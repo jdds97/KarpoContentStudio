@@ -1,12 +1,12 @@
 import ogImageSrc from "@images/social.png";
 
 export const SITE = {
-  title: "ScrewFast",
-  tagline: "Top-quality Hardware Tools",
-  description: "ScrewFast offers top-tier hardware tools and expert construction services to meet all your project needs. Start exploring and contact our sales team for superior quality and reliability.",
-  description_short: "ScrewFast offers top-tier hardware tools and expert construction services to meet all your project needs.",
-  url: "https://screwfast.uk",
-  author: "Emil Gulamov",
+  title: "Karpo Content Studio",
+  tagline: "Capturando Momentos, Creando Recuerdos",
+  description: "Karpo Estudio de Contenido ofrece servicios profesionales de fotografía para capturar tus momentos más preciados. Nuestros fotógrafos expertos aseguran calidad superior y creatividad en cada toma. Comienza a explorar y contacta a nuestro equipo para servicios de fotografía excepcionales.",
+  description_short: "Karpo Estudio de Contenido ofrece servicios profesionales de fotografía para capturar tus momentos más preciados.",
+  url: "https://karpostudiocontent.com",
+  author: "Karpo Estudio de Contenido",
 };
 
 export const SEO = {
@@ -15,7 +15,7 @@ export const SEO = {
   structuredData: {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    inLanguage: "en-US",
+    inLanguage: "es-ES",
     "@id": SITE.url,
     url: SITE.url,
     name: SITE.title,

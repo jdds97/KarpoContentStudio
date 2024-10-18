@@ -80,14 +80,14 @@ interface Props {
   <div class="flex w-full">
       <div class="top-12 overflow-hidden">
 	{src && alt &&
-	<Image
-        src={src}
-        alt={alt}
-        class="h-full w-full scale-110 object-cover object-center"
-        draggable={"false"}
-        loading={"eager"}
-        format={"avif"}
-	 />
+  <Image
+    src={src}
+    alt={alt}
+    class="h-full w-full scale-110 object-cover object-center rounded-[110px]"
+    draggable={"false"}
+    loading={"eager"}
+    format={"png"}
+  />
 	}
     </div>
   </div>

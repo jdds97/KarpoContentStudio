@@ -10,13 +10,13 @@ import TestimonialsSection from "@components/sections/testimonials/TestimonialsS
 import PricingSection from "@components/sections/pricing/PricingSection.astro";
 import FAQ from "@components/sections/misc/FAQ.astro";
 import AnnouncementBanner from "@components/ui/banners/AnnouncementBanner.astro";
-import heroImage from "@images/hero-image.avif";
+import heroImage from "@images/03 Post - The Content Studio.png";
 import faqs from "@data/faqs.json";
 import features from "@data/features.json";
 import pricing from "@data/pricing.json";
-import featureImage from "@images/features-image.avif";
+import featureImage from "@images/07 Post - The Content Studio.png";
 import construction from "@images/construction-image.avif";
-import tools from "@images/automated-tools.avif";
+import tools from "@images/Modelo - Camiseta Color HEX FFFFFF o HEX F5F5F5 - Logo Color HEX 3C3C3C.jpg";
 import dashboard from "@images/dashboard-image.avif";
 
 const avatarSrcs: Array<string> = [
@@ -28,118 +28,103 @@ const avatarSrcs: Array<string> = [
 ---
 
 <MainLayout>
-  <AnnouncementBanner
-    btnId="dismiss-button"
-    btnTitle="Explore ScrewFast on GitHub"
-    url="https://github.com/mearashadowfax/ScrewFast"
-  />
-
   <HeroSection
-    title=`Equip Your Projects with <span
-        class="text-yellow-500 dark:text-yellow-400">ScrewFast</span>`
-    subTitle="Top-quality hardware tools and expert construction services for every project need."
-    primaryBtn="Start Exploring"
-    primaryBtnURL="/products"
-    secondaryBtn="Contact Sales Team"
-    secondaryBtnURL="/contact"
+    title=`Estudio fotográfico profesional <span class="text-yellow-500 dark:text-yellow-400">Content Studio</span>`
+    subTitle="Reserva tu sesión en nuestro amplio y versátil espacio, equipado con lo último en tecnología para todo tipo de proyectos fotográficos."
+    primaryBtn="Reserva ahora"
+    primaryBtnURL="/reservas"
+    secondaryBtn="Ver galería"
+    secondaryBtnURL="/galeria"
     withReview={true}
     avatars={avatarSrcs}
-    rating=`<span class="font-bold">4.8</span> / 5`
-    starCount={4}
-    reviews=`From Over <span class="font-bold">12.8k</span> Reviews`
+    rating=`<span class="font-bold">4.9</span> / 5`
+    starCount={5}
+    reviews=`Basado en más de <span class="font-bold">1000</span> opiniones`
     src={heroImage}
-    alt="Stack of ScrewFast product boxes containing assorted hardware tools"
+    alt="Interior de un estudio fotográfico profesional con equipos de iluminación y cámaras"
   />
 
   <ClientsSection
-    title="Trusted by Industry Leaders"
-    subTitle="Experience the reliability chosen by industry giants."
+    title="Confianza de profesionales y marcas líderes"
+    subTitle="Experimenta la calidad elegida por los mejores fotógrafos y agencias creativas."
   />
 
   <FeaturesGeneral
-    title="Meeting Industry Demands"
-    subTitle="At ScrewFast, we tackle the unique challenges encountered in the hardware and construction sectors. From cutting-edge tools to expert services, we're dedicated to helping you overcome obstacles and achieve your goals."
+    title="Equipamiento de última generación"
+    subTitle="En Content Studio, ofrecemos soluciones para todos los desafíos de la fotografía profesional. Desde iluminación avanzada hasta fondos versátiles, estamos dedicados a ayudarte a lograr tus visiones creativas."
     src={featureImage}
-    alt="ScrewFast products in floating boxes"
+    alt="Equipos fotográficos profesionales en Content Studio"
     features={features}
   />
 
   <FeaturesNavs
-    title=`Customize <span class="text-yellow-500 dark:text-yellow-400">ScrewFast</span>'s offerings to perfectly suit your hardware and construction needs.`
+    title=`Descubre las <span class="text-yellow-500 dark:text-yellow-400">ventajas</span> de Content Studio para tus necesidades fotográficas.`
     tabs={[
       {
-        heading: "Cutting-Edge Tools",
-        content:
-          "Empower your projects with ScrewFast's cutting-edge tools. Experience enhanced efficiency in construction management with our sophisticated automated solutions.",
+        heading: "Equipos de vanguardia",
+        content: "Potencia tus proyectos con los equipos más avanzados de Content Studio. Experimenta una eficiencia mejorada en la producción fotográfica con nuestras soluciones de iluminación y cámaras de última generación.",
         svg: "tools",
         src: tools,
-        alt: "Yellow and black heavy equipment on brown grass field",
+        alt: "Equipo fotográfico profesional de alta gama",
         first: true,
       },
       {
-        heading: "Intuitive Dashboards",
-        content:
-          "Navigate with ease using ScrewFast's intuitive dashboards. Set up and oversee your projects seamlessly, with user-friendly interfaces designed for quick and effective workflow management.",
+        heading: "Espacios versátiles",
+        content: "Trabaja con comodidad en nuestros espaciosos y adaptables sets. Diseñados para acomodar desde retratos íntimos hasta grandes producciones comerciales.",
         svg: "dashboard",
         src: dashboard,
-        alt: "A screenshot or graphic representation of the intuitive dashboard",
+        alt: "Amplios espacios de estudio con diferentes configuraciones",
         second: true,
       },
       {
-        heading: "Robust Features",
-        content:
-          "Minimize complexity, maximize productivity. ScrewFast's robust features are engineered to streamline your construction process, delivering results that stand out for their excellence.",
+        heading: "Servicios complementarios",
+        content: "Maximiza tu experiencia con nuestros servicios adicionales. Desde asistencia técnica hasta post-producción, ofrecemos todo lo que necesitas para que tu sesión sea un éxito.",
         svg: "house",
         src: construction,
-        alt: "Gray metal building frame near tower crane during daytime",
+        alt: "Personal asistiendo en una sesión fotográfica",
       },
     ]}
   />
 
   <TestimonialsSection
-    title="Fast-Track Your Projects"
-    subTitle="At ScrewFast, we ensure a swift start with instant account setup. Experience the speed of construction redefined."
-    ;
+    title="Impulsa tu creatividad"
+    subTitle="En Content Studio, garantizamos un inicio rápido con reservas instantáneas. Experimenta la eficiencia de la fotografía profesional redefinida."
     testimonials={[
       {
-        content:
-          "ScrewFast dramatically boosted our project efficiency. Setup was instant, and their rapid response times are phenomenal. Truly a game-changer in hardware and construction support!",
-        author: "Samantha Ruiz",
-        role: "Chief Operating Officer | ConstructIt Inc.",
+        content: "Content Studio transformó nuestra producción fotográfica. La reserva fue instantánea y la calidad del equipo es excepcional. ¡Un verdadero cambio de juego para nuestros proyectos creativos!",
+        author: "Laura Martínez",
+        role: "Directora Creativa | Agencia Visión",
         avatarSrc:
           "https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?q=80&w=1453&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
       },
     ]}
     statistics={[
       {
-        count: "70k+",
-        description:
-          "customers equipped — from DIY to major construction firms",
+        count: "5000+",
+        description: "sesiones realizadas — desde aficionados hasta profesionales reconocidos"
       },
       {
-        count: "35%",
-        description:
-          "uptick in project efficiency with ScrewFast tools and services",
+        count: "40%",
+        description: "aumento en productividad reportado por nuestros clientes regulares"
       },
       {
-        count: "15.3%",
-        description:
-          "reduction in maintenance costs reported by long-term clients",
+        count: "98%",
+        description: "tasa de satisfacción en la calidad de nuestros equipos y espacios"
       },
       {
-        count: "2x",
-        description: "quicker assembly using innovative fastening solutions",
+        count: "3x",
+        description: "más rápido en setup comparado con estudios tradicionales"
       },
     ]}
   />
 
   <PricingSection pricing={pricing} />
 
-  <FAQ title="Frequently<br />asked questions" faqs={faqs} />
+  <FAQ title="Preguntas<br />frecuentes" faqs={faqs} />
 
   <HeroSectionAlt
-    title="Let's Build Together"
-    subTitle="ScrewFast is an open-source template, meticulously crafted with Astro, Tailwind CSS, and Preline UI frameworks."
-    url="https://github.com/mearashadowfax/ScrewFast"
+    title="Crea tu visión con nosotros"
+    subTitle="Content Studio es tu socio ideal para llevar tus proyectos fotográficos al siguiente nivel. Reserva tu sesión hoy y descubre la diferencia."
+    url="/contact"
   />
 </MainLayout>

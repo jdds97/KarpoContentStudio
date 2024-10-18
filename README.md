@@ -277,7 +277,7 @@ Edit the `navBarLinks` array to adjust navigation bar links:
 ```typescript
 // An array of links for the navigation bar
 export const navBarLinks: NavLink[] = [
-  { name: "Home", url: "/" },
+  { name: "Inicio", url: "/" },
   { name: "Products", url: "/products" },
   { name: "Services", url: "/services" },
   { name: "Blog", url: "/blog" },
