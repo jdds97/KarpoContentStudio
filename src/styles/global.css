@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Colores primarios */
+    --color-primary-black: #000000;
+    --color-primary-gray: #3C3C3C;
+    --color-primary-beige: #DAD6C9;
+    --color-primary-white: #F5F5F5;
+    /* Colores secundarios */
+    --color-secondary-darkgray: #282828;
+    --color-secondary-midgray: #B2B2B2;
+    --color-secondary-lightgray: #C8C8C8;
+    /* Fuentes personalizadas */
+    --font-instrument: 'Instrument Serif', serif;
+    --font-outfit: 'Outfit', sans-serif;
+  }
+
+  html {
+    font-family: 'Outfit', sans-serif;
+    scroll-behavior: smooth;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Instrument Serif', serif;
+  }
+  
+  body {
+    @apply bg-white text-black;
+  }
+}
+
+@layer utilities {
+  .text-primary-black { color: var(--color-primary-black); }
+  .text-primary-gray { color: var(--color-primary-gray); }
+  .text-primary-beige { color: var(--color-primary-beige); }
+  .text-primary-white { color: var(--color-primary-white); }
+  .text-secondary-darkgray { color: var(--color-secondary-darkgray); }
+  .text-secondary-midgray { color: var(--color-secondary-midgray); }
+  .text-secondary-lightgray { color: var(--color-secondary-lightgray); }
+
+  .bg-primary-black { background-color: var(--color-primary-black); }
+  .bg-primary-gray { background-color: var(--color-primary-gray); }
+  .bg-primary-beige { background-color: var(--color-primary-beige); }
+  .bg-white { background-color: #fff; }
+  .bg-secondary-darkgray { background-color: var(--color-secondary-darkgray); }
+  .bg-secondary-midgray { background-color: var(--color-secondary-midgray); }
+  .bg-secondary-lightgray { background-color: var(--color-secondary-lightgray); }
+
+  .font-instrument { font-family: var(--font-instrument); }
+  .font-outfit { font-family: var(--font-outfit); }
+}
+
+@layer components {
+  .btn {
+    @apply px-6 py-3 transition-all duration-300 font-medium;
+  }
+  
+  .btn-primary {
+    @apply bg-black text-white hover:bg-gray-800;
+  }
+  
+  .btn-outline {
+    @apply border border-black text-black hover:bg-black hover:text-white;
+  }
+  
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+  
+  .container-padding {
+    @apply px-4 md:px-8;
+  }
+  
+  .section-title {
+    @apply text-4xl md:text-5xl lg:text-6xl mb-8;
+  }
+  
+  .section-subtitle {
+    @apply text-2xl md:text-3xl mb-6;
+  }
+}
