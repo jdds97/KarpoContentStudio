@@ -1,0 +1,66 @@
+---
+interface Props {
+  question: string;
+  answer: string;
+  index: number;
+}
+
+const { question, answer, index } = Astro.props;
+const isOpen = index === 0; // First item is open by default
+---
+
+<div class="border-b border-primary-beige/50 accordion-item">
+  <button 
+    class="accordion-header w-full text-left py-4 pr-10 pl-0 flex justify-between items-center focus:outline-none"
+    aria-expanded={isOpen ? "true" : "false"}
+  >
+    <span class="font-instrument text-lg">{question}</span>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="accordion-icon w-6 h-6 transition-transform duration-300 transform">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+    </svg>
+  </button>
+  
+  <div 
+    class="accordion-content overflow-hidden transition-all duration-300 max-h-0"
+    style={isOpen ? "max-height: 1000px;" : ""}
+  >
+    <div class="pb-4 text-primary-gray">
+      <p set:html={answer}></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Accordion functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    
+    accordionHeaders.forEach((header) => {
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        const icon = header.querySelector('.accordion-icon');
+        
+        // Toggle aria-expanded
+        const isExpanded = header.getAttribute('aria-expanded') === 'true';
+        header.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+        
+        // Toggle content
+        if (content && icon) {
+          if (isExpanded) {
+            (content as HTMLElement).style.maxHeight = '0';
+            icon.classList.remove('rotate-180');
+          } else {
+            (content as HTMLElement).style.maxHeight = '1000px';
+            icon.classList.add('rotate-180');
+          }
+        }
+      });
+    });
+    
+    // Initialize first item open
+    const firstIcon = accordionHeaders[0]?.querySelector('.accordion-icon');
+    if (firstIcon) {
+      firstIcon.classList.add('rotate-180');
+    }
+  });
+</script>

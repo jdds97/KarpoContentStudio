@@ -1,0 +1,225 @@
+<div class="bg-white p-8 rounded-lg shadow-md">
+    <h3 class="text-2xl font-instrument mb-6">Reserva Tu Sesión</h3>
+    
+    <form id="booking-form" class="space-y-6">
+      <!-- Personal Information -->
+      <div>
+        <h4 class="text-lg font-outfit font-medium mb-4">Información Personal</h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="name" class="block text-sm font-medium text-primary-gray mb-1">Nombre Completo *</label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name" 
+              required 
+              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+            />
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-primary-gray mb-1">Email *</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              required 
+              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+            />
+          </div>
+          <div>
+            <label for="phone" class="block text-sm font-medium text-primary-gray mb-1">Teléfono *</label>
+            <input 
+              type="tel" 
+              id="phone" 
+              name="phone" 
+              required 
+              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+            />
+          </div>
+          <div>
+            <label for="company" class="block text-sm font-medium text-primary-gray mb-1">Empresa / Instagram (opcional)</label>
+            <input 
+              type="text" 
+              id="company" 
+              name="company" 
+              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+            />
+          </div>
+        </div>
+      </div>
+      
+      <!-- Booking Details -->
+      <div>
+        <h4 class="text-lg font-outfit font-medium mb-4">Detalles de la Reserva</h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="studio-space" class="block text-sm font-medium text-primary-gray mb-1">Área del Estudio *</label>
+            <select 
+              id="studio-space" 
+              name="studio-space" 
+              required 
+              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+            >
+              <option value="">Seleccionar área</option>
+              <option value="cyclorama">Ciclorama</option>
+              <option value="color-backgrounds">Zona de Fondos de Colores</option>
+              <option value="black-zone">Black Zone</option>
+              <option value="creative-studio">Creative Studio</option>
+              <option value="full-studio">Estudio Completo</option>
+            </select>
+          </div>
+          <div>
+            <label for="package" class="block text-sm font-medium text-primary-gray mb-1">Paquete de Horas *</label>
+            <select 
+              id="package" 
+              name="package" 
+              required 
+              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+            >
+              <option value="">Seleccionar paquete</option>
+              <option value="2h">2 horas - 150€</option>
+              <option value="4h">Medio día (4 horas) - 300€</option>
+              <option value="8h">Día completo (8 horas) - 600€</option>
+              <option value="12h">Jornada extendida (12 horas) - 850€</option>
+            </select>
+          </div>
+          <div>
+            <label for="date" class="block text-sm font-medium text-primary-gray mb-1">Fecha Deseada *</label>
+            <input 
+              type="date" 
+              id="date" 
+              name="date" 
+              required 
+              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+            />
+          </div>
+          <div>
+            <label for="time" class="block text-sm font-medium text-primary-gray mb-1">Hora de Inicio *</label>
+            <input 
+              type="time" 
+              id="time" 
+              name="time" 
+              required 
+              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+            />
+          </div>
+        </div>
+      </div>
+      
+      <!-- Additional Information -->
+      <div>
+        <h4 class="text-lg font-outfit font-medium mb-4">Información Adicional</h4>
+        <div class="grid grid-cols-1 gap-4">
+          <div>
+            <label for="participants" class="block text-sm font-medium text-primary-gray mb-1">Número de Participantes *</label>
+            <input 
+              type="number" 
+              id="participants" 
+              name="participants" 
+              min="1" 
+              max="15" 
+              required 
+              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+            />
+          </div>
+          <div>
+            <label for="session-type" class="block text-sm font-medium text-primary-gray mb-1">Tipo de Sesión *</label>
+            <select 
+              id="session-type" 
+              name="session-type" 
+              required 
+              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+            >
+              <option value="">Seleccionar tipo</option>
+              <option value="photography">Fotografía</option>
+              <option value="video">Video / Rodaje</option>
+              <option value="podcast">Podcast</option>
+              <option value="event">Evento / Workshop</option>
+              <option value="other">Otro</option>
+            </select>
+          </div>
+          <div>
+            <label for="notes" class="block text-sm font-medium text-primary-gray mb-1">Notas o Requerimientos Específicos</label>
+            <textarea 
+              id="notes" 
+              name="notes" 
+              rows="4" 
+              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Terms and Conditions -->
+      <div class="flex items-start">
+        <div class="flex items-center h-5">
+          <input 
+            id="terms" 
+            name="terms" 
+            type="checkbox" 
+            required 
+            class="focus:ring-primary-beige h-4 w-4 text-primary-black border-secondary-lightgray rounded"
+          />
+        </div>
+        <div class="ml-3 text-sm">
+          <label for="terms" class="text-primary-gray">
+            He leído y acepto los <a href="/terms" class="text-primary-black underline">términos y condiciones</a> y la <a href="/privacy-policy" class="text-primary-black underline">política de privacidad</a>.
+          </label>
+        </div>
+      </div>
+      
+      <!-- Submit Button -->
+      <div>
+        <button 
+          type="submit" 
+          class="w-full btn btn-primary"
+        >
+          Solicitar Reserva
+        </button>
+        <p class="text-xs text-center text-primary-gray mt-2">
+          * La reserva no estará confirmada hasta recibir el pago. Te enviaremos un email con las instrucciones de pago.
+        </p>
+      </div>
+    </form>
+  </div>
+  
+  <script>
+    // Form submission handling
+    const bookingForm = document.getElementById('booking-form') as HTMLFormElement | null;
+    
+    if (bookingForm) {
+      bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Normally we'd send this data to a server
+        // For now, let's just show a success message
+        
+        const formData = new FormData(bookingForm);
+        console.log('Form submitted:', Object.fromEntries(formData));
+        
+        // Show success message
+        showSuccessMessage();
+      });
+    }
+    
+    function showSuccessMessage() {
+      // Replace form with success message
+      if (bookingForm) {
+        const parentElement = bookingForm.parentElement;
+        if (parentElement) {
+          parentElement.innerHTML = `
+            <div class="text-center py-8">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 text-primary-black mx-auto mb-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <h3 class="text-2xl font-instrument mb-4">¡Solicitud Enviada!</h3>
+              <p class="text-primary-gray mb-6">
+                Hemos recibido tu solicitud de reserva. En breve recibirás un email con información sobre el pago y la confirmación de tu reserva.
+              </p>
+              <a href="/" class="btn btn-primary">Volver al Inicio</a>
+            </div>
+          `;
+        }
+      }
+    }
+  </script>

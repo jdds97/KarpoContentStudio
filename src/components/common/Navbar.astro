@@ -1,0 +1,71 @@
+<header class="fixed w-full bg-primary-white/90 backdrop-blur-sm z-50 py-4 border-b border-secondary-lightgray/20">
+    <div class="container mx-auto px-4 md:px-8">
+      <nav class="flex justify-between items-center">
+        <a href="/" class="flex items-center">
+          <img src="/images/logos/logo.png" alt="The Content Studio" class="h-12" />
+        </a>
+        
+        <!-- Mobile menu button -->
+        <button id="menu-toggle" class="lg:hidden text-primary-black">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+        
+        <!-- Desktop navigation -->
+        <div class="hidden lg:flex items-center space-x-8">
+          <a href="/" class="text-primary-black hover:text-primary-gray transition-colors">Home</a>
+          <a href="/studio-spaces" class="text-primary-black hover:text-primary-gray transition-colors">Estudio</a>
+          <a href="/target-audiences" class="text-primary-black hover:text-primary-gray transition-colors">Público</a>
+          <a href="/rates" class="text-primary-black hover:text-primary-gray transition-colors">Tarifas</a>
+          <a href="/faq" class="text-primary-black hover:text-primary-gray transition-colors">FAQ</a>
+          <a href="/contact" class="text-primary-black hover:text-primary-gray transition-colors">Contacto</a>
+          <a href="/booking" class="btn btn-primary">Reserva</a>
+        </div>
+      </nav>
+      
+      <!-- Mobile navigation -->
+      <div id="mobile-menu" class="lg:hidden hidden fixed top-20 right-0 z-40 w-full max-w-xs h-auto min-h-0 max-h-[90vh] bg-white shadow-xl border-l border-secondary-lightgray rounded-l-xl flex flex-col space-y-4 p-6 animate-fade-in">
+        <button id="close-mobile-menu" class="absolute top-4 right-4 text-primary-black text-3xl focus:outline-none hover:text-primary-beige transition-colors">&times;</button>
+        <a href="/" class="text-primary-black text-base font-semibold hover:bg-primary-beige/60 rounded-lg px-4 py-3 transition-colors">Home</a>
+        <a href="/studio-spaces" class="text-primary-black text-base font-semibold hover:bg-primary-beige/60 rounded-lg px-4 py-3 transition-colors">Estudio</a>
+        <a href="/target-audiences" class="text-primary-black text-base font-semibold hover:bg-primary-beige/60 rounded-lg px-4 py-3 transition-colors">Público</a>
+        <a href="/rates" class="text-primary-black text-base font-semibold hover:bg-primary-beige/60 rounded-lg px-4 py-3 transition-colors">Tarifas</a>
+        <a href="/faq" class="text-primary-black text-base font-semibold hover:bg-primary-beige/60 rounded-lg px-4 py-3 transition-colors">FAQ</a>
+        <a href="/contact" class="text-primary-black text-base font-semibold hover:bg-primary-beige/60 rounded-lg px-4 py-3 transition-colors">Contacto</a>
+        <a href="/booking" class="btn btn-primary w-full text-center mt-2">Reserva</a>
+      </div>
+    </div>
+  </header>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const closeBtn = document.getElementById('close-mobile-menu');
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+          mobileMenu.classList.remove('hidden');
+        });
+      }
+      if (closeBtn && mobileMenu) {
+        closeBtn.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+        });
+      }
+      // Cerrar menú al hacer click fuera del panel
+      window.addEventListener('click', (e) => {
+        if (
+          mobileMenu &&
+          !mobileMenu.classList.contains('hidden') &&
+          !mobileMenu.contains(e.target as Node) &&
+          e.target !== menuToggle
+        ) {
+          mobileMenu.classList.add('hidden');
+        }
+      });
+    });
+  </script>
+  
+  <!-- Add padding to compensate for fixed header -->
+  <div class="h-20"></div>

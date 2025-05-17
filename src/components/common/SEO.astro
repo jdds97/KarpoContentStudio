@@ -1,0 +1,54 @@
+---
+// src/components/common/SEO.astro
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  type?: "website" | "article";
+}
+
+const {
+  title,
+  description = "The Content Studio - Tu espacio creativo para sesiones de fotos, rodajes, podcast y eventos especiales en Sevilla.",
+  canonical = Astro.url.href,
+  image = "/images/og-image.jpg",
+  type = "website",
+} = Astro.props;
+
+const siteUrl = "https://thecontentstudio.es";
+const fullImageUrl = image.startsWith("http") ? image : `${siteUrl}${image}`;
+const fullTitle = `${title} | The Content Studio`;
+---
+
+<!-- Primary Meta Tags -->
+<title>{fullTitle}</title>
+<meta name="title" content={fullTitle} />
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={fullImageUrl} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonical} />
+<meta property="twitter:title" content={fullTitle} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={fullImageUrl} />
+
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#ffffff">
+
+<!-- Additional meta tags for SEO -->
+<meta name="keywords" content="estudio fotográfico, alquiler estudio, fotografía, podcast, ciclorama, espacio creativo, sevilla, dos hermanas, estudio de contenido" />
+<meta name="author" content="The Content Studio" />
+<meta name="robots" content="index, follow" />

@@ -1,0 +1,81 @@
+<div class="relative w-full h-screen max-h-[800px] overflow-hidden">
+    <div id="carousel-container" class="relative h-full">
+      <!-- Carousel slides -->
+      <div class="carousel-slide absolute inset-0 opacity-100 transition-opacity duration-1000 ease-in-out">
+        <img src="/images/carousel/slide-1.png" alt="The Content Studio space" class="w-full h-full object-cover" />
+      </div>
+      <div class="carousel-slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
+        <img src="/images/carousel/slide-2.png" alt="Photo session in progress" class="w-full h-full object-cover" />
+      </div>
+      <div class="carousel-slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
+        <img src="/images/carousel/slide-3.png" alt="Podcast recording studio" class="w-full h-full object-cover" />
+      </div>
+      
+      <!-- Overlay with text -->
+      <div class="absolute inset-0 bg-primary-black/30 flex items-center justify-center text-center p-4">
+        <div class="max-w-4xl">
+          <h1 class="text-white text-4xl md:text-5xl lg:text-7xl font-instrument mb-4">
+            The Content Studio
+          </h1>
+          <p class="text-white text-xl md:text-2xl font-outfit mb-8 max-w-2xl mx-auto">
+            Tu espacio Creativo. Inspírate, innova, crea y sorprende.
+          </p>
+          <a href="/booking" class="btn btn-primary">Reserva Ahora</a>
+        </div>
+      </div>
+      
+      <!-- Carousel controls -->
+      <div class="absolute bottom-6 left-0 right-0 flex justify-center space-x-2">
+        <button class="carousel-dot w-3 h-3 rounded-full bg-primary-white opacity-50 transition-opacity" data-index="0"></button>
+        <button class="carousel-dot w-3 h-3 rounded-full bg-primary-white opacity-50 transition-opacity" data-index="1"></button>
+        <button class="carousel-dot w-3 h-3 rounded-full bg-primary-white opacity-50 transition-opacity" data-index="2"></button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Simple carousel logic
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+    
+    // Initialize first slide
+    slides[0].classList.remove('opacity-0');
+    slides[0].classList.add('opacity-100');
+    dots[0].classList.add('opacity-100');
+    
+    function showSlide(index: number) {
+      // Hide all slides
+      slides.forEach((slide) => {
+        slide.classList.remove('opacity-100');
+        slide.classList.add('opacity-0');
+      });
+      
+      // Show the selected slide
+      slides[index].classList.remove('opacity-0');
+      slides[index].classList.add('opacity-100');
+      
+      // Update dots
+      dots.forEach((dot) => {
+        dot.classList.remove('opacity-100');
+        dot.classList.add('opacity-50');
+      });
+      dots[index].classList.remove('opacity-50');
+      dots[index].classList.add('opacity-100');
+      
+      currentSlide = index;
+    }
+    
+    // Add click event to dots
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        showSlide(index);
+      });
+    });
+    
+    // Auto slide every 5 seconds
+    setInterval(() => {
+      let nextSlide = (currentSlide + 1) % slides.length;
+      showSlide(nextSlide);
+    }, 5000);
+  </script>
