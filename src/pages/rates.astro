@@ -6,11 +6,11 @@ import PricingTable from '../components/booking/PricingTable.astro';
 
 <Layout title="Tarifas">
   <!-- Hero Section -->
-  <section class="bg-primary-beige/30 py-20">
+  <section class="bg-primary-beige py-20">
     <div class="container mx-auto container-padding">
       <div class="max-w-3xl mx-auto text-center prose prose-neutral dark:prose-invert">
-        <h1 class="section-title">Tarifas y Planes</h1>
-        <p class="text-lg md:text-xl text-primary-gray mb-8">
+        <h1 class="section-title text-primary-black">Tarifas y Planes</h1>
+        <p class="text-lg md:text-xl text-primary-black mb-8 font-medium">
           Ofrecemos opciones flexibles para adaptarnos a tus necesidades, desde alquileres por horas hasta membresías mensuales y anuales.
         </p>
       </div>
@@ -28,106 +28,106 @@ import PricingTable from '../components/booking/PricingTable.astro';
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <!-- Service 1 -->
-          <div class="bg-white p-6 rounded-lg shadow-sm">
+          <div class="p-6 rounded-2xl shadow-lg border border-primary-black/10 bg-white/60 backdrop-blur-md transition-colors duration-200 hover:bg-primary-black hover:text-primary-beige hover:shadow-2xl">
             <div class="flex items-center mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-primary-black mr-3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
               </svg>
-              <h3 class="text-xl font-instrument">Repintado de Ciclorama</h3>
+              <h3 class="text-xl font-instrument text-primary-black">Repintado de Ciclorama</h3>
             </div>
-            <p class="text-primary-gray mb-4">
+            <p class="text-neutral-800 mb-4 font-medium">
               Si necesitas un ciclorama recién pintado para tu sesión, podemos prepararlo con anticipación.
             </p>
             <div class="flex justify-between items-center">
-              <span class="font-medium">50€</span>
-              <span class="text-sm text-primary-gray">Por servicio</span>
+              <span class="font-bold text-primary-black">50€</span>
+              <span class="text-sm text-neutral-700">Por servicio</span>
             </div>
           </div>
           
           <!-- Service 2 -->
-          <div class="bg-white p-6 rounded-lg shadow-sm">
+          <div class="p-6 rounded-2xl shadow-lg border border-primary-black/10 bg-white/60 backdrop-blur-md transition-colors duration-200 hover:bg-primary-black hover:text-primary-beige hover:shadow-2xl">
             <div class="flex items-center mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-primary-black mr-3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
               </svg>
-              <h3 class="text-xl font-instrument">Fondos de Papel</h3>
+              <h3 class="text-xl font-instrument text-primary-black">Fondos de Papel</h3>
             </div>
-            <p class="text-primary-gray mb-4">
+            <p class="text-neutral-800 mb-4 font-medium">
               Contamos con una variedad de fondos de papel Colorama para tus sesiones fotográficas.
             </p>
             <div class="flex justify-between items-center">
-              <span class="font-medium">10€</span>
-              <span class="text-sm text-primary-gray">Por metro utilizado</span>
+              <span class="font-bold text-primary-black">10€</span>
+              <span class="text-sm text-neutral-700">Por metro utilizado</span>
             </div>
           </div>
           
           <!-- Service 3 -->
-          <div class="bg-white p-6 rounded-lg shadow-sm">
+          <div class="p-6 rounded-2xl shadow-lg border border-primary-black/10 bg-white/60 backdrop-blur-md transition-colors duration-200 hover:bg-primary-black hover:text-primary-beige hover:shadow-2xl">
             <div class="flex items-center mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-primary-black mr-3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
               </svg>
-              <h3 class="text-xl font-instrument">Asistente Técnico</h3>
+              <h3 class="text-xl font-instrument text-primary-black">Asistente Técnico</h3>
             </div>
-            <p class="text-primary-gray mb-4">
+            <p class="text-neutral-800 mb-4 font-medium">
               Si necesitas ayuda con los equipos o el montaje de la iluminación, podemos asignarte un asistente.
             </p>
             <div class="flex justify-between items-center">
-              <span class="font-medium">20€/hora</span>
-              <span class="text-sm text-primary-gray">Mínimo 2 horas</span>
+              <span class="font-bold text-primary-black">20€/hora</span>
+              <span class="text-sm text-neutral-700">Mínimo 2 horas</span>
             </div>
           </div>
           
           <!-- Service 4 -->
-          <div class="bg-white p-6 rounded-lg shadow-sm">
+          <div class="p-6 rounded-2xl shadow-lg border border-primary-black/10 bg-white/60 backdrop-blur-md transition-colors duration-200 hover:bg-primary-black hover:text-primary-beige hover:shadow-2xl">
             <div class="flex items-center mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-primary-black mr-3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
               </svg>
-              <h3 class="text-xl font-instrument">Servicio de Catering</h3>
+              <h3 class="text-xl font-instrument text-primary-black">Servicio de Catering</h3>
             </div>
-            <p class="text-primary-gray mb-4">
+            <p class="text-neutral-800 mb-4 font-medium">
               Para sesiones largas o eventos, podemos organizar un servicio de catering personalizado.
             </p>
             <div class="flex justify-between items-center">
-              <span class="font-medium">Desde 15€</span>
-              <span class="text-sm text-primary-gray">Por persona</span>
+              <span class="font-bold text-primary-black">Desde 15€</span>
+              <span class="text-sm text-neutral-700">Por persona</span>
             </div>
           </div>
           
           <!-- Service 5 -->
-          <div class="bg-white p-6 rounded-lg shadow-sm">
+          <div class="p-6 rounded-2xl shadow-lg border border-primary-black/10 bg-white/60 backdrop-blur-md transition-colors duration-200 hover:bg-primary-black hover:text-primary-beige hover:shadow-2xl">
             <div class="flex items-center mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-primary-black mr-3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
               </svg>
-              <h3 class="text-xl font-instrument">Equipamiento Adicional</h3>
+              <h3 class="text-xl font-instrument text-primary-black">Equipamiento Adicional</h3>
             </div>
-            <p class="text-primary-gray mb-4">
+            <p class="text-neutral-800 mb-4 font-medium">
               Alquiler de equipos especializados como cámaras, objetivos o equipos de audio adicionales.
             </p>
             <div class="flex justify-between items-center">
-              <span class="font-medium">Consultar</span>
-              <span class="text-sm text-primary-gray">Según necesidades</span>
+              <button class="rounded-none bg-primary-beige text-primary-black font-semibold px-5 py-2 shadow-sm border border-primary-beige/60 hover:bg-primary-black hover:text-primary-beige transition-colors">Consultar</button>
+              <span class="text-sm text-neutral-700">Según necesidades</span>
             </div>
           </div>
           
           <!-- Service 6 -->
-          <div class="bg-white p-6 rounded-lg shadow-sm">
+          <div class="p-6 rounded-2xl shadow-lg border border-primary-black/10 bg-white/60 backdrop-blur-md transition-colors duration-200 hover:bg-primary-black hover:text-primary-beige hover:shadow-2xl">
             <div class="flex items-center mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-primary-black mr-3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              <h3 class="text-xl font-instrument">Servicios Profesionales</h3>
+              <h3 class="text-xl font-instrument text-primary-black">Servicios Profesionales</h3>
             </div>
-            <p class="text-primary-gray mb-4">
+            <p class="text-neutral-800 mb-4 font-medium">
               Conexión con profesionales como fotógrafos, maquilladores o estilistas para tu producción.
             </p>
             <div class="flex justify-between items-center">
-              <span class="font-medium">Consultar</span>
-              <span class="text-sm text-primary-gray">Según necesidades</span>
+              <button class="rounded-none bg-primary-beige text-primary-black font-semibold px-5 py-2 shadow-sm border border-primary-beige/60 hover:bg-primary-black hover:text-primary-beige transition-colors">Consultar</button>
+              <span class="text-sm text-neutral-700">Según necesidades</span>
             </div>
           </div>
         </div>
@@ -136,21 +136,21 @@ import PricingTable from '../components/booking/PricingTable.astro';
   </section>
   
   <!-- Payment Information -->
-  <section class="section-padding bg-primary-beige/30">
+  <section class="section-padding bg-secondary-lightgray">
     <div class="container mx-auto container-padding">
       <div class="max-w-4xl mx-auto">
-        <h2 class="section-subtitle text-center mb-12">Información de Pago</h2>
+        <h2 class="section-subtitle text-center mb-12 text-primary-black">Información de Pago</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <!-- Reservation Policy -->
-          <div class="bg-white p-8 rounded-lg shadow-sm">
+          <div class="bg-primary-beige p-8 rounded-lg shadow-sm border border-primary-black/10">
             <div class="flex items-center mb-6">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-primary-black mr-3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
               </svg>
-              <h3 class="text-xl font-instrument">Política de Reserva</h3>
+              <h3 class="text-xl font-instrument text-primary-black">Política de Reserva</h3>
             </div>
-            <ul class="space-y-4 text-primary-gray">
+            <ul class="space-y-4 text-primary-black">
               <li class="flex items-start">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary-black mr-2 mt-0.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
@@ -173,14 +173,14 @@ import PricingTable from '../components/booking/PricingTable.astro';
           </div>
           
           <!-- Cancellation Policy -->
-          <div class="bg-white p-8 rounded-lg shadow-sm">
+          <div class="bg-primary-beige p-8 rounded-lg shadow-sm border border-primary-black/10">
             <div class="flex items-center mb-6">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-primary-black mr-3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <h3 class="text-xl font-instrument">Política de Cancelación</h3>
+              <h3 class="text-xl font-instrument text-primary-black">Política de Cancelación</h3>
             </div>
-            <ul class="space-y-4 text-primary-gray">
+            <ul class="space-y-4 text-primary-black">
               <li class="flex items-start">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary-black mr-2 mt-0.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
@@ -210,44 +210,45 @@ import PricingTable from '../components/booking/PricingTable.astro';
         </div>
         
         <!-- Payment Methods -->
-        <div class="mt-8 bg-white p-8 rounded-lg shadow-sm">
-          <div class="flex items-center mb-6">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-primary-black mr-3">
+        <div class="mt-12 bg-white/60 backdrop-blur-md p-10 rounded-2xl shadow-lg border border-primary-black/10">
+          <div class="flex items-center mb-8">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-neutral-700 mr-4">
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
             </svg>
-            <h3 class="text-xl font-instrument">Métodos de Pago</h3>
+            <h3 class="text-2xl font-instrument text-neutral-800 tracking-tight">Métodos de Pago</h3>
           </div>
-          <p class="text-primary-gray mb-6">
+          <p class="text-neutral-700 mb-8 text-lg font-light">
             Aceptamos los siguientes métodos de pago para tu comodidad:
           </p>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="flex items-center p-3 border border-secondary-lightgray/20 rounded-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary-black mr-2">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="flex items-center p-4 rounded-xl bg-white/80 shadow select-none">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-neutral-600 mr-3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
               </svg>
-              <span>Tarjeta de Crédito</span>
+              <span class="text-neutral-800 font-medium text-base">Tarjeta de Crédito</span>
             </div>
-            <div class="flex items-center p-3 border border-secondary-lightgray/20 rounded-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary-black mr-2">
+            <div class="flex items-center p-4 rounded-xl bg-white/80 shadow select-none">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-neutral-600 mr-3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3" />
               </svg>
-              <span>Transferencia</span>
+              <span class="text-neutral-800 font-medium text-base">Transferencia</span>
             </div>
-            <div class="flex items-center p-3 border border-secondary-lightgray/20 rounded-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary-black mr-2">
+            <div class="flex items-center p-4 rounded-xl bg-white/80 shadow select-none">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-neutral-600 mr-3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
               </svg>
-              <span>Bizum</span>
+              <span class="text-neutral-800 font-medium text-base">Bizum</span>
             </div>
-            <div class="flex items-center p-3 border border-secondary-lightgray/20 rounded-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary-black mr-2">
+            <div class="flex items-center p-4 rounded-xl bg-white/80 shadow select-none">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-neutral-600 mr-3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
               </svg>
-              <span>Factura</span>
+              <span class="text-neutral-800 font-medium text-base">Factura</span>
             </div>
           </div>
-          <p class="text-sm text-primary-gray mt-4">
-            Para solicitar una factura, envíanos un email con los datos fiscales de tu empresa a info@thecontentstudio.es.
+          <p class="text-base text-neutral-700 mt-8 font-light">
+            Para solicitar una factura, envíanos un email con los datos fiscales de tu empresa a 
+            <a href="mailto:info@thecontentstudio.es" class="text-primary-beige underline underline-offset-4 hover:text-primary-black transition-colors">info@thecontentstudio.es</a>.
           </p>
         </div>
       </div>
@@ -262,7 +263,7 @@ import PricingTable from '../components/booking/PricingTable.astro';
         Si buscas una solución a medida para tus necesidades específicas, contáctanos y te prepararemos una propuesta personalizada.
       </p>
       <div class="flex flex-col md:flex-row justify-center gap-4">
-        <a href="/booking" class="btn bg-primary-white text-primary-black hover:bg-primary-beige">Reserva Ahora</a>
+        <a href="/booking" class="btn bg-primary-white text-primary-black hover:bg-secondary-lightgray hover:text-primary-black border border-primary-white">Reserva Ahora</a>
         <a href="/contact" class="btn btn-outline border-primary-white text-primary-white hover:bg-primary-white hover:text-primary-black">Solicitar Presupuesto</a>
       </div>
     </div>
