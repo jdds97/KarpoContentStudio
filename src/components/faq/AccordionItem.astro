@@ -31,22 +31,19 @@ const isOpen = index === 0; // First item is open by default
 </div>
 
 <script>
-  // Accordion functionality
+  // Accordion funcionalidad: cada ítem se abre/cierra de forma independiente
   document.addEventListener('DOMContentLoaded', () => {
     const accordionHeaders = document.querySelectorAll('.accordion-header');
-    
     accordionHeaders.forEach((header) => {
       header.addEventListener('click', () => {
         const content = header.nextElementSibling;
         const icon = header.querySelector('.accordion-icon');
-        
         // Toggle aria-expanded
-        const isExpanded = header.getAttribute('aria-expanded') === 'true';
-        header.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
-        
+        const isOpenAccordion = header.getAttribute('aria-expanded') === 'true';
+        header.setAttribute('aria-expanded', isOpenAccordion ? 'false' : 'true');
         // Toggle content
         if (content && icon) {
-          if (isExpanded) {
+          if (isOpenAccordion) {
             (content as HTMLElement).style.maxHeight = '0';
             icon.classList.remove('rotate-180');
           } else {
@@ -56,11 +53,6 @@ const isOpen = index === 0; // First item is open by default
         }
       });
     });
-    
-    // Initialize first item open
-    const firstIcon = accordionHeaders[0]?.querySelector('.accordion-icon');
-    if (firstIcon) {
-      firstIcon.classList.add('rotate-180');
-    }
+    // Eliminar la lógica que fuerza solo el primero abierto
   });
 </script>

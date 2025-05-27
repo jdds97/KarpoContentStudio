@@ -1,92 +1,67 @@
 ---
-// src/layouts/Layout.astro
-import '../styles/global.css';
-import Navbar from '../components/common/Navbar.astro';
-import Footer from '../components/common/Footer.astro';
-import SEO from '../components/common/SEO.astro';
-import { ClientRouter } from 'astro:transitions';
-interface Props {
-  title: string;
-  description?: string;
-  image?: string;
-  canonical?: string;
-  type?: "website" | "article";
-}
+import '@/styles/global.css';
+import Navbar from '@/components/common/Navbar.astro';
+import Footer from '@/components/common/Footer.astro';
+import SEO from '@/components/common/SEO.astro';
+import { businessStructuredData } from '@/utils';
+import type { LayoutProps } from '@/utils';
 
-const { 
+const {
   title,
   description = "The Content Studio - Tu espacio creativo para sesiones de fotos, rodajes, podcast y eventos especiales.",
   image,
   canonical,
   type
-} = Astro.props;
+}: LayoutProps = Astro.props as LayoutProps;
 ---
 
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <SEO 
-      title={title} 
-      description={description} 
-      image={image}
-      canonical={canonical}
-      type={type}
-    />
-    <!-- Structured data -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "The Content Studio",
-        "image": [
-          "https://thecontentstudio.es/images/spaces/cyclorama.webp",
-          "https://thecontentstudio.es/images/spaces/color-backgrounds.jpg",
-          "https://thecontentstudio.es/images/spaces/black-zone.png"
-        ],
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Calle Industria 123, Polígono Industrial",
-          "addressLocality": "Dos Hermanas",
-          "addressRegion": "Sevilla",
-          "postalCode": "41700",
-          "addressCountry": "ES"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 37.3050,
-          "longitude": -5.9276
-        },
-        "telephone": "+34600000000",
-        "url": "https://thecontentstudio.es",
-        "priceRange": "€€",
-        "openingHoursSpecification": [
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-            "opens": "09:00",
-            "closes": "20:00"
-          },
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Saturday"],
-            "opens": "10:00",
-            "closes": "18:00"
-          }
-        ]
-      }
-      </script>
-      <ClientRouter />
-  </head>
-  <body>
-    <div class="flex flex-col min-h-screen">
-      <Navbar />
-      <main class="flex-grow">
-        <slot />
-      </main>
-      <Footer />
-    </div>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="generator" content={Astro.generator} />
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  
+  <!-- Preconnect para fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+  <!-- Preload imagen LCP crítica -->
+  <link rel="preload" as="image" href="/images/spaces/principal-optimized.webp" fetchpriority="high" imagesizes="100vw" />
+    
+  <!-- Fuentes optimizadas - carga asíncrona -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400&display=swap" />
+  </noscript>
+  
+  <SEO
+    title={title}
+    description={description}
+    image={image}
+    canonical={canonical}
+    type={type}
+  />
+  
+  <script type="application/ld+json" set:html={JSON.stringify(businessStructuredData)}></script>
+</head>
+<body>
+  <div class="flex flex-col min-h-screen">
+    <Navbar />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer />
+  </div>
+</body>
 </html>

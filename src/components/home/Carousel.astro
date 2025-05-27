@@ -1,81 +1,119 @@
-<div class="relative w-full h-screen max-h-[800px] overflow-hidden">
-    <div id="carousel-container" class="relative h-full">
-      <!-- Carousel slides -->
-      <div class="carousel-slide absolute inset-0 opacity-100 transition-opacity duration-1000 ease-in-out">
-        <img src="/images/carousel/slide-1.png" alt="The Content Studio space" class="w-full h-full object-cover" />
-      </div>
-      <div class="carousel-slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
-        <img src="/images/carousel/slide-2.png" alt="Photo session in progress" class="w-full h-full object-cover" />
-      </div>
-      <div class="carousel-slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
-        <img src="/images/carousel/slide-3.png" alt="Podcast recording studio" class="w-full h-full object-cover" />
-      </div>
-      
-      <!-- Overlay with text -->
-      <div class="absolute inset-0 bg-primary-black/30 flex items-center justify-center text-center p-4">
-        <div class="max-w-4xl">
-          <h1 class="text-white text-4xl md:text-5xl lg:text-7xl font-instrument mb-4">
-            The Content Studio
-          </h1>
-          <p class="text-white text-xl md:text-2xl font-outfit mb-8 max-w-2xl mx-auto">
-            Tu espacio Creativo. Inspírate, innova, crea y sorprende.
-          </p>
-          <a href="/booking" class="btn btn-primary">Reserva Ahora</a>
+<div class="relative w-full h-[70vh] max-h-[600px] overflow-hidden">
+  <div id="carousel-container" class="relative h-full">
+    <!-- Carousel slides -->
+    <div class="carousel-slide absolute inset-0 opacity-100 transition-opacity duration-1000 ease-in-out z-10">
+      <img src="/images/carousel/slide-1.png" alt="Estudio fotográfico profesional en Sevilla" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 flex items-center justify-center text-center p-4 pointer-events-none">
+        <div class="backdrop-blur-md bg-white/10 rounded-xl max-w-2xl mx-auto px-6 py-8">
+          <h1 class="text-white text-3xl md:text-4xl font-instrument font-semibold mb-2 tracking-tight">Estudio Fotográfico en Sevilla</h1>
+          <p class="text-white/80 text-lg md:text-xl font-outfit mb-6">Alquila un espacio profesional, versátil y equipado para tus sesiones de fotos, vídeos y proyectos creativos.</p>
+          <a href="/booking" class="inline-block bg-primary-beige text-primary-black font-medium px-6 py-2 rounded-none hover:bg-white hover:text-primary-black transition-colors text-base shadow-sm pointer-events-auto" aria-label="Reserva tu sesión en el estudio">Reserva tu sesión</a>
         </div>
       </div>
-      
-      <!-- Carousel controls -->
-      <div class="absolute bottom-6 left-0 right-0 flex justify-center space-x-2">
-        <button class="carousel-dot w-3 h-3 rounded-full bg-primary-white opacity-50 transition-opacity" data-index="0"></button>
-        <button class="carousel-dot w-3 h-3 rounded-full bg-primary-white opacity-50 transition-opacity" data-index="1"></button>
-        <button class="carousel-dot w-3 h-3 rounded-full bg-primary-white opacity-50 transition-opacity" data-index="2"></button>
+    </div>
+    <div class="carousel-slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out z-10">
+      <img src="/images/carousel/slide-2.png" alt="Alquiler de plató para producciones audiovisuales" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 flex items-center justify-center text-center p-4 pointer-events-none">
+        <div class="backdrop-blur-md bg-white/10 rounded-xl max-w-2xl mx-auto px-6 py-8">
+          <h2 class="text-white text-2xl md:text-3xl font-instrument font-semibold mb-2 tracking-tight">Plató Audiovisual para Empresas y Creativos</h2>
+          <p class="text-white/80 text-lg md:text-xl font-outfit mb-6">Realiza producciones de vídeo, fotografía de producto, moda o publicidad con la mejor luz y equipamiento.</p>
+          <a href="/studio-spaces" class="inline-block bg-primary-beige text-primary-black font-medium px-6 py-2 rounded-none hover:bg-white hover:text-primary-black transition-colors text-base shadow-sm pointer-events-auto" aria-label="Descubre los espacios del estudio">Ver espacios</a>
+        </div>
       </div>
     </div>
+    <div class="carousel-slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out z-10">
+      <img src="/images/carousel/slide-3.png" alt="Estudio para podcast y grabación de audio profesional" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 flex items-center justify-center text-center p-4 pointer-events-none">
+        <div class="backdrop-blur-md bg-white/10 rounded-xl max-w-2xl mx-auto px-6 py-8">
+          <h2 class="text-white text-2xl md:text-3xl font-instrument font-semibold mb-2 tracking-tight">Podcast y Grabación de Audio Profesional</h2>
+          <p class="text-white/80 text-lg md:text-xl font-outfit mb-6">Reserva nuestro estudio insonorizado y crea tu podcast, entrevistas o cursos online con calidad premium.</p>
+          <a href="/contact" class="inline-block bg-primary-beige text-primary-black font-medium px-6 py-2 rounded-none hover:bg-white hover:text-primary-black transition-colors text-base shadow-sm pointer-events-auto" aria-label="Solicita información para podcast">Solicita información</a>
+        </div>
+      </div>
+    </div>
+    <!-- Minimal arrows -->
+    <button aria-label="Anterior" class="carousel-arrow left-2 absolute top-1/2 -translate-y-1/2 z-20 bg-white/60 hover:bg-primary-beige text-primary-black rounded-full w-9 h-9 flex items-center justify-center shadow transition-all border border-white/40 focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+      </svg>
+    </button>
+    <button aria-label="Siguiente" class="carousel-arrow right-2 absolute top-1/2 -translate-y-1/2 z-20 bg-white/60 hover:bg-primary-beige text-primary-black rounded-full w-9 h-9 flex items-center justify-center shadow transition-all border border-white/40 focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+      </svg>
+    </button>
+    <!-- Minimal dots -->
+    <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-20">
+      <button class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/60 border border-primary-beige transition-all duration-300 scale-100" data-index="0"></button>
+      <button class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/60 border border-primary-beige transition-all duration-300 scale-100" data-index="1"></button>
+      <button class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/60 border border-primary-beige transition-all duration-300 scale-100" data-index="2"></button>
+    </div>
   </div>
-  
-  <script>
-    // Simple carousel logic
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots = document.querySelectorAll('.carousel-dot');
-    
-    // Initialize first slide
-    slides[0].classList.remove('opacity-0');
-    slides[0].classList.add('opacity-100');
-    dots[0].classList.add('opacity-100');
-    
-    function showSlide(index: number) {
-      // Hide all slides
-      slides.forEach((slide) => {
-        slide.classList.remove('opacity-100');
-        slide.classList.add('opacity-0');
-      });
-      
-      // Show the selected slide
-      slides[index].classList.remove('opacity-0');
-      slides[index].classList.add('opacity-100');
-      
-      // Update dots
-      dots.forEach((dot) => {
-        dot.classList.remove('opacity-100');
-        dot.classList.add('opacity-50');
-      });
-      dots[index].classList.remove('opacity-50');
-      dots[index].classList.add('opacity-100');
-      
-      currentSlide = index;
+</div>
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+const dots = document.querySelectorAll('.carousel-dot');
+const arrows = document.querySelectorAll('.carousel-arrow');
+let intervalId;
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.remove('opacity-100', 'z-20');
+    slide.classList.add('opacity-0', 'z-10');
+    if (i === index) {
+      slide.classList.add('opacity-100', 'z-20');
+      slide.classList.remove('opacity-0', 'z-10');
     }
-    
-    // Add click event to dots
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        showSlide(index);
-      });
-    });
-    
-    // Auto slide every 5 seconds
-    setInterval(() => {
-      let nextSlide = (currentSlide + 1) % slides.length;
-      showSlide(nextSlide);
-    }, 5000);
-  </script>
+  });
+  dots.forEach((dot, i) => {
+    dot.classList.remove('bg-primary-beige', 'scale-110', 'opacity-100');
+    dot.classList.add('bg-white/60', 'scale-100', 'opacity-60');
+    if (i === index) {
+      dot.classList.add('bg-primary-beige', 'scale-110', 'opacity-100');
+      dot.classList.remove('bg-white/60', 'scale-100', 'opacity-60');
+    }
+  });
+  currentSlide = index;
+}
+
+function nextSlide() {
+  showSlide((currentSlide + 1) % slides.length);
+}
+function prevSlide() {
+  showSlide((currentSlide - 1 + slides.length) % slides.length);
+}
+
+dots.forEach((dot, i) => {
+  dot.addEventListener('click', () => {
+    showSlide(i);
+    resetInterval();
+  });
+});
+arrows[0].addEventListener('click', () => {
+  prevSlide();
+  resetInterval();
+});
+arrows[1].addEventListener('click', () => {
+  nextSlide();
+  resetInterval();
+});
+
+function startInterval() {
+  intervalId = setInterval(nextSlide, 5000);
+}
+function resetInterval() {
+  clearInterval(intervalId);
+  startInterval();
+}
+
+const carousel = document.getElementById('carousel-container');
+if (carousel) {
+  carousel.addEventListener('mouseenter', () => clearInterval(intervalId));
+  carousel.addEventListener('mouseleave', startInterval);
+}
+
+showSlide(0);
+startInterval();
+</script>
