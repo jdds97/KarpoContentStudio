@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro';
 import HeroSection from '@/components/common/HeroSection.astro';
 import PricingSection from '@/components/rates/PricingSection.astro';
+import ContentPackagesSection from '@/components/rates/ContentPackagesSection.astro';
 import AdditionalServicesSection from '@/components/rates/AdditionalServicesSection.astro';
 import PaymentInfoSection from '@/components/rates/PaymentInfoSection.astro';
 import CtaSection from '@/components/common/CtaSection.astro';
@@ -15,9 +16,9 @@ import { HERO_CONTENT, CTA_CONTENT } from '@/utils';
     image=""
     overlayClass="bg-primary-beige"
     textClass="text-primary-black"
-    buttonText=""
-  />
+    buttonText=""  />
   <PricingSection />
+  <ContentPackagesSection />
   <AdditionalServicesSection />
   <PaymentInfoSection />
   <CtaSection
