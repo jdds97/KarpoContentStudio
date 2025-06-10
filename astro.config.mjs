@@ -1,11 +1,20 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import node from '@astrojs/node';
 
 // https://astro.build/config
 export default defineConfig({
+  output: 'server', // 🔄 Cambiamos a 'server' por compatibilidad
+  adapter: node({
+    mode: 'standalone'
+  }),
   devToolbar: {
     enabled: false
+  },
+  server: {
+    port: 4321,
+    host: true
   },
   compressHTML: true,
   build: {
@@ -19,6 +28,19 @@ export default defineConfig({
         '@': new URL('./src', import.meta.url).pathname,
       },
     },
+    optimizeDeps: {
+      include: ['@lucide/astro'], // Pre-bundle Lucide para mejor rendimiento en dev
+      force: true, // Forzar re-optimización en dev
+    },
+    server: {
+      hmr: {
+        overlay: false, // Desactivar overlay de errores para mejor rendimiento
+      },
+      watch: {
+        ignored: ['**/node_modules/**', '**/.git/**'], // Ignorar archivos innecesarios
+        usePolling: false, // Usar eventos del sistema en lugar de polling
+      },
+    },
     build: {
       cssCodeSplit: false, // ✅ Consolidar CSS en un solo archivo
       minify: 'terser',
@@ -28,6 +50,10 @@ export default defineConfig({
           // Separar vendor chunks para mejor caché
           manualChunks: (id) => {
             if (id.includes('node_modules')) {
+              // Separar Lucide en su propio chunk para mejor caché
+              if (id.includes('@lucide/astro')) {
+                return 'lucide';
+              }
               return 'vendor';
             }
           },
