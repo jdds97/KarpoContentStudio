@@ -148,3 +148,15 @@ export interface Testimonial {
   avatar?: string;
   rating?: number;
 }
+
+// Tipos para Servicios Adicionales
+export interface AdditionalService {
+  id: string;
+  icon: string;
+  title: string;
+  description: string;
+  price: string;
+  priceNote: string | null;
+  actionText: string | null;
+  actionHref: string | null;
+}

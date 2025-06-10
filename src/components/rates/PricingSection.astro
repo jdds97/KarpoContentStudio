@@ -1,0 +1,20 @@
+---
+import PricingTable from '@/components/booking/PricingTable.astro';
+import { SECTION_CONTENT } from '@/utils';
+---
+<section class="section-padding bg-gradient-to-b from-primary-white to-primary-beige/20">
+  <div class="container mx-auto px-4 md:px-6 lg:px-8">
+    <!-- Título de la sección -->
+    <div class="text-center mb-8 md:mb-12 lg:mb-16">
+      <h2 class="section-title text-primary-black mb-4 md:mb-6">
+        {SECTION_CONTENT.pricing.title}
+      </h2>
+      <p class="section-subtitle text-primary-gray max-w-3xl mx-auto">
+        {SECTION_CONTENT.pricing.description}
+      </p>
+    </div>
+    
+    <!-- Tabla de precios -->
+    <PricingTable />
+  </div>
+</section>

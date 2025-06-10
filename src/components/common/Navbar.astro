@@ -1,15 +1,20 @@
 ---
 import Button from '@/components/common/Button.astro';
+import { ArrowRight } from '@lucide/astro';
+import { NAVIGATION_LINKS, COMPANY_INFO } from '@/utils';
 const { url } = Astro;
 ---
 
 <header class="fixed w-full bg-primary-white/95 backdrop-blur-md z-50 py-4 border-b border-secondary-lightgray/20 shadow-sm">
+    <!-- CSS-only mobile menu toggle - moved outside nav -->
+    <input type="checkbox" id="menu-toggle" class="hidden" />
+    
     <div class="container mx-auto px-4 md:px-8">
       <nav class="flex justify-between items-center">
         <a href="/" class="flex items-center">
           <img 
-            src="/images/logos/logo-optimized.webp" 
-            alt="The Content Studio" 
+            src={COMPANY_INFO.logo.main}
+            alt={COMPANY_INFO.logo.alt}
             class="h-12 w-auto"
             style="aspect-ratio: 204/72;"
             width="204" 
@@ -21,8 +26,6 @@ const { url } = Astro;
           />
         </a>
         
-        <!-- CSS-only mobile menu toggle -->
-        <input type="checkbox" id="menu-toggle" class="hidden" />
         <label 
           for="menu-toggle" 
           class="lg:hidden relative w-12 h-12 rounded-xl bg-primary-beige/80 hover:bg-primary-beige transition-all duration-300 flex items-center justify-center group shadow-sm cursor-pointer"
@@ -35,58 +38,47 @@ const { url } = Astro;
           </div>
         </label>
         
-        <!-- Navegación escritorio (sin cambios) -->
+        <!-- Navegación escritorio -->
         <div class="hidden lg:flex items-center space-x-8">
-          <a href="/" class="text-primary-black hover:text-primary-gray transition-colors relative group">Home
-            {url.pathname === '/' && <span class="block absolute left-0 -bottom-2 w-full h-1 bg-primary-black rounded-t"></span>}
-          </a>
-          <a href="/studio-spaces" class="text-primary-black hover:text-primary-gray transition-colors relative group">Estudio
-            {url.pathname === '/studio-spaces' && <span class="block absolute left-0 -bottom-2 w-full h-1 bg-primary-black rounded-t"></span>}
-          </a>
-          <a href="/target-audiences" class="text-primary-black hover:text-primary-gray transition-colors relative group">Público
-            {url.pathname === '/target-audiences' && <span class="block absolute left-0 -bottom-2 w-full h-1 bg-primary-black rounded-t"></span>}
-          </a>
-          <a href="/rates" class="text-primary-black hover:text-primary-gray transition-colors relative group">Tarifas
-            {url.pathname === '/rates' && <span class="block absolute left-0 -bottom-2 w-full h-1 bg-primary-black rounded-t"></span>}
-          </a>
-          <a href="/faq" class="text-primary-black hover:text-primary-gray transition-colors relative group">FAQ
-            {url.pathname === '/faq' && <span class="block absolute left-0 -bottom-2 w-full h-1 bg-primary-black rounded-t"></span>}
-          </a>
-          <a href="/contact" class="text-primary-black hover:text-primary-gray transition-colors relative group">Contacto
-            {url.pathname === '/contact' && <span class="block absolute left-0 -bottom-2 w-full h-1 bg-primary-black rounded-t"></span>}
-          </a>
-          <Button href="/booking" variant="custom" class="bg-primary-black text-primary-white hover:bg-stone-500 hover:text-black transition-all duration-300 text-center mt-2 relative group font-semibold">
+          {NAVIGATION_LINKS.map((link) => {
+            const isActive = url.pathname === link.href || (link.href === '/' && url.pathname === '/');
+            return (
+              <a href={link.href} class="text-primary-black hover:text-primary-gray transition-colors relative group nav-link" data-href={link.href}>
+                {link.label}
+                {isActive && <span class="block absolute left-0 -bottom-2 w-full h-1 bg-primary-black rounded-t nav-indicator"></span>}
+              </a>
+            );
+          })}
+          <Button href="/booking" variant="custom" class="bg-primary-black text-primary-white hover:bg-primary-beige hover:text-primary-black transition-all duration-300 text-center mt-2 relative group font-semibold nav-link" data-href="/booking">
             Reserva
-            {url.pathname === '/booking' && <span class="block absolute left-0 -bottom-2 w-full h-1 bg-primary-black rounded-t"></span>}
+            {url.pathname === '/booking' && <span class="block absolute left-0 -bottom-2 w-full h-1 bg-primary-black rounded-t nav-indicator"></span>}
           </Button>
         </div>
       </nav>
+    </div>
       
-      <!-- CSS-only Mobile Menu -->
-      <div class="mobile-menu">
-        <div class="mobile-menu-overlay"></div>
-        <div class="mobile-menu-content">
-          <nav class="space-y-1 mb-8">
-            <a href="/" class={`mobile-nav-link ${url.pathname === '/' ? 'active' : ''}`}>Home</a>
-            <a href="/studio-spaces" class={`mobile-nav-link ${url.pathname === '/studio-spaces' ? 'active' : ''}`}>Estudio</a>
-            <a href="/target-audiences" class={`mobile-nav-link ${url.pathname === '/target-audiences' ? 'active' : ''}`}>Público</a>
-            <a href="/rates" class={`mobile-nav-link ${url.pathname === '/rates' ? 'active' : ''}`}>Tarifas</a>
-            <a href="/faq" class={`mobile-nav-link ${url.pathname === '/faq' ? 'active' : ''}`}>FAQ</a>
-            <a href="/contact" class={`mobile-nav-link ${url.pathname === '/contact' ? 'active' : ''}`}>Contacto</a>
-          </nav>
-          <div class="space-y-4">
-            <Button href="/booking" variant="custom" fullWidth class={`font-outfit font-semibold py-4 transition-all duration-300 rounded-2xl bg-primary-black text-primary-white hover:bg-stone-500 hover:text-black hover:scale-105 shadow-xl ${url.pathname === '/booking' ? 'ring-4 ring-primary-beige/40 scale-105' : ''}`}>
-              <span class="flex items-center justify-center space-x-3">
-                <span class="text-xl">✨</span>
-                <span>Reservar Estudio</span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </span>
-            </Button>
-            <div class="text-center">
-              <p class="text-primary-black/70 text-sm font-outfit">Tu espacio creativo te espera</p>
-            </div>
+    <!-- CSS-only Mobile Menu -->
+    <div class="mobile-menu">
+      <div class="mobile-menu-overlay"></div>
+      <div class="mobile-menu-content">
+        <nav class="space-y-1 mb-8">
+          {NAVIGATION_LINKS.map((link) => {
+            const isActive = url.pathname === link.href || (link.href === '/' && url.pathname === '/');
+            return (
+              <a href={link.href} class={`mobile-nav-link ${isActive ? 'active' : ''}`} data-href={link.href}>{link.label}</a>
+            );
+          })}
+        </nav>
+        <div class="space-y-4">
+          <Button href="/booking" variant="custom" fullWidth class={`font-outfit font-semibold py-4 transition-all duration-300 rounded-2xl bg-primary-black text-primary-white hover:bg-primary-beige hover:text-primary-black hover:scale-105 shadow-xl ${url.pathname === '/booking' ? 'ring-4 ring-primary-beige/40 scale-105' : ''}`}>
+            <span class="flex items-center justify-center space-x-3">
+              <span class="text-xl">✨</span>
+              <span>Reservar Estudio</span>
+              <ArrowRight class="w-5 h-5" />
+            </span>
+          </Button>
+          <div class="text-center">
+            <p class="text-primary-black/70 text-sm font-outfit">Tu espacio creativo te espera</p>
           </div>
         </div>
       </div>
@@ -95,3 +87,54 @@ const { url } = Astro;
   
   <!-- Relleno para compensar el header fijo -->
   <div class="h-20"></div>
+
+<script>
+// Función para actualizar indicadores de navegación activa
+function updateActiveNavigation() {
+  const currentPath = window.location.pathname;
+  
+  // Limpiar todos los indicadores existentes
+  document.querySelectorAll('.nav-indicator').forEach(indicator => {
+    indicator.remove();
+  });
+  
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.classList.remove('active');
+  });
+  
+  // Añadir indicadores a elementos activos
+  document.querySelectorAll('.nav-link').forEach(link => {
+    const href = link.getAttribute('data-href');
+    const isActive = currentPath === href || (href === '/' && currentPath === '/');
+    
+    if (isActive) {
+      // Para navegación desktop
+      if (!link.querySelector('.nav-indicator')) {
+        const indicator = document.createElement('span');
+        indicator.className = 'block absolute left-0 -bottom-2 w-full h-1 bg-primary-black rounded-t nav-indicator';
+        link.appendChild(indicator);
+      }
+    }
+  });
+  
+  // Para navegación móvil
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    const href = link.getAttribute('data-href');
+    const isActive = currentPath === href || (href === '/' && currentPath === '/');
+    
+    if (isActive) {
+      link.classList.add('active');
+    }
+  });
+}
+
+// Ejecutar cuando el DOM esté listo
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', updateActiveNavigation);
+} else {
+  updateActiveNavigation();
+}
+
+// Ejecutar después de navegación SPA si existe
+document.addEventListener('astro:page-load', updateActiveNavigation);
+</script>

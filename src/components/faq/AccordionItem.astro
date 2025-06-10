@@ -1,58 +1,35 @@
 ---
+import { ChevronDown } from '@lucide/astro';
+
 interface Props {
   question: string;
   answer: string;
   index: number;
+  categoryIndex?: number;
 }
 
-const { question, answer, index } = Astro.props;
-const isOpen = index === 0; // First item is open by default
+const { question, answer, index, categoryIndex = 0 } = Astro.props as Props;
+const accordionId = `accordion-${categoryIndex}-${index}`;
 ---
 
-<div class="border-b border-primary-beige/50 accordion-item">
-  <button 
-    class="accordion-header w-full text-left py-4 pr-10 pl-0 flex justify-between items-center focus:outline-none"
-    aria-expanded={isOpen ? "true" : "false"}
-  >
-    <span class="font-instrument text-lg">{question}</span>
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="accordion-icon w-6 h-6 transition-transform duration-300 transform">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-    </svg>
-  </button>
+<div class="accordion-item">
+  <!-- Checkbox oculto que controla el estado del acordeón -->
+  <input 
+    type="checkbox" 
+    id={accordionId} 
+    class="accordion-checkbox"
+  />
   
-  <div 
-    class="accordion-content overflow-hidden transition-all duration-300 max-h-0"
-    style={isOpen ? "max-height: 1000px;" : ""}
-  >
-    <div class="pb-4 text-primary-gray">
-      <p set:html={answer}></p>
+  <!-- Label que actúa como botón del acordeón -->
+  <label for={accordionId} class="accordion-header">
+    <span class="font-instrument text-lg leading-relaxed">{question}</span>
+    <ChevronDown class="accordion-icon" />
+  </label>
+  
+  <!-- Contenido del acordeón -->
+  <div class="accordion-content">
+    <div class="accordion-content-inner">
+      <div set:html={answer}></div>
     </div>
   </div>
 </div>
-
-<script>
-  // Accordion funcionalidad: cada ítem se abre/cierra de forma independiente
-  document.addEventListener('DOMContentLoaded', () => {
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
-    accordionHeaders.forEach((header) => {
-      header.addEventListener('click', () => {
-        const content = header.nextElementSibling;
-        const icon = header.querySelector('.accordion-icon');
-        // Toggle aria-expanded
-        const isOpenAccordion = header.getAttribute('aria-expanded') === 'true';
-        header.setAttribute('aria-expanded', isOpenAccordion ? 'false' : 'true');
-        // Toggle content
-        if (content && icon) {
-          if (isOpenAccordion) {
-            (content as HTMLElement).style.maxHeight = '0';
-            icon.classList.remove('rotate-180');
-          } else {
-            (content as HTMLElement).style.maxHeight = '1000px';
-            icon.classList.add('rotate-180');
-          }
-        }
-      });
-    });
-    // Eliminar la lógica que fuerza solo el primero abierto
-  });
-</script>

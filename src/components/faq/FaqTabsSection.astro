@@ -1,0 +1,43 @@
+---
+import AccordionItem from './AccordionItem.astro';
+import { faqCategories, type FaqCategory, type FaqQuestion } from '@/utils';
+---
+<section class="section-padding bg-primary-white">
+  <div class="container mx-auto container-padding">
+    <div class="faq-tabs">
+      {/* Radios ocultos */}
+      {faqCategories.map((category: FaqCategory, index: number) => (
+        <input
+          type="radio"
+          name="faq-tab"
+          id={`faq-tab-${index}`}
+          class="faq-tab-radio"
+          checked={index === 0 ? true : undefined}
+        />
+      ))}
+      {/* Labels de pestañas */}
+      <div class="faq-tab-labels flex flex-wrap border-b border-primary-beige/50 mb-8">
+        {faqCategories.map((category: FaqCategory, index: number) => (
+          <label for={`faq-tab-${index}`} class="faq-tab-label">
+            {category.title}
+          </label>
+        ))}
+      </div>
+      {/* Contenidos de pestañas */}
+      <div class="tab-content-container">
+        {faqCategories.map((category: FaqCategory, catIndex: number) => (
+          <div class="tab-content-faq">
+            {category.questions.map((faq: FaqQuestion, faqIndex: number) => (
+              <AccordionItem
+                question={faq.question}
+                answer={faq.answer}
+                index={faqIndex}
+                categoryIndex={catIndex}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

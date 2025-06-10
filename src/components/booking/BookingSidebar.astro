@@ -1,0 +1,70 @@
+---
+import Button from '@/components/common/Button.astro';
+import { Clock, CreditCard, XCircle, Info, Phone, Mail, ArrowRight } from '@lucide/astro';
+---
+<div>
+  <!-- Información rápida -->
+  <div class="bg-primary-beige p-6 rounded-lg mb-8">
+    <h3 class="text-xl font-instrument mb-4 text-primary-black">Información de Reserva</h3>
+    <ul class="space-y-4 mt-4">
+      <li class="flex items-start">
+        <Clock class="w-6 h-6 text-primary-black mr-2 mt-0.5" />
+        <div>
+          <p class="font-medium">Horario de Reservas</p>
+          <p class="text-primary-gray text-sm">Lunes - Viernes: 9:00 - 20:00</p>
+          <p class="text-primary-gray text-sm">Sábado: 10:00 - 18:00</p>
+        </div>
+      </li>
+      <li class="flex items-start">
+        <CreditCard class="w-6 h-6 text-primary-black mr-2 mt-0.5" />
+        <div>
+          <p class="font-medium">Pago</p>
+          <p class="text-primary-gray text-sm">Se requiere pago completo para confirmar la reserva.</p>
+        </div>
+      </li>
+      <li class="flex items-start">
+        <XCircle class="w-6 h-6 text-primary-black mr-2 mt-0.5" />
+        <div>
+          <p class="font-medium">Cancelaciones</p>
+          <p class="text-primary-gray text-sm">Reembolso completo si se cancela con 48h de antelación.</p>
+        </div>
+      </li>
+      <li class="flex items-start">
+        <Info class="w-6 h-6 text-primary-black mr-2 mt-0.5" />
+        <div>
+          <p class="font-medium">Tiempo Mínimo</p>
+          <p class="text-primary-gray text-sm">La reserva mínima es de 2 horas.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!-- ¿Necesitas ayuda? -->
+  <div class="bg-primary-black text-primary-white p-6 rounded-lg mb-8 border border-primary-beige/20">
+    <h3 class="text-2xl font-instrument font-bold mb-4 text-primary-white">¿Necesitas Ayuda?</h3>
+    <p class="mb-4 text-gray-100">
+      Si tienes dudas o necesitas un presupuesto personalizado, no dudes en contactarnos.
+    </p>
+    <div class="space-y-3 mb-6">
+      <div class="flex items-center">
+        <Phone class="w-5 h-5 text-primary-beige mr-2" />
+        <a href="tel:+34 633 811 994" class="text-primary-white hover:text-primary-beige transition-colors font-medium">+34 633 811 994</a>
+      </div>
+      <div class="flex items-center">
+        <Mail class="w-5 h-5 text-primary-beige mr-2" />
+        <a href="mailto:info@thecontentstudio.es" class="text-primary-white hover:text-primary-beige transition-colors font-medium">info@thecontentstudio.es</a>
+      </div>
+    </div>
+    <Button href="/contact" variant="custom" class="bg-primary-white text-primary-black hover:bg-primary-beige hover:text-primary-gray font-medium transition-all" fullWidth>Contactar</Button>
+  </div>
+  <!-- Enlace rápido a FAQ -->
+  <div class="bg-primary-beige p-6 rounded-lg">
+    <h3 class="text-xl font-instrument mb-4 text-primary-black">Preguntas Frecuentes</h3>
+    <p class="mb-4 text-primary-gray">
+      Encuentra respuestas a las preguntas más comunes sobre reservas y servicios.
+    </p>
+    <a href="/faq" class="text-primary-black font-medium inline-flex items-center hover:text-primary-gray transition-colors">
+      Ver todas las preguntas
+      <ArrowRight class="w-4 h-4 ml-1" />
+    </a>
+  </div>
+</div>
