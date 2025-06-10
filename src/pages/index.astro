@@ -1,108 +1,40 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Carousel from '../components/home/Carousel.astro';
-import WelcomeSection from '../components/home/WelcomeSection.astro';
-import TargetSection from '../components/home/TargetSection.astro';
-import StudioSpace from '../components/studio/StudioSpace.astro';
-
-// Studio space data
-const studioSpaces = [
-  {
-    id: "cyclorama",
-    title: "Ciclorama de Grandes Dimensiones",
-    description: "Nuestro ciclorama de gran formato es el espacio ideal para producciones fotográficas y audiovisuales que requieren un entorno amplio, versátil y completamente personalizable.",
-    image: "/images/spaces/cyclorama.webp",
-    features: [
-      "Grandes Dimensiones: 6m x 4m con más de 3m de altura",
-      "Espacio Versátil para fotografía de moda, retratos y producciones audiovisuales",
-      "Iluminación Sin Restricciones y total libertad para setups profesionales",
-      "Fondos y Decorados Personalizables según las necesidades de cada sesión"
-    ],
-    idealFor: [
-      "Fotografía y video de moda, editorial y publicidad",
-      "Producciones de e-commerce con modelos o productos de gran tamaño",
-      "Sesiones grupales con amplio espacio de movimiento",
-      "Escenarios dinámicos con setups de iluminación avanzada"
-    ]
-  },
-  {
-    id: "color-backgrounds",
-    title: "Zona de Fondos de Colores",
-    description: "Nuestra zona de fondos de colores es el espacio perfecto para sesiones fotográficas y producciones audiovisuales que requieren versatilidad y personalización.",
-    image: "/images/spaces/color-backgrounds.jpg",
-    reverse: true,
-    features: [
-      "Fondos Intercambiables de 2.7m de ancho en variedad de colores",
-      "Mobiliario y Accesorios Personalizables para ambientar tus sesiones",
-      "Iluminación Adaptable para diferentes estilos visuales",
-      "Fácil Montaje y Cambio Rápido de Fondos sin interrumpir el workflow"
-    ],
-    idealFor: [
-      "Sesiones de retrato con fondos coloridos y llamativos",
-      "Fotografía de moda y campañas publicitarias con escenografía personalizada",
-      "Contenido para e-commerce con variedad de fondos para destacar productos",
-      "Producciones audiovisuales con transiciones de colores y efectos visuales"
-    ]
-  }
-];
+import Layout from '@/layouts/Layout.astro';
+import TargetSection from '@/components/home/TargetSection.astro';
+import StudioSpacesSection from '@/components/home/StudioSpacesSection.astro';
+import CtaSection from '@/components/common/CtaSection.astro';
+import HeroSection from '@/components/common/HeroSection.astro';
+import { HERO_CONTENT, CTA_CONTENT } from '@/utils';
 ---
 
 <Layout title="Home">
-  <Carousel />
-  <WelcomeSection />
+  <HeroSection
+    title={HERO_CONTENT.home.title}
+    description={HERO_CONTENT.home.description}
+    image="/images/spaces/principal-optimized.webp"
+    buttonText={HERO_CONTENT.home.buttonText}
+    buttonHref={HERO_CONTENT.home.buttonHref}
+    overlayClass="bg-primary-black/60"
+    titleClass="text-primary-black"
+    descriptionClass='text-primary-white'
+    buttonVariant="custom"
+    buttonClass="bg-primary-black text-primary-white hover:bg-primary-beige hover:text-primary-black transition-colors shadow-lg"
+  />
   <TargetSection />
-  
-  <!-- SEO Optimized Section -->
-  <section class="bg-primary-beige/30 py-20">
-    <div class="container mx-auto container-padding">
-      <div class="max-w-3xl mx-auto text-center prose prose-neutral dark:prose-invert">
-        <h1 class="section-title">Alquiler de Estudio Fotográfico en Sevilla</h1>
-        <p class="text-lg md:text-xl text-primary-gray mb-8">
-          The Content Studio: tu espacio profesional en Sevilla para fotografía, vídeo y eventos creativos. Descubre un estudio moderno, versátil y céntrico, ideal para creadores, marcas y empresas que buscan calidad y comodidad en la capital andaluza.
-        </p>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Studio Spaces Preview -->
-  <section class="section-padding">
-    <div class="container mx-auto container-padding">
-      <div class="max-w-4xl mx-auto text-center prose prose-neutral dark:prose-invert mb-16">
-        <h2 class="section-title">Nuestras Instalaciones</h2>
-        <p class="text-lg md:text-xl text-primary-gray max-w-3xl mx-auto">
-          Conoce los diferentes espacios disponibles en The Content Studio, diseñados para adaptarse a cualquier tipo de producción fotográfica o audiovisual.
-        </p>
-      </div>
-      
-      {studioSpaces.map((space) => (
-        <StudioSpace 
-          id={space.id}
-          title={space.title}
-          description={space.description}
-          image={space.image}
-          reverse={space.reverse}
-          features={space.features}
-          idealFor={space.idealFor}
-        />
-      ))}
-      
-      <div class="text-center mt-8">
-        <a href="/studio-spaces" class="btn btn-primary">Ver Todos los Espacios</a>
-      </div>
-    </div>
-  </section>
-  
-  <!-- CTA Section -->
-  <section class="py-20 bg-primary-black text-primary-white">
-    <div class="container mx-auto container-padding text-center prose prose-neutral dark:prose-invert">
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-instrument mb-6">Haz Realidad tu Próximo Proyecto</h2>
-      <p class="text-lg md:text-xl mb-10 max-w-3xl mx-auto">
-        Ya sea para una sesión de fotos, grabación de podcast o un evento especial, en The Content Studio encontrarás el espacio ideal para dar vida a tus ideas.
-      </p>
-      <div class="flex flex-col md:flex-row justify-center gap-4">
-        <a href="/booking" class="btn bg-white text-primary-black hover:bg-primary-black hover:text-primary-beige">Reserva Ahora</a>
-        <a href="/contact" class="btn btn-outline border-white text-white hover:bg-primary-beige hover:text-primary-black">Contáctanos</a>
-      </div>
-    </div>
-  </section>
+  <StudioSpacesSection />
+  <CtaSection
+    title={CTA_CONTENT.readyToCreate.title}
+    description={CTA_CONTENT.readyToCreate.description}
+    primaryText={CTA_CONTENT.readyToCreate.primaryText}
+    primaryHref={CTA_CONTENT.readyToCreate.primaryHref}
+    secondaryText="Contactar"
+    secondaryHref="/contact"
+    bgClass="bg-primary-beige-200"
+    titleClass="text-primary-black"
+    descriptionClass="mt-4 text-primary-black"
+    primaryBtnVariant="custom"
+    primaryBtnClass="bg-primary-black text-primary-white hover:bg-primary-beige hover:text-primary-black"
+    secondaryBtnVariant="custom"
+    secondaryBtnClass="bg-primary-white border-2 border-primary-beige-500 text-stone-700 hover:bg-primary-beige hover:text-primary-black hover:border-primary-beige-500 transition-colors"
+  />
 </Layout>

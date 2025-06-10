@@ -5,7 +5,7 @@ import Footer from '@/components/common/Footer.astro';
 import SEO from '@/components/common/SEO.astro';
 import { businessStructuredData } from '@/utils';
 import type { LayoutProps } from '@/utils';
-
+import { ClientRouter } from 'astro:transitions';
 const {
   title,
   description = "The Content Studio - Tu espacio creativo para sesiones de fotos, rodajes, podcast y eventos especiales.",
@@ -30,20 +30,18 @@ const {
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   
-  <!-- Preconnect para fuentes -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Preconnect removido ya que usamos fuentes auto-hospedadas -->
   
   <!-- Preload imagen LCP crítica -->
   <link rel="preload" as="image" href="/images/spaces/principal-optimized.webp" fetchpriority="high" imagesizes="100vw" />
-    
-  <!-- Fuentes optimizadas - carga asíncrona -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400&display=swap" />
-  </noscript>
+  
+  <!-- Preload solo de la fuente más crítica para reducir cadenas de solicitud -->
+  <link rel="preload" href="/fonts/outfit-regular.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+  
+  <!-- Prefetch de fuentes secundarias para navegación futura -->
+  <link rel="prefetch" href="/fonts/instrument-serif-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="prefetch" href="/fonts/outfit-300.woff2" as="font" type="font/woff2" crossorigin>
+  
   
   <SEO
     title={title}
@@ -52,7 +50,7 @@ const {
     canonical={canonical}
     type={type}
   />
-  
+  <ClientRouter />
   <script type="application/ld+json" set:html={JSON.stringify(businessStructuredData)}></script>
 </head>
 <body>

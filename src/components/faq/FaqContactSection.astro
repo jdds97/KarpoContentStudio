@@ -1,0 +1,15 @@
+---
+import Button from '@/components/common/Button.astro';
+import { FAQ_CONTENT } from '@/utils';
+---
+<section class="section-padding bg-primary-beige/30">
+  <div class="container mx-auto container-padding">
+    <div class="max-w-3xl mx-auto text-center prose prose-neutral dark:prose-invert">
+      <h2 class="text-4xl md:text-5xl font-instrument font-bold mb-6 text-primary-black">{FAQ_CONTENT.contact.title}</h2>
+      <p class="text-lg text-primary-gray mb-8">
+        {FAQ_CONTENT.contact.description}
+      </p>
+      <Button href="/contact" variant="custom" class="bg-primary-black text-primary-white hover:bg-primary-beige hover:text-primary-black font-semibold px-8 py-4 text-lg">{FAQ_CONTENT.contact.buttonText}</Button>
+    </div>
+  </div>
+</section>

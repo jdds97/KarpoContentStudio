@@ -1,9 +1,12 @@
 /* Optimized CSS para Tailwind v4 - Eliminado render-blocking */
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@import "./critical-fonts.css"; /* Fuentes críticas primero */
+@import "./fonts.css"; /* Fuentes completas después */
 
-/* Variables CSS personalizadas */
-:root {
-  /* Paleta de colores */
+/* Configuración de tema para Tailwind v4 */
+@theme {
+  /* Colores personalizados disponibles como clases de Tailwind */
   --color-primary-black: #000000;
   --color-primary-gray: #3C3C3C;
   --color-primary-beige: #DAD6C9;
@@ -12,17 +15,22 @@
   --color-secondary-midgray: #B2B2B2;
   --color-secondary-lightgray: #C8C8C8;
   
-  /* Familias de fuentes con fallbacks optimizados para reducir layout shifts */
-  --font-instrument: 'Instrument Serif', ui-serif, 'Times New Roman', Times, serif;
-  --font-outfit: 'Outfit', ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Colores adicionales para mejor accesibilidad */
+  --color-primary-beige-light: #F0ECE0; /* Versión más clara para mejores contrastes */
+  --color-primary-beige-dark: #C4BFB1;  /* Versión más oscura para mejores contrastes */
+  --color-text-dark: #1F1F1F;           /* Texto más oscuro para mejor contraste */
+  
+  /* Fuentes personalizadas disponibles como clases de Tailwind */
+  --font-family-instrument: 'Instrument Serif', 'Instrument Serif Fallback', ui-serif, 'Times New Roman', Georgia, serif;
+  --font-family-outfit: 'Outfit', 'Outfit Fallback', ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Font fallbacks optimizados para reducir CLS */
+/* Font fallbacks optimizados para reducir CLS y mejorar críticas */
 @font-face {
   font-family: 'Outfit Fallback';
   src: local('Segoe UI'), local('system-ui'), local('sans-serif');
-  font-display: swap;
-  size-adjust: 98%;
+  font-display: swap; /* Fallback principal también usa swap */
+  size-adjust: 98.5%;
   ascent-override: 110%;
   descent-override: 28%;
   line-gap-override: 0%;
@@ -30,9 +38,9 @@
 
 @font-face {
   font-family: 'Instrument Serif Fallback';
-  src: local('Times New Roman'), local('serif');
-  font-display: swap;
-  size-adjust: 95%;
+  src: local('Times New Roman'), local('Georgia'), local('serif');
+  font-display: optional;
+  size-adjust: 96%;
   ascent-override: 108%;
   descent-override: 25%;
   line-gap-override: 0%;
@@ -44,7 +52,7 @@
 }
 
 html {
-  font-family: var(--font-outfit);
+  font-family: var(--font-family-outfit);
   scroll-behavior: smooth;
   font-size: 16px;
   line-height: 1.5;
@@ -52,8 +60,8 @@ html {
 
 body {
   background-color: #fff;
-  color: #000;
-  font-family: var(--font-outfit) !important;
+  color: var(--color-primary-black);
+  font-family: var(--font-family-outfit);
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
@@ -62,17 +70,29 @@ body {
 
 /* Asegurar que Outfit se aplique a TODOS los elementos de texto */
 body * {
-  font-family: var(--font-outfit) !important;
+  font-family: var(--font-family-outfit) ;
 }
 
 /* Solo los headings usan Instrument Serif */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-instrument) !important;
+  font-family: var(--font-family-instrument) ;
   font-weight: 400;
   line-height: 1.2;
   margin: 0;
+  /* Prevenir layout shift durante carga de fuentes */
+  font-display: optional;
+}
+a {
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
+/* Clase especial para elementos críticos above-the-fold */
+.critical-text {
+  font-display: optional;
+  /* Asegurar dimensiones estables */
+  contain: layout style;
+}
 
 
 /* H1 más grande en pantallas grandes */
@@ -83,25 +103,9 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Utilidades personalizadas para colores */
-.text-primary-black { color: var(--color-primary-black); }
-.text-primary-gray { color: var(--color-primary-gray); }
-.text-primary-beige { color: var(--color-primary-beige); }
-.text-primary-white { color: var(--color-primary-white); }
-.text-secondary-darkgray { color: var(--color-secondary-darkgray); }
-.text-secondary-midgray { color: var(--color-secondary-midgray); }
-.text-secondary-lightgray { color: var(--color-secondary-lightgray); }
-
-.bg-primary-black { background-color: var(--color-primary-black); }
-.bg-primary-gray { background-color: var(--color-primary-gray); }
-.bg-primary-beige { background-color: var(--color-primary-beige); }
-.bg-white { background-color: #fff; }
-.bg-secondary-darkgray { background-color: var(--color-secondary-darkgray); }
-.bg-secondary-midgray { background-color: var(--color-secondary-midgray); }
-.bg-secondary-lightgray { background-color: var(--color-secondary-lightgray); }
-
-.font-instrument { font-family: var(--font-instrument) !important; }
-.font-outfit { font-family: var(--font-outfit) !important; }
+/* Solo utilidades de fuente personalizadas necesarias para estilos base */
+.font-instrument { font-family: var(--font-family-instrument) ; }
+.font-outfit { font-family: var(--font-family-outfit) ; }
 
 /* Componentes reutilizables */
 .section-padding {
@@ -132,18 +136,24 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 2.25rem;
   line-height: 2.5rem;
   margin-bottom: 2rem;
+  /* Dimensiones fijas para prevenir layout shift */
+  min-height: 2.5rem;
+  /* Fallback font performance */
+  font-display: optional;
 }
 
 @media (min-width: 768px) {
   .section-title {
     font-size: 3rem;
     line-height: 1;
+    min-height: 3rem;
   }
 }
 
 @media (min-width: 1024px) {
   .section-title {
     font-size: 3.75rem;
+    min-height: 3.75rem;
   }
 }
 
@@ -205,20 +215,17 @@ label[for="menu-toggle"] .hamburger-line:nth-child(3) {
 }
 
 /* Animación a X cuando está activo */
-#menu-toggle:checked ~ nav label[for="menu-toggle"] .hamburger-line:nth-child(1),
-#menu-toggle:checked + label .hamburger-line:nth-child(1) {
+#menu-toggle:checked + div nav label[for="menu-toggle"] .hamburger-line:nth-child(1) {
   top: 50%;
   transform: translateY(-50%) rotate(45deg);
 }
 
-#menu-toggle:checked ~ nav label[for="menu-toggle"] .hamburger-line:nth-child(2),
-#menu-toggle:checked + label .hamburger-line:nth-child(2) {
+#menu-toggle:checked + div nav label[for="menu-toggle"] .hamburger-line:nth-child(2) {
   opacity: 0;
   transform: translateY(-50%) scale(0);
 }
 
-#menu-toggle:checked ~ nav label[for="menu-toggle"] .hamburger-line:nth-child(3),
-#menu-toggle:checked + label .hamburger-line:nth-child(3) {
+#menu-toggle:checked + div nav label[for="menu-toggle"] .hamburger-line:nth-child(3) {
   bottom: auto;
   top: 50%;
   transform: translateY(-50%) rotate(-45deg);
@@ -344,7 +351,7 @@ label[for="menu-toggle"] .hamburger-line:nth-child(3) {
   text-align: left;
   border: none;
   background: transparent;
-  font-family: var(--font-instrument);
+  font-family: var(--font-family-instrument);
   font-size: 1.125rem;
   line-height: 1.625;
 }

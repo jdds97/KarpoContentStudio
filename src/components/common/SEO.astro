@@ -1,4 +1,6 @@
 ---
+import { SEO_METADATA } from '@/utils';
+
 interface Props {
   title: string;
   description?: string;
@@ -19,10 +21,6 @@ const siteUrl = "https://thecontentstudio.es";
 const fullImageUrl = image.startsWith("http") ? image : `${siteUrl}${image}`;
 const fullTitle = `${title} | The Content Studio`;
 ---
-
-<!-- Preconnect para Google Fonts (optimización de rendimiento) -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
 <!-- Primary Meta Tags -->
 <title>{fullTitle}</title>
@@ -49,9 +47,9 @@ const fullTitle = `${title} | The Content Studio`;
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
 <link rel="manifest" href="/favicon/site.webmanifest">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content={SEO_METADATA.themeColor}>
 
 <!-- Meta tags adicionales para SEO -->
-<meta name="keywords" content="estudio fotográfico, alquiler estudio, fotografía, podcast, ciclorama, espacio creativo, sevilla, dos hermanas, estudio de contenido" />
-<meta name="author" content="The Content Studio" />
-<meta name="robots" content="index, follow" />
+<meta name="keywords" content={SEO_METADATA.keywords} />
+<meta name="author" content={SEO_METADATA.author} />
+<meta name="robots" content={SEO_METADATA.robots} />

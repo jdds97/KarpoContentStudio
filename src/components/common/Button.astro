@@ -1,0 +1,64 @@
+---
+export interface Props {
+  variant?: 'primary' | 'outline' | 'table' | 'custom';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  disabled?: boolean;
+  target?: string;
+  fullWidth?: boolean;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  class: customClass = '',
+  disabled = false,
+  target,
+  fullWidth = false
+} = Astro.props;
+
+// Clases base del botón
+const baseClasses = 'inline-block px-6 py-3 transition-all font-semibold duration-300 text-center rounded focus:outline-none focus:ring-2 focus:ring-offset-2 font-outfit';
+
+// Variantes de estilo
+const variantClasses = {
+  primary: 'bg-primary-black text-primary-white hover:bg-primary-beige hover:text-primary-black focus:ring-primary-black transition-all duration-300',
+  outline: 'border border-black text-primary-black hover:bg-primary-black hover:text-primary-white focus:ring-black transition-all duration-300',
+  table: 'rounded-lg bg-primary-black text-primary-white font-semibold px-5 py-2 shadow-sm hover:bg-primary-beige hover:text-primary-black focus:ring-primary-black/40 transition-all duration-300',
+  custom: ''
+};
+
+// Tamaños disponibles
+const sizeClasses = {
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-6 py-3',
+  lg: 'px-8 py-4 text-lg'
+};
+
+// Construcción de clases finales
+const buttonClasses = [
+  baseClasses,
+  variant !== 'custom' ? variantClasses[variant] : '',
+  variant !== 'table' ? sizeClasses[size] : '',
+  fullWidth ? 'w-full' : '',
+  disabled ? 'opacity-50 cursor-not-allowed' : '',
+  customClass
+].filter(Boolean).join(' ');
+
+// Elemento dinámico según props
+const Element = href ? 'a' : 'button';
+---
+
+<Element
+  class={buttonClasses}
+  href={href}
+  type={href ? undefined : type}
+  disabled={href ? undefined : disabled}
+  target={target}
+>
+  <slot />
+</Element>

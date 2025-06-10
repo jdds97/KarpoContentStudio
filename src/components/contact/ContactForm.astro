@@ -1,0 +1,46 @@
+---
+import Button from '@/components/common/Button.astro';
+import { FORM_LABELS } from '@/utils';
+---
+<section class="section-padding">
+  <div class="container mx-auto container-padding prose prose-neutral dark:prose-invert">
+    <h2 class="text-2xl font-instrument mb-6">{FORM_LABELS.contact.title}</h2>
+    <form id="contact-form" class="space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="name" class="block text-sm font-medium text-primary-gray mb-1">{FORM_LABELS.contact.fields.name}</label>
+          <input type="text" id="name" name="name" required class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige" />
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-primary-gray mb-1">{FORM_LABELS.contact.fields.email}</label>
+          <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige" />
+        </div>
+      </div>
+      <div>
+        <label for="phone" class="block text-sm font-medium text-primary-gray mb-1">{FORM_LABELS.contact.fields.phone}</label>
+        <input type="tel" id="phone" name="phone" class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige" />
+      </div>
+      <div>
+        <label for="subject" class="block text-sm font-medium text-primary-gray mb-1">{FORM_LABELS.contact.fields.subject}</label>
+        <input type="text" id="subject" name="subject" required class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige" />
+      </div>
+      <div>
+        <label for="message" class="block text-sm font-medium text-primary-gray mb-1">{FORM_LABELS.contact.fields.message}</label>
+        <textarea id="message" name="message" rows="5" required class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"></textarea>
+      </div>
+      <div class="flex items-start">
+        <div class="flex items-center h-5">
+          <input id="privacy-policy" name="privacy-policy" type="checkbox" required class="focus:ring-primary-beige h-4 w-4 text-primary-black border-secondary-lightgray rounded" />
+        </div>
+        <div class="ml-3 text-sm">
+          <label for="privacy-policy" class="text-primary-gray">
+            {FORM_LABELS.contact.privacy} <a href="/privacy-policy" class="text-primary-black underline">política de privacidad</a>.
+          </label>
+        </div>
+      </div>
+      <div>
+        <Button type="submit" variant="primary" class="cursor-pointer">{FORM_LABELS.contact.submit}</Button>
+      </div>
+    </form>
+  </div>
+</section>

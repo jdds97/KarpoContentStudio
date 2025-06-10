@@ -1,190 +1,153 @@
-<div class="overflow-x-auto">
-    <table class="w-full border-collapse">
-      <thead>
-        <tr class="bg-primary-beige/80 border-b-2 border-primary-beige/60">
-          <th class="px-6 py-4 text-left font-instrument text-lg text-primary-black">Servicio</th>
-          <th class="px-6 py-4 text-left font-instrument text-lg text-primary-black">Duración</th>
-          <th class="px-6 py-4 text-left font-instrument text-lg text-primary-black">Precio</th>
-          <th class="px-6 py-4 text-left font-instrument text-lg text-primary-black"></th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-primary-beige/30">
-        <!-- Standard packages -->
-        <tr>
-          <td class="px-6 py-4">Alquiler Base</td>
-          <td class="px-6 py-4">2 horas</td>
-          <td class="px-6 py-4 font-medium">150€</td>
-          <td class="px-6 py-4">
-            <a href="/booking" class="inline-block rounded-none bg-black text-white font-semibold px-5 py-2 shadow-sm border border-black transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-black/40 hover:bg-neutral-900 hover:text-beige-200">Reservar</a>
-          </td>
-        </tr>
-        <tr>
-          <td class="px-6 py-4">Medio día</td>
-          <td class="px-6 py-4">4 horas</td>
-          <td class="px-6 py-4 font-medium">300€</td>
-          <td class="px-6 py-4">
-            <a href="/booking" class="inline-block rounded-none bg-black text-white font-semibold px-5 py-2 shadow-sm border border-black transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-black/40 hover:bg-neutral-900 hover:text-beige-200">Reservar</a>
-          </td>
-        </tr>
-        <tr>
-          <td class="px-6 py-4">Día completo</td>
-          <td class="px-6 py-4">8 horas</td>
-          <td class="px-6 py-4 font-medium">600€</td>
-          <td class="px-6 py-4">
-            <a href="/booking" class="inline-block rounded-none bg-black text-white font-semibold px-5 py-2 shadow-sm border border-black transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-black/40 hover:bg-neutral-900 hover:text-beige-200">Reservar</a>
-          </td>
-        </tr>
-        <tr>
-          <td class="px-6 py-4">Jornada Extendida</td>
-          <td class="px-6 py-4">12 horas</td>
-          <td class="px-6 py-4 font-medium">850€</td>
-          <td class="px-6 py-4">
-            <a href="/booking" class="inline-block rounded-none bg-black text-white font-semibold px-5 py-2 shadow-sm border border-black transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-black/40 hover:bg-neutral-900 hover:text-beige-200">Reservar</a>
-          </td>
-        </tr>
-        <tr>
-          <td class="px-6 py-4">Hora Extra</td>
-          <td class="px-6 py-4">1 hora</td>
-          <td class="px-6 py-4 font-medium">90€</td>
-          <td class="px-6 py-4">
-            <a href="/booking" class="inline-block rounded-none bg-black text-white font-semibold px-5 py-2 shadow-sm border border-black transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-black/40 hover:bg-neutral-900 hover:text-beige-200">Reservar</a>
-          </td>
-        </tr>
-        
-        <!-- Special header for memberships -->
-        <tr class="bg-primary-black/95 text-primary-beige">
-          <td colspan="4" class="px-6 py-4 font-instrument text-xl">Membresías Mensuales</td>
-        </tr>
-        
-        <!-- Memberships -->
-        <tr>
-          <td class="px-6 py-4">Básica</td>
-          <td class="px-6 py-4">8h/mes + 10% descuento en horas extra</td>
-          <td class="px-6 py-4 font-medium">250€/mes</td>
-          <td class="px-6 py-4">
-            <a href="/booking" class="inline-block rounded-none bg-black text-white font-semibold px-5 py-2 shadow-sm border border-black transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-black/40 hover:bg-neutral-900 hover:text-beige-200">Contactar</a>
-          </td>
-        </tr>
-        <tr>
-          <td class="px-6 py-4">Pro</td>
-          <td class="px-6 py-4">16h/mes + 15% descuento en horas extra</td>
-          <td class="px-6 py-4 font-medium">400€/mes</td>
-          <td class="px-6 py-4">
-            <a href="/booking" class="inline-block rounded-none bg-black text-white font-semibold px-5 py-2 shadow-sm border border-black transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-black/40 hover:bg-neutral-900 hover:text-beige-200">Contactar</a>
-          </td>
-        </tr>
-        <tr>
-          <td class="px-6 py-4">VIP</td>
-          <td class="px-6 py-4">30h/mes + 20% descuento en horas extra + prioridad en reservas</td>
-          <td class="px-6 py-4 font-medium">700€/mes</td>
-          <td class="px-6 py-4">
-            <a href="/booking" class="inline-block rounded-none bg-black text-white font-semibold px-5 py-2 shadow-sm border border-black transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-black/40 hover:bg-neutral-900 hover:text-beige-200">Contactar</a>
-          </td>
-        </tr>
-        
-        <!-- Special header for events -->
-        <tr class="bg-primary-black/95 text-primary-beige">
-          <td colspan="4" class="px-6 py-4 font-instrument text-xl">Tarifas Especiales - Eventos y Producciones</td>
-        </tr>
-        
-        <!-- Events -->
-        <tr>
-          <td class="px-6 py-4">Workshop / Masterclass</td>
-          <td class="px-6 py-4">4 horas</td>
-          <td class="px-6 py-4 font-medium">400€</td>
-          <td class="px-6 py-4">
-            <a href="/booking" class="inline-block rounded-none bg-black text-white font-semibold px-5 py-2 shadow-sm border border-black transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-black/40 hover:bg-neutral-900 hover:text-beige-200">Contactar</a>
-          </td>
-        </tr>
-        <tr>
-          <td class="px-6 py-4">Evento privado + catering</td>
-          <td class="px-6 py-4">8 horas</td>
-          <td class="px-6 py-4 font-medium">800€</td>
-          <td class="px-6 py-4">
-            <a href="/booking" class="inline-block rounded-none bg-black text-white font-semibold px-5 py-2 shadow-sm border border-black transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-black/40 hover:bg-neutral-900 hover:text-beige-200">Contactar</a>
-          </td>
-        </tr>
-        <tr>
-          <td class="px-6 py-4">Producción completa</td>
-          <td class="px-6 py-4">Personalizado</td>
-          <td class="px-6 py-4 font-medium">Desde 1.000€</td>
-          <td class="px-6 py-4">
-            <a href="/booking" class="inline-block rounded-none bg-black text-white font-semibold px-5 py-2 shadow-sm border border-black transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-black/40 hover:bg-neutral-900 hover:text-beige-200">Contactar</a>
-          </td>
-        </tr>
-        
-        <!-- Special header for annual membership -->
-        <tr class="bg-primary-black/95 text-primary-beige">
-          <td colspan="4" class="px-6 py-4 font-instrument text-xl">Membresía Anual Pro+</td>
-        </tr>
-        
-        <!-- Annual membership -->
-        <tr>
-          <td class="px-6 py-4">
-            <p class="font-medium">Membresía Anual Pro+</p>
-            <ul class="text-sm text-primary-gray mt-2 list-disc pl-4">
-              <li>360 horas/año (30 h/mes)</li>
-              <li>Prioridad máxima en reservas</li>
-              <li>25% descuento en horas extra</li>
-              <li>2 sesiones con asistente de producción incluidas</li>
-              <li>Hasta 6 usos de ciclorama sin suplemento de limpieza</li>
-              <li>Facturación anual deducible</li>
-            </ul>
-          </td>
-          <td class="px-6 py-4">1 año</td>
-          <td class="px-6 py-4 font-medium">
-            <p>6.800€/año</p>
-            <p class="text-sm text-primary-gray">o 3.500€ x 2 (semestral)</p>
-          </td>
-          <td class="px-6 py-4">
-            <a href="/booking" class="inline-block rounded-none bg-black text-white font-semibold px-5 py-2 shadow-sm border border-black transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-black/40 hover:bg-neutral-900 hover:text-beige-200">Contactar</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+---
+import Button from '@/components/common/Button.astro';
+import { pricingSections, annualMembershipDetails, pricingNotes } from '@/utils';
+import { Info } from '@lucide/astro';
+---
+
+<!-- Desktop Table View (hidden on mobile) -->
+<div class="hidden lg:block overflow-x-auto">
+  <table class="w-full border-collapse">
+    <thead>
+      <tr class="bg-primary-beige/90 border-b-2 border-primary-black/20">
+        <th class="px-6 py-4 text-left font-instrument text-xl font-bold text-primary-black">Servicio</th>
+        <th class="px-6 py-4 text-left font-instrument text-xl font-bold text-primary-black">Duración</th>
+        <th class="px-6 py-4 text-left font-instrument text-xl font-bold text-primary-black">Precio</th>
+        <th class="px-6 py-4 text-left font-instrument text-xl font-bold text-primary-black"></th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-primary-beige/30">
+      {pricingSections.map((section: any) => (
+        <>
+          {/* Cabecera de sección (excepto para la primera sección) */}
+          {section.id !== 'standard' && (
+            <tr class="bg-primary-black text-primary-white">
+              <td colspan="4" class="px-6 py-4 font-instrument text-xl font-bold tracking-wide">{section.title}</td>
+            </tr>
+          )}
+          
+          {/* Items de la sección */}
+          {section.items.map((item: any) => (
+            <tr>
+              <td class="px-6 py-4">
+                {item.id === 'annual-pro-plus' ? (
+                  <div>
+                    <p class="font-medium">{item.service}</p>
+                    <ul class="text-sm text-primary-gray mt-2 list-disc pl-4">
+                      {annualMembershipDetails.features.map((feature: any) => (
+                        <li>{feature}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : (
+                  item.service
+                )}
+              </td>
+              <td class="px-6 py-4">{item.duration}</td>
+              <td class="px-6 py-4 font-medium">
+                {item.id === 'annual-pro-plus' ? (
+                  <div>
+                    <p>{item.price}</p>
+                    <p class="text-sm text-primary-gray">o {annualMembershipDetails.alternativePayment}</p>
+                  </div>
+                ) : (
+                  item.price
+                )}
+              </td>
+              <td class="px-6 py-4">
+                <Button 
+                  href={item.actionHref} 
+                  variant="table"
+                >
+                  {item.action === 'book' ? 'Reservar' : 'Contactar'}
+                </Button>
+              </td>
+            </tr>
+          ))}
+        </>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<!-- Mobile Card View (visible on mobile and tablet) -->
+<div class="lg:hidden space-y-6">
+  {pricingSections.map((section: any) => (
+    <div class="space-y-4">
+      {/* Cabecera de sección */}
+      {section.id !== 'standard' && (
+        <div class="bg-primary-black text-primary-white px-4 py-3 rounded-t-xl">
+          <h3 class="font-instrument text-lg md:text-xl font-bold tracking-wide">{section.title}</h3>
+        </div>
+      )}
+      
+      {/* Cards de servicios */}
+      <div class="space-y-3">
+        {section.items.map((item: any) => (
+          <div class="bg-white border border-primary-beige/50 rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-shadow">
+            <div class="space-y-3">
+              <!-- Servicio -->
+              <div>
+                <h4 class="font-instrument text-lg md:text-xl font-bold text-primary-black mb-2">
+                  {item.service}
+                </h4>
+                {item.id === 'annual-pro-plus' && (
+                  <ul class="text-sm text-primary-gray space-y-1 list-disc pl-4">
+                    {annualMembershipDetails.features.map((feature: any) => (
+                      <li>{feature}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              
+              <!-- Información en grid -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm md:text-base">
+                <div>
+                  <span class="text-primary-gray font-medium">Duración:</span>
+                  <p class="text-primary-black mt-1">{item.duration}</p>
+                </div>
+                <div>
+                  <span class="text-primary-gray font-medium">Precio:</span>
+                  {item.id === 'annual-pro-plus' ? (
+                    <div class="mt-1">
+                      <p class="text-primary-black font-semibold">{item.price}</p>
+                      <p class="text-xs text-primary-gray">o {annualMembershipDetails.alternativePayment}</p>
+                    </div>
+                  ) : (
+                    <p class="text-primary-black font-semibold mt-1">{item.price}</p>
+                  )}
+                </div>
+              </div>
+              
+              <!-- Botón de acción -->
+              <div class="pt-2">
+                <Button 
+                  href={item.actionHref} 
+                  variant="custom"
+                  fullWidth
+                  class="bg-primary-black text-primary-white hover:bg-primary-beige hover:text-primary-black transition-all duration-300 py-3 text-center font-semibold"
+                >
+                  {item.action === 'book' ? 'Reservar' : 'Contactar'}
+                </Button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>
   
-  <div class="mt-8 bg-primary-beige/40 p-6 rounded-xl border border-primary-beige/60 shadow-sm">
-    <h3 class="font-instrument text-xl mb-4 flex items-center gap-2">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-primary-beige drop-shadow-md">
-        <circle cx="12" cy="12" r="11" fill="#E9D7C3" stroke="#BFA97A" stroke-width="1.5" />
-        <path stroke="#BFA97A" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8.5v4" />
-        <circle cx="12" cy="16" r="1" fill="#BFA97A" />
-      </svg>
-      Notas Importantes
-    </h3>
-    <ul class="space-y-2 text-primary-black/80">
-      <li class="flex items-start">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-primary-beige mr-2 flex-shrink-0">
-          <circle cx="12" cy="12" r="11" fill="#E9D7C3" stroke="#BFA97A" stroke-width="1.5" />
-          <path stroke="#BFA97A" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8.5v4" />
-          <circle cx="12" cy="16" r="1" fill="#BFA97A" />
-        </svg>
-        <span>Todas las tarifas incluyen acceso a ciclorama, zonas de set, cocina, camerino y mobiliario básico.</span>
+<div class="mt-8 bg-primary-beige/80 p-4 md:p-6 rounded-xl border border-primary-beige-dark shadow-sm">
+  <h3 class="font-instrument text-lg md:text-xl mb-4 flex items-center gap-2 text-primary-black">
+    <Info class="w-6 h-6 md:w-7 md:h-7 text-primary-black drop-shadow-md flex-shrink-0" />
+    Notas Importantes
+  </h3>
+  <ul class="space-y-3 mt-4 text-primary-black">
+    {pricingNotes.map((note: any) => (
+      <li class="flex items-start gap-3">
+        <Info class="w-5 h-5 md:w-6 md:h-6 text-primary-black mt-0.5 flex-shrink-0" />
+        <span class="text-sm md:text-base leading-relaxed">{note}</span>
       </li>
-      <li class="flex items-start">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-primary-beige mr-2 flex-shrink-0">
-          <circle cx="12" cy="12" r="11" fill="#E9D7C3" stroke="#BFA97A" stroke-width="1.5" />
-          <path stroke="#BFA97A" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8.5v4" />
-          <circle cx="12" cy="16" r="1" fill="#BFA97A" />
-        </svg>
-        <span>Para grupos de más de 5 personas, se aplicará una tarifa de 12€ por limpieza básica.</span>
-      </li>
-      <li class="flex items-start">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-primary-beige mr-2 flex-shrink-0">
-          <circle cx="12" cy="12" r="11" fill="#E9D7C3" stroke="#BFA97A" stroke-width="1.5" />
-          <path stroke="#BFA97A" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8.5v4" />
-          <circle cx="12" cy="16" r="1" fill="#BFA97A" />
-        </svg>
-        <span>El uso de fondos de papel Colorama tiene un coste adicional de 10€ por metro pisado.</span>
-      </li>
-      <li class="flex items-start">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-primary-beige mr-2 flex-shrink-0">
-          <circle cx="12" cy="12" r="11" fill="#E9D7C3" stroke="#BFA97A" stroke-width="1.5" />
-          <path stroke="#BFA97A" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8.5v4" />
-          <circle cx="12" cy="16" r="1" fill="#BFA97A" />
-        </svg>
-        <span>Para propuestas personalizadas o paquetes especiales, contáctanos directamente.</span>
-      </li>
-    </ul>
-  </div>
+    ))}
+  </ul>
+</div>
