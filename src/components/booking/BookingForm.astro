@@ -1,9 +1,53 @@
 ---
-import Button from '@/components/common/Button.astro';
 import { FORM_LABELS, FORM_OPTIONS } from '@/utils';
+import { actions } from 'astro:actions';
+import { 
+  hasFieldError, 
+  getFieldErrors, 
+  getFieldValue, 
+  getFieldClasses,
+  getGeneralError,
+  isActionSuccess,
+  getSuccessMessage
+} from '@/lib/form-helpers';
+
+// Obtener resultado de la action si existe
+const result = Astro.getActionResult(actions.createBooking);
 ---
 <div class="bg-primary-white p-8 rounded-lg shadow-md">
-    <form id="booking-form" action="/api/bookings/create" method="POST" class="space-y-6">
+  
+  <!-- Mensaje de éxito -->
+  {isActionSuccess(result) && (
+    <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+      <div class="flex items-start">
+        <svg class="w-5 h-5 text-green-600 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        <div>
+          <h3 class="text-green-800 font-medium">¡Reserva Creada Exitosamente!</h3>
+          <p class="text-green-700 mt-1">{getSuccessMessage(result)}</p>
+          <p class="text-green-600 text-sm mt-2 font-medium">Redirigiendo a la página de confirmación...</p>
+        </div>
+      </div>
+    </div>
+  )}
+
+  <!-- Mensaje de error -->
+  {getGeneralError(result) && (
+    <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+      <div class="flex items-start">
+        <svg class="w-5 h-5 text-red-600 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        <div>
+          <h3 class="text-red-800 font-medium">Error al crear la reserva</h3>
+          <p class="text-red-700 mt-1">{getGeneralError(result)}</p>
+        </div>
+      </div>
+    </div>
+  )}
+
+  <form method="POST" action={actions.createBooking} class="space-y-6" id="booking-form">
       <!-- Información Personal -->
       <div>
         <h4 class="text-lg font-outfit font-medium mb-4">{FORM_LABELS.booking.personalInfo}</h4>
@@ -14,9 +58,13 @@ import { FORM_LABELS, FORM_OPTIONS } from '@/utils';
               type="text" 
               id="name" 
               name="name" 
+              value={getFieldValue(result, 'name')}
               required 
-              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+              class={getFieldClasses(result, 'name')}
             />
+            {hasFieldError(result, 'name') && (
+              <p class="mt-1 text-sm text-red-600">{getFieldErrors(result, 'name').join(', ')}</p>
+            )}
           </div>
           <div>
             <label for="email" class="block text-sm font-medium text-primary-gray mb-1">{FORM_LABELS.booking.fields.email}</label>
@@ -24,9 +72,13 @@ import { FORM_LABELS, FORM_OPTIONS } from '@/utils';
               type="email" 
               id="email" 
               name="email" 
+              value={getFieldValue(result, 'email')}
               required 
-              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+              class={getFieldClasses(result, 'email')}
             />
+            {hasFieldError(result, 'email') && (
+              <p class="mt-1 text-sm text-red-600">{getFieldErrors(result, 'email').join(', ')}</p>
+            )}
           </div>
           <div>
             <label for="phone" class="block text-sm font-medium text-primary-gray mb-1">{FORM_LABELS.booking.fields.phone}</label>
@@ -34,9 +86,13 @@ import { FORM_LABELS, FORM_OPTIONS } from '@/utils';
               type="tel" 
               id="phone" 
               name="phone" 
+              value={getFieldValue(result, 'phone')}
               required 
-              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+              class={getFieldClasses(result, 'phone')}
             />
+            {hasFieldError(result, 'phone') && (
+              <p class="mt-1 text-sm text-red-600">{getFieldErrors(result, 'phone').join(', ')}</p>
+            )}
           </div>
           <div>
             <label for="company" class="block text-sm font-medium text-primary-gray mb-1">{FORM_LABELS.booking.fields.company}</label>
@@ -44,7 +100,8 @@ import { FORM_LABELS, FORM_OPTIONS } from '@/utils';
               type="text" 
               id="company" 
               name="company" 
-              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+              value={getFieldValue(result, 'company')}
+              class={getFieldClasses(result, 'company')}
             />
           </div>
         </div>
@@ -55,57 +112,76 @@ import { FORM_LABELS, FORM_OPTIONS } from '@/utils';
         <h4 class="text-lg font-outfit font-medium mb-4">{FORM_LABELS.booking.sessionDetails}</h4>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label for="studio-space" class="block text-sm font-medium text-primary-gray mb-1">Área del Estudio *</label>
+            <label for="studio-space" class="block text-sm font-medium text-primary-gray mb-1">{FORM_LABELS.booking.fields.studioArea}</label>
             <select 
               id="studio-space" 
               name="studio-space" 
               required 
-              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+              class={getFieldClasses(result, 'studio-space')}
             >
               {FORM_OPTIONS.studioAreas.map((option) => (
-                <option value={option.value}>{option.label}</option>
+                <option value={option.value} selected={getFieldValue(result, 'studio-space') === option.value}>{option.label}</option>
               ))}
             </select>
+            {hasFieldError(result, 'studio-space') && (
+              <p class="mt-1 text-sm text-red-600">{getFieldErrors(result, 'studio-space').join(', ')}</p>
+            )}
           </div>
           <div>
-            <label for="package" class="block text-sm font-medium text-primary-gray mb-1">Paquete de Horas *</label>
+            <label for="package" class="block text-sm font-medium text-primary-gray mb-1">{FORM_LABELS.booking.fields.package}</label>
             <select 
               id="package" 
               name="package" 
               required 
-              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+              class={getFieldClasses(result, 'package')}
             >
               {FORM_OPTIONS.durations.map((option) => (
-                <option value={option.value}>{option.label}</option>
+                <option value={option.value} selected={getFieldValue(result, 'package') === option.value}>{option.label}</option>
               ))}
             </select>
+            {hasFieldError(result, 'package') && (
+              <p class="mt-1 text-sm text-red-600">{getFieldErrors(result, 'package').join(', ')}</p>
+            )}
           </div>
           <div>
-            <label for="date" class="block text-sm font-medium text-primary-gray mb-1">Fecha Deseada *</label>
+            <label for="date" class="block text-sm font-medium text-primary-gray mb-1">{FORM_LABELS.booking.fields.date}</label>
             <input 
               type="date" 
               id="date" 
               name="date" 
+              value={getFieldValue(result, 'date')}
               required 
-              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+              class={getFieldClasses(result, 'date')}
             />
+            {hasFieldError(result, 'date') && (
+              <p class="mt-1 text-sm text-red-600">{getFieldErrors(result, 'date').join(', ')}</p>
+            )}
           </div>
           <div>
-            <label for="time" class="block text-sm font-medium text-primary-gray mb-1">Hora de Inicio *</label>
+            <label for="time" class="block text-sm font-medium text-primary-gray mb-1">{FORM_LABELS.booking.fields.time}</label>
             <input 
               type="time" 
               id="time" 
               name="time" 
+              value={getFieldValue(result, 'time')}
               required 
-              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+              class={getFieldClasses(result, 'time')}
             />
+            {hasFieldError(result, 'time') && (
+              <p class="mt-1 text-sm text-red-600">{getFieldErrors(result, 'time').join(', ')}</p>
+            )}
           </div>
+        </div>
+        
+        <!-- Mensaje de disponibilidad -->
+        <div id="availability-message" class="mt-4 hidden">
+          <!-- Los mensajes de disponibilidad aparecerán aquí -->
         </div>
       </div>
       
       <!-- Información Adicional -->
       <div>
-        <h4 class="text-lg font-outfit font-medium mb-4">Información Adicional</h4>
+        <h4 class="text-lg font-outfit font-medium mb-4">{FORM_LABELS.booking.additionalInfo}</h4>
         <div class="grid grid-cols-1 gap-4">
           <div>
             <label for="participants" class="block text-sm font-medium text-primary-gray mb-1">{FORM_LABELS.booking.fields.participants}</label>
@@ -113,12 +189,15 @@ import { FORM_LABELS, FORM_OPTIONS } from '@/utils';
               id="participants" 
               name="participants" 
               required 
-              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+              class={getFieldClasses(result, 'participants')}
             >
               {FORM_OPTIONS.participants.map((option) => (
-                <option value={option.value}>{option.label}</option>
+                <option value={option.value} selected={getFieldValue(result, 'participants') === option.value}>{option.label}</option>
               ))}
             </select>
+            {hasFieldError(result, 'participants') && (
+              <p class="mt-1 text-sm text-red-600">{getFieldErrors(result, 'participants').join(', ')}</p>
+            )}
           </div>
           <div>
             <label for="session-type" class="block text-sm font-medium text-primary-gray mb-1">{FORM_LABELS.booking.fields.sessionType}</label>
@@ -126,12 +205,15 @@ import { FORM_LABELS, FORM_OPTIONS } from '@/utils';
               id="session-type" 
               name="session-type" 
               required 
-              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
+              class={getFieldClasses(result, 'session-type')}
             >
               {FORM_OPTIONS.sessionTypes.map((option) => (
-                <option value={option.value}>{option.label}</option>
+                <option value={option.value} selected={getFieldValue(result, 'session-type') === option.value}>{option.label}</option>
               ))}
             </select>
+            {hasFieldError(result, 'session-type') && (
+              <p class="mt-1 text-sm text-red-600">{getFieldErrors(result, 'session-type').join(', ')}</p>
+            )}
           </div>
           <div>
             <label for="notes" class="block text-sm font-medium text-primary-gray mb-1">{FORM_LABELS.booking.fields.description}</label>
@@ -139,8 +221,47 @@ import { FORM_LABELS, FORM_OPTIONS } from '@/utils';
               id="notes" 
               name="notes" 
               rows="4" 
-              class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
-            ></textarea>
+              class={getFieldClasses(result, 'notes')}
+            >{getFieldValue(result, 'notes')}</textarea>
+            {hasFieldError(result, 'notes') && (
+              <p class="mt-1 text-sm text-red-600">{getFieldErrors(result, 'notes').join(', ')}</p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <!-- Código de Descuento -->
+      <div>
+        <h4 class="text-lg font-outfit font-medium mb-4">Código de Descuento</h4>
+        <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+          <div class="flex items-center mb-3">
+            <svg class="w-5 h-5 text-green-600 mr-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2L13.09 8.26L19 9L13.09 9.74L12 16L10.91 9.74L5 9L10.91 8.26L12 2Z"/>
+            </svg>
+            <span class="text-green-800 font-medium">¿Tienes un código promocional?</span>
+          </div>
+          <div class="flex gap-2">
+            <input 
+              type="text" 
+              id="discount-code" 
+              name="discount-code" 
+              value={getFieldValue(result, 'discount-code')}
+              placeholder="Introduce tu código (ej: PRIMERA25)" 
+              class="flex-1 px-3 py-2 border border-green-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            />
+            <button 
+              type="button" 
+              id="apply-discount"
+              class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors duration-200 font-medium"
+            >
+              Aplicar
+            </button>
+          </div>
+          <div id="discount-message" class="mt-2 text-sm hidden">
+            <!-- Los mensajes de validación aparecerán aquí -->
+          </div>
+          <div class="mt-2 text-xs text-green-700">
+            💡 Código PRIMERA25: 25% de descuento para nuevos clientes (mínimo 2h)
           </div>
         </div>
       </div>
@@ -152,39 +273,126 @@ import { FORM_LABELS, FORM_OPTIONS } from '@/utils';
             id="terms" 
             name="terms" 
             type="checkbox" 
+            value="true"
             required 
-            class="focus:ring-primary-beige h-4 w-4 text-primary-black border-secondary-lightgray rounded"
+            class={`focus:ring-primary-beige h-4 w-4 text-primary-black border rounded ${
+              hasFieldError(result, 'terms') ? 'border-red-300' : 'border-secondary-lightgray'
+            }`}
           />
         </div>
         <div class="ml-3 text-sm">
           <label for="terms" class="text-primary-gray">
-            He leído y acepto los <a href="/terms" class="text-primary-black underline">términos y condiciones</a> y la <a href="/privacy-policy" class="text-primary-black underline">política de privacidad</a>.
+            {FORM_LABELS.booking.termsWithLinks.prefix}
+            <a 
+              href={FORM_LABELS.booking.termsWithLinks.termsLink.href} 
+              class={FORM_LABELS.booking.termsWithLinks.termsLink.class}
+            >
+              {FORM_LABELS.booking.termsWithLinks.termsLink.text}
+            </a>
+            {FORM_LABELS.booking.termsWithLinks.middle}
+            <a 
+              href={FORM_LABELS.booking.termsWithLinks.privacyLink.href} 
+              class={FORM_LABELS.booking.termsWithLinks.privacyLink.class}
+            >
+              {FORM_LABELS.booking.termsWithLinks.privacyLink.text}
+            </a>
+            {FORM_LABELS.booking.termsWithLinks.suffix}
           </label>
+          {hasFieldError(result, 'terms') && (
+            <p class="mt-1 text-sm text-red-600">{getFieldErrors(result, 'terms').join(', ')}</p>
+          )}
         </div>
       </div>
       
       <!-- Botón de Envío -->
       <div>
-        <Button 
+        <button 
           type="submit" 
-          variant="primary"
-          fullWidth
-          class="cursor-pointer"
+          class="w-full bg-primary-black text-primary-white hover:bg-primary-beige hover:text-primary-black px-6 py-3 rounded font-semibold transition-all duration-300"
         >
           {FORM_LABELS.booking.submit}
-        </Button>
+        </button>
         <p class="text-xs text-center text-primary-gray mt-2">
-          * La reserva no estará confirmada hasta recibir el pago. Te enviaremos un email con las instrucciones de pago.
+          {FORM_LABELS.booking.note}
         </p>
       </div>
     </form>
   </div>
 
-<!-- Script para manejar el formulario -->
 <script>
-  import { BookingFormHandler } from '@/lib/booking-form';
+  // Import validation module to ensure it's loaded
+  import { initBookingValidation } from '@/scripts/booking-form-validation';
+  import { actions } from 'astro:actions';
+  import { navigate } from 'astro:transitions/client';
   
-  document.addEventListener('DOMContentLoaded', () => {
-    new BookingFormHandler('booking-form');
-  });
+  // Ensure initialization when component loads
+  function ensureInit() {
+    const form = document.getElementById('booking-form') as HTMLFormElement;
+    console.log('ensureInit called, form:', form);
+    
+    if (form) {
+      console.log('Booking form found, calling initBookingValidation');
+      try {
+        initBookingValidation();
+        setupFormSubmission(form);
+      } catch (error) {
+        console.error('Error calling initBookingValidation:', error);
+      }
+    } else {
+      console.log('Booking form not found, retrying...');
+      setTimeout(ensureInit, 100);
+    }
+  }
+
+  // Setup form submission with client-side navigation
+  function setupFormSubmission(form: HTMLFormElement) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      // Show loading state
+      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const originalText = submitButton?.textContent;
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
+      }
+
+      try {
+        // Get form data
+        const formData = new FormData(form);
+        
+        // Call the action
+        const { data, error } = await actions.createBooking(formData);
+        
+        if (error) {
+          // Handle error - let the form show the error message naturally
+          console.error('Booking error:', error);
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = originalText;
+          }
+          // Allow the form to submit normally to show errors
+          form.removeEventListener('submit', arguments.callee as EventListener);
+          form.submit();
+        } else if (data && (data as any).booking?.id) {
+          // Success - navigate to confirmation page
+          console.log('Booking created successfully:', (data as any).booking.id);
+          navigate(`/booking/confirmation?id=${(data as any).booking.id}`);
+        }
+      } catch (err) {
+        console.error('Form submission error:', err);
+        // Fallback: submit form normally
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalText;
+        }
+        form.removeEventListener('submit', arguments.callee as EventListener);
+        form.submit();
+      }
+    });
+  }
+  
+  // Initialize immediately
+  ensureInit();
 </script>
+

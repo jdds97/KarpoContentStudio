@@ -1,7 +1,7 @@
 ---
 import Button from '@/components/common/Button.astro';
-import { pricingSections, annualMembershipDetails, pricingNotes } from '@/utils';
-import { Info } from '@lucide/astro';
+import { pricingSections, annualMembershipDetails, pricingNotes, PRICING_TABLE } from '@/utils';
+import Info from '@/components/icons/Info.astro';
 ---
 
 <!-- Desktop Table View (hidden on mobile) -->
@@ -9,10 +9,10 @@ import { Info } from '@lucide/astro';
   <table class="w-full border-collapse">
     <thead>
       <tr class="bg-primary-beige/90 border-b-2 border-primary-black/20">
-        <th class="px-6 py-4 text-left font-instrument text-xl font-bold text-primary-black">Servicio</th>
-        <th class="px-6 py-4 text-left font-instrument text-xl font-bold text-primary-black">Duración</th>
-        <th class="px-6 py-4 text-left font-instrument text-xl font-bold text-primary-black">Precio</th>
-        <th class="px-6 py-4 text-left font-instrument text-xl font-bold text-primary-black"></th>
+        <th class="px-6 py-4 text-left font-instrument text-xl font-bold text-primary-black">{PRICING_TABLE.headers.service}</th>
+        <th class="px-6 py-4 text-left font-instrument text-xl font-bold text-primary-black">{PRICING_TABLE.headers.duration}</th>
+        <th class="px-6 py-4 text-left font-instrument text-xl font-bold text-primary-black">{PRICING_TABLE.headers.price}</th>
+        <th class="px-6 py-4 text-left font-instrument text-xl font-bold text-primary-black">{PRICING_TABLE.headers.action}</th>
       </tr>
     </thead>
     <tbody class="divide-y divide-primary-beige/30">
@@ -47,7 +47,7 @@ import { Info } from '@lucide/astro';
                 {item.id === 'annual-pro-plus' ? (
                   <div>
                     <p>{item.price}</p>
-                    <p class="text-sm text-primary-gray">o {annualMembershipDetails.alternativePayment}</p>
+                    <p class="text-sm text-primary-gray">{PRICING_TABLE.alternativePayment.prefix} {annualMembershipDetails.alternativePayment}</p>
                   </div>
                 ) : (
                   item.price
@@ -58,7 +58,7 @@ import { Info } from '@lucide/astro';
                   href={item.actionHref} 
                   variant="table"
                 >
-                  {item.action === 'book' ? 'Reservar' : 'Contactar'}
+                  {item.action === 'book' ? PRICING_TABLE.actions.book : PRICING_TABLE.actions.contact}
                 </Button>
               </td>
             </tr>
@@ -110,7 +110,7 @@ import { Info } from '@lucide/astro';
                   {item.id === 'annual-pro-plus' ? (
                     <div class="mt-1">
                       <p class="text-primary-black font-semibold">{item.price}</p>
-                      <p class="text-xs text-primary-gray">o {annualMembershipDetails.alternativePayment}</p>
+                      <p class="text-xs text-primary-gray">{PRICING_TABLE.alternativePayment.prefix} {annualMembershipDetails.alternativePayment}</p>
                     </div>
                   ) : (
                     <p class="text-primary-black font-semibold mt-1">{item.price}</p>
@@ -126,7 +126,7 @@ import { Info } from '@lucide/astro';
                   fullWidth
                   class="bg-primary-black text-primary-white hover:bg-primary-beige hover:text-primary-black transition-all duration-300 py-3 text-center font-semibold"
                 >
-                  {item.action === 'book' ? 'Reservar' : 'Contactar'}
+                  {item.action === 'book' ? PRICING_TABLE.actions.book : PRICING_TABLE.actions.contact}
                 </Button>
               </div>
             </div>
@@ -140,7 +140,7 @@ import { Info } from '@lucide/astro';
 <div class="mt-8 bg-primary-beige/80 p-4 md:p-6 rounded-xl border border-primary-beige-dark shadow-sm">
   <h3 class="font-instrument text-lg md:text-xl mb-4 flex items-center gap-2 text-primary-black">
     <Info class="w-6 h-6 md:w-7 md:h-7 text-primary-black drop-shadow-md flex-shrink-0" />
-    Notas Importantes
+    {PRICING_TABLE.notes.title}
   </h3>
   <ul class="space-y-3 mt-4 text-primary-black">
     {pricingNotes.map((note: any) => (

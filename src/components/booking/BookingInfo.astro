@@ -1,0 +1,35 @@
+---
+import { BOOKING_INFO } from '@/utils';
+---
+
+<!-- Información útil integrada -->
+<div class="mt-8 space-y-6">
+  <!-- Información importante -->
+  <div class="bg-primary-beige/20 p-6 rounded-lg">
+    <h3 class="text-lg font-instrument mb-4 text-primary-black">{BOOKING_INFO.importantInfo.title}</h3>
+    <ul class="space-y-3 text-sm">
+      {BOOKING_INFO.importantInfo.items.map((item) => (
+        <li class="flex items-start">
+          <div class="w-2 h-2 bg-primary-black rounded-full mt-2 mr-3 flex-shrink-0"></div>
+          <span class="text-primary-gray">{item}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+  
+  <!-- Contacto directo -->
+  <div class="bg-primary-black text-primary-white p-6 rounded-lg">
+    <h3 class="text-lg font-instrument mb-3">{BOOKING_INFO.helpSection.title}</h3>
+    <p class="mb-4 text-gray-100 text-sm">
+      {BOOKING_INFO.helpSection.description}
+    </p>
+    <div class="space-y-2 text-sm">
+      {BOOKING_INFO.helpSection.contacts.map((contact) => (
+        <div class="flex items-center">
+          <span class="w-16 text-primary-beige">{contact.label}</span>
+          <a href={contact.href} class="text-primary-white hover:text-primary-beige transition-colors">{contact.value}</a>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
