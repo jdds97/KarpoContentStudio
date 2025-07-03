@@ -1,19 +1,32 @@
 ---
+// Las páginas que usan Server Islands necesitan SSR
+export const prerender = false;
+
 import Layout from '@/layouts/Layout.astro';
 import HeroSection from '@/components/common/HeroSection.astro';
-import BookingSection from '@/components/booking/BookingSection.astro';
+import BookingLayout from '@/components/booking/BookingLayout.astro';
 import BookingTerms from '@/components/booking/BookingTerms.astro';
+import { HERO_CONTENT } from '@/utils';
+
 ---
 
 <Layout title="Reserva">
   <HeroSection
-    title="Reserva Tu Sesión"
-    description="Completa el formulario para solicitar tu reserva. Te contactaremos para confirmar la disponibilidad y el pago."
-    image=""
+    title={HERO_CONTENT.booking.title}
+    description={HERO_CONTENT.booking.description}
     overlayClass="bg-primary-beige"
     textClass="text-primary-black"
-    buttonText=""
+    heightClass="h-[40vh] md:h-[50vh]"
+    buttonText=''
   />
-  <BookingSection />
+  
+  <BookingLayout server:defer>
+    <div slot="fallback" class="flex justify-center items-center h-96">
+      <div class="text-center">
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-black mx-auto mb-4"></div>
+        <p class="text-primary-gray">Cargando calendario...</p>
+      </div>
+    </div>
+  </BookingLayout>
   <BookingTerms />
 </Layout>

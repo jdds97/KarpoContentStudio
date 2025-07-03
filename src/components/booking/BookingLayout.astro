@@ -1,0 +1,46 @@
+---
+import Calendar from './Calendar.astro';
+import BookingInfo from './BookingInfo.astro';
+import { BOOKING_INFO } from '@/utils';
+import BookingForm from './BookingForm.astro';
+
+// Obtener parámetros de la URL para el calendario
+const url = Astro.url;
+const selectedDate = url.searchParams.get('date');
+const selectedTime = url.searchParams.get('time');
+const studioSpace = url.searchParams.get('space') || 'all';
+---
+
+<!-- Sección integrada con calendario y formulario mejorado -->
+<section class="section-padding bg-primary-white">
+  <div class="container mx-auto container-padding">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <!-- Calendario de disponibilidad mejorado -->
+      <div>
+        <h2 class="text-2xl font-instrument font-bold text-primary-black mb-6">
+          {BOOKING_INFO.calendar.title}
+        </h2>
+        <p class="text-gray-600 mb-4">
+          Selecciona una fecha, hora y espacio para tu sesión. Los horarios se actualizarán automáticamente en el formulario.
+        </p>
+        <Calendar 
+          selectedDate={selectedDate || undefined}
+          selectedTime={selectedTime || undefined}
+          studioSpace={studioSpace}
+        />
+      </div>
+      
+      <!-- Formulario de reserva con información -->
+      <div>
+        <h2 class="text-2xl font-instrument font-bold text-primary-black mb-6">
+          {BOOKING_INFO.form.title}
+        </h2>
+        <p class="text-gray-600 mb-4">
+          Los campos se completarán automáticamente al seleccionar desde el calendario.
+        </p>
+        <BookingForm />
+        <BookingInfo />
+      </div>
+    </div>
+  </div>
+</section>
