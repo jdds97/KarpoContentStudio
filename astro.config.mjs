@@ -1,36 +1,53 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-import node from '@astrojs/node';
+import cloudflare from '@astrojs/cloudflare';
 
-// https://astro.build/config
+// Cargar variables de entorno explícitamente
+import 'dotenv/config';
+
 export default defineConfig({
-  output: 'server', // 🔄 Cambiamos a 'server' por compatibilidad
-  adapter: node({
-    mode: 'standalone'
+  output: 'server',
+  adapter: cloudflare({
+    platformProxy: {
+      enabled: true
+    }
   }),
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/squoosh'
+    }
+  },
+
   devToolbar: {
     enabled: false
   },
   server: {
     port: 4321,
-    host: true
+    host: true,
+    hmr: {
+      port: 4322,
+      overlay: false
+    },
+    watch: {
+      usePolling: false,
+      ignored: ['**/node_modules/**', '**/dist/**', '**/.git/**']
+    }
   },
   compressHTML: true,
   build: {
-    inlineStylesheets: 'always', // ✅ CAMBIO: Forzar inline de CSS crítico para eliminar cadenas
+    inlineStylesheets: 'always',
     assets: 'assets'
   },
   vite: {
     plugins: [tailwindcss()],
+    define: {
+      global: 'globalThis',
+      'process.env': 'process.env',
+    },
     resolve: {
       alias: {
         '@': new URL('./src', import.meta.url).pathname,
       },
-    },
-    optimizeDeps: {
-      include: ['@lucide/astro'], // Pre-bundle Lucide para mejor rendimiento en dev
-      force: true, // Forzar re-optimización en dev
     },
     server: {
       hmr: {
@@ -47,19 +64,14 @@ export default defineConfig({
       assetsInlineLimit: 8192, // ✅ CAMBIO: Inline assets hasta 8KB para eliminar requests adicionales
       rollupOptions: {
         output: {
-          // Separar vendor chunks para mejor caché
           manualChunks: (id) => {
             if (id.includes('node_modules')) {
-              // Separar Lucide en su propio chunk para mejor caché
-              if (id.includes('@lucide/astro')) {
-                return 'lucide';
-              }
               return 'vendor';
             }
           },
           assetFileNames: (assetInfo) => {
-            if (!assetInfo.name) return `assets/[name]-[hash][extname]`;
-            const info = assetInfo.name.split('.');
+            if (!assetInfo.fileName) return `assets/[name]-[hash][extname]`;
+            const info = assetInfo.fileName.split('.');
             const ext = info[info.length - 1];
             if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(ext)) {
               return `assets/images/[name]-[hash][extname]`;
