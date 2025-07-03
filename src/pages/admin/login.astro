@@ -1,6 +1,14 @@
 ---
 // Página de login para administradores
-const { cookies, redirect } = Astro;
+import Layout from '@/layouts/Layout.astro';
+import Button from '@/components/common/Button.astro';
+import { Mail, LockKeyhole } from '@/components/icons';
+import { Image } from 'astro:assets';
+import logoMain from '@/assets/images/logos/logo-optimized.webp';
+
+export const prerender = false;
+
+const { cookies } = Astro;
 
 const accessToken = cookies.get("sb-access-token");
 const refreshToken = cookies.get("sb-refresh-token");
@@ -10,59 +18,105 @@ if (accessToken && refreshToken) {
 }
 ---
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Login - The Content Studio</title>
-  <link href="/styles/global.css" rel="stylesheet">
-</head>
-<body class="bg-primary-beige min-h-screen flex items-center justify-center">
-  <div class="bg-primary-white p-8 rounded-lg shadow-md w-full max-w-md">
-    <div class="text-center mb-6">
-      <img 
-        src="/images/logos/logo-optimized.webp" 
-        alt="The Content Studio" 
-        class="h-12 mx-auto mb-4"
-      />
-      <h1 class="text-2xl font-instrument text-primary-black">Panel de Administración</h1>
+<Layout title="Admin Login - The Content Studio">
+  <div class="min-h-screen bg-gradient-to-br from-primary-beige via-primary-white to-secondary-lightgray flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+      <!-- Contenedor principal con glassmorphism -->
+      <div class="bg-white/80 backdrop-blur-xl border border-white/30 rounded-2xl shadow-2xl p-8">
+        <!-- Header del login -->
+        <div class="text-center">
+          <div class="mb-6">
+            <Image 
+              src={logoMain}
+              alt="The Content Studio" 
+              class="h-16 mx-auto mb-4 drop-shadow-lg"
+              width={204}
+              height={72}
+              loading="eager"
+            />
+            <div class="w-20 h-1 bg-gradient-to-r from-primary-beige to-primary-black mx-auto rounded-full"></div>
+          </div>
+          <h1 class="text-3xl font-instrument font-bold text-primary-black mb-2">
+            Panel de Administración
+          </h1>
+          <p class="text-primary-gray text-sm">
+            Accede para gestionar las reservas del estudio
+          </p>
+        </div>
+        
+        <!-- Formulario de login -->
+        <form action="/api/auth/signin" method="post" class="mt-8 space-y-6">
+          <div class="space-y-4">
+            <!-- Campo Email -->
+            <div>
+              <label for="email" class="block text-sm font-medium text-primary-gray mb-2">
+                Correo Electrónico
+              </label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Mail class="h-5 w-5 text-primary-gray" />
+                </div>
+                <input 
+                  type="email" 
+                  name="email" 
+                  id="email" 
+                  required
+                  class="block w-full pl-10 pr-3 py-3 border border-secondary-lightgray rounded-lg bg-white/70 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary-beige focus:border-primary-beige transition-all duration-200 text-primary-black placeholder-primary-gray"
+                  placeholder="Inserte aquí el e-mail"
+                />
+              </div>
+            </div>
+            
+            <!-- Campo Contraseña -->
+            <div>
+              <label for="password" class="block text-sm font-medium text-primary-gray mb-2">
+                Contraseña
+              </label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <LockKeyhole class="h-5 w-5 text-primary-gray" />
+                </div>
+                <input 
+                  type="password" 
+                  name="password" 
+                  id="password" 
+                  required
+                  class="block w-full pl-10 pr-3 py-3 border border-secondary-lightgray rounded-lg bg-white/70 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary-beige focus:border-primary-beige transition-all duration-200 text-primary-black placeholder-primary-gray"
+                  placeholder="Inserte aquí la contraseña"
+                />
+              </div>
+            </div>
+          </div>
+          
+          <!-- Botón de submit -->
+          <div class="pt-4">
+            <Button 
+              type="submit"
+              variant="primary"
+              fullWidth
+              class="h-12 text-base font-semibold bg-primary-black text-primary-white hover:bg-primary-beige hover:text-primary-black transform transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-xl"
+            >
+              Iniciar Sesión
+            </Button>
+          </div>
+        </form>
+        
+        <!-- Footer informativo -->
+        <div class="mt-6 text-center">
+          <p class="text-xs text-primary-gray">
+            Panel exclusivo para administradores de The Content Studio
+          </p>
+        </div>
+      </div>
+      
+      <!-- Elementos decorativos -->
+      <div class="text-center mt-8">
+        <div class="flex items-center justify-center space-x-2 text-primary-gray">
+          <div class="w-2 h-2 bg-primary-beige rounded-full animate-pulse"></div>
+          <span class="text-sm">Área Administrativa Segura</span>
+          <div class="w-2 h-2 bg-primary-beige rounded-full animate-pulse" style="animation-delay: 0.5s"></div>
+        </div>
+      </div>
     </div>
-    
-    <form action="/api/auth/signin" method="post" class="space-y-4">
-      <div>
-        <label for="email" class="block text-sm font-medium text-primary-gray mb-1">
-          Email
-        </label>
-        <input 
-          type="email" 
-          name="email" 
-          id="email" 
-          required
-          class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
-        />
-      </div>
-      
-      <div>
-        <label for="password" class="block text-sm font-medium text-primary-gray mb-1">
-          Contraseña
-        </label>
-        <input 
-          type="password" 
-          name="password" 
-          id="password" 
-          required
-          class="w-full px-3 py-2 border border-secondary-lightgray rounded-md focus:outline-none focus:ring-2 focus:ring-primary-beige"
-        />
-      </div>
-      
-      <button 
-        type="submit"
-        class="w-full bg-primary-black text-primary-white py-2 px-4 rounded-md hover:bg-primary-beige hover:text-primary-black transition-colors font-medium"
-      >
-        Iniciar Sesión
-      </button>
-    </form>
   </div>
-</body>
-</html>
+</Layout>

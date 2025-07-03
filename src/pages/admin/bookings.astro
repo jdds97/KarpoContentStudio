@@ -1,0 +1,223 @@
+---
+// Página de administración para gestionar reservas
+export const prerender = false;
+
+import Layout from '@/layouts/Layout.astro';
+import { supabaseAdmin } from '@/lib/supabase';
+import { actions } from 'astro:actions';
+import { getGeneralError, isActionSuccess, getSuccessMessage } from '@/lib/form-helpers';
+
+// Obtener resultado de la action de confirmación si existe
+const confirmResult = Astro.getActionResult(actions.confirmBooking);
+
+// Obtener todas las reservas pendientes y confirmadas
+const { data: bookings, error } = await supabaseAdmin
+  .from('bookings')
+  .select('*')
+  .order('created_at', { ascending: false })
+  .limit(50);
+
+if (error) {
+  console.error('Error fetching bookings:', error);
+}
+---
+
+<Layout title="Administración de Reservas - The Content Studio">
+  <div class="min-h-screen bg-gray-50 py-8">
+    <div class="container mx-auto px-4">
+      <!-- Header -->
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">
+          📋 Administración de Reservas
+        </h1>
+        <p class="text-gray-600">
+          Gestiona y confirma las reservas pendientes del estudio
+        </p>
+      </div>
+
+      <!-- Mensajes de confirmación -->
+      {isActionSuccess(confirmResult) && (
+        <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+          <div class="flex items-start">
+            <svg class="w-5 h-5 text-green-600 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            <div>
+              <h3 class="text-green-800 font-medium">¡Reserva Confirmada!</h3>
+              <p class="text-green-700 mt-1">{getSuccessMessage(confirmResult)}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {getGeneralError(confirmResult) && (
+        <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+          <div class="flex items-start">
+            <svg class="w-5 h-5 text-red-600 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            <div>
+              <h3 class="text-red-800 font-medium">Error</h3>
+              <p class="text-red-700 mt-1">{getGeneralError(confirmResult)}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <!-- Estadísticas rápidas -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-lg shadow-sm">
+          <h3 class="text-lg font-medium text-gray-900 mb-2">📝 Pendientes</h3>
+          <p class="text-3xl font-bold text-yellow-600">
+            {bookings?.filter(b => b.status === 'pending').length || 0}
+          </p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm">
+          <h3 class="text-lg font-medium text-gray-900 mb-2">✅ Confirmadas</h3>
+          <p class="text-3xl font-bold text-green-600">
+            {bookings?.filter(b => b.status === 'confirmed').length || 0}
+          </p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm">
+          <h3 class="text-lg font-medium text-gray-900 mb-2">📊 Total</h3>
+          <p class="text-3xl font-bold text-blue-600">
+            {bookings?.length || 0}
+          </p>
+        </div>
+      </div>
+
+      <!-- Lista de reservas -->
+      <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+        <div class="px-6 py-4 border-b border-gray-200">
+          <h2 class="text-xl font-semibold text-gray-900">Reservas Recientes</h2>
+        </div>
+        
+        {bookings && bookings.length > 0 ? (
+          <div class="divide-y divide-gray-200">
+            {bookings.map((booking) => (
+              <div class="p-6">
+                <div class="flex items-start justify-between">
+                  <div class="flex-1">
+                    <!-- Información del cliente -->
+                    <div class="flex items-center mb-2">
+                      <h3 class="text-lg font-medium text-gray-900 mr-3">
+                        {booking.name}
+                      </h3>
+                      <span class={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                        booking.status === 'pending' 
+                          ? 'bg-yellow-100 text-yellow-800' 
+                          : booking.status === 'confirmed'
+                          ? 'bg-green-100 text-green-800'
+                          : 'bg-gray-100 text-gray-800'
+                      }`}>
+                        {booking.status === 'pending' ? '⏳ Pendiente' : 
+                         booking.status === 'confirmed' ? '✅ Confirmada' : booking.status}
+                      </span>
+                    </div>
+                    
+                    <!-- Detalles de contacto -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <p class="text-sm text-gray-600">📧 {booking.email}</p>
+                        <p class="text-sm text-gray-600">📱 {booking.phone}</p>
+                        {booking.company && (
+                          <p class="text-sm text-gray-600">🏢 {booking.company}</p>
+                        )}
+                      </div>
+                      
+                      <!-- Detalles de la sesión -->
+                      <div>
+                        <p class="text-sm text-gray-600">
+                          📅 {new Date(booking.preferred_date).toLocaleDateString('es-ES', { 
+                            weekday: 'long', 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                          })}
+                        </p>
+                        <p class="text-sm text-gray-600">⏰ {booking.preferred_time}</p>
+                        <p class="text-sm text-gray-600">⏳ {booking.package_duration}</p>
+                        <p class="text-sm text-gray-600">🏢 {booking.studio_space === 'all' ? 'Todos los espacios' : booking.studio_space}</p>
+                        <p class="text-sm text-gray-600">🎬 {booking.session_type}</p>
+                        <p class="text-sm text-gray-600">👥 {booking.participants} participantes</p>
+                      </div>
+                    </div>
+                    
+                    <!-- Código de descuento si existe -->
+                    {booking.discount_code && (
+                      <div class="mb-4 p-3 bg-green-50 rounded-lg">
+                        <p class="text-sm text-green-800">
+                          💰 <strong>Descuento aplicado:</strong> {booking.discount_code} 
+                          ({booking.discount_percentage}% de descuento)
+                        </p>
+                      </div>
+                    )}
+                    
+                    <!-- Descripción si existe -->
+                    {booking.description && (
+                      <div class="mb-4">
+                        <p class="text-sm text-gray-600">
+                          <strong>Descripción:</strong> {booking.description}
+                        </p>
+                      </div>
+                    )}
+                    
+                    <!-- Fechas de creación y confirmación -->
+                    <div class="text-xs text-gray-500">
+                      <p>Creada: {new Date(booking.created_at).toLocaleString('es-ES')}</p>
+                      {booking.confirmed_at && (
+                        <p>Confirmada: {new Date(booking.confirmed_at).toLocaleString('es-ES')}</p>
+                      )}
+                      <p>ID: {booking.id}</p>
+                    </div>
+                  </div>
+                  
+                  <!-- Acciones -->
+                  <div class="ml-6">
+                    {booking.status === 'pending' && (
+                      <form action={actions.confirmBooking} method="POST" class="space-y-2">
+                        <input type="hidden" name="bookingId" value={booking.id} />
+                        <input 
+                          type="password" 
+                          name="adminPassword" 
+                          placeholder="Password admin" 
+                          required 
+                          class="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                        />
+                        <button 
+                          type="submit"
+                          class="w-full bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                        >
+                          ✅ Confirmar Reserva
+                        </button>
+                      </form>
+                    )}
+                    
+                    {booking.status === 'confirmed' && (
+                      <div class="text-center">
+                        <span class="inline-flex items-center px-4 py-2 bg-green-100 text-green-800 rounded-md text-sm font-medium">
+                          ✅ Confirmada
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div class="p-6 text-center text-gray-500">
+            <p>No hay reservas disponibles</p>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Auto-refresh cada 30 segundos para ver nuevas reservas
+  setTimeout(() => {
+    window.location.reload();
+  }, 30000);
+</script>

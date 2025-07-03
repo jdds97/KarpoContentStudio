@@ -1,0 +1,69 @@
+---
+// Componente de estadísticas del dashboard
+import { Calendar, CheckCircle, Clock } from '@/components/icons';
+
+interface Props {
+  stats: {
+    totalBookings: number;
+    pendingBookings: number;
+    confirmedBookings: number;
+    completedBookings: number;
+  };
+}
+
+const { stats } = Astro.props;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+  <!-- Total Reservas -->
+  <div class="bg-white/80 backdrop-blur-sm border border-white/50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-primary-gray mb-1">Total Reservas</p>
+        <p class="text-3xl font-bold text-primary-black">{stats.totalBookings}</p>
+      </div>
+      <div class="bg-primary-beige/30 p-3 rounded-xl">
+        <Calendar class="w-8 h-8 text-primary-black" />
+      </div>
+    </div>
+  </div>
+  
+  <!-- Pendientes -->
+  <div class="bg-white/80 backdrop-blur-sm border border-white/50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-primary-gray mb-1">Pendientes</p>
+        <p class="text-3xl font-bold text-yellow-600">{stats.pendingBookings}</p>
+      </div>
+      <div class="bg-yellow-100 p-3 rounded-xl">
+        <Clock class="w-8 h-8 text-yellow-600" />
+      </div>
+    </div>
+  </div>
+  
+  <!-- Confirmadas -->
+  <div class="bg-white/80 backdrop-blur-sm border border-white/50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-primary-gray mb-1">Confirmadas</p>
+        <p class="text-3xl font-bold text-green-600">{stats.confirmedBookings}</p>
+      </div>
+      <div class="bg-green-100 p-3 rounded-xl">
+        <CheckCircle class="w-8 h-8 text-green-600" />
+      </div>
+    </div>
+  </div>
+  
+  <!-- Completadas -->
+  <div class="bg-white/80 backdrop-blur-sm border border-white/50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium text-primary-gray mb-1">Completadas</p>
+        <p class="text-3xl font-bold text-blue-600">{stats.completedBookings}</p>
+      </div>
+      <div class="bg-blue-100 p-3 rounded-xl">
+        <CheckCircle class="w-8 h-8 text-blue-600" />
+      </div>
+    </div>
+  </div>
+</div>

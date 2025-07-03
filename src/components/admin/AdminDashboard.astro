@@ -1,0 +1,55 @@
+---
+// Componente principal del dashboard - limpio, solo composición
+import DashboardStats from './DashboardStats.astro';
+import DashboardFilters from './DashboardFilters.astro';
+import BookingsTable from './BookingsTable.astro';
+import ViewBookingModal from './ViewBookingModal.astro';
+import EditBookingModal from './EditBookingModal.astro';
+import CancelBookingModal from './CancelBookingModal.astro';
+import type { DashboardData } from '@/utils/admin/dashboard-server';
+
+interface Props extends DashboardData {}
+
+const { bookings, stats, successMessage, errorMessage } = Astro.props;
+---
+
+<div class="container mx-auto container-padding py-8">
+  <DashboardStats stats={stats} />
+  <DashboardFilters stats={stats} />
+  <BookingsTable bookings={bookings} />
+</div>
+
+<!-- Modales para cada reserva -->
+{bookings.map((booking) => (
+  <>
+    <ViewBookingModal booking={booking} />
+    <EditBookingModal booking={booking} />
+    <CancelBookingModal booking={booking} />
+  </>
+))}
+
+<!-- Notificaciones de estado -->
+{successMessage && (
+  <div class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50">
+    {successMessage === 'confirmed' && 'Reserva confirmada exitosamente'}
+    {successMessage === 'updated' && 'Reserva actualizada exitosamente'}
+    {successMessage === 'cancelled' && 'Reserva cancelada exitosamente'}
+  </div>
+)}
+
+{errorMessage && (
+  <div class="fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50">
+    {decodeURIComponent(errorMessage)}
+  </div>
+)}
+
+<!-- Script mínimo -->
+<script>
+  import { initializeDashboard } from '@/scripts/dashboard-client';
+  
+  const bookingsData = JSON.parse(document.getElementById('bookings-data')?.textContent || '[]');
+  initializeDashboard(bookingsData);
+</script>
+
+<!-- Datos para el script -->
+<script is:inline type="application/json" id="bookings-data" set:html={JSON.stringify(bookings)} />

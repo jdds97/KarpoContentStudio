@@ -1,0 +1,74 @@
+---
+// Modal para ver detalles de reservas
+import Button from '@/components/common/Button.astro';
+
+interface Props {
+  booking: any;
+}
+
+const { booking } = Astro.props;
+
+// Función para formatear fecha
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('es-ES', { 
+    weekday: 'long', 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  });
+};
+---
+
+<div 
+  id={`view-modal-${booking.id}`}
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 hidden"
+  data-modal="view"
+>
+  <div class="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+    <div class="space-y-4">
+      <h3 class="text-xl font-bold text-black mb-4">Detalles de Reserva</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <div><strong>Cliente:</strong> {booking.name}</div>
+        <div><strong>Email:</strong> {booking.email}</div>
+        <div><strong>Teléfono:</strong> {booking.phone}</div>
+        <div><strong>Empresa:</strong> {booking.company || 'No especificada'}</div>
+        <div><strong>Espacio:</strong> {booking.studio_space}</div>
+        <div><strong>Duración:</strong> {booking.package_duration}</div>
+        <div><strong>Fecha:</strong> {formatDate(booking.preferred_date)}</div>
+        <div><strong>Hora:</strong> {booking.preferred_time}</div>
+        <div><strong>Participantes:</strong> {booking.participants}</div>
+        <div><strong>Tipo:</strong> {booking.session_type || 'No especificado'}</div>
+        <div><strong>Estado:</strong> {booking.status}</div>
+        <div><strong>Creado:</strong> {formatDate(booking.created_at)}</div>
+      </div>
+      
+      {booking.notes && (
+        <div class="mt-4">
+          <strong>Notas:</strong>
+          <div class="bg-gray-100 p-3 rounded mt-2">{booking.notes}</div>
+        </div>
+      )}
+      
+      <div class="mt-6 flex justify-end space-x-3">
+        <Button 
+          type="button" 
+          variant="outline"
+          class="px-4 py-2 close-modal"
+          data-modal-id={`view-modal-${booking.id}`}
+        >
+          Cerrar
+        </Button>
+        <Button 
+          type="button" 
+          variant="primary"
+          class="px-4 py-2"
+          data-onclick={`closeViewModal('${booking.id}'); showEditModal('${booking.id}');`}
+        >
+          Editar
+        </Button>
+      </div>
+    </div>
+  </div>
+</div>

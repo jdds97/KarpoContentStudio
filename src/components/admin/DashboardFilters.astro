@@ -1,0 +1,53 @@
+---
+// Componente de filtros del dashboard
+import Button from '@/components/common/Button.astro';
+
+interface Props {
+  stats: {
+    pendingBookings: number;
+    confirmedBookings: number;
+  };
+}
+
+const { stats } = Astro.props;
+---
+
+<div class="mb-6 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+  <div class="flex flex-wrap gap-2">
+    <button 
+      data-filter="pending"
+      class="filter-btn bg-yellow-100 text-yellow-800 px-4 py-2 rounded-lg text-sm font-medium hover:bg-yellow-200 transition-all duration-200"
+    >
+      Ver Pendientes ({stats.pendingBookings})
+    </button>
+    <button 
+      data-filter="confirmed"
+      class="filter-btn bg-green-100 text-green-800 px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-200 transition-all duration-200"
+    >
+      Ver Confirmadas ({stats.confirmedBookings})
+    </button>
+    <button 
+      id="export-csv"
+      class="bg-primary-beige text-primary-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-black hover:text-primary-white transition-all duration-200"
+    >
+      Exportar CSV
+    </button>
+  </div>
+  
+  <div class="flex gap-2">
+    <Button 
+      href="/booking"
+      variant="custom"
+      class="bg-primary-beige text-primary-black hover:bg-primary-black hover:text-primary-white px-4 py-2 text-sm transition-all duration-200"
+    >
+      + Nueva Reserva
+    </Button>
+    <select id="status-filter" class="px-3 py-2 border border-secondary-lightgray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-beige">
+      <option value="all">Todos los estados</option>
+      <option value="pending">Pendientes</option>
+      <option value="confirmed">Confirmadas</option>
+      <option value="completed">Completadas</option>
+      <option value="cancelled">Canceladas</option>
+    </select>
+  </div>
+</div>
