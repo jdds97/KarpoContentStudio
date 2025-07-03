@@ -1,101 +1,17 @@
 ---
 import StudioSpace from '@/components/studio/StudioSpace.astro';
-
-const studioSpaces = [
-  {
-    id: "cyclorama",
-    title: "Ciclorama de Grandes Dimensiones",
-    description: "Nuestro ciclorama de gran formato es el espacio ideal para producciones fotográficas y audiovisuales que requieren un entorno amplio, versátil y completamente personalizable.",
-    image: "/images/spaces/cyclorama-optimized.webp",
-    features: [
-      "Grandes Dimensiones: 6m x 4m con más de 3m de altura",
-      "Espacio Versátil para fotografía de moda, retratos y producciones audiovisuales",
-      "Iluminación Sin Restricciones y total libertad para setups profesionales",
-      "Fondos y Decorados Personalizables según las necesidades de cada sesión",
-      "Amplia Movilidad para el Equipo de fotografía y producción",
-      "Acceso a Equipamiento Profesional incluido en el alquiler",
-      "Fácil Acceso y Comodidad para transporte de equipos"
-    ],
-    idealFor: [
-      "Fotografía y video de moda, editorial y publicidad",
-      "Producciones de e-commerce con modelos o productos de gran tamaño",
-      "Sesiones grupales con amplio espacio de movimiento",
-      "Escenarios dinámicos con setups de iluminación avanzada"
-    ]
-  },
-  {
-    id: "color-backgrounds",
-    title: "Zona de Fondos de Colores",
-    description: "Nuestra zona de fondos de colores es el espacio perfecto para sesiones fotográficas y producciones audiovisuales que requieren versatilidad y personalización. Diseñada para adaptarse a cualquier concepto creativo, ofrece un amplio abanico de posibilidades para crear imágenes únicas y dinámicas.",
-    image: "/images/spaces/sample.webp",
-    reverse: true,
-    features: [
-      "Fondos Intercambiables de 2.7m de ancho en variedad de colores",
-      "Mobiliario y Accesorios Personalizables para ambientar tus sesiones",
-      "Iluminación Adaptable para diferentes estilos visuales",
-      "Ambientes Dinámicos desde retratos hasta fotografía de moda",
-      "Fácil Montaje y Cambio Rápido de Fondos sin interrumpir el workflow"
-    ],
-    idealFor: [
-      "Sesiones de retrato con fondos coloridos y llamativos",
-      "Fotografía de moda y campañas publicitarias con escenografía personalizada",
-      "Contenido para e-commerce con variedad de fondos para destacar productos",
-      "Producciones audiovisuales con transiciones de colores y efectos visuales"
-    ]
-  },
-  {
-    id: "black-zone",
-    title: "Black Zone",
-    description: "Nuestra Black Zone es el escenario ideal para creadores que buscan un fondo oscuro con un ambiente sofisticado, dramático y versátil. Perfecta para jugar con luces, sombras y contrastes, esta zona se adapta a sesiones fotográficas, producciones audiovisuales y contenido artístico con un estilo único.",
-    image: "/images/spaces/black-zone-optimized.webp",
-    features: [
-      "Fondo Negro Profundo para contraste intenso y efecto cinematográfico",
-      "Espacio para Sesiones con Vehículos gracias a su acceso directo y amplitud",
-      "Iluminación Versátil para Juegos de Luces y Sombras",
-      "Mobiliario y Props Personalizables para crear ambientes únicos",
-      "Superficie Amplia con más de 40 metros cuadrados",
-      "Perfecto para Contenido Cinematográfico y Editorial"
-    ],
-    idealFor: [
-      "Retratos y sesiones editoriales con un look sofisticado y contrastes definidos",
-      "Fotografía y video de coches y motos, con acceso directo al set",
-      "Producciones audiovisuales con estética minimalista y cinematográfica",
-      "Contenido de branding y publicidad que requiera un ambiente elegante y versátil"
-    ]
-  },
-  {
-    id: "creative-studio",
-    title: "Creative Studio",
-    description: "Nuestra zona Creative Studio está diseñada para creadores que buscan un entorno con personalidad, versatilidad y un acabado profesional. Con cuatro escenarios distintos, cada pared ofrece un estilo único, ideal para entrevistas, podcasts, grabaciones de video y sesiones fotográficas que requieren un fondo cuidado y moderno.",
-    image: "/images/spaces/cyclorama-optimized.webp",
-    reverse: true,
-    features: [
-      "Cuatro Fondos con Estilos Diferenciados para variedad visual",
-      "Pensado para Podcasting y Producción Audiovisual con calidad profesional",
-      "Ambiente Cambiante y Personalizable con mobiliario y accesorios",
-      "Interactividad y Presentaciones en Vivo con televisión en pared",
-      "Condiciones de Grabación Optimizadas con paneles acústicos decorativos",
-      "Un Espacio para Contenido Premium de alta calidad"
-    ],
-    idealFor: [
-      "Podcasters y creadores de contenido que buscan un fondo atractivo y versátil",
-      "Producciones audiovisuales con distintos escenarios sin cambiar de locación",
-      "Fotografía de retrato y editorial con fondos únicos y estéticos",
-      "Marcas y empresas que requieren grabaciones de alta calidad",
-      "Presentaciones interactivas y contenido educativo con soporte visual"
-    ]
-  }
-];
+import { STUDIO_SPACES_FULL } from '@/utils';
 ---
+
 <section class="section-padding">
   <div class="container mx-auto container-padding">
-    {studioSpaces.map((space) => (
+    {STUDIO_SPACES_FULL.map((space) => (
       <StudioSpace 
         id={space.id}
         title={space.title}
         description={space.description}
         image={space.image}
-        reverse={space.reverse}
+        reverse={space.id === 'color-backgrounds' || space.id === 'creative-studio'}
         features={space.features}
         idealFor={space.idealFor}
       />

@@ -1,5 +1,6 @@
 ---
 import Button from '@/components/common/Button.astro';
+import { CONTENT_PACKAGES } from '@/utils';
 ---
 
 <section class="py-16 bg-primary-white">
@@ -7,231 +8,92 @@ import Button from '@/components/common/Button.astro';
         <!-- Header -->
         <div class="text-center mb-12">
             <h2 class="text-3xl lg:text-4xl font-serif text-primary-black mb-6">
-                Paquetes de Creación de Contenido
+                {CONTENT_PACKAGES.header.title}
             </h2>
             <p class="text-lg text-primary-gray max-w-3xl mx-auto mb-4">
-                Contenido profesional mensual para marcas que quieren destacar
+                {CONTENT_PACKAGES.header.subtitle}
             </p>
             <p class="text-base text-primary-gray max-w-4xl mx-auto">
-                Creamos todo tu contenido mensual en una sola jornada, desde reels hasta fotos para tu feed o stories. 
-                Tú solo vienes al estudio, y nosotros nos encargamos de que tengas contenido de calidad y coherente, listo para publicar.
+                {CONTENT_PACKAGES.header.description}
             </p>
         </div>
 
         <!-- Paquetes -->
         <div class="grid md:grid-cols-3 gap-8 mb-16">
-            <!-- Pack Inicia -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden border-2 border-primary-beige">
-                <div class="bg-primary-beige p-6 text-center">
-                    <h3 class="text-2xl font-bold text-primary-black mb-2">Pack Inicia</h3>
-                    <div class="text-3xl font-bold text-primary-black">550€/mes</div>
-                    <div class="text-sm text-primary-gray">+ IVA</div>
-                    <p class="text-sm text-primary-black mt-2">
-                        La puerta de entrada para marcas que comienzan su presencia digital
-                    </p>
-                </div>
-                <div class="p-6">
-                    <ul class="space-y-3 mb-6">
-                        <li class="flex items-start">
-                            <span class="text-orange-500 mr-3">🎬</span>
-                            <span class="text-sm text-primary-gray">Media jornada de producción (4h)</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-blue-500 mr-3">📸</span>
-                            <span class="text-sm text-primary-gray">8 fotografías editadas</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-red-500 mr-3">🎥</span>
-                            <span class="text-sm text-primary-gray">5 vídeos tipo reel</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-green-500 mr-3">🎯</span>
-                            <span class="text-sm text-primary-gray">Entrega optimizada para redes</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-purple-500 mr-3">✅</span>
-                            <span class="text-sm text-primary-gray">Moodboard previo para marcar el estilo visual</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-yellow-500 mr-3">💡</span>
-                            <span class="text-sm font-medium text-primary-black">Ideal para 2 publicaciones + 1–2 reels semanales</span>
-                        </li>
-                    </ul>
-                    <Button 
-                        href="/booking?package=pack-inicia&price=550"
-                        variant="primary"
-                        fullWidth={true}
-                        class="h-14 text-base"
-                    >
-                        Reservar Pack Inicia
-                    </Button>
-                </div>
-            </div>
-
-            <!-- Pack Impulsa -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden border-2 border-primary-black transform scale-105 relative">
-                <!-- Badge Más Popular -->
-                <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 z-10 mt-7 mb-12">
-                    <div class="bg-primary-beige text-primary-black  px-6 py-2 rounded-full text-sm font-bold shadow-lg">
-                        Más Popular
+            {CONTENT_PACKAGES.packages.map((pkg) => (
+            <div class={`bg-white rounded-lg shadow-lg overflow-hidden border-2 ${pkg.borderColor} ${pkg.isPopular ? 'transform scale-105 relative' : ''}`}>
+                {pkg.badge && (
+                    <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 z-10 mt-7 mb-12">
+                        <div class="bg-primary-beige text-primary-black px-6 py-2 rounded-full text-sm font-bold shadow-lg">
+                            {pkg.badge}
+                        </div>
                     </div>
-                </div>
+                )}
                 
-                <div class="bg-primary-black p-6 text-center pt-10">
-                    <h3 class="text-2xl font-bold text-primary-white mb-2">Pack Impulsa</h3>
-                    <div class="text-3xl font-bold text-primary-white">800€/mes</div>
+                <div class={`${pkg.headerBg} p-6 text-center ${pkg.isPopular ? 'pt-10' : ''}`}>
+                    <h3 class={`text-2xl font-bold ${pkg.headerTextColor} mb-2`}>{pkg.name}</h3>
+                    <div class={`text-3xl font-bold ${pkg.headerTextColor}`}>{pkg.price}</div>
                     <div class="text-sm text-gray-300">+ IVA</div>
-                    <p class="text-sm text-primary-white mt-2">
-                        Para marcas con actividad regular que quieren mantener ritmo y calidad
+                    <p class={`text-sm ${pkg.headerTextColor} mt-2`}>
+                        {pkg.description}
                     </p>
                 </div>
                 <div class="p-6">
                     <ul class="space-y-3 mb-6">
+                        {pkg.features.map((feature) => (
                         <li class="flex items-start">
-                            <span class="text-orange-500 mr-3">🎬</span>
-                            <span class="text-sm text-primary-gray">Jornada completa de producción (8h)</span>
+                            <span class="text-primary-black mr-3"><feature.icon class="w-5 h-5" /></span>
+                            <span class={`text-sm ${feature.isBold ? 'font-medium text-primary-black' : 'text-primary-gray'}`}>
+                                {feature.text}
+                            </span>
                         </li>
-                        <li class="flex items-start">
-                            <span class="text-blue-500 mr-3">📸</span>
-                            <span class="text-sm text-primary-gray">16 fotografías editadas</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-red-500 mr-3">🎥</span>
-                            <span class="text-sm text-primary-gray">10 reels optimizados para redes</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-green-500 mr-3">🎯</span>
-                            <span class="text-sm text-primary-gray">Entrega organizada por tipo de contenido</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-purple-500 mr-3">✅</span>
-                            <span class="text-sm text-primary-gray">Dirección creativa + moodboard</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-yellow-500 mr-3">💡</span>
-                            <span class="text-sm font-medium text-primary-black">Ideal para 4 publicaciones + 2–3 reels semanales</span>
-                        </li>
+                        ))}
                     </ul>
                     <Button 
-                        href="/booking?package=pack-impulsa&price=800"
-                        variant="custom"
+                        href={pkg.buttonLink}
+                        variant={pkg.buttonVariant}
                         fullWidth={true}
-                        class="bg-primary-beige text-primary-black hover:bg-primary-gray hover:text-primary-white font-medium py-4 h-14 text-base transition-all duration-300 inline-flex items-center justify-center rounded"
+                        class={pkg.buttonClass || 'h-14 text-base'}
                     >
-                        Reservar Pack Impulsa
+                        {pkg.buttonText}
                     </Button>
                 </div>
             </div>
-
-            <!-- Pack Potencia -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden border-2 border-primary-gray">
-                <div class="bg-primary-gray p-6 text-center">
-                    <h3 class="text-2xl font-bold text-primary-white mb-2">Pack Potencia</h3>
-                    <div class="text-3xl font-bold text-primary-white">1200€/mes</div>
-                    <div class="text-sm text-gray-300">+ IVA</div>
-                    <p class="text-sm text-primary-white mt-2">
-                        Para marcas con estrategia sólida que buscan volumen, estilo y consistencia
-                    </p>
-                </div>
-                <div class="p-6">
-                    <ul class="space-y-3 mb-6">
-                        <li class="flex items-start">
-                            <span class="text-orange-500 mr-3">🎬</span>
-                            <span class="text-sm text-primary-gray">Jornada completa + sets y luces premium</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-blue-500 mr-3">📸</span>
-                            <span class="text-sm text-primary-gray">30 fotografías editadas</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-red-500 mr-3">🎥</span>
-                            <span class="text-sm text-primary-gray">16 reels con edición avanzada</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-green-500 mr-3">🎯</span>
-                            <span class="text-sm text-primary-gray">Kit de stories con subtítulos y llamadas a la acción</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-purple-500 mr-3">✅</span>
-                            <span class="text-sm text-primary-gray">Plan visual mensual + opción de programación en Meta Suite</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-yellow-500 mr-3">💡</span>
-                            <span class="text-sm font-medium text-primary-black">Ideal para 4+ publicaciones y reels semanales + historias diarias</span>
-                        </li>
-                    </ul>
-                    <Button 
-                        href="/booking?package=pack-potencia&price=1200"
-                        variant="primary"
-                        fullWidth={true}
-                        class="h-14 text-base"
-                    >
-                        Reservar Pack Potencia
-                    </Button>
-                </div>
-            </div>
+            ))}
         </div>
 
-        <!-- Servicios Adicionales -->
-        <div class="bg-primary-beige rounded-lg p-8 mb-8">
-            <h3 class="text-2xl font-bold text-primary-black mb-6 text-center">
-                🔧 Servicios Adicionales
-            </h3>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="text-center">
-                    <span class="text-2xl mb-2 block">📲</span>
-                    <h4 class="font-medium text-primary-black mb-1">Programación de publicaciones</h4>
-                    <p class="text-sm text-primary-gray">+80€/mes</p>
-                </div>
-                <div class="text-center">
-                    <span class="text-2xl mb-2 block">🧠</span>
-                    <h4 class="font-medium text-primary-black mb-1">Análisis mensual</h4>
-                    <p class="text-sm text-primary-gray">de rendimiento</p>
-                </div>
-                <div class="text-center">
-                    <span class="text-2xl mb-2 block">✍️</span>
-                    <h4 class="font-medium text-primary-black mb-1">Guiones creativos</h4>
-                    <p class="text-sm text-primary-gray">para reels o storytelling</p>
-                </div>
-                <div class="text-center">
-                    <span class="text-2xl mb-2 block">📞</span>
-                    <h4 class="font-medium text-primary-black mb-1">Asesoría estratégica</h4>
-                    <p class="text-sm text-primary-gray">en contenido</p>
+        <!-- Servicios Adicionales y Por qué elegirnos -->
+        <div class="grid md:grid-cols-2 gap-8 mb-8">
+            <!-- Servicios Adicionales -->
+            <div class="bg-primary-beige rounded-lg p-8">
+                <h3 class="text-2xl font-bold text-primary-black mb-10 text-center">
+                    {CONTENT_PACKAGES.additionalServices.title}
+                </h3>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8">
+                    {CONTENT_PACKAGES.additionalServices.services.map((service) => (
+                    <div class="text-center">
+                        <span class="text-2xl mb-2 block"><service.icon class="w-6 h-6 mx-auto" /></span>
+                        <h4 class="font-medium text-primary-black mb-1">{service.title}</h4>
+                        <p class="text-sm text-primary-gray">{service.subtitle}</p>
+                    </div>
+                    ))}
                 </div>
             </div>
-        </div>
 
-        <!-- Por qué elegirnos -->
-        <div class="bg-primary-white rounded-lg p-8">
-            <h3 class="text-2xl font-bold text-primary-black mb-6 text-center">
-            🤝 ¿Por qué elegirnos?
-            </h3>
-            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4 mt-4">
-            <div class="text-center">
-                <span class="text-2xl mb-2 block">🏙️</span>
-                <h4 class="font-medium text-primary-black mb-1">Estudio profesional</h4>
-                <p class="text-sm text-primary-gray">en el centro de la ciudad</p>
-            </div>
-            <div class="text-center">
-                <span class="text-2xl mb-2 block">🎥</span>
-                <h4 class="font-medium text-primary-black mb-1">Espacios versátiles</h4>
-                <p class="text-sm text-primary-gray">con equipo técnico incluido</p>
-            </div>
-            <div class="text-center">
-                <span class="text-2xl mb-2 block">👥</span>
-                <h4 class="font-medium text-primary-black mb-1">Fotógrafos expertos</h4>
-                <p class="text-sm text-primary-gray">a tu servicio</p>
-            </div>
-            <div class="text-center">
-                <span class="text-2xl mb-2 block">🔁</span>
-                <h4 class="font-medium text-primary-black mb-1">Flujo eficiente</h4>
-                <p class="text-sm text-primary-gray">contenido mensual en 1 jornada</p>
-            </div>
-            <div class="text-center">
-                <span class="text-2xl mb-2 block">🎯</span>
-                <h4 class="font-medium text-primary-black mb-1">Acompañamiento creativo</h4>
-                <p class="text-sm text-primary-gray">y soporte en redes</p>
-            </div>
+            <!-- Por qué elegirnos -->
+            <div class="bg-primary-white rounded-lg p-8 border border-primary-beige">
+                <h3 class="text-2xl font-bold text-primary-black mb-6 text-center">
+                    {CONTENT_PACKAGES.whyChooseUs.title}
+                </h3>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
+                    {CONTENT_PACKAGES.whyChooseUs.reasons.map((reason) => (
+                    <div class={`text-center ${reason.isFullWidth ? 'col-span-full' : ''}`}>
+                        <span class="text-2xl mb-2 block"><reason.icon class="w-6 h-6 mx-auto" /></span>
+                        <h4 class="font-medium text-primary-black mb-1">{reason.title}</h4>
+                        <p class="text-sm text-primary-gray">{reason.subtitle}</p>
+                    </div>
+                    ))}
+                </div>
             </div>
         </div>
     </div>

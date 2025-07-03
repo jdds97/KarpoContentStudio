@@ -6,7 +6,7 @@ import { faqCategories, type FaqCategory, type FaqQuestion } from '@/utils';
   <div class="container mx-auto container-padding">
     <div class="faq-tabs">
       {/* Radios ocultos */}
-      {faqCategories.map((category: FaqCategory, index: number) => (
+      {faqCategories.map((_category: FaqCategory, index: number) => (
         <input
           type="radio"
           name="faq-tab"

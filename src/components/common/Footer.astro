@@ -1,104 +1,97 @@
 ---
-import Button from './Button.astro';
-import { Instagram, MapPin, Phone, Mail } from '@lucide/astro';
-import { 
-  CONTACT_INFO, 
-  NAVIGATION_LINKS, 
-  COMPANY_INFO, 
-  SOCIAL_MEDIA, 
-  OPENING_HOURS_DISPLAY, 
-  LEGAL_LINKS 
-} from '@/utils';
+import { NAVIGATION_LINKS, COMPANY_INFO, CONTACT_INFO } from '@/utils';
+import { Image } from 'astro:assets';
+import logoWhite from '@/assets/images/logos/logo-white-optimized.webp';
+import MapPin from '@/components/icons/MapPin.astro';
+import Phone from '@/components/icons/Phone.astro';
+import Mail from '@/components/icons/Mail.astro';
 ---
 
-<footer class="bg-primary-black text-primary-white py-8 md:py-12">
-  <div class="container mx-auto px-4 md:px-8">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-    <!-- Logo y descripción -->
-    <div class="col-span-1 sm:col-span-2 lg:col-span-1 text-center sm:text-left">
-      <img 
-      src={COMPANY_INFO.logo.white}
-      alt={COMPANY_INFO.logo.alt}
-      class="h-10 md:h-12 w-auto mb-3 md:mb-4 mx-auto sm:mx-0"
-      style="aspect-ratio: 300/106;"
-      width="300" 
-      height="106"
-      sizes="(max-width: 640px) 200px, (max-width: 768px) 250px, 300px"
-      loading="lazy"
-      decoding="async"
-      />
-      <p class="text-secondary-lightgray mt-3 md:mt-4 text-sm md:text-base max-w-xs mx-auto sm:mx-0">
-      {COMPANY_INFO.description}
-      </p>
-      <div class="flex justify-center sm:justify-start space-x-4 mt-4 md:mt-6">
-      <a href={SOCIAL_MEDIA.instagram.url} aria-label={SOCIAL_MEDIA.instagram.label} class="text-primary-white hover:text-primary-beige transition-colors">
-        <Instagram class="w-5 h-5 md:w-6 md:h-6" />
-      </a>
+<footer class="bg-primary-black text-primary-white py-16">
+  <div class="container mx-auto container-padding">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+      <!-- Logo y descripción -->
+      <div class="lg:col-span-2">
+        <Image 
+          src={logoWhite}
+          alt={COMPANY_INFO.logo.alt}
+          class="h-12 w-auto mb-6"
+          width={204} 
+          height={72}
+          loading="lazy"
+          decoding="async"
+        />
+        <p class="text-gray-300 mb-6 max-w-md">
+          Tu espacio creativo para sesiones de fotos, rodajes, podcast y eventos especiales en el corazón de Sevilla.
+        </p>
+        <div class="space-y-3">
+          <div class="flex items-center">
+            <MapPin class="w-5 h-5 text-primary-beige mr-3" />
+            <span class="text-gray-300">Calle La Red Veintisiete, 6, Sevilla</span>
+          </div>
+          <div class="flex items-center">
+            <Phone class="w-5 h-5 text-primary-beige mr-3" />
+            <a href={`tel:${CONTACT_INFO.phone}`} class="text-gray-300 hover:text-primary-beige transition-colors">
+              {CONTACT_INFO.phone}
+            </a>
+          </div>
+          <div class="flex items-center">
+            <Mail class="w-5 h-5 text-primary-beige mr-3" />
+            <a href={`mailto:${CONTACT_INFO.email}`} class="text-gray-300 hover:text-primary-beige transition-colors">
+              {CONTACT_INFO.email}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enlaces de navegación -->
+      <div>
+        <h3 class="font-instrument text-lg font-semibold mb-4 text-primary-white">Navegación</h3>
+        <ul class="space-y-2">
+          {NAVIGATION_LINKS.map((link) => (
+            <li>
+              <a href={link.href} class="text-gray-300 hover:text-primary-beige transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Información adicional -->
+      <div>
+        <h3 class="font-instrument text-lg font-semibold mb-4 text-primary-white">Información</h3>
+        <ul class="space-y-2">
+          <li>
+            <a href="/terms" class="text-gray-300 hover:text-primary-beige transition-colors">
+              Términos y Condiciones
+            </a>
+          </li>
+          <li>
+            <a href="/privacy-policy" class="text-gray-300 hover:text-primary-beige transition-colors">
+              Política de Privacidad
+            </a>
+          </li>
+          <li>
+            <a href="/faq" class="text-gray-300 hover:text-primary-beige transition-colors">
+              Preguntas Frecuentes
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
-    
-    <!-- Enlaces rápidos -->
-    <div class="text-center sm:text-left">
-      <h3 class="text-base md:text-lg font-instrument mb-4 md:mb-6">Enlaces rápidos</h3>
-      <ul class="space-y-1.5 md:space-y-2 mt-4">
-      {NAVIGATION_LINKS.map((link) => (
-        <li><a href={link.href} class="text-secondary-lightgray hover:text-primary-white transition-colors text-sm md:text-base">{link.label}</a></li>
-      ))}
-      </ul>
-    </div>
-    
-    <!-- Información de contacto -->
-    <div class="text-center sm:text-left">
-      <h3 class="text-base md:text-lg font-instrument mb-4">Contáctanos</h3>
-      <ul class="space-y-2 md:space-y-3 mt-4">
-      <li class="flex items-start justify-center sm:justify-start space-x-2">
-        <MapPin class="w-4 h-4 md:w-5 md:h-5 text-secondary-lightgray mt-0.5 flex-shrink-0" />
-        <span class="text-secondary-lightgray text-sm md:text-base">{CONTACT_INFO.address.street} ({CONTACT_INFO.address.city})</span>
-      </li>
-      <li class="flex items-center justify-center sm:justify-start space-x-2">
-        <Phone class="w-4 h-4 md:w-5 md:h-5 text-secondary-lightgray flex-shrink-0" />
-        <a href={`tel:${CONTACT_INFO.phone}`} class="text-secondary-lightgray hover:text-primary-white transition-colors text-sm md:text-base">{CONTACT_INFO.phone}</a>
-      </li>
-      <li class="flex items-center justify-center sm:justify-start space-x-2">
-        <Mail class="w-4 h-4 md:w-5 md:h-5 text-secondary-lightgray flex-shrink-0" />
-        <a href={`mailto:${CONTACT_INFO.email}`} class="text-secondary-lightgray hover:text-primary-white transition-colors text-sm md:text-base break-all">{CONTACT_INFO.email}</a>
-      </li>
-      </ul>
-    </div>
-    
-    <!-- Horario -->
-    <div class="text-center sm:text-left">
-      <h3 class="text-base md:text-lg font-instrument mb-4">Horario</h3>
-      <ul class="space-y-1.5 md:space-y-2 text-secondary-lightgray text-sm md:text-base mt-4">
-      {OPENING_HOURS_DISPLAY.map((schedule) => (
-        <li>{schedule}</li>
-      ))}
-      </ul>
-      <div class="mt-4 md:mt-6">
-      <Button 
-        href="/booking" 
-        variant="custom" 
-        size="sm"
-        class="bg-primary-white text-primary-black border border-white hover:bg-primary-beige hover:text-primary-gray hover:border-primary-beige-500 transition-all duration-300 shadow-md hover:shadow-lg font-semibold text-sm md:text-base px-4 py-2 md:px-6 md:py-3 w-full sm:w-auto"
-        target="_self"
-        type="button"
-        disabled={false}
-        fullWidth={false}
-      >
-        Reserva Ahora
-      </Button>
+
+    <!-- Copyright y redes sociales -->
+    <div class="border-t border-gray-700 pt-8">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-400 text-sm mb-4 md:mb-0">
+          © {new Date().getFullYear()} {COMPANY_INFO.name}. Todos los derechos reservados.
+        </p>
+        <div class="flex space-x-4">
+          <!-- Aquí podrías agregar enlaces a redes sociales si los tienes -->
+          <span class="text-gray-400 text-sm">Síguenos en redes sociales</span>
+        </div>
       </div>
-    </div>
-    </div>
-    
-    <!-- Barra inferior -->
-    <div class="border-t border-secondary-darkgray mt-8 md:mt-12 pt-4 md:pt-6 flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
-    <p class="text-secondary-lightgray text-xs md:text-sm text-center md:text-left">© {new Date().getFullYear()} {COMPANY_INFO.name}. {COMPANY_INFO.copyright}</p>
-    <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-center">
-      {LEGAL_LINKS.map((link) => (
-        <a href={link.href} class="text-secondary-lightgray hover:text-primary-white transition-colors text-xs md:text-sm">{link.label}</a>
-      ))}
-    </div>
     </div>
   </div>
-  </footer>
+</footer>

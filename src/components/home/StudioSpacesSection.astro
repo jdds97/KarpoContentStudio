@@ -1,56 +1,17 @@
 ---
 import StudioSpace from '@/components/studio/StudioSpace.astro';
 import Button from '@/components/common/Button.astro';
-
-const studioSpaces = [
-  {
-    id: "cyclorama",
-    title: "Ciclorama de Grandes Dimensiones",
-    description: "Nuestro ciclorama de gran formato es el espacio ideal para producciones fotográficas y audiovisuales que requieren un entorno amplio, versátil y completamente personalizable.",
-    image: "/images/spaces/cyclorama-optimized.webp",
-    features: [
-      "Grandes Dimensiones: 6m x 4m con más de 3m de altura",
-      "Espacio Versátil para fotografía de moda, retratos y producciones audiovisuales",
-      "Iluminación Sin Restricciones y total libertad para setups profesionales",
-      "Fondos y Decorados Personalizables según las necesidades de cada sesión"
-    ],
-    idealFor: [
-      "Fotografía y video de moda, editorial y publicidad",
-      "Producciones de e-commerce con modelos o productos de gran tamaño",
-      "Sesiones grupales con amplio espacio de movimiento",
-      "Escenarios dinámicos con setups de iluminación avanzada"
-    ]
-  },
-  {
-    id: "color-backgrounds",
-    title: "Zona de Fondos de Colores",
-    description: "Nuestra zona de fondos de colores es el espacio perfecto para sesiones fotográficas y producciones audiovisuales que requieren versatilidad y personalización.",
-    image: "/images/spaces/principal-optimized.webp",
-    reverse: true,
-    features: [
-      "Fondos Intercambiables de 2.7m de ancho en variedad de colores",
-      "Mobiliario y Accesorios Personalizables para ambientar tus sesiones",
-      "Iluminación Adaptable para diferentes estilos visuales",
-      "Fácil Montaje y Cambio Rápido de Fondos sin interrumpir el workflow"
-    ],
-    idealFor: [
-      "Sesiones de retrato con fondos coloridos y llamativos",
-      "Fotografía de moda y campañas publicitarias con escenografía personalizada",
-      "Contenido para e-commerce con variedad de fondos para destacar productos",
-      "Producciones audiovisuales con transiciones de colores y efectos visuales"
-    ]
-  }
-];
+import { HOME_STUDIO_SPACES, SECTION_CONTENT } from '@/utils';
 ---
 <section class="section-padding bg-primary-beige/30">
   <div class="container mx-auto container-padding">
     <div class="max-w-4xl mx-auto text-center prose prose-neutral dark:prose-invert mb-16">
-      <h2 class="section-title text-primary-black">Nuestras Instalaciones</h2>
+      <h2 class="section-title text-primary-black">{SECTION_CONTENT.studioSpaces.title}</h2>
       <p class="text-lg md:text-xl max-w-3xl mx-auto text-primary-black">
-        Conoce los diferentes espacios disponibles en The Content Studio, diseñados para adaptarse a cualquier tipo de producción fotográfica o audiovisual.
+        {SECTION_CONTENT.studioSpaces.description}
       </p>
     </div>
-    {studioSpaces.map((space) => (
+    {HOME_STUDIO_SPACES.map((space) => (
       <StudioSpace 
         id={space.id}
         title={space.title}

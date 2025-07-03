@@ -1,7 +1,9 @@
 ---
 import Button from '@/components/common/Button.astro';
-import { ArrowRight } from '@lucide/astro';
+import ArrowRight from '@/components/icons/ArrowRight.astro';
 import { NAVIGATION_LINKS, COMPANY_INFO } from '@/utils';
+import { Image } from 'astro:assets';
+import logoMain from '@/assets/images/logos/logo-optimized.webp';
 const { url } = Astro;
 ---
 
@@ -12,17 +14,14 @@ const { url } = Astro;
     <div class="container mx-auto px-4 md:px-8">
       <nav class="flex justify-between items-center">
         <a href="/" class="flex items-center">
-          <img 
-            src={COMPANY_INFO.logo.main}
+          <Image 
+            src={logoMain}
             alt={COMPANY_INFO.logo.alt}
             class="h-12 w-auto"
-            style="aspect-ratio: 204/72;"
-            width="204" 
-            height="72"
-            sizes="(max-width: 768px) 204px, 204px"
+            width={204} 
+            height={72}
             loading="eager"
             decoding="async"
-            fetchpriority="high"
           />
         </a>
         
@@ -43,16 +42,22 @@ const { url } = Astro;
           {NAVIGATION_LINKS.map((link) => {
             const isActive = url.pathname === link.href || (link.href === '/' && url.pathname === '/');
             return (
-              <a href={link.href} class="text-primary-black hover:text-primary-gray transition-colors relative group nav-link" data-href={link.href}>
+              <a href={link.href} class="text-primary-black hover:text-primary-gray transition-colors relative group nav-link" data-href={link.href} data-astro-prefetch>
                 {link.label}
                 {isActive && <span class="block absolute left-0 -bottom-2 w-full h-1 bg-primary-black rounded-t nav-indicator"></span>}
               </a>
             );
           })}
-          <Button href="/booking" variant="custom" class="bg-primary-black text-primary-white hover:bg-primary-beige hover:text-primary-black transition-all duration-300 text-center mt-2 relative group font-semibold nav-link" data-href="/booking">
-            Reserva
-            {url.pathname === '/booking' && <span class="block absolute left-0 -bottom-2 w-full h-1 bg-primary-black rounded-t nav-indicator"></span>}
-          </Button>
+          <div class="flex items-center space-x-4">
+            <Button href="/booking" variant="custom" class="bg-primary-black text-primary-white hover:bg-primary-beige hover:text-primary-black transition-all duration-300 text-center relative group font-semibold nav-link px-6 py-2" data-href="/booking">
+              Reserva
+              {url.pathname === '/booking' && <span class="block absolute left-0 -bottom-2 w-full h-1 bg-primary-black rounded-t nav-indicator"></span>}
+            </Button>
+            <Button href="/admin/login" variant="custom" class="bg-transparent text-primary-black border border-primary-black hover:bg-primary-black hover:text-primary-white transition-all duration-300 text-center relative group font-semibold nav-link px-6 py-2" data-href="/admin/login">
+              Login
+              {url.pathname === '/admin/login' && <span class="block absolute left-0 -bottom-2 w-full h-1 bg-primary-black rounded-t nav-indicator"></span>}
+            </Button>
+          </div>
         </div>
       </nav>
     </div>
@@ -65,11 +70,17 @@ const { url } = Astro;
           {NAVIGATION_LINKS.map((link) => {
             const isActive = url.pathname === link.href || (link.href === '/' && url.pathname === '/');
             return (
-              <a href={link.href} class={`mobile-nav-link ${isActive ? 'active' : ''}`} data-href={link.href}>{link.label}</a>
+              <a href={link.href} class={`mobile-nav-link ${isActive ? 'active' : ''}`} data-href={link.href} data-astro-prefetch>{link.label}</a>
             );
           })}
         </nav>
         <div class="space-y-4">
+          <Button href="/admin/login" variant="custom" fullWidth class="font-outfit font-semibold py-4 transition-all duration-300 rounded-2xl bg-transparent text-primary-black border-2 border-primary-black hover:bg-primary-black hover:text-primary-white hover:scale-105 shadow-xl">
+            <span class="flex items-center justify-center space-x-3">
+              <span class="text-xl">🔑</span>
+              <span>Acceso Admin</span>
+            </span>
+          </Button>
           <Button href="/booking" variant="custom" fullWidth class={`font-outfit font-semibold py-4 transition-all duration-300 rounded-2xl bg-primary-black text-primary-white hover:bg-primary-beige hover:text-primary-black hover:scale-105 shadow-xl ${url.pathname === '/booking' ? 'ring-4 ring-primary-beige/40 scale-105' : ''}`}>
             <span class="flex items-center justify-center space-x-3">
               <span class="text-xl">✨</span>
@@ -89,52 +100,6 @@ const { url } = Astro;
   <div class="h-20"></div>
 
 <script>
-// Función para actualizar indicadores de navegación activa
-function updateActiveNavigation() {
-  const currentPath = window.location.pathname;
-  
-  // Limpiar todos los indicadores existentes
-  document.querySelectorAll('.nav-indicator').forEach(indicator => {
-    indicator.remove();
-  });
-  
-  document.querySelectorAll('.mobile-nav-link').forEach(link => {
-    link.classList.remove('active');
-  });
-  
-  // Añadir indicadores a elementos activos
-  document.querySelectorAll('.nav-link').forEach(link => {
-    const href = link.getAttribute('data-href');
-    const isActive = currentPath === href || (href === '/' && currentPath === '/');
-    
-    if (isActive) {
-      // Para navegación desktop
-      if (!link.querySelector('.nav-indicator')) {
-        const indicator = document.createElement('span');
-        indicator.className = 'block absolute left-0 -bottom-2 w-full h-1 bg-primary-black rounded-t nav-indicator';
-        link.appendChild(indicator);
-      }
-    }
-  });
-  
-  // Para navegación móvil
-  document.querySelectorAll('.mobile-nav-link').forEach(link => {
-    const href = link.getAttribute('data-href');
-    const isActive = currentPath === href || (href === '/' && currentPath === '/');
-    
-    if (isActive) {
-      link.classList.add('active');
-    }
-  });
-}
-
-// Ejecutar cuando el DOM esté listo
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', updateActiveNavigation);
-} else {
-  updateActiveNavigation();
-}
-
-// Ejecutar después de navegación SPA si existe
-document.addEventListener('astro:page-load', updateActiveNavigation);
+import { initNavbar } from '@/lib/navbar.ts';
+initNavbar();
 </script>

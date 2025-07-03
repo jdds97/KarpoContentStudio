@@ -1,6 +1,9 @@
 ---
 import Button from '@/components/common/Button.astro';
-import { CheckCircle, Sparkles } from '@lucide/astro';
+import CheckCircle from '@/components/icons/CheckCircle.astro';
+import Sparkles from '@/components/icons/Sparkles.astro';
+import { Image } from 'astro:assets';
+import { imageMap } from '@/assets/images';
 
 interface Props {
   id: string;
@@ -22,9 +25,10 @@ const {
   reverse = false,
   features,
   idealFor,
-  titleClass,
-  descriptionClass,
 } = Astro.props;
+
+// Obtener la imagen optimizada o usar la original como fallback
+const optimizedImage = imageMap[image as keyof typeof imageMap] || image;
 ---
 
 <div
@@ -33,17 +37,27 @@ const {
 >
   <!-- Imagen -->
   <div class="w-full lg:w-1/2">
-    <img
-      src={image}
-      alt={title}
-      width="1200"
-      height="800"
-      style="aspect-ratio: 1200/800;"
-      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 600px"
-      class="w-full h-full object-cover rounded-lg shadow-md"
-      loading="lazy"
-      decoding="async"
-    />
+    {typeof optimizedImage === 'string' ? (
+      <img
+        src={optimizedImage}
+        alt={title}
+        width="1200"
+        height="800"
+        class="w-full h-full object-cover rounded-lg shadow-md"
+        loading="lazy"
+        decoding="async"
+      />
+    ) : (
+      <Image
+        src={optimizedImage}
+        alt={title}
+        width={1200}
+        height={800}
+        class="w-full h-full object-cover rounded-lg shadow-md"
+        loading="lazy"
+        decoding="async"
+      />
+    )}
   </div>
 
   <!-- Contenido -->

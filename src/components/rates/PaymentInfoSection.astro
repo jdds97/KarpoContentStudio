@@ -1,6 +1,7 @@
 ---
-import { Calendar, XCircle, ChevronRight, CreditCard, Clock, AlertCircle, Zap } from '@/components/icons';
+import { Calendar, XCircle, ChevronRight, CreditCard, Clock } from '@/components/icons';
 import { PAYMENT_INFO } from '@/utils';
+import Button from '@/components/common/Button.astro';
 ---
 <section class="section-padding bg-secondary-lightgray">
   <div class="container mx-auto container-padding">
@@ -64,7 +65,16 @@ import { PAYMENT_INFO } from '@/utils';
           </ul>
         </div>
       </div>
-      <p class="mt-10 text-primary-gray text-center text-base">{PAYMENT_INFO.footer.text} <a href={PAYMENT_INFO.footer.linkHref} class="underline font-medium hover:text-primary-black">{PAYMENT_INFO.footer.linkText}</a> {PAYMENT_INFO.footer.restText}</p>
+      <p class="mt-10 text-primary-gray text-center text-base">{PAYMENT_INFO.footer.text} 
+        <Button 
+          href={PAYMENT_INFO.footer.linkHref} 
+          variant="custom"
+          class="underline font-medium hover:text-primary-black"
+        >
+          {PAYMENT_INFO.footer.linkText}
+        </Button> 
+        {PAYMENT_INFO.footer.restText}
+      </p>
     </div>
   </div>
 </section>
