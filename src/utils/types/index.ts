@@ -152,7 +152,7 @@ export interface Testimonial {
 // Tipos para Servicios Adicionales
 export interface AdditionalService {
   id: string;
-  icon: string;
+  icon: any; // Componente SVG
   title: string;
   description: string;
   price: string;

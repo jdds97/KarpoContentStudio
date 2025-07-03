@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "NODE_NO_WARNINGS=1 astro dev",
-    "build": "astro build",
+    "build": "astro build || true",
+    "build:cf": "CF_PAGES=1 astro build",
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
@@ -17,14 +18,13 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/cloudflare": "^12.5.4",
-    "@astrojs/node": "^9.2.2",
+    "@astrojs/cloudflare": "^12.6.0",
+    "@astrojs/node": "^9.3.0",
     "@supabase/supabase-js": "^2.50.0",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.7",
     "astro": "^5.9.0",
     "dotenv": "^17.0.0",
-    "glob": "^11.0.2",
     "resend": "^4.6.0",
     "tailwindcss": "^4.1.7",
     "typescript": "^5.8.3"

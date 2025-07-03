@@ -3,7 +3,7 @@
 // Información de contacto
 export const CONTACT_INFO = {
   phone: '+34633811994',
-  email: 'info@thecontentstudio.es',
+  email: 'contacto@contentstudiokrp.es',
   address: {
     street: 'Calle La Red Veintisiete, nº 6',
     city: 'Sevilla',
@@ -36,9 +36,9 @@ export const DEFAULT_SEO = {
 
 // Horarios de apertura
 export const OPENING_HOURS = {
-  weekdays: { opens: '09:00', closes: '20:00' },
-  saturday: { opens: '10:00', closes: '18:00' },
-  sunday: { opens: 'Closed', closes: 'Closed' }
+  weekdays: { opens: '08:00', closes: '23:00' },
+  saturday: { opens: '08:00', closes: '23:00' },
+  sunday: { opens: '08:00', closes: '23:00' }
 } as const;
 
 // Enlaces de navegación
@@ -47,7 +47,6 @@ export const NAVIGATION_LINKS = [
   { href: '/studio-spaces', label: 'Estudio' },
   { href: '/target-audiences', label: 'Público' },
   { href: '/rates', label: 'Tarifas' },
-  { href: '/calendar', label: 'Calendario' },
   { href: '/faq', label: 'FAQ' },
   { href: '/contact', label: 'Contacto' }
 ] as const;
@@ -74,7 +73,7 @@ export const FORM_CONFIG = {
 export const SOCIAL_MEDIA = {
   instagram: {
     url: 'https://instagram.com/thecontentstudio.es',
-    username: '@thecontentstudio.es',
+    username: '@contentstudiokrp.es',
     label: 'Instagram'
   }
 } as const;
@@ -94,9 +93,7 @@ export const COMPANY_INFO = {
 
 // Horarios formateados para mostrar
 export const OPENING_HOURS_DISPLAY = [
-  'Lunes - Viernes: 9:00 - 20:00',
-  'Sábado: 10:00 - 18:00',
-  'Domingo: Cerrado'
+  'Lunes - Domingo: 8:00 - 23:00'
 ] as const;
 
 // Links legales

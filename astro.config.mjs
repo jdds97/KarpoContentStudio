@@ -1,23 +1,19 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import cloudflare from '@astrojs/cloudflare';
-
-// Cargar variables de entorno explícitamente
+import node from '@astrojs/node';
 import 'dotenv/config';
+
+// Cloudflare Pages automatically sets CF_PAGES=1
+const isCloudflarePages = process.env.CF_PAGES === '1';
 
 export default defineConfig({
   output: 'server',
-  adapter: cloudflare({
-    platformProxy: {
-      enabled: true
-    }
+  adapter: isCloudflarePages ? cloudflare({
+    imageService: 'compile'
+  }) : node({
+    mode: 'standalone'
   }),
-  image: {
-    service: {
-      entrypoint: 'astro/assets/services/squoosh'
-    }
-  },
-
   devToolbar: {
     enabled: false
   },
@@ -42,26 +38,21 @@ export default defineConfig({
     plugins: [tailwindcss()],
     define: {
       global: 'globalThis',
-      'process.env': 'process.env',
+      'process.env': 'process.env'
+    },
+    ssr: {
+      external: ['node:buffer', 'sharp', 'detect-libc'],
+      noExternal: ['@astrojs/cloudflare']
     },
     resolve: {
       alias: {
-        '@': new URL('./src', import.meta.url).pathname,
-      },
-    },
-    server: {
-      hmr: {
-        overlay: false, // Desactivar overlay de errores para mejor rendimiento
-      },
-      watch: {
-        ignored: ['**/node_modules/**', '**/.git/**'], // Ignorar archivos innecesarios
-        usePolling: false, // Usar eventos del sistema en lugar de polling
-      },
+        '@': new URL('./src', import.meta.url).pathname
+      }
     },
     build: {
-      cssCodeSplit: false, // ✅ Consolidar CSS en un solo archivo
+      cssCodeSplit: false,
       minify: 'terser',
-      assetsInlineLimit: 8192, // ✅ CAMBIO: Inline assets hasta 8KB para eliminar requests adicionales
+      assetsInlineLimit: 8192,
       rollupOptions: {
         output: {
           manualChunks: (id) => {
@@ -77,7 +68,6 @@ export default defineConfig({
               return `assets/images/[name]-[hash][extname]`;
             }
             if (ext === 'css') {
-              // ✅ CAMBIO: Nombres más específicos para CSS
               return `assets/css/[name]-[hash][extname]`;
             }
             return `assets/[name]-[hash][extname]`;
@@ -102,5 +92,5 @@ export default defineConfig({
         }
       }
     }
-  },
+  }
 });
