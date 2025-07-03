@@ -13,7 +13,7 @@ const {
   title,
   description = "The Content Studio - Tu espacio creativo para sesiones de fotos, rodajes, podcast y eventos especiales en Sevilla.",
   canonical = Astro.url.href,
-  image = "/images/spaces/principal-optimized.webp",
+  image = "https://thecontentstudio.es/principal-optimized.webp",
   type = "website",
 } = Astro.props;
 
@@ -34,6 +34,11 @@ const fullTitle = `${title} | The Content Studio`;
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={fullImageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={title} />
+<meta property="og:site_name" content="The Content Studio" />
+<meta property="og:locale" content="es_ES" />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />

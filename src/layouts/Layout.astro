@@ -19,8 +19,38 @@ const {
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="generator" content={Astro.generator} />
+  
+  <!-- Performance hints -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <!-- Critical CSS inline para mejorar FCP -->
+  <style>
+    /* Critical above-the-fold styles */
+    body{margin:0;font-family:'Outfit',sans-serif;line-height:1.6}
+    .min-h-screen{min-height:100vh}
+    .flex{display:flex}
+    .flex-col{flex-direction:column}
+    .flex-grow{flex-grow:1}
+    .relative{position:relative}
+    .absolute{position:absolute}
+    .inset-0{top:0;right:0;bottom:0;left:0}
+    .w-full{width:100%}
+    .h-full{height:100%}
+    .object-cover{object-fit:cover}
+    .z-10{z-index:10}
+    .text-center{text-align:center}
+    .text-4xl{font-size:2.25rem;line-height:2.5rem}
+    .font-bold{font-weight:700}
+    .mb-6{margin-bottom:1.5rem}
+    .text-white{color:#fff}
+    /* Loading optimization */
+    img{transition:opacity 0.3s}
+    .hero-image{opacity:0}
+    .hero-image.loaded{opacity:1}
+    @media(min-width:768px){.text-6xl{font-size:3.75rem;line-height:1}}
+  </style>
   
   <!-- Favicons -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -32,14 +62,15 @@ const {
   
   <!-- Preconnect removido ya que usamos fuentes auto-hospedadas -->
   
-  <!-- Preload imagen LCP crítica -->
-  <link rel="preload" as="image" href="/images/spaces/principal-optimized.webp" fetchpriority="high" imagesizes="100vw" />
+  <!-- Preload imagen LCP crítica - removido por usar imports optimizados -->
   
-  <!-- Preload solo de la fuente más crítica para reducir cadenas de solicitud -->
-  <link rel="preload" href="/fonts/outfit-regular.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+  <!-- Astro:assets maneja el preload automáticamente con priority -->
   
-  <!-- Prefetch de fuentes secundarias para navegación futura -->
-  <link rel="prefetch" href="/fonts/instrument-serif-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Preload fuentes críticas con font-display: swap -->
+  <link rel="preload" href="/fonts/outfit-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/instrument-serif-regular.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Prefetch fuente secundaria -->
   <link rel="prefetch" href="/fonts/outfit-300.woff2" as="font" type="font/woff2" crossorigin>
   
   
@@ -50,8 +81,8 @@ const {
     canonical={canonical}
     type={type}
   />
-  <ClientRouter />
-  <script type="application/ld+json" set:html={JSON.stringify(businessStructuredData)}></script>
+  <ClientRouter fallback="swap" />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(businessStructuredData)}></script>
 </head>
 <body>
   <div class="flex flex-col min-h-screen">

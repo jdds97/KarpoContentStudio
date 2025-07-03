@@ -1,11 +1,13 @@
 ---
 import Button from './Button.astro';
 import { HERO_CONTENT } from '@/utils';
+import { Image } from 'astro:assets';
+import principalImage from '@/assets/images/spaces/principal-optimized.webp';
 
 export interface Props {
   title?: string;
   description?: string;
-  image?: string;
+  image?: any;
   buttonText?: string;
   buttonHref?: string;
   overlayClass?: string;
@@ -14,11 +16,12 @@ export interface Props {
   descriptionClass?: string;
   buttonVariant?: 'primary' | 'outline' | 'table' | 'custom';
   buttonClass?: string;
+  heightClass?: string; // Nueva prop para controlar altura
 }
 const {
   title = HERO_CONTENT.home.title,
   description = HERO_CONTENT.home.description,
-  image = '/images/spaces/principal-optimized.webp',
+  image = principalImage,
   buttonText = HERO_CONTENT.home.buttonText,
   buttonHref = HERO_CONTENT.home.buttonHref,
   overlayClass = 'bg-primary-black/60',
@@ -27,21 +30,23 @@ const {
   descriptionClass = 'text-primary-black font-outfit',
   buttonVariant = 'custom',
   buttonClass = 'bg-primary-beige text-primary-black hover:bg-primary-black hover:text-primary-white transition-colors shadow-lg',
+  heightClass = 'h-[50vh] md:h-[75vh]', // Altura por defecto
 } = Astro.props;
 ---
-<section class="relative h-[50vh] md:h-[75vh] flex items-center justify-center overflow-hidden">
-  <img
-    src={image}
-    alt={title}
-    width="1920"
-    height="1280"
-    style="aspect-ratio: 1920/1280;"
-    sizes="100vw"
-    class="absolute inset-0 w-full h-full object-cover lcp-image"
-    loading="eager"
-    fetchpriority="high"
-    decoding="sync"
-  />
+<section class={`relative ${heightClass} flex items-center justify-center overflow-hidden`}>
+  {image && (
+    <Image
+      src={image}
+      alt={title}
+      width={1920}
+      height={1280}
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="eager"
+      decoding="sync"
+      priority
+      fetchpriority="high"
+    />
+  )}
   <div class={`absolute inset-0 ${overlayClass}`}></div>
   <div class={`relative z-10 text-center max-w-2xl mx-auto px-4 ${textClass}`}>  
     <h2 class={`text-4xl md:text-6xl font-instrument font-bold mb-6 drop-shadow-lg ${titleClass}`}>{title}</h2>

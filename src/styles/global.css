@@ -1,7 +1,7 @@
-/* Optimized CSS para Tailwind v4 - Eliminado render-blocking */
+/* Optimized CSS para Tailwind v4 - Critical CSS inline, resto async */
+@import "./critical-fonts.css"; /* Fuentes críticas primero */
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@import "./critical-fonts.css"; /* Fuentes críticas primero */
 @import "./fonts.css"; /* Fuentes completas después */
 
 /* Configuración de tema para Tailwind v4 */
@@ -49,6 +49,11 @@
 /* Reset y estilos base */
 * {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px; /* Ajuste para navbar fijo */
 }
 
 html {
@@ -424,4 +429,65 @@ label[for="menu-toggle"] .hamburger-line:nth-child(3) {
 
 .faq-tab-label:hover {
   color: var(--color-primary-black);
+}
+
+/* ===================================
+   ESTILOS EXTRAÍDOS DE COMPONENTES
+   =================================== */
+
+/* Calendar Component Styles */
+.time-selected {
+  transform: scale(1.05);
+}
+
+@media (max-width: 640px) {
+  #available-times-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  #calendar-days-grid > div {
+    min-height: 60px;
+    padding: 0.5rem;
+  }
+  
+  .availability-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+}
+
+/* DiscountBanner Component Styles */
+/* Animaciones adicionales */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Efecto de brillo en el banner */
+.discount-banner-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.discount-banner-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
