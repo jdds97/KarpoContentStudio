@@ -9,3 +9,11 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+// Tipos para las funciones del calendario
+declare global {
+  interface Window {
+    selectTimeSlot: (time: string, date: string) => void;
+    scrollToForm: () => void;
+  }
+}

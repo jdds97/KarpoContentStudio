@@ -5,7 +5,14 @@
     "**/*"
   ],
   "exclude": [
-    "dist"
+    "dist",
+    "src/tests/**/*",
+    "**/*.test.ts",
+    "**/*.test.js",
+    "**/*.spec.ts",
+    "**/*.spec.js",
+    "jest.config.js",
+    "node_modules"
   ],
   "compilerOptions": {
     "baseUrl": ".",

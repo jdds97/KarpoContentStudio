@@ -22,27 +22,15 @@ export const businessStructuredData = {
     "longitude": -5.9416
   },
   "telephone": "+34633811994",
-  "email": "info@thecontentstudio.es",
+  "email": "contacto@contentstudiokrp.es",
   "url": "https://thecontentstudio.es",
   "priceRange": "€€",
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      "opens": "09:00",
-      "closes": "20:00"
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Saturday"],
-      "opens": "10:00",
-      "closes": "18:00"
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Sunday"],
-      "opens": "Closed",
-      "closes": "Closed"
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "08:00",
+      "closes": "23:00"
     }
   ]
 };

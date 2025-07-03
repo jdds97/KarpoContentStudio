@@ -17,6 +17,12 @@ export interface Database {
           session_type: string;
           notes: string | null;
           status: 'pending' | 'confirmed' | 'cancelled' | 'completed';
+          discount_code: string | null;
+          discount_percentage: number;
+          total_price: number | null;
+          confirmed_at: string | null;
+          cancelled_at: string | null;
+          cancellation_reason: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -34,6 +40,12 @@ export interface Database {
           session_type: string;
           notes?: string | null;
           status?: 'pending' | 'confirmed' | 'cancelled' | 'completed';
+          discount_code?: string | null;
+          discount_percentage?: number;
+          total_price?: number | null;
+          confirmed_at?: string | null;
+          cancelled_at?: string | null;
+          cancellation_reason?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -51,6 +63,12 @@ export interface Database {
           session_type?: string;
           notes?: string | null;
           status?: 'pending' | 'confirmed' | 'cancelled' | 'completed';
+          discount_code?: string | null;
+          discount_percentage?: number;
+          total_price?: number | null;
+          confirmed_at?: string | null;
+          cancelled_at?: string | null;
+          cancellation_reason?: string | null;
           created_at?: string;
           updated_at?: string;
         };

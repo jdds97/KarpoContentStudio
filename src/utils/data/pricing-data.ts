@@ -24,7 +24,7 @@ export const pricingSections: PricingSection[] = [
         id: 'base-rental',
         service: 'Alquiler Base',
         duration: '2 horas',
-        price: '150€',
+        price: '150€ +IVA',
         action: 'book',
         actionHref: '/booking'
       },
@@ -32,7 +32,7 @@ export const pricingSections: PricingSection[] = [
         id: 'half-day',
         service: 'Medio día',
         duration: '4 horas',
-        price: '300€',
+        price: '300€ +IVA',
         action: 'book',
         actionHref: '/booking'
       },
@@ -40,7 +40,7 @@ export const pricingSections: PricingSection[] = [
         id: 'full-day',
         service: 'Día completo',
         duration: '8 horas',
-        price: '600€',
+        price: '600€ +IVA',
         action: 'book',
         actionHref: '/booking'
       },
@@ -48,15 +48,7 @@ export const pricingSections: PricingSection[] = [
         id: 'extended-day',
         service: 'Jornada Extendida',
         duration: '12 horas',
-        price: '850€',
-        action: 'book',
-        actionHref: '/booking'
-      },
-      {
-        id: 'extra-hour',
-        service: 'Hora Extra',
-        duration: '1 hora',
-        price: '90€',
+        price: '850€ +IVA',
         action: 'book',
         actionHref: '/booking'
       }
@@ -70,7 +62,7 @@ export const pricingSections: PricingSection[] = [
         id: 'basic-membership',
         service: 'Básica',
         duration: '8h/mes + 10% descuento en horas extra',
-        price: '250€/mes',
+        price: '250€/mes +IVA',
         action: 'contact',
         actionHref: '/contact'
       },
@@ -78,7 +70,7 @@ export const pricingSections: PricingSection[] = [
         id: 'pro-membership',
         service: 'Pro',
         duration: '16h/mes + 15% descuento en horas extra',
-        price: '400€/mes',
+        price: '400€/mes +IVA',
         action: 'contact',
         actionHref: '/contact'
       },
@@ -86,7 +78,7 @@ export const pricingSections: PricingSection[] = [
         id: 'vip-membership',
         service: 'VIP',
         duration: '30h/mes + 20% descuento en horas extra + prioridad en reservas',
-        price: '700€/mes',
+        price: '700€/mes +IVA',
         action: 'contact',
         actionHref: '/contact'
       }
@@ -100,7 +92,7 @@ export const pricingSections: PricingSection[] = [
         id: 'workshop',
         service: 'Workshop / Masterclass',
         duration: '4 horas',
-        price: '400€',
+        price: '400€ +IVA',
         action: 'contact',
         actionHref: '/contact'
       },
@@ -108,7 +100,7 @@ export const pricingSections: PricingSection[] = [
         id: 'private-event',
         service: 'Evento privado + catering',
         duration: '8 horas',
-        price: '800€',
+        price: '800€ +IVA',
         action: 'contact',
         actionHref: '/contact'
       },
@@ -116,7 +108,7 @@ export const pricingSections: PricingSection[] = [
         id: 'full-production',
         service: 'Producción completa',
         duration: 'Personalizado',
-        price: 'Desde 1.000€',
+        price: 'Desde 1.000€ +IVA',
         action: 'contact',
         actionHref: '/contact'
       }
@@ -130,7 +122,7 @@ export const pricingSections: PricingSection[] = [
         id: 'annual-pro-plus',
         service: 'Membresía Anual Pro+',
         duration: '1 año',
-        price: '6.800€/año',
+        price: '6.800€/año +IVA',
         action: 'contact',
         actionHref: '/contact'
       }
@@ -148,13 +140,13 @@ export const annualMembershipDetails = {
     'Hasta 6 usos de ciclorama sin suplemento de limpieza',
     'Facturación anual deducible'
   ],
-  alternativePayment: '3.500€ x 2 (semestral)'
+  alternativePayment: '3.500€ x 2 (semestral) +IVA'
 };
 
 // Notas importantes sobre las tarifas
 export const pricingNotes = [
   'Todas las tarifas incluyen acceso a ciclorama, zonas de set, cocina, camerino y mobiliario básico.',
-  'Para grupos de más de 5 personas, se aplicará una tarifa de 12€ por limpieza básica.',
-  'El uso de fondos de papel Colorama tiene un coste adicional de 10€ por metro pisado.',
+  'Para grupos de más de 5 personas, se aplicará una tarifa desde 50€ por limpieza básica.',
+  'El uso de fondos de papel Colorama tiene un coste adicional de 20€ por metro pisado.',
   'Para propuestas personalizadas o paquetes especiales, contáctanos directamente.'
 ];

@@ -1,23 +1,19 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import cloudflare from '@astrojs/cloudflare';
-
-// Cargar variables de entorno explícitamente
+import node from '@astrojs/node';
 import 'dotenv/config';
+
+// Only use Cloudflare adapter when CF_PAGES=1 is set by Cloudflare Pages
+const isCloudflarePages = process.env.CF_PAGES === '1';
 
 export default defineConfig({
   output: 'server',
-  adapter: cloudflare({
-    platformProxy: {
-      enabled: true
-    }
+  adapter: isCloudflarePages ? cloudflare({
+    imageService: 'compile'
+  }) : node({
+    mode: 'standalone'
   }),
-  image: {
-    service: {
-      entrypoint: 'astro/assets/services/squoosh'
-    }
-  },
-
   devToolbar: {
     enabled: false
   },
@@ -30,7 +26,7 @@ export default defineConfig({
     },
     watch: {
       usePolling: false,
-      ignored: ['**/node_modules/**', '**/dist/**', '**/.git/**']
+      ignored: ['**/node_modules/**', '**/dist/**', '**/.git/**', '**/tests/**', '**/*.test.*', '**/*.spec.*']
     }
   },
   compressHTML: true,
@@ -39,34 +35,62 @@ export default defineConfig({
     assets: 'assets'
   },
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      {
+        name: 'cloudflare-polyfill',
+        generateBundle(options, bundle) {
+          // Replace require calls with proper polyfills for Cloudflare Workers
+          for (const [fileName, chunk] of Object.entries(bundle)) {
+            if (chunk.type === 'chunk' && chunk.code) {
+              // Replace WebSocket require with browser WebSocket
+              chunk.code = chunk.code.replace(
+                /WebSocketImpl = require\('ws'\);/g,
+                'WebSocketImpl = WebSocket;'
+              );
+            }
+          }
+        }
+      }
+    ],
     define: {
       global: 'globalThis',
-      'process.env': 'process.env',
+      'process.env': 'process.env'
     },
     resolve: {
       alias: {
         '@': new URL('./src', import.meta.url).pathname,
-      },
+        'node:fetch': 'fetch',
+        'ws': 'WebSocket'
+      }
     },
-    server: {
-      hmr: {
-        overlay: false, // Desactivar overlay de errores para mejor rendimiento
-      },
-      watch: {
-        ignored: ['**/node_modules/**', '**/.git/**'], // Ignorar archivos innecesarios
-        usePolling: false, // Usar eventos del sistema en lugar de polling
-      },
+    ssr: {
+      external: ['node:buffer', 'sharp', 'detect-libc', 'ws'],
+      noExternal: ['@astrojs/cloudflare', '@supabase/supabase-js']
+    },
+    resolve: {
+      alias: {
+        '@': new URL('./src', import.meta.url).pathname
+      }
     },
     build: {
-      cssCodeSplit: false, // ✅ Consolidar CSS en un solo archivo
-      minify: 'terser',
-      assetsInlineLimit: 8192, // ✅ CAMBIO: Inline assets hasta 8KB para eliminar requests adicionales
+      cssCodeSplit: false,
+      minify: false,
+      assetsInlineLimit: 8192,
       rollupOptions: {
+        external: [
+          /.*\.test\.(js|ts|jsx|tsx)$/,
+          /.*\.spec\.(js|ts|jsx|tsx)$/,
+          /^.*\/tests\/.*$/,
+          'ws'
+        ],
         output: {
           manualChunks: (id) => {
             if (id.includes('node_modules')) {
               return 'vendor';
+            }
+            if (id.includes('tests') || id.includes('.test.') || id.includes('.spec.')) {
+              return undefined; // Don't chunk test files
             }
           },
           assetFileNames: (assetInfo) => {
@@ -77,7 +101,6 @@ export default defineConfig({
               return `assets/images/[name]-[hash][extname]`;
             }
             if (ext === 'css') {
-              // ✅ CAMBIO: Nombres más específicos para CSS
               return `assets/css/[name]-[hash][extname]`;
             }
             return `assets/[name]-[hash][extname]`;
@@ -102,5 +125,5 @@ export default defineConfig({
         }
       }
     }
-  },
+  }
 });

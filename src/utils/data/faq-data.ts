@@ -18,16 +18,20 @@ export const faqCategories: FaqCategory[] = [
         answer: "El estudio cuenta con cuatro zonas diferenciadas, cada una diseñada para diferentes tipos de producciones. Tenemos el Ciclorama, la Zona de Fondos de Colores, la Black Zone y el Creative Studio. Puedes consultar sus características en la página de <a href='/studio-spaces' class='text-primary-black underline'>Estudio</a>."
       },
       {
+        question: "¿Qué hace especial al Creative Studio?",
+        answer: "El Creative Studio es nuestro espacio más versátil, diseñado específicamente para podcasters y creadores de contenido. Cuenta con cuatro paredes temáticas diferentes (ladrillo industrial, minimalista blanco, madera natural y fondo oscuro elegante), una televisión de 55 pulgadas integrada, paneles acústicos decorativos y mobiliario modular. Es ideal para grabar contenido variado sin cambiar de ubicación, perfecto para podcasts, YouTube, entrevistas corporativas y streaming profesional."
+      },
+      {
         question: "¿Hay un espacio disponible para maquillaje y vestuario?",
         answer: "Sí, contamos con una zona de maquillaje y vestuario equipada con espejo, camerino, dos burros con perchas y un área cómoda para cambios de ropa."
       },
       {
         question: "¿La limpieza está incluida en el precio?",
-        answer: "Cada cliente es responsable de dejar el estudio en las mismas condiciones en las que lo encontró. Al finalizar la reserva (dentro del tiempo contratado), todo el equipo debe ser desmontado y colocado en su sitio.<br><br>Para grupos de más de 5 personas, se aplicará una tarifa de 12€ por limpieza básica. En caso de dejar residuos como basura, huellas en el suelo, restos de comida o bebidas, se aplicará un cargo adicional de 15€/hora por limpieza extra."
+        answer: "Cada cliente es responsable de dejar el estudio en las mismas condiciones en las que lo encontró. Al finalizar la reserva (dentro del tiempo contratado), todo el equipo debe ser desmontado y colocado en su sitio.<br><br>Para grupos de más de 5 personas, se aplicará una tarifa desde 50€ por limpieza básica. En caso de dejar residuos como basura, huellas en el suelo, restos de comida o bebidas, se aplicará un cargo adicional por limpieza extra."
       },
       {
         question: "¿Se puede traer comida o bebidas al estudio?",
-        answer: "Sí, puedes traer tu propia comida y bebida. Además, ponemos a tu disposición microondas, frigorífico y una máquina de café, con cápsulas, leche y agua incluidas en el alquiler.<br><br>Es importante recoger todos los restos y limpiar la zona después de su uso. En caso de no hacerlo, se aplicará un cargo adicional de 15€/hora por limpieza."
+        answer: "Sí, puedes traer tu propia comida y bebida. Además, ponemos a tu disposición microondas, frigorífico y una máquina de café, con cápsulas, leche y agua incluidas en el alquiler.<br><br>Es importante recoger todos los restos y limpiar la zona después de su uso. En caso de no hacerlo, se aplicará un cargo adicional por limpieza."
       },
       {
         question: "¿Está permitido el uso de glitter, confeti o materiales similares?",
@@ -76,7 +80,7 @@ export const faqCategories: FaqCategory[] = [
       },
       {
         question: "¿Me pueden enviar la factura de mi reserva?",
-        answer: "Sí, para solicitar una factura, envíanos un email con los datos fiscales de tu empresa a info@thecontentstudio.es."
+        answer: "Sí, para solicitar una factura, envíanos un email con los datos fiscales de tu empresa a contacto@contentstudiokrp.es."
       },
       {
         question: "¿El estudio cuenta con parking o zona de carga y descarga?",
@@ -104,7 +108,11 @@ export const faqCategories: FaqCategory[] = [
       },
       {
         question: "¿Se puede alquilar el estudio para eventos?",
-        answer: "En general, sí alquilamos el estudio para eventos profesionales y workshops. Si estás interesado en realizar un evento, envíanos un mensaje a info@thecontentstudio.es con los detalles, y evaluaremos tu solicitud."
+        answer: "En general, sí alquilamos el estudio para eventos profesionales y workshops. Si estás interesado en realizar un evento, envíanos un mensaje a contacto@contentstudiokrp.es con los detalles, y evaluaremos tu solicitud."
+      },
+      {
+        question: "¿Qué ocurre si necesito más tiempo del reservado?",
+        answer: "Si durante tu sesión necesitas tiempo adicional, puedes extender tu reserva si hay disponibilidad. El coste de la hora extra es de 90€ +IVA por hora o fracción.<br><br>Te recomendamos reservar con tiempo de margen para evitar prisas y garantizar que puedas completar tu proyecto sin limitaciones de tiempo."
       }
     ]
   },
@@ -125,7 +133,7 @@ export const faqCategories: FaqCategory[] = [
       },
       {
         question: "¿Qué fondos de color están disponibles en el estudio?",
-        answer: "Disponemos de fondos de papel Colorama de 2,7 metros en los siguientes colores: Blanco, Verde (Chromakey), Celeste, y otros colores que vamos incorporando regularmente.<br><br>El coste por uso es de 10€ por metro pisado. Para evitar daños, ofrecemos una plancha de metacrilato transparente de 2m x 1m, que permite trabajar sin afectar los fondos y mejora los resultados en la imagen final.<br><br>Además, contamos con pared de roble clásico y reverso en mármol gris móviles, y escenarios vestidos en la zona Creative Studio, que pueden utilizarse como fondos adicionales."
+        answer: "Disponemos de fondos de papel Colorama de 2,7 metros en una amplia gama de colores: Blanco, Verde (Chromakey), Celeste, Rojo, Azul, Rosa, Amarillo, Negro y otros colores que vamos incorporando regularmente según la demanda.<br><br>El coste por uso es de 20€ por metro pisado. Para evitar daños, ofrecemos una plancha de metacrilato transparente de 2m x 1m, que permite trabajar sin afectar los fondos y mejora los resultados en la imagen final.<br><br>Además, contamos con pared de roble clásico y reverso en mármol gris móviles, y escenarios vestidos en la zona Creative Studio, que pueden utilizarse como fondos adicionales."
       },
       {
         question: "¿El estudio tiene aire acondicionado y calefacción?",
