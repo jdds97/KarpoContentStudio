@@ -1,0 +1,243 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Button from '@/components/common/Button.astro';
+import { CheckCircle, Calendar, CreditCard, Mail, Phone } from '@/components/icons';
+import { supabase } from '@/lib/supabase.ts';
+
+export const prerender = false;
+
+const { url } = Astro;
+const bookingId = url.searchParams.get('id');
+
+if (!bookingId) {
+  return Astro.redirect('/booking');
+}
+
+// Obtener los detalles de la reserva
+const { data: booking, error } = await supabase
+  .from('bookings')
+  .select('*')
+  .eq('id', bookingId)
+  .single();
+
+if (error || !booking) {
+  return Astro.redirect('/booking');
+}
+
+// Función para formatear fecha
+function formatDate(dateString: string) {
+  return new Date(dateString).toLocaleDateString('es-ES', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+
+// Función para formatear hora
+function formatTime(timeString: string) {
+  return timeString;
+}
+
+// Función para formatear duración
+function formatDuration(duration: string) {
+  const durations: Record<string, string> = {
+    '1h': '1 hora',
+    '2h': '2 horas',
+    '3h': '3 horas',
+    '4h': '4 horas',
+    '6h': '6 horas',
+    '8h': '8 horas'
+  };
+  return durations[duration] || duration;
+}
+---
+
+<Layout title="Reserva Confirmada - The Content Studio">
+  <div class="min-h-screen bg-gradient-to-br from-primary-beige/20 via-primary-white to-secondary-lightgray/30 py-12">
+    <div class="container mx-auto container-padding">
+      <div class="max-w-4xl mx-auto">
+        
+        <!-- Header de éxito -->
+        <div class="text-center mb-12">
+          <div class="flex justify-center mb-6">
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
+              <CheckCircle class="w-12 h-12 text-green-600" />
+            </div>
+          </div>
+          <h1 class="text-4xl md:text-5xl font-instrument font-bold text-primary-black mb-4">
+            ¡Reserva Creada Exitosamente!
+          </h1>
+          <p class="text-lg text-primary-gray mb-2">
+            Tu solicitud de reserva ha sido recibida correctamente.
+          </p>
+          <p class="text-sm text-primary-gray">
+            <strong>ID de Reserva:</strong> <span class="font-mono bg-primary-beige/50 px-2 py-1 rounded">{booking.id}</span>
+          </p>
+        </div>
+
+        <!-- Detalles de la reserva -->
+        <div class="bg-primary-white rounded-2xl shadow-lg border border-primary-beige/30 overflow-hidden mb-8">
+          <div class="bg-primary-black text-primary-white p-6">
+            <h2 class="text-2xl font-instrument font-bold">Detalles de tu Reserva</h2>
+          </div>
+          
+          <div class="p-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              
+              <!-- Información Personal -->
+              <div>
+                <h3 class="text-lg font-semibold text-primary-black mb-4 flex items-center">
+                  <Mail class="w-5 h-5 mr-2" />
+                  Información Personal
+                </h3>
+                <div class="space-y-3">
+                  <div>
+                    <span class="text-sm text-primary-gray">Nombre:</span>
+                    <p class="font-medium text-primary-black">{booking.name}</p>
+                  </div>
+                  <div>
+                    <span class="text-sm text-primary-gray">Email:</span>
+                    <p class="font-medium text-primary-black">{booking.email}</p>
+                  </div>
+                  <div>
+                    <span class="text-sm text-primary-gray">Teléfono:</span>
+                    <p class="font-medium text-primary-black">{booking.phone}</p>
+                  </div>
+                  {booking.company && (
+                    <div>
+                      <span class="text-sm text-primary-gray">Empresa:</span>
+                      <p class="font-medium text-primary-black">{booking.company}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <!-- Detalles de la Sesión -->
+              <div>
+                <h3 class="text-lg font-semibold text-primary-black mb-4 flex items-center">
+                  <Calendar class="w-5 h-5 mr-2" />
+                  Detalles de la Sesión
+                </h3>
+                <div class="space-y-3">
+                  <div>
+                    <span class="text-sm text-primary-gray">Fecha:</span>
+                    <p class="font-medium text-primary-black">{formatDate(booking.preferred_date)}</p>
+                  </div>
+                  <div>
+                    <span class="text-sm text-primary-gray">Hora:</span>
+                    <p class="font-medium text-primary-black">{formatTime(booking.preferred_time)}</p>
+                  </div>
+                  <div>
+                    <span class="text-sm text-primary-gray">Duración:</span>
+                    <p class="font-medium text-primary-black">{formatDuration(booking.package_duration)}</p>
+                  </div>
+                  <div>
+                    <span class="text-sm text-primary-gray">Espacio:</span>
+                    <p class="font-medium text-primary-black">{booking.studio_space}</p>
+                  </div>
+                  <div>
+                    <span class="text-sm text-primary-gray">Participantes:</span>
+                    <p class="font-medium text-primary-black">{booking.participants} persona{booking.participants > 1 ? 's' : ''}</p>
+                  </div>
+                  <div>
+                    <span class="text-sm text-primary-gray">Tipo de sesión:</span>
+                    <p class="font-medium text-primary-black">{booking.session_type}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Notas adicionales */}
+            {booking.notes && (
+              <div class="mt-8 pt-6 border-t border-primary-beige/50">
+                <h3 class="text-lg font-semibold text-primary-black mb-3">Descripción de la sesión</h3>
+                <p class="text-primary-gray bg-primary-beige/20 p-4 rounded-lg">{booking.notes}</p>
+              </div>
+            )}
+
+            {/* Información de precio */}
+            <div class="mt-8 pt-6 border-t border-primary-beige/50">
+              <div class="flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-primary-black flex items-center">
+                  <CreditCard class="w-5 h-5 mr-2" />
+                  Precio Total
+                </h3>
+                <div class="text-right">
+                  <p class="text-3xl font-bold text-primary-black">€{booking.total_price}</p>
+                  {booking.discount_code && (
+                    <p class="text-sm text-green-600">
+                      Descuento aplicado: {booking.discount_code} ({booking.discount_percentage}%)
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Estado y próximos pasos -->
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
+          <h3 class="text-lg font-semibold text-blue-900 mb-3">¿Qué sigue ahora?</h3>
+          <div class="space-y-3 text-blue-800">
+            <div class="flex items-start">
+              <div class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5">1</div>
+              <p>Hemos enviado un email de confirmación a <strong>{booking.email}</strong></p>
+            </div>
+            <div class="flex items-start">
+              <div class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5">2</div>
+              <p>Nuestro equipo revisará tu solicitud y te contactará pronto para confirmar los detalles</p>
+            </div>
+            <div class="flex items-start">
+              <div class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5">3</div>
+              <p>Recibirás la confirmación final por email y WhatsApp</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Información de contacto -->
+        <div class="bg-primary-beige/30 rounded-xl p-6 mb-8">
+          <h3 class="text-lg font-semibold text-primary-black mb-4">¿Necesitas ayuda?</h3>
+          <p class="text-primary-gray mb-4">Si tienes alguna pregunta sobre tu reserva, puedes contactarnos:</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex items-center">
+              <Phone class="w-5 h-5 text-primary-black mr-3" />
+              <div>
+                <p class="font-medium text-primary-black">Teléfono</p>
+                <a href="tel:+34633811994" class="text-primary-gray hover:text-primary-black transition-colors">+34 633 811 994</a>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <Mail class="w-5 h-5 text-primary-black mr-3" />
+              <div>
+                <p class="font-medium text-primary-black">Email</p>
+                <a href="mailto:contacto@contentstudiokrp.es" class="text-primary-gray hover:text-primary-black transition-colors">contacto@contentstudiokrp.es</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="text-center space-y-4">
+          <Button 
+            href="/"
+            variant="custom"
+            class="bg-primary-black text-primary-white hover:bg-primary-beige hover:text-primary-black px-8 py-4 text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Volver al Inicio
+          </Button>
+          <div>
+            <Button 
+              href="/contact"
+              variant="custom"
+              class="text-primary-black hover:text-primary-gray transition-colors underline"
+            >
+              ¿Tienes alguna pregunta? Contáctanos
+            </Button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</Layout>

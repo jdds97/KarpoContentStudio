@@ -1,98 +1,55 @@
 ---
-import { Building2, Mic, Sparkles, XCircle, ChevronRight} from '@lucide/astro';
+import Building2 from '@/components/icons/Building2.astro';
+import Mic from '@/components/icons/Mic.astro';
+import Sparkles from '@/components/icons/Sparkles.astro';
+import XCircle from '@/components/icons/XCircle.astro';
+import ChevronRight from '@/components/icons/ChevronRight.astro';
+import Button from '@/components/common/Button.astro';
+import { BOOKING_TERMS } from '@/utils';
 ---
 <section class="section-padding bg-primary-beige">
   <div class="container mx-auto container-padding">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="section-subtitle text-center mb-12 text-primary-black">Normas de Uso</h2>
+      <h2 class="section-subtitle text-center mb-12 text-primary-black">{BOOKING_TERMS.title}</h2>
       <div class="bg-primary-white p-8 rounded-lg shadow-sm text-left">
-        <h3 class="text-xl font-instrument mb-6 text-primary-black">Guía de Uso y Normas del Estudio</h3>
+        <h3 class="text-xl font-instrument mb-6 text-primary-black">{BOOKING_TERMS.subtitle}</h3>
         <p class="mb-6 text-primary-black">
-          Para garantizar una experiencia óptima y mantener nuestro espacio en perfectas condiciones, te pedimos que leas y sigas estas normas:
+          {BOOKING_TERMS.description}
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Uso del Estudio -->
-          <div>
-            <h4 class="text-lg font-medium mb-4 flex items-center text-primary-black">
-              <Building2 class="w-5 h-5 text-primary-black mr-2 flex-shrink-0" />
-              Uso del Estudio
-            </h4>
-            <ul class="space-y-2 mt-4 text-primary-gray text-sm list-none">
-              <li class="flex items-start">
-                <XCircle class="w-4 h-4 text-primary-black mr-2 mt-0.5 flex-shrink-0" />
-                <span>La limpieza NO está incluida en la tarifa de alquiler. El estudio debe dejarse tal como se encontró.</span>
-              </li>
-              <li class="flex items-start">
-                <XCircle class="w-4 h-4 text-primary-black mr-2 mt-0.5 flex-shrink-0" />
-                <span>Tu tiempo de alquiler incluye montaje, desmontaje y limpieza. No hay margen extra entre reservas.</span>
-              </li>
-              <li class="flex items-start">
-                <XCircle class="w-4 h-4 text-primary-black mr-2 mt-0.5 flex-shrink-0" />
-                <span>Para mantener la comodidad y seguridad: Zona A: Máximo 8 personas. Zona B: Máximo 6 personas.</span>
-              </li>
-            </ul>
-          </div>
-          <!-- Grabación de Sonido -->
-          <div>
-            <h4 class="text-lg font-medium mb-4 flex items-center text-primary-black">
-              <Mic class="w-5 h-5 text-primary-black mr-2 flex-shrink-0" />
-              Grabación de Sonido
-            </h4>
-            <ul class="space-y-2 mt-4 text-primary-gray text-sm list-none">
-              <li class="flex items-start">
-                <XCircle class="w-4 h-4 text-primary-black mr-2 mt-0.5 flex-shrink-0" />
-                <span>El estudio NO es completamente insonorizado. Aunque hemos optimizado la acústica, pueden filtrarse sonidos externos.</span>
-              </li>
-              <li class="flex items-start">
-                <XCircle class="w-4 h-4 text-primary-black mr-2 mt-0.5 flex-shrink-0" />
-                <span>Si necesitas una grabación sin interrupciones, consulta con nosotros la disponibilidad en horarios de menor ruido.</span>
-              </li>
-            </ul>
-          </div>
-          <!-- Tarifas de Limpieza -->
-          <div>
-            <h4 class="text-lg font-medium mb-4 flex items-center text-primary-black">
-              <Sparkles class="w-5 h-5 text-primary-black mr-2 flex-shrink-0" />
-              Tarifas de Limpieza
-            </h4>
-            <ul class="space-y-2 mt-4 text-primary-gray text-sm list-none">
-              <li class="flex items-start">
-                <XCircle class="w-4 h-4 text-primary-black mr-2 mt-0.5 flex-shrink-0" />
-                <span>Para sesiones con 1-5 personas, la limpieza básica está incluida.</span>
-              </li>
-              <li class="flex items-start">
-                <XCircle class="w-4 h-4 text-primary-black mr-2 mt-0.5 flex-shrink-0" />
-                <span>Para grupos de 6 o más personas, se aplicará un recargo de 15€ por limpieza.</span>
-              </li>
-              <li class="flex items-start">
-                <XCircle class="w-4 h-4 text-primary-black mr-2 mt-0.5 flex-shrink-0" />
-                <span>Tarifa de limpieza adicional (desde 20€) en caso de uso inadecuado del ciclorama, mobiliario o restos de comida/bebida.</span>
-              </li>
-            </ul>
-          </div>
-          <!-- Política de Cancelación -->
-          <div>
-            <h4 class="text-lg font-medium mb-4 flex items-center text-primary-black">
-              <XCircle class="w-5 h-5 text-primary-black mr-2 flex-shrink-0" />
-              Política de Cancelación
-            </h4>
-            <ul class="space-y-2 mt-4 text-primary-gray text-sm list-none">
-              <li class="flex items-start">
-                <XCircle class="w-4 h-4 text-primary-black mr-2 mt-0.5 flex-shrink-0" />
-                <span>Puedes cancelar o reprogramar tu sesión con hasta 48 horas de anticipación para recibir un reembolso total (excepto tarifas de procesamiento).</span>
-              </li>
-              <li class="flex items-start">
-                <XCircle class="w-4 h-4 text-primary-black mr-2 mt-0.5 flex-shrink-0" />
-                <span>Cancelaciones con menos de 48 horas no son reembolsables.</span>
-              </li>
-            </ul>
-          </div>
+          {BOOKING_TERMS.sections.map((section) => {
+            const IconComponent = section.icon === 'Building2' ? Building2 :
+                                section.icon === 'Mic' ? Mic :
+                                section.icon === 'Sparkles' ? Sparkles :
+                                XCircle;
+            
+            return (
+              <div>
+                <h4 class="text-lg font-medium mb-4 flex items-center text-primary-black">
+                  <IconComponent class="w-5 h-5 text-primary-black mr-2 flex-shrink-0" />
+                  {section.title}
+                </h4>
+                <ul class="space-y-2 mt-4 text-primary-gray text-sm list-none">
+                  {section.rules.map((rule) => (
+                    <li class="flex items-start">
+                      <XCircle class="w-4 h-4 text-primary-black mr-2 mt-0.5 flex-shrink-0" />
+                      <span>{rule}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
         </div>
         <div class="mt-6 text-center">
-          <a href="/faq" class="text-primary-black font-medium inline-flex items-center hover:text-primary-gray transition-colors">
-            Ver todas las normas
+          <Button 
+            href="/faq" 
+            variant="custom"
+            class="text-primary-black font-medium inline-flex items-center hover:text-primary-gray transition-colors"
+          >
+            {BOOKING_TERMS.linkText}
             <ChevronRight class="w-4 h-4 ml-1 flex-shrink-0" />
-          </a>
+          </Button>
         </div>
       </div>
     </div>
