@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://thecontentstudio.com/sitemap.xml
+
+# Disallow admin areas
+Disallow: /admin/
+Disallow: /api/
+
+# Allow important pages
+Allow: /
+Allow: /booking
+Allow: /contact
+Allow: /rates
+Allow: /studio-spaces
+Allow: /target-audiences
+Allow: /faq
+Allow: /terms
+Allow: /privacy-policy
+
+# Crawl delay (optional)
+Crawl-delay: 1
