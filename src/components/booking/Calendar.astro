@@ -1,0 +1,179 @@
+---
+// Calendario final optimizado para The Content Studio
+// Solucionado el problema de inicialización y mejorada la experiencia de usuario
+
+// Props opcionales para configuración inicial del calendario
+interface Props {
+  selectedDate?: string;
+  selectedTime?: string;
+  studioSpace?: string;
+}
+---
+
+<div id="calendar-container" class="w-full">
+  <!-- Header con navegación de meses -->
+  <div class="flex items-center justify-between mb-6 bg-white p-4 rounded-lg shadow-sm">
+    <button id="prev-month-btn" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+    </button>
+    
+    <h3 id="calendar-month-year" class="text-xl font-semibold text-primary-black">
+      Cargando...
+    </h3>
+    
+    <button id="next-month-btn" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Filtros -->
+  <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <label for="studio-space-filter" class="block text-sm font-medium text-gray-700 mb-2">
+        Espacio del estudio:
+      </label>
+      <select id="studio-space-filter" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-black focus:border-transparent">
+        <option value="all">Todos los espacios</option>
+        <option value="principal">Zona Principal</option>
+        <option value="black-zone">Zona Negra</option>
+        <option value="cyclorama">Ciclorama</option>
+      </select>
+    </div>
+    
+    <div>
+      <label for="package-duration-filter" class="block text-sm font-medium text-gray-700 mb-2">
+        Duración del paquete:
+      </label>
+      <select id="package-duration-filter" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-black focus:border-transparent">
+        <option value="">Seleccionar duración</option>
+        <option value="1h">1 hora (Express)</option>
+        <option value="2h">2 horas (Estándar)</option>
+        <option value="3h">3 horas</option>
+        <option value="4h">4 horas (Medio día)</option>
+        <option value="6h">6 horas</option>
+        <option value="8h">8 horas (Día completo)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Grid del calendario -->
+  <div class="bg-white rounded-lg border border-gray-200 overflow-hidden mb-6">
+    <!-- Días de la semana -->
+    <div class="grid grid-cols-7 bg-gray-50">
+      <div class="p-3 text-center text-sm font-medium text-gray-700">Lun</div>
+      <div class="p-3 text-center text-sm font-medium text-gray-700">Mar</div>
+      <div class="p-3 text-center text-sm font-medium text-gray-700">Mié</div>
+      <div class="p-3 text-center text-sm font-medium text-gray-700">Jue</div>
+      <div class="p-3 text-center text-sm font-medium text-gray-700">Vie</div>
+      <div class="p-3 text-center text-sm font-medium text-gray-700">Sáb</div>
+      <div class="p-3 text-center text-sm font-medium text-gray-700">Dom</div>
+    </div>
+    
+    <!-- Grid de días del mes -->
+    <div id="calendar-days-grid" class="grid grid-cols-7">
+      <!-- Los días se generarán dinámicamente -->
+    </div>
+  </div>
+
+  <!-- Panel de selección de horarios -->
+  <div id="time-selection-panel" class="hidden">
+    <div class="bg-white rounded-lg border border-gray-200 p-6">
+      <h4 class="text-lg font-medium text-primary-black mb-4">
+        Disponibilidad para <span id="selected-date-text"></span>
+      </h4>
+      
+      <!-- Información del espacio seleccionado -->
+      <div id="space-info" class="mb-4 p-3 bg-blue-50 rounded-lg hidden">
+        <p class="text-sm text-blue-800">
+          <strong>Espacio:</strong> <span id="current-space-name"></span>
+        </p>
+      </div>
+
+      <!-- Horarios disponibles -->
+      <div id="available-times-section">
+        <h5 class="text-sm font-medium text-green-700 mb-2">✅ Horarios Disponibles</h5>
+        <div id="available-times-grid" class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-2">
+          <!-- Se generan dinámicamente -->
+        </div>
+      </div>
+
+      <!-- Horarios ocupados (solo si los hay) -->
+      <div id="occupied-times-section" class="mt-4 hidden">
+        <h5 class="text-sm font-medium text-red-700 mb-2">❌ Horarios Ocupados</h5>
+        <div id="occupied-times-grid" class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-2">
+          <!-- Se generan dinámicamente -->
+        </div>
+      </div>
+
+      <!-- Información del paquete seleccionado -->
+      <div id="package-info" class="mt-4 p-3 bg-green-50 rounded-lg hidden">
+        <p class="text-sm text-green-800">
+          <strong>Paquete:</strong> <span id="current-package-duration"></span><br>
+          <strong>Hora de inicio:</strong> <span id="selected-start-time"></span><br>
+          <strong>Hora de fin:</strong> <span id="calculated-end-time"></span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Estado de carga -->
+  <div id="loading-indicator" class="text-center py-8 hidden">
+    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-black mx-auto"></div>
+    <p class="mt-2 text-gray-600">Cargando disponibilidad...</p>
+  </div>
+
+  <!-- Leyenda de colores -->
+  <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+    <h5 class="text-sm font-medium text-gray-900 mb-3">Leyenda de disponibilidad:</h5>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+      <div class="flex items-center">
+        <div class="w-3 h-3 bg-green-400 rounded-full mr-2"></div>
+        <span>Disponible</span>
+      </div>
+      <div class="flex items-center">
+        <div class="w-3 h-3 bg-yellow-400 rounded-full mr-2"></div>
+        <span>Parcialmente ocupado</span>
+      </div>
+      <div class="flex items-center">
+        <div class="w-3 h-3 bg-red-400 rounded-full mr-2"></div>
+        <span>Completo</span>
+      </div>
+      <div class="flex items-center">
+        <div class="w-3 h-3 bg-gray-400 rounded-full mr-2"></div>
+        <span>Fecha pasada</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Import calendar module to ensure it's loaded
+  import { initCalendarFinal } from '@/lib/calendar';
+  
+
+  // Ensure initialization when component loads
+  function ensureInit() {
+    const container = document.getElementById('calendar-container');
+    console.log('ensureInit called, container:', container);
+    
+    
+    if (container) {
+      console.log('Calendar container found, calling initCalendarFinal');
+      try {
+        initCalendarFinal();
+      } catch (error) {
+        console.error('Error calling initCalendarFinal:', error);
+      }
+    } else {
+      console.log('Calendar container not found, retrying...');
+      setTimeout(ensureInit, 100);
+    }
+  }
+  
+  // Initialize immediately and with delays
+  ensureInit();
+</script>

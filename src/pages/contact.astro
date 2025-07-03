@@ -4,6 +4,7 @@ import HeroSection from '@/components/common/HeroSection.astro';
 import ContactForm from '@/components/contact/ContactForm.astro';
 import ContactMapSection from '@/components/contact/ContactMapSection.astro';
 import { HERO_CONTENT } from '@/utils';
+export const prerender = false; // Server Islands requieren SSR
 ---
 
 <Layout title="Contacto">
@@ -14,7 +15,21 @@ import { HERO_CONTENT } from '@/utils';
     overlayClass="bg-primary-beige"
     textClass="text-primary-black"
     buttonText=""
+    heightClass="h-[40vh] md:h-[50vh]"
   />
-  <ContactForm />
+  <ContactForm server:defer>
+    <div slot="fallback" class="section-padding">
+      <div class="container mx-auto container-padding prose prose-neutral">
+        <h2 class="text-2xl font-instrument mb-6">Contacto</h2>
+        <div class="animate-pulse space-y-4">
+          <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+          <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+          <div class="h-10 bg-gray-200 rounded"></div>
+          <div class="h-10 bg-gray-200 rounded"></div>
+          <div class="h-24 bg-gray-200 rounded"></div>
+        </div>
+      </div>
+    </div>
+  </ContactForm>
   <ContactMapSection />
 </Layout>
