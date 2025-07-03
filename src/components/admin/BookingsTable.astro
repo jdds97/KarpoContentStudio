@@ -1,0 +1,220 @@
+---
+// Componente de tabla de reservas
+import Button from '@/components/common/Button.astro';
+import { Mail, Phone, MapPin, Building2, Users, FileText, ChevronRight, Edit, CheckCircle, XCircle, Clock, AlertCircle } from '@/components/icons';
+import { getStatusBadge, formatPackageDuration } from '@/utils/admin/dashboard-utils';
+
+interface Props {
+  bookings: any[];
+}
+
+const { bookings } = Astro.props;
+
+// Mapear strings de iconos a componentes
+const iconMap = {
+  Clock: Clock,
+  CheckCircle: CheckCircle,
+  XCircle: XCircle,
+  AlertCircle: AlertCircle
+};
+---
+
+<div class="bg-white/80 backdrop-blur-sm border border-white/50 rounded-2xl shadow-lg overflow-hidden">
+  <div class="px-6 py-4 border-b border-primary-beige/20">
+    <h3 class="text-lg font-instrument font-bold text-primary-black">Reservas Recientes</h3>
+    <p class="text-sm text-primary-gray">Gestiona y supervisa todas las reservas del estudio</p>
+  </div>
+
+  <div class="overflow-x-auto">
+    {bookings && bookings.length > 0 ? (
+      <table class="min-w-full divide-y divide-primary-beige/20">
+        <thead class="bg-primary-beige/10">
+          <tr>
+            <th class="px-6 py-4 text-left text-xs font-semibold text-primary-black uppercase tracking-wider">
+              Cliente
+            </th>
+            <th class="px-6 py-4 text-left text-xs font-semibold text-primary-black uppercase tracking-wider">
+              Fecha y Hora
+            </th>
+            <th class="px-6 py-4 text-left text-xs font-semibold text-primary-black uppercase tracking-wider">
+              Espacio & Duración
+            </th>
+            <th class="px-6 py-4 text-left text-xs font-semibold text-primary-black uppercase tracking-wider">
+              Detalles
+            </th>
+            <th class="px-6 py-4 text-left text-xs font-semibold text-primary-black uppercase tracking-wider">
+              Estado
+            </th>
+            <th class="px-6 py-4 text-left text-xs font-semibold text-primary-black uppercase tracking-wider">
+              Acciones
+            </th>
+          </tr>
+        </thead>
+        <tbody class="bg-white/50 divide-y divide-primary-beige/20">
+          {bookings.map((booking) => {
+            const statusInfo = getStatusBadge(booking.status);
+            const StatusIcon = iconMap[statusInfo.icon as keyof typeof iconMap] || AlertCircle;
+            
+            return (
+              <tr class="hover:bg-primary-beige/20 transition-colors duration-200" data-status={booking.status}>
+                <!-- Cliente -->
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <div class="ml-4">
+                      <div class="text-sm font-medium text-primary-black">{booking.name}</div>
+                      <div class="text-sm text-primary-gray flex items-center mt-1">
+                        <Mail class="w-3 h-3 mr-1" />
+                        {booking.email}
+                      </div>
+                      <div class="text-sm text-primary-gray flex items-center">
+                        <Phone class="w-3 h-3 mr-1" />
+                        {booking.phone}
+                      </div>
+                      {booking.company && (
+                        <div class="text-sm text-primary-gray flex items-center">
+                          <Building2 class="w-3 h-3 mr-1" />
+                          {booking.company}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </td>
+                
+                <!-- Fecha y Hora -->
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-primary-black font-medium">
+                    {new Date(booking.preferred_date).toLocaleDateString('es-ES', { 
+                      weekday: 'short', 
+                      year: 'numeric', 
+                      month: 'short', 
+                      day: 'numeric' 
+                    })}
+                  </div>
+                  <div class="text-sm text-primary-gray">
+                    {booking.preferred_time}
+                  </div>
+                </td>
+                
+                <!-- Espacio & Duración -->
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-primary-black font-medium flex items-center">
+                    <MapPin class="w-3 h-3 mr-1" />
+                    {booking.studio_space}
+                  </div>
+                  <div class="text-sm text-primary-gray">
+                    {formatPackageDuration(booking.package_duration)}
+                  </div>
+                  {booking.participants > 1 && (
+                    <div class="text-sm text-primary-gray flex items-center">
+                      <Users class="w-3 h-3 mr-1" />
+                      {booking.participants} personas
+                    </div>
+                  )}
+                </td>
+                
+                <!-- Detalles -->
+                <td class="px-6 py-4">
+                  <div class="text-sm text-primary-black">
+                    {booking.session_type && (
+                      <div class="mb-1">
+                        <span class="font-medium">Tipo:</span> {booking.session_type}
+                      </div>
+                    )}
+                    {booking.notes && (
+                      <div class="text-primary-gray text-xs max-w-xs truncate">
+                        <FileText class="w-3 h-3 inline mr-1" />
+                        {booking.notes.length > 30 ? `${booking.notes.substring(0, 30)}...` : booking.notes}
+                      </div>
+                    )}
+                  </div>
+                </td>
+                
+                <!-- Estado -->
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${statusInfo.color}`}>
+                    <StatusIcon />
+                    <span class="ml-1">{statusInfo.text}</span>
+                  </span>
+                </td>
+                
+                <!-- Acciones -->
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <div class="flex space-x-2">
+                    <button 
+                      data-view={booking.id}
+                      class="view-btn text-primary-black hover:text-primary-beige transition-colors duration-200"
+                      title="Ver detalles"
+                      onclick={`showViewModal('${booking.id}')`}
+                    >
+                      <ChevronRight class="w-4 h-4" />
+                    </button>
+                    <button 
+                      data-edit={booking.id}
+                      class="edit-btn text-blue-600 hover:text-blue-900 transition-colors duration-200"
+                      title="Editar"
+                      onclick={`showEditModal('${booking.id}')`}
+                    >
+                      <Edit class="w-4 h-4" />
+                    </button>
+                    {booking.status === 'pending' && (
+                      <>
+                        <form method="POST" style="display: inline;">
+                          <input type="hidden" name="_action" value="confirmBooking" />
+                          <input type="hidden" name="bookingId" value={booking.id} />
+                          <button 
+                            type="submit"
+                            class="text-green-600 hover:text-green-900 transition-colors duration-200"
+                            title="Confirmar"
+                            onclick="return confirm('¿Estás seguro de que quieres confirmar esta reserva?')"
+                          >
+                            <CheckCircle class="w-4 h-4" />
+                          </button>
+                        </form>
+                        <button 
+                          data-cancel={booking.id}
+                          class="cancel-btn text-red-600 hover:text-red-900 transition-colors duration-200"
+                          title="Cancelar"
+                          onclick={`showCancelModal('${booking.id}')`}
+                        >
+                          <XCircle class="w-4 h-4" />
+                        </button>
+                      </>
+                    )}
+                    {(booking.status === 'confirmed' || booking.status === 'completed') && (
+                      <button 
+                        data-cancel={booking.id}
+                        class="cancel-btn text-red-600 hover:text-red-900 transition-colors duration-200"
+                        title="Cancelar"
+                        onclick={`showCancelModal('${booking.id}')`}
+                      >
+                        <XCircle class="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    ) : (
+      <!-- Estado vacío -->
+      <div class="text-center py-12">
+        <Building2 class="mx-auto h-12 w-12 text-primary-gray/50" />
+        <h3 class="mt-4 text-lg font-medium text-primary-gray">No hay reservas recientes</h3>
+        <p class="mt-2 text-sm text-primary-gray">
+          Las nuevas reservas aparecerán aquí cuando se realicen.
+        </p>
+        <div class="mt-6">
+          <Button 
+            href="/booking"
+            variant="primary"
+            class="px-6 py-3"
+          >
+            Crear Primera Reserva
+          </Button>
+        </div>
+      </div>
+    )}
+  </div>
+</div>
