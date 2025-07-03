@@ -3,24 +3,41 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "build": "NODE_ENV=production astro build",
-    "build:dev": "NODE_ENV=development astro build",
+    "dev": "NODE_NO_WARNINGS=1 astro dev",
+    "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check": "astro check",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:api": "jest src/tests/api/",
+    "test:frontend": "jest src/tests/frontend/",
+    "test:integration": "jest src/tests/integration/"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/cloudflare": "^12.5.4",
     "@astrojs/node": "^9.2.2",
-    "@lucide/astro": "^0.513.0",
     "@supabase/supabase-js": "^2.50.0",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.7",
     "astro": "^5.9.0",
-    "cally": "^0.8.0",
+    "dotenv": "^17.0.0",
     "glob": "^11.0.2",
-    "tailwindcss": "^4.1.7"
+    "resend": "^4.6.0",
+    "tailwindcss": "^4.1.7",
+    "typescript": "^5.8.3"
   },
   "devDependencies": {
-    "terser": "^5.40.0"
+    "@testing-library/jest-dom": "^6.6.3",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.0.10",
+    "jest": "^30.0.3",
+    "jest-environment-jsdom": "^30.0.2",
+    "jsdom": "^26.1.0",
+    "node-mocks-http": "^1.17.2",
+    "terser": "^5.40.0",
+    "ts-jest": "^29.4.0"
   }
 }
