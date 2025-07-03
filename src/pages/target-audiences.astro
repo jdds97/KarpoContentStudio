@@ -5,6 +5,7 @@ import TestimonialsSection from '@/components/target/TestimonialsSection.astro';
 import TargetAudiencesList from '@/components/target/TargetAudiencesList.astro';
 import HeroSection from '@/components/common/HeroSection.astro';
 import { HERO_CONTENT, CTA_CONTENT } from '@/utils';
+export const prerender = true;
 ---
 
 <Layout title="Público Objetivo">
@@ -15,6 +16,7 @@ import { HERO_CONTENT, CTA_CONTENT } from '@/utils';
     overlayClass="bg-primary-beige"
     textClass="text-primary-black"
     buttonText=""
+    heightClass="h-[40vh] md:h-[50vh]"
   />
   <TargetAudiencesList />
   <TestimonialsSection />

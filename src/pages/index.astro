@@ -5,13 +5,15 @@ import StudioSpacesSection from '@/components/home/StudioSpacesSection.astro';
 import CtaSection from '@/components/common/CtaSection.astro';
 import HeroSection from '@/components/common/HeroSection.astro';
 import { HERO_CONTENT, CTA_CONTENT } from '@/utils';
+import principalImage from '@/assets/images/spaces/principal-optimized.webp';
+export const prerender = true;
 ---
 
 <Layout title="Home">
   <HeroSection
     title={HERO_CONTENT.home.title}
     description={HERO_CONTENT.home.description}
-    image="/images/spaces/principal-optimized.webp"
+    image={principalImage}
     buttonText={HERO_CONTENT.home.buttonText}
     buttonHref={HERO_CONTENT.home.buttonHref}
     overlayClass="bg-primary-black/60"

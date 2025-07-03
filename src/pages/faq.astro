@@ -4,6 +4,7 @@ import HeroSection from '@/components/common/HeroSection.astro';
 import FaqTabsSection from '@/components/faq/FaqTabsSection.astro';
 import FaqContactSection from '@/components/faq/FaqContactSection.astro';
 import { HERO_CONTENT } from '@/utils';
+export const prerender = true;
 ---
 
 <Layout title="Preguntas Frecuentes">
@@ -14,6 +15,7 @@ import { HERO_CONTENT } from '@/utils';
     overlayClass="bg-primary-beige"
     textClass="text-primary-black"
     buttonText=""
+    heightClass="h-[40vh] md:h-[50vh]"
   />
   <FaqTabsSection />
   <FaqContactSection />
