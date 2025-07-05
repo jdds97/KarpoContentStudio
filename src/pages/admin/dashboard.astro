@@ -37,7 +37,7 @@ if (error) {
 }
 
 // Obtener datos del dashboard
-const dashboardData = await getDashboardData();
+const dashboardData = await getDashboardData(locals?.runtime);
 
 // Obtener mensajes de estado
 const statusMessages = getStatusMessages(new URL(request.url));

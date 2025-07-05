@@ -17,8 +17,8 @@ export interface DashboardData {
 }
 
 // Obtener datos del dashboard
-export async function getDashboardData(): Promise<Pick<DashboardData, 'bookings' | 'stats'>> {
-  const supabase = createSupabaseClient();
+export async function getDashboardData(runtime?: any): Promise<Pick<DashboardData, 'bookings' | 'stats'>> {
+  const supabase = createSupabaseClient(runtime);
   const { data: bookings } = await supabase
     .from('bookings')
     .select('*')
@@ -51,7 +51,7 @@ export async function handleDashboardActions(context: APIContext): Promise<Respo
   
   if (action === 'confirmBooking') {
     const bookingId = formData.get('bookingId') as string;
-    const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+    const adminPassword = context.locals?.runtime?.env?.ADMIN_PASSWORD || 'admin123';
     
     const confirmFormData = new FormData();
     confirmFormData.append('bookingId', bookingId);
