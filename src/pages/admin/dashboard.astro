@@ -7,7 +7,7 @@ import { getDashboardData, handleDashboardActions, getStatusMessages } from '@/u
 
 export const prerender = false;
 
-const { cookies, request } = Astro;
+const { cookies, request, redirect, locals } = Astro;
 
 // Manejar acciones POST
 const actionResponse = await handleDashboardActions(Astro);
@@ -24,7 +24,7 @@ if (!accessToken || !refreshToken) {
 }
 
 // Verificar sesión
-const supabase = createSupabaseClient();
+const supabase = createSupabaseClient(locals?.runtime);
 const { data, error } = await supabase.auth.setSession({
   refresh_token: refreshToken.value,
   access_token: accessToken.value,

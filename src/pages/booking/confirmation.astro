@@ -14,7 +14,7 @@ if (!bookingId) {
 }
 
 // Obtener los detalles de la reserva
-const supabase = createSupabaseClient();
+const supabase = createSupabaseClient(Astro.locals?.runtime);
 const { data: booking, error } = await supabase
   .from('bookings')
   .select('*')
