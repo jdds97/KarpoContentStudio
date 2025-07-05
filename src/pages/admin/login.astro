@@ -100,6 +100,9 @@ if (accessToken && refreshToken) {
           </div>
         </form>
         
+        <!-- Error/Success messages -->
+        <div id="message" class="mt-4 text-center hidden"></div>
+        
         <!-- Footer informativo -->
         <div class="mt-6 text-center">
           <p class="text-xs text-primary-gray">
@@ -119,3 +122,59 @@ if (accessToken && refreshToken) {
     </div>
   </div>
 </Layout>
+
+<script>
+  // Handle login form submission
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    const messageDiv = document.getElementById('message');
+    const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const originalButtonText = submitButton?.textContent || 'Iniciar Sesión';
+
+    form?.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      if (!submitButton || !messageDiv) return;
+      
+      // Show loading state
+      submitButton.disabled = true;
+      submitButton.textContent = 'Iniciando sesión...';
+      messageDiv.className = 'mt-4 text-center hidden';
+      
+      try {
+        const formData = new FormData(form);
+        const response = await fetch('/api/auth/signin', {
+          method: 'POST',
+          body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          // Success - redirect to dashboard
+          messageDiv.className = 'mt-4 text-center text-green-600';
+          messageDiv.textContent = 'Sesión iniciada correctamente. Redirigiendo...';
+          setTimeout(() => {
+            window.location.href = result.redirectTo;
+          }, 1000);
+        } else {
+          // Error - show error message
+          messageDiv.className = 'mt-4 text-center text-red-600';
+          messageDiv.textContent = result.error || 'Error al iniciar sesión';
+          
+          // Reset button
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
+      } catch (error) {
+        // Network or other error
+        messageDiv.className = 'mt-4 text-center text-red-600';
+        messageDiv.textContent = 'Error de conexión. Inténtalo de nuevo.';
+        
+        // Reset button
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+      }
+    });
+  });
+</script>

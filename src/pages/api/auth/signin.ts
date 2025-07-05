@@ -4,6 +4,11 @@ import { createSupabaseClient } from "../../../lib/supabase";
 
 export const prerender = false;
 
+export const GET: APIRoute = async ({ redirect }) => {
+  // Redirect GET requests to login page
+  return redirect("/admin/login");
+};
+
 export const POST: APIRoute = async ({ request, cookies, redirect }) => {
   const supabase = createSupabaseClient();
   const formData = await request.formData();
@@ -11,7 +16,13 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
   const password = formData.get("password")?.toString();
 
   if (!email || !password) {
-    return new Response("Email y contraseña obligatorios", { status: 400 });
+    return new Response(JSON.stringify({ 
+      success: false, 
+      error: "Email y contraseña obligatorios" 
+    }), { 
+      status: 400,
+      headers: { "Content-Type": "application/json" }
+    });
   }
 
   const { data, error } = await supabase.auth.signInWithPassword({
@@ -20,7 +31,13 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
   });
 
   if (error) {
-    return new Response(error.message, { status: 500 });
+    return new Response(JSON.stringify({ 
+      success: false, 
+      error: error.message 
+    }), { 
+      status: 400,
+      headers: { "Content-Type": "application/json" }
+    });
   }
 
   const { access_token, refresh_token } = data.session;
@@ -37,5 +54,11 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
     sameSite: "strict",
   });
   
-  return redirect("/admin/dashboard");
+  return new Response(JSON.stringify({ 
+    success: true, 
+    redirectTo: "/admin/dashboard" 
+  }), {
+    status: 200,
+    headers: { "Content-Type": "application/json" }
+  });
 };
