@@ -9,8 +9,8 @@ export const GET: APIRoute = async ({ redirect }) => {
   return redirect("/admin/login");
 };
 
-export const POST: APIRoute = async ({ request, cookies, redirect }) => {
-  const supabase = createSupabaseClient();
+export const POST: APIRoute = async ({ request, cookies, locals }) => {
+  const supabase = createSupabaseClient(locals?.runtime);
   const formData = await request.formData();
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
