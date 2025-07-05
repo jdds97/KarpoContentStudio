@@ -3,7 +3,7 @@
 export const prerender = false;
 
 import Layout from '@/layouts/Layout.astro';
-import { supabaseAdmin } from '@/lib/supabase';
+import { createSupabaseAdmin } from '@/lib/supabase';
 import { actions } from 'astro:actions';
 import { getGeneralError, isActionSuccess, getSuccessMessage } from '@/lib/form-helpers';
 
@@ -11,6 +11,7 @@ import { getGeneralError, isActionSuccess, getSuccessMessage } from '@/lib/form-
 const confirmResult = Astro.getActionResult(actions.confirmBooking);
 
 // Obtener todas las reservas pendientes y confirmadas
+const supabaseAdmin = createSupabaseAdmin();
 const { data: bookings, error } = await supabaseAdmin
   .from('bookings')
   .select('*')

@@ -1,10 +1,11 @@
 // API optimizada para obtener detalles de un día específico
 import type { APIRoute } from "astro";
-import { supabaseAdmin } from "@/lib/supabase";
+import { createSupabaseAdmin } from "@/lib/supabase";
 
 export const prerender = false;
 
 export const GET: APIRoute = async ({ url }) => {
+  const supabaseAdmin = createSupabaseAdmin();
   try {
     const date = url.searchParams.get("date");
     const studioSpace = url.searchParams.get("studio_space") || "all";

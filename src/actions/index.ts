@@ -1,6 +1,6 @@
 // Actions para manejo de reservas con integración de Resend
 import { defineAction } from 'astro:actions';
-import { supabaseAdmin } from '@/lib/supabase';
+import { createSupabaseAdmin } from '@/lib/supabase';
 import { 
   createBookingSchema,
   confirmBookingSchema,
@@ -24,7 +24,8 @@ import {
 const createBooking = defineAction({
   accept: 'form',
   input: createBookingSchema,
-  handler: async (input) => {
+  handler: async (input, context) => {
+    const supabaseAdmin = createSupabaseAdmin(context.locals.runtime);
     console.log('=== CREATE BOOKING ACTION CALLED ===');
     console.log('Input received:', Object.keys(input));
     
@@ -33,7 +34,8 @@ const createBooking = defineAction({
       const durationHours = parseInt(input.package.replace('h', ''));
       
       // Validar disponibilidad antes de crear la reserva
-      const availabilityResponse = await fetch(`${process.env.PUBLIC_SITE_URL || 'http://localhost:4321'}/api/calendar/validate-availability?date=${input.date}&time=${input.time}&duration=${durationHours}&studio_space=${input['studio-space']}`);
+      const siteUrl = context.locals.runtime?.env?.PUBLIC_SITE_URL || 'https://contentstudiokrp.es';
+      const availabilityResponse = await fetch(`${siteUrl}/api/calendar/validate-availability?date=${input.date}&time=${input.time}&duration=${durationHours}&studio_space=${input['studio-space']}`);
       
       if (availabilityResponse.ok) {
         const availabilityData = await availabilityResponse.json();
@@ -54,7 +56,7 @@ const createBooking = defineAction({
       
       if (input['applied-discount-code']) {
         // Validar código de descuento
-        const discountResponse = await fetch(`${process.env.PUBLIC_SITE_URL || 'http://localhost:4321'}/api/discount/validate`, {
+        const discountResponse = await fetch(`${siteUrl}/api/discount/validate`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ code: input['applied-discount-code'] })
@@ -109,12 +111,12 @@ const createBooking = defineAction({
       try {
         // Email al cliente
         const { subject: clientSubject, html: clientHtml } = generateBookingConfirmationEmail(booking);
-        const clientEmailResult = await sendEmailWithResend(input.email, clientSubject, clientHtml);
+        const clientEmailResult = await sendEmailWithResend(input.email, clientSubject, clientHtml, context.locals.runtime);
         
         // Email al estudio/administración
-        const studioEmail = process.env.RESEND_ADMIN_EMAIL || 'contacto@contentstudiokrp.es';
+        const studioEmail = context.locals.runtime?.env?.ADMIN_EMAIL || 'contacto@contentstudiokrp.es';
         const { subject: studioSubject, html: studioHtml } = generateAdminBookingNotificationEmail(booking);
-        const studioEmailResult = await sendEmailWithResend(studioEmail, studioSubject, studioHtml);
+        const studioEmailResult = await sendEmailWithResend(studioEmail, studioSubject, studioHtml, context.locals.runtime);
         
         if (!clientEmailResult.success) {
           console.warn('Failed to send client confirmation email:', clientEmailResult.error);
@@ -149,10 +151,11 @@ const createBooking = defineAction({
 const confirmBooking = defineAction({
   accept: 'form',
   input: confirmBookingSchema,
-  handler: async (input) => {
+  handler: async (input, context) => {
+    const supabaseAdmin = createSupabaseAdmin(context.locals.runtime);
     try {
       // Verificar password de admin
-      const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+      const adminPassword = context.locals.runtime?.env?.ADMIN_PASSWORD || 'admin123';
       if (input.adminPassword !== adminPassword) {
         return {
           success: false,
@@ -184,7 +187,7 @@ const confirmBooking = defineAction({
       // Enviar email de confirmación al cliente
       try {
         const { subject, html } = generateBookingConfirmedEmail(booking);
-        await sendEmailWithResend(booking.email, subject, html);
+        await sendEmailWithResend(booking.email, subject, html, context.locals.runtime);
       } catch (emailError) {
         console.warn('Failed to send confirmation email:', emailError);
       }
@@ -210,7 +213,8 @@ const confirmBooking = defineAction({
 const updateBooking = defineAction({
   accept: 'form',
   input: updateBookingSchema,
-  handler: async (input) => {
+  handler: async (input, context) => {
+    const supabaseAdmin = createSupabaseAdmin(context.locals.runtime);
     try {
       const { id, ...updateData } = input;
       
@@ -275,7 +279,7 @@ const updateBooking = defineAction({
       if (significantChanges.length > 0) {
         try {
           const { subject, html } = generateBookingUpdatedEmail(booking, significantChanges);
-          await sendEmailWithResend(booking.email, subject, html);
+          await sendEmailWithResend(booking.email, subject, html, context.locals.runtime);
         } catch (emailError) {
           console.warn('Failed to send update notification email:', emailError);
         }
@@ -302,7 +306,8 @@ const updateBooking = defineAction({
 const cancelBooking = defineAction({
   accept: 'form',
   input: cancelBookingSchema,
-  handler: async (input) => {
+  handler: async (input, context) => {
+    const supabaseAdmin = createSupabaseAdmin(context.locals.runtime);
     try {
       const { data: booking, error } = await supabaseAdmin
         .from('bookings')
@@ -327,7 +332,7 @@ const cancelBooking = defineAction({
       // Enviar email de cancelación
       try {
         const { subject, html } = generateBookingCancelledEmail(booking, input.reason);
-        await sendEmailWithResend(booking.email, subject, html);
+        await sendEmailWithResend(booking.email, subject, html, context.locals.runtime);
       } catch (emailError) {
         console.warn('Failed to send cancellation email:', emailError);
       }
@@ -353,22 +358,22 @@ const cancelBooking = defineAction({
 const contactForm = defineAction({
   accept: 'form',
   input: contactFormSchema,
-  handler: async (input) => {
+  handler: async (input, context) => {
     console.log('=== CONTACT FORM ACTION CALLED ===');
     console.log('Input received:', Object.keys(input));
     
     try {
-      const adminEmail = process.env.ADMIN_EMAIL || 'contacto@thecontentstudio.com';
+      const adminEmail = context.locals.runtime?.env?.ADMIN_EMAIL || 'contacto@contentstudiokrp.es';
       
       // Enviar emails usando las funciones centralizadas
       try {
         // Email al cliente
         const { subject: clientSubject, html: clientHtml } = generateContactConfirmationEmail(input);
-        const clientEmailResult = await sendEmailWithResend(input.email, clientSubject, clientHtml);
+        const clientEmailResult = await sendEmailWithResend(input.email, clientSubject, clientHtml, context.locals.runtime);
         
         // Email al admin
         const { subject: adminSubject, html: adminHtml } = generateContactNotificationEmail(input);
-        const adminEmailResult = await sendEmailWithResend(adminEmail, adminSubject, adminHtml);
+        const adminEmailResult = await sendEmailWithResend(adminEmail, adminSubject, adminHtml, context.locals.runtime);
         
         if (!clientEmailResult.success) {
           console.warn('Failed to send client confirmation email:', clientEmailResult.error);

@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { supabaseAdmin } from "@/lib/supabase";
+import { createSupabaseAdmin } from "@/lib/supabase";
 
 export const prerender = false;
 
@@ -31,6 +31,7 @@ function generateTimeSlots(startTime: string, durationMinutes: number): string[]
 }
 
 export const GET: APIRoute = async ({ url }) => {
+  const supabaseAdmin = createSupabaseAdmin();
   try {
     const date = url.searchParams.get("date");
     const time = url.searchParams.get("time");

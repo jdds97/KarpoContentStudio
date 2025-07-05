@@ -2,7 +2,7 @@
 import Layout from '@/layouts/Layout.astro';
 import Button from '@/components/common/Button.astro';
 import { CheckCircle, Calendar, CreditCard, Mail, Phone } from '@/components/icons';
-import { supabase } from '@/lib/supabase.ts';
+import { createSupabaseClient } from '@/lib/supabase.ts';
 
 export const prerender = false;
 
@@ -14,6 +14,7 @@ if (!bookingId) {
 }
 
 // Obtener los detalles de la reserva
+const supabase = createSupabaseClient();
 const { data: booking, error } = await supabase
   .from('bookings')
   .select('*')

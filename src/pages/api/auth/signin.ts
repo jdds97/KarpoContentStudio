@@ -1,10 +1,11 @@
 // Endpoint para iniciar sesión en el panel de administración
 import type { APIRoute } from "astro";
-import { supabase } from "../../../lib/supabase";
+import { createSupabaseClient } from "../../../lib/supabase";
 
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request, cookies, redirect }) => {
+  const supabase = createSupabaseClient();
   const formData = await request.formData();
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();

@@ -1,8 +1,9 @@
 // Endpoint para obtener disponibilidad de un mes específico
 import type { APIRoute } from "astro";
-import { supabaseAdmin } from "../../../lib/supabase";
+import { createSupabaseAdmin } from "../../../lib/supabase";
 
 export const GET: APIRoute = async ({ url }) => {
+  const supabaseAdmin = createSupabaseAdmin();
   try {
     const year = parseInt(url.searchParams.get("year") || new Date().getFullYear().toString());
     const month = parseInt(url.searchParams.get("month") || (new Date().getMonth() + 1).toString());

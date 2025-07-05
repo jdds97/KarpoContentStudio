@@ -115,10 +115,11 @@ export const sendEmailWithResend = async (
   to: string | string[],
   subject: string,
   html: string,
+  runtime?: any,
   from?: string
 ): Promise<{ success: boolean; error?: string }> => {
   try {
-    const RESEND_API_KEY = process.env.RESEND_API_KEY;
+    const RESEND_API_KEY = runtime?.env?.RESEND_API_KEY || process.env.RESEND_API_KEY;
     if (!RESEND_API_KEY) {
       throw new Error('RESEND_API_KEY no está configurada');
     }

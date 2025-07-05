@@ -10,7 +10,8 @@ const isCloudflarePages = process.env.CF_PAGES === '1';
 export default defineConfig({
   output: 'server',
   adapter: isCloudflarePages ? cloudflare({
-    imageService: 'compile'
+    imageService: 'passthrough',
+    platformProxy: true,
   }) : node({
     mode: 'standalone'
   }),

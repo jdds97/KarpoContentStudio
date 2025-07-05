@@ -2,7 +2,7 @@
 // Dashboard de administración - limpio como rates.astro
 import AdminLayout from '@/layouts/AdminLayout.astro';
 import AdminDashboard from '@/components/admin/AdminDashboard.astro';
-import { supabase } from "../../lib/supabase";
+import { createSupabaseClient } from "../../lib/supabase";
 import { getDashboardData, handleDashboardActions, getStatusMessages } from '@/utils/admin/dashboard-server';
 
 export const prerender = false;
@@ -24,6 +24,7 @@ if (!accessToken || !refreshToken) {
 }
 
 // Verificar sesión
+const supabase = createSupabaseClient();
 const { data, error } = await supabase.auth.setSession({
   refresh_token: refreshToken.value,
   access_token: accessToken.value,

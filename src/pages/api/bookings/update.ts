@@ -1,11 +1,12 @@
 // API wrapper para actualizar reservas - Usa Actions centralizadas
 import type { APIRoute } from "astro";
-import { supabase } from "../../../lib/supabase";
+import { createSupabaseClient } from "../../../lib/supabase";
 import { actions } from "astro:actions";
 
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request, cookies }) => {
+  const supabase = createSupabaseClient();
   try {
     // Verificar autenticación
     const accessToken = cookies.get("sb-access-token");

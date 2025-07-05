@@ -1,10 +1,11 @@
 // API para validar códigos de descuento
 import type { APIRoute } from "astro";
-import { supabaseAdmin } from "@/lib/supabase";
+import { createSupabaseAdmin } from "@/lib/supabase";
 
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
+  const supabaseAdmin = createSupabaseAdmin();
   try {
     const { code } = await request.json();
     

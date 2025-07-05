@@ -1,5 +1,5 @@
 // Lógica del servidor para el dashboard de administración
-import { supabase } from "../../lib/supabase";
+import { createSupabaseClient } from "../../lib/supabase";
 import { actions } from 'astro:actions';
 import type { APIContext } from 'astro';
 
@@ -18,6 +18,7 @@ export interface DashboardData {
 
 // Obtener datos del dashboard
 export async function getDashboardData(): Promise<Pick<DashboardData, 'bookings' | 'stats'>> {
+  const supabase = createSupabaseClient();
   const { data: bookings } = await supabase
     .from('bookings')
     .select('*')
