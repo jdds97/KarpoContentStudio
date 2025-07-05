@@ -1,40 +1,26 @@
 ---
-import { INSPIRATION_GALLERY } from '@/utils';
 import { Image } from 'astro:assets';
-import { imageMap } from '@/assets/images';
+import { INSPIRATION_GALLERY } from '@/utils';
 ---
 <section class="py-16 bg-primary-white">
   <div class="container mx-auto">
     <h2 class="text-2xl md:text-3xl font-instrument text-center mb-10">{INSPIRATION_GALLERY.title}</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {INSPIRATION_GALLERY.images.map((image) => {
-        const optimizedImage = imageMap[image.src as keyof typeof imageMap];
         return (
           <div class="rounded-lg shadow-md overflow-hidden h-64">
-            {optimizedImage ? (
-              <Image 
-                src={optimizedImage}
-                alt={image.alt} 
-                width={image.width} 
-                height={image.height}
-                loading="lazy"
-                decoding="async"
-                class="rounded-lg shadow-md w-full h-full object-cover"
-              />
-            ) : (
-              <img 
-                src={image.src} 
-                alt={image.alt} 
-                width={image.width} 
-                height={image.height}
-                loading="lazy"
-                decoding="async"
-                class="rounded-lg shadow-md w-full h-full object-cover"
-              />
-            )}
+            <Image 
+              src={`/images/${image.src}`}
+              alt={image.alt} 
+              width={image.width} 
+              height={image.height}
+              loading="lazy"
+              decoding="async"
+              class="rounded-lg shadow-md w-full h-full object-cover"
+            />
           </div>
         );
-      })}
+      })
     </div>
   </div>
 </section>

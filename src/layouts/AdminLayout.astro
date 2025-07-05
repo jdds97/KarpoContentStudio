@@ -1,9 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import '@/styles/global.css';
 import SEO from '@/components/common/SEO.astro';
 import Button from '@/components/common/Button.astro';
-import { Image } from 'astro:assets';
-import logoMain from '@/assets/images/logos/logo-optimized.webp';
 import type { LayoutProps } from '@/utils';
 
 const {
@@ -46,7 +45,7 @@ const {
           <!-- Logo y título -->
           <div class="flex items-center space-x-4">
             <Image 
-              src={logoMain}
+              src="/images/logos/logo-optimized.webp"
               alt="The Content Studio" 
               width={120}
               height={72}

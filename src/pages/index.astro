@@ -1,11 +1,11 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '@/layouts/Layout.astro';
 import TargetSection from '@/components/home/TargetSection.astro';
 import StudioSpacesSection from '@/components/home/StudioSpacesSection.astro';
 import CtaSection from '@/components/common/CtaSection.astro';
 import HeroSection from '@/components/common/HeroSection.astro';
 import { HERO_CONTENT, CTA_CONTENT } from '@/utils';
-import principalImage from '@/assets/images/spaces/principal-optimized.webp';
 
 ---
 
@@ -13,7 +13,7 @@ import principalImage from '@/assets/images/spaces/principal-optimized.webp';
   <HeroSection
     title={HERO_CONTENT.home.title}
     description={HERO_CONTENT.home.description}
-    image={principalImage}
+    image="/images/spaces/principal-optimized.webp"
     buttonText={HERO_CONTENT.home.buttonText}
     buttonHref={HERO_CONTENT.home.buttonHref}
     overlayClass="bg-primary-black/60"

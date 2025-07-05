@@ -1,7 +1,6 @@
 ---
-import { NAVIGATION_LINKS, COMPANY_INFO, CONTACT_INFO } from '@/utils';
 import { Image } from 'astro:assets';
-import logoWhite from '@/assets/images/logos/logo-white-optimized.webp';
+import { NAVIGATION_LINKS, COMPANY_INFO, CONTACT_INFO } from '@/utils';
 import MapPin from '@/components/icons/MapPin.astro';
 import Phone from '@/components/icons/Phone.astro';
 import Mail from '@/components/icons/Mail.astro';
@@ -13,7 +12,7 @@ import Mail from '@/components/icons/Mail.astro';
       <!-- Logo y descripción -->
       <div class="lg:col-span-2">
         <Image 
-          src={logoWhite}
+          src="/images/logos/logo-white-optimized.webp"
           alt={COMPANY_INFO.logo.alt}
           class="h-12 w-auto mb-6"
           width={204} 

@@ -1,8 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import Button from './Button.astro';
 import { HERO_CONTENT } from '@/utils';
-import { Image } from 'astro:assets';
-import principalImage from '@/assets/images/spaces/principal-optimized.webp';
 
 export interface Props {
   title?: string;
@@ -21,7 +20,7 @@ export interface Props {
 const {
   title = HERO_CONTENT.home.title,
   description = HERO_CONTENT.home.description,
-  image = principalImage,
+  image = "/images/spaces/principal-optimized.webp",
   buttonText = HERO_CONTENT.home.buttonText,
   buttonHref = HERO_CONTENT.home.buttonHref,
   overlayClass = 'bg-primary-black/60',
@@ -43,7 +42,6 @@ const {
       class="absolute inset-0 w-full h-full object-cover"
       loading="eager"
       decoding="sync"
-      priority
       fetchpriority="high"
     />
   )}

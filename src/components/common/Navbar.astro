@@ -1,9 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import Button from '@/components/common/Button.astro';
 import ArrowRight from '@/components/icons/ArrowRight.astro';
 import { NAVIGATION_LINKS, COMPANY_INFO } from '@/utils';
-import { Image } from 'astro:assets';
-import logoMain from '@/assets/images/logos/logo-optimized.webp';
 const { url } = Astro;
 ---
 
@@ -15,7 +14,7 @@ const { url } = Astro;
       <nav class="flex justify-between items-center">
         <a href="/" class="flex items-center">
           <Image 
-            src={logoMain}
+            src="/images/logos/logo-optimized.webp"
             alt={COMPANY_INFO.logo.alt}
             class="h-12 w-auto"
             width={204} 

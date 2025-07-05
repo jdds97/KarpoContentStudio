@@ -1,9 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import Button from '@/components/common/Button.astro';
 import CheckCircle from '@/components/icons/CheckCircle.astro';
 import Sparkles from '@/components/icons/Sparkles.astro';
-import { Image } from 'astro:assets';
-import { imageMap } from '@/assets/images';
 
 interface Props {
   id: string;
@@ -27,8 +26,6 @@ const {
   idealFor,
 } = Astro.props;
 
-// Obtener la imagen optimizada o usar la original como fallback
-const optimizedImage = imageMap[image as keyof typeof imageMap] || image;
 ---
 
 <div
@@ -37,27 +34,15 @@ const optimizedImage = imageMap[image as keyof typeof imageMap] || image;
 >
   <!-- Imagen -->
   <div class="w-full lg:w-1/2">
-    {typeof optimizedImage === 'string' ? (
-      <img
-        src={optimizedImage}
-        alt={title}
-        width="1200"
-        height="800"
-        class="w-full h-full object-cover rounded-lg shadow-md"
-        loading="lazy"
-        decoding="async"
-      />
-    ) : (
-      <Image
-        src={optimizedImage}
-        alt={title}
-        width={1200}
-        height={800}
-        class="w-full h-full object-cover rounded-lg shadow-md"
-        loading="lazy"
-        decoding="async"
-      />
-    )}
+    <Image
+      src={`/images/${image}`}
+      alt={title}
+      width={1200}
+      height={800}
+      class="w-full h-full object-cover rounded-lg shadow-md"
+      loading="lazy"
+      decoding="async"
+    />
   </div>
 
   <!-- Contenido -->

@@ -1,10 +1,9 @@
 ---
 // Página de login para administradores
+import { Image } from 'astro:assets';
 import Layout from '@/layouts/Layout.astro';
 import Button from '@/components/common/Button.astro';
 import { Mail, LockKeyhole } from '@/components/icons';
-import { Image } from 'astro:assets';
-import logoMain from '@/assets/images/logos/logo-optimized.webp';
 
 export const prerender = false;
 
@@ -27,7 +26,7 @@ if (accessToken && refreshToken) {
         <div class="text-center">
           <div class="mb-6">
             <Image 
-              src={logoMain}
+              src="/images/logos/logo-optimized.webp"
               alt="The Content Studio" 
               class="h-16 mx-auto mb-4 drop-shadow-lg"
               width={204}
