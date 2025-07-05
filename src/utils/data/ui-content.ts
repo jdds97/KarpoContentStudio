@@ -339,33 +339,33 @@ export const CTA_CONTENT = {
 // Contenido para HeroSection
 export const HERO_CONTENT = {
   home: {
-    title: 'The Content Studio',
+    title: 'Estudio Fotográfico Profesional en Sevilla - The Content Studio',
     description: 'El espacio donde tu creatividad cobra vida en Sevilla.',
     buttonText: 'Reserva tu sesión',
     buttonHref: '/booking'
   },
   targetAudiences: {
-    title: '¿Para Quién es The Content Studio?',
+    title: 'Servicios Profesionales para Fotógrafos, Marcas y Creadores',
     description: 'Hemos diseñado nuestros espacios y servicios para diferentes perfiles profesionales y creativos. Descubre cómo The Content Studio puede ayudarte a elevar tus proyectos.'
   },
   studioSpaces: {
-    title: 'Nuestros Espacios',
+    title: 'Espacios y Salas de Estudio para Fotografía y Video',
     description: 'Descubre todos los espacios disponibles en The Content Studio, cada uno diseñado específicamente para diferentes tipos de producciones y necesidades creativas.'
   },
   rates: {
-    title: 'Tarifas y Planes',
+    title: 'Tarifas de Alquiler de Estudio Fotográfico en Sevilla',
     description: 'Ofrecemos opciones flexibles para adaptarnos a tus necesidades, desde alquileres por horas hasta membresías mensuales y anuales.'
   },
   contact: {
-    title: 'Contacto',
+    title: 'Contacta con The Content Studio - Estudio en Sevilla',
     description: 'Estamos aquí para responder a tus preguntas y ayudarte a encontrar el espacio perfecto para tu próximo proyecto.'
   },
   faq: {
-    title: 'Preguntas Frecuentes',
+    title: 'Preguntas Frecuentes sobre Alquiler de Estudio Fotográfico',
     description: 'Encuentra respuestas a las preguntas más comunes sobre nuestro estudio, reservas y servicios.'
   },
   booking: {
-    title: 'Reserva Tu Sesión',
+    title: 'Reserva Tu Sesión de Estudio Fotográfico en Sevilla',
     description: 'Consulta la disponibilidad y completa el formulario para solicitar tu reserva. Te contactaremos para confirmar la disponibilidad y el pago.'
   }
 } as const;
