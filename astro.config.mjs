@@ -40,9 +40,9 @@ export default defineConfig({
       tailwindcss(),
       {
         name: 'cloudflare-polyfill',
-        generateBundle(options, bundle) {
+        generateBundle(_, bundle) {
           // Replace require calls with proper polyfills for Cloudflare Workers
-          for (const [fileName, chunk] of Object.entries(bundle)) {
+          for (const [, chunk] of Object.entries(bundle)) {
             if (chunk.type === 'chunk' && chunk.code) {
               // Replace WebSocket require with browser WebSocket
               chunk.code = chunk.code.replace(

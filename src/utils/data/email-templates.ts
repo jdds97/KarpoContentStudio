@@ -1092,7 +1092,6 @@ export const BOOKING_REMINDER_TEMPLATE = `
 </html>
 `;
 
-// Template mejorado del email-templates.ts actual - más completo y detallado
 export const BOOKING_CONFIRMATION_TEMPLATE_ENHANCED = `
 <!DOCTYPE html>
 <html lang="es">

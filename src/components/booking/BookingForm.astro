@@ -320,79 +320,9 @@ const result = Astro.getActionResult(actions.createBooking);
   </div>
 
 <script>
-  // Import validation module to ensure it's loaded
-  import { initBookingValidation } from '@/scripts/booking-form-validation';
-  import { actions } from 'astro:actions';
-  import { navigate } from 'astro:transitions/client';
+  import { initBookingFormHandler } from '@/scripts/booking-form-handler';
   
-  // Ensure initialization when component loads
-  function ensureInit() {
-    const form = document.getElementById('booking-form') as HTMLFormElement;
-    console.log('ensureInit called, form:', form);
-    
-    if (form) {
-      console.log('Booking form found, calling initBookingValidation');
-      try {
-        initBookingValidation();
-        setupFormSubmission(form);
-      } catch (error) {
-        console.error('Error calling initBookingValidation:', error);
-      }
-    } else {
-      console.log('Booking form not found, retrying...');
-      setTimeout(ensureInit, 100);
-    }
-  }
-
-  // Setup form submission with client-side navigation
-  function setupFormSubmission(form: HTMLFormElement) {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      // Show loading state
-      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-      const originalText = submitButton?.textContent;
-      if (submitButton) {
-        submitButton.disabled = true;
-        submitButton.textContent = 'Enviando...';
-      }
-
-      try {
-        // Get form data
-        const formData = new FormData(form);
-        
-        // Call the action
-        const { data, error } = await actions.createBooking(formData);
-        
-        if (error) {
-          // Handle error - let the form show the error message naturally
-          console.error('Booking error:', error);
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.textContent = originalText;
-          }
-          // Allow the form to submit normally to show errors
-          form.removeEventListener('submit', arguments.callee as EventListener);
-          form.submit();
-        } else if (data && (data as any).booking?.id) {
-          // Success - navigate to confirmation page
-          console.log('Booking created successfully:', (data as any).booking.id);
-          navigate(`/booking/confirmation?id=${(data as any).booking.id}`);
-        }
-      } catch (err) {
-        console.error('Form submission error:', err);
-        // Fallback: submit form normally
-        if (submitButton) {
-          submitButton.disabled = false;
-          submitButton.textContent = originalText;
-        }
-        form.removeEventListener('submit', arguments.callee as EventListener);
-        form.submit();
-      }
-    });
-  }
-  
-  // Initialize immediately
-  ensureInit();
+  // Initialize the booking form handler
+  initBookingFormHandler();
 </script>
 

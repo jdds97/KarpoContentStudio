@@ -39,7 +39,6 @@ export class BookingFormValidator {
     this.submitButton = document.querySelector('button[type="submit"]') as HTMLButtonElement;
 
     if (!this.dateInput || !this.timeInput || !this.packageInput || !this.studioSpaceInput || !this.submitButton) {
-      console.warn('BookingFormValidator: No se encontraron todos los elementos necesarios');
       return;
     }
 
@@ -144,15 +143,8 @@ export class BookingFormValidator {
   }
 
   private async validateAvailability(): Promise<void> {
-    console.log('=== VALIDATE AVAILABILITY CALLED ===');
     
     if (!this.dateInput?.value || !this.timeInput?.value || !this.packageInput?.value || !this.studioSpaceInput?.value) {
-      console.log('Missing form values:', {
-        date: this.dateInput?.value,
-        time: this.timeInput?.value,
-        package: this.packageInput?.value,
-        studioSpace: this.studioSpaceInput?.value
-      });
       return;
     }
 
@@ -163,35 +155,22 @@ export class BookingFormValidator {
       const packageDuration = parseInt(this.packageInput.value.replace('h', ''));
       const url = `/api/calendar/validate-availability?date=${this.dateInput.value}&time=${this.timeInput.value}&duration=${packageDuration}&studio_space=${this.studioSpaceInput.value}`;
       
-      console.log('Validation request:', {
-        url,
-        date: this.dateInput.value,
-        time: this.timeInput.value,
-        duration: packageDuration,
-        studioSpace: this.studioSpaceInput.value
-      });
       
       const response = await fetch(url);
-      console.log('API Response status:', response.status);
       
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('API Error response:', errorText);
         throw new Error(`HTTP ${response.status}: ${errorText}`);
       }
 
       const data: AvailabilityResponse = await response.json();
-      console.log('API Response data:', data);
       
       if (data.available) {
-        console.log('Horario disponible');
         this.showAvailableState();
       } else {
-        console.log('Horario NO disponible:', data.reason, data.conflicts);
         this.showUnavailableState(data);
       }
     } catch (error) {
-      console.error('Error validating availability:', error);
       this.showErrorState();
     }
   }
@@ -207,63 +186,49 @@ export function initBookingValidation(): void {
   // Check if form exists
   const bookingForm = document.getElementById('booking-form');
   if (!bookingForm) {
-    console.log('BookingValidation: Form not found, skipping initialization');
     return;
   }
 
   // Check if already initialized
   if ((window as any).bookingValidator || bookingForm.hasAttribute('data-validation-initialized')) {
-    console.log('BookingValidation: Already initialized, skipping');
     return;
   }
   
   try {
-    console.log('BookingValidation: Initializing validator...');
     const instance = new BookingFormValidator();
     (window as any).bookingValidator = instance;
     bookingForm.setAttribute('data-validation-initialized', 'true');
-    console.log('BookingValidation: Successfully initialized');
   } catch (error) {
-    console.error('BookingValidation: Error creating instance:', error);
+    // Error al crear instancia
   }
 }
 
-// Auto-initialize with better lifecycle management for Astro
+// Auto-inicializar con mejor manejo del ciclo de vida para Astro
 if (typeof document !== 'undefined') {
-  console.log('BookingValidation: Module loaded, setting up initialization...');
-
   const handleValidationInit = () => {
-    console.log('BookingValidation: Attempting initialization...');
-    
     const bookingForm = document.getElementById('booking-form');
     if (!bookingForm) {
-      console.log('BookingValidation: Form not found');
       return;
     }
 
     if (bookingForm.hasAttribute('data-validation-initialized')) {
-      console.log('BookingValidation: Already initialized');
       return;
     }
     
-    console.log('BookingValidation: Form found, initializing...');
     initBookingValidation();
   };
 
-  // Multiple initialization strategies
+  // Múltiples estrategias de inicialización
   if (document.readyState === 'loading') {
-    console.log('BookingValidation: Document loading, waiting for DOMContentLoaded');
     document.addEventListener('DOMContentLoaded', handleValidationInit);
   } else {
-    console.log('BookingValidation: Document ready, attempting immediate init');
     handleValidationInit();
-    // Also try with a small delay in case of timing issues
+    // También intentar con un pequeño retraso en caso de problemas de timing
     setTimeout(handleValidationInit, 100);
   }
 
-  // Handle Astro page transitions
+  // Manejar transiciones de página de Astro
   document.addEventListener('astro:page-load', () => {
-    console.log('BookingValidation: Astro page load detected');
     setTimeout(handleValidationInit, 50);
   });
 }

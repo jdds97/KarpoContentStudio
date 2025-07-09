@@ -9,6 +9,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
+    "check:types": "tsc --noEmit",
+
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",

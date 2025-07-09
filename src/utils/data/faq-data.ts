@@ -1,4 +1,4 @@
-// FAQ Categories and Questions Data
+// Categorias FAQ y preguntas frecuentes
 export interface FaqQuestion {
   question: string;
   answer: string;

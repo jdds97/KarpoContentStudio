@@ -1,5 +1,4 @@
-// Calendario Final para The Content Studio
-// TypeScript implementation
+// Calendario para The Content Studio
 
 interface CalendarDetail {
   date: string | null;
@@ -80,13 +79,11 @@ class CalendarFinal {
     this.initAttempts++;
     
     if (this.initAttempts > this.maxInitAttempts) {
-      console.error('CalendarFinal: Max initialization attempts reached');
       return;
     }
     
     const container = document.getElementById('calendar-container');
     if (!container) {
-      console.log(`CalendarFinal: Container not found, attempt ${this.initAttempts}/${this.maxInitAttempts}`);
       setTimeout(() => this.init(), 100);
       return;
     }
@@ -122,7 +119,6 @@ class CalendarFinal {
       }));
       
     } catch (error) {
-      console.error('CalendarFinal: Error during initialization:', error);
       setTimeout(() => this.init(), 200);
     }
   }
@@ -325,7 +321,6 @@ class CalendarFinal {
       this.render();
       
     } catch (error) {
-      console.error('Error loading availability:', error);
       this.availabilityData = {};
       this.render();
     } finally {
@@ -350,7 +345,6 @@ class CalendarFinal {
       this.renderTimeSlots(data);
       
     } catch (error) {
-      console.error('Error loading day details:', error);
       this.dayDetailsData = null;
       this.renderFallbackTimeSlots();
     }
@@ -740,7 +734,7 @@ class CalendarFinal {
 
 // Función de inicialización mejorada
 function initCalendarFinal(): void {
-  // Check if we're in a browser environment
+  // Verificar si estamos en un entorno de navegador
   if (typeof window === 'undefined' || typeof document === 'undefined') {
     return;
   }
@@ -748,24 +742,20 @@ function initCalendarFinal(): void {
   // Check if calendar container exists
   const calendarContainer = document.getElementById('calendar-container');
   if (!calendarContainer) {
-    console.log('CalendarFinal: Container not found, skipping initialization');
     return;
   }
 
   // Check if already initialized
   if ((window as any).calendarFinal || calendarContainer.hasAttribute('data-calendar-initialized')) {
-    console.log('CalendarFinal: Already initialized, skipping');
     return;
   }
   
   try {
-    console.log('CalendarFinal: Initializing calendar...');
     const instance = new CalendarFinal();
     (window as any).calendarFinal = instance;
     calendarContainer.setAttribute('data-calendar-initialized', 'true');
-    console.log('CalendarFinal: Successfully initialized');
   } catch (error) {
-    console.error('CalendarFinal: Error creating instance:', error);
+    // Error creating instance
   }
 }
 
@@ -782,35 +772,26 @@ function cleanupCalendar(): void {
 
 // Auto-initialize with better lifecycle management for Astro
 if (typeof document !== 'undefined') {
-  console.log('CalendarFinal: Module loaded, setting up initialization...');
-
   // Function to handle initialization
   const handleCalendarInit = () => {
-    console.log('CalendarFinal: Attempting initialization...');
-    
     // Check if calendar container exists
     const calendarContainer = document.getElementById('calendar-container');
     if (!calendarContainer) {
-      console.log('CalendarFinal: Container not found');
       return;
     }
 
     // Check if already initialized
     if (calendarContainer.hasAttribute('data-calendar-initialized')) {
-      console.log('CalendarFinal: Already initialized');
       return;
     }
     
-    console.log('CalendarFinal: Container found, initializing...');
     initCalendarFinal();
   };
 
   // Multiple initialization strategies
   if (document.readyState === 'loading') {
-    console.log('CalendarFinal: Document loading, waiting for DOMContentLoaded');
     document.addEventListener('DOMContentLoaded', handleCalendarInit);
   } else {
-    console.log('CalendarFinal: Document ready, attempting immediate init');
     handleCalendarInit();
     // Also try with a small delay in case of timing issues
     setTimeout(handleCalendarInit, 100);
@@ -818,7 +799,6 @@ if (typeof document !== 'undefined') {
 
   // Handle Astro page transitions
   document.addEventListener('astro:page-load', () => {
-    console.log('CalendarFinal: Astro page load detected');
     setTimeout(handleCalendarInit, 50);
   });
   

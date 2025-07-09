@@ -151,29 +151,26 @@ interface Props {
 </div>
 
 <script>
-  // Import calendar module to ensure it's loaded
+  // Importar módulo de calendario para asegurar que esté cargado
   import { initCalendarFinal } from '@/lib/calendar';
   
 
-  // Ensure initialization when component loads
+  // Asegurar inicialización cuando el componente carga
   function ensureInit() {
     const container = document.getElementById('calendar-container');
-    console.log('ensureInit called, container:', container);
     
     
     if (container) {
-      console.log('Calendar container found, calling initCalendarFinal');
       try {
         initCalendarFinal();
       } catch (error) {
-        console.error('Error calling initCalendarFinal:', error);
+        // Error al llamar initCalendarFinal
       }
     } else {
-      console.log('Calendar container not found, retrying...');
       setTimeout(ensureInit, 100);
     }
   }
   
-  // Initialize immediately and with delays
+  // Inicializar inmediatamente y con retrasos
   ensureInit();
 </script>

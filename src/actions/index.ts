@@ -26,11 +26,9 @@ const createBooking = defineAction({
   input: createBookingSchema,
   handler: async (input, context) => {
     const supabaseAdmin = createSupabaseAdmin(context.locals.runtime);
-    console.log('=== CREATE BOOKING ACTION CALLED ===');
-    console.log('Input received:', Object.keys(input));
     
     try {
-      // Convertir paquete a duración numérica para validación (1h -> 1, 2h -> 2, etc.)
+      // Convertir paquete a duración numérica para validación
       const durationHours = parseInt(input.package.replace('h', ''));
       
       // Validar disponibilidad antes de crear la reserva
@@ -47,7 +45,6 @@ const createBooking = defineAction({
           };
         }
       } else {
-        console.warn('Could not validate availability, proceeding with booking');
       }
 
       // Aplicar descuento si hay código válido
@@ -99,7 +96,6 @@ const createBooking = defineAction({
         .single();
 
       if (error) {
-        console.error('Error creating booking:', error);
         return {
           success: false,
           error: 'Error al crear la reserva. Por favor, inténtalo de nuevo.',
@@ -111,22 +107,14 @@ const createBooking = defineAction({
       try {
         // Email al cliente
         const { subject: clientSubject, html: clientHtml } = generateBookingConfirmationEmail(booking);
-        const clientEmailResult = await sendEmailWithResend(input.email, clientSubject, clientHtml, context.locals.runtime);
+        await sendEmailWithResend(input.email, clientSubject, clientHtml, context.locals.runtime);
         
         // Email al estudio/administración
         const studioEmail = context.locals.runtime?.env?.ADMIN_EMAIL || 'contacto@contentstudiokrp.es';
         const { subject: studioSubject, html: studioHtml } = generateAdminBookingNotificationEmail(booking);
-        const studioEmailResult = await sendEmailWithResend(studioEmail, studioSubject, studioHtml, context.locals.runtime);
+        await sendEmailWithResend(studioEmail, studioSubject, studioHtml, context.locals.runtime);
         
-        if (!clientEmailResult.success) {
-          console.warn('Failed to send client confirmation email:', clientEmailResult.error);
-        }
-        
-        if (!studioEmailResult.success) {
-          console.warn('Failed to send studio notification email:', studioEmailResult.error);
-        }
       } catch (emailError) {
-        console.warn('Email notification failed:', emailError);
         // No fallar la reserva si el email falla
       }
 
@@ -137,7 +125,6 @@ const createBooking = defineAction({
       };
 
     } catch (error) {
-      console.error('Error in createBooking action:', error);
       return {
         success: false,
         error: 'Error interno del servidor.',
@@ -176,7 +163,6 @@ const confirmBooking = defineAction({
         .single();
 
       if (error) {
-        console.error('Error confirming booking:', error);
         return {
           success: false,
           error: 'Error al confirmar la reserva.',
@@ -189,7 +175,6 @@ const confirmBooking = defineAction({
         const { subject, html } = generateBookingConfirmedEmail(booking);
         await sendEmailWithResend(booking.email, subject, html, context.locals.runtime);
       } catch (emailError) {
-        console.warn('Failed to send confirmation email:', emailError);
       }
 
       return {
@@ -199,7 +184,6 @@ const confirmBooking = defineAction({
       };
 
     } catch (error) {
-      console.error('Error in confirmBooking action:', error);
       return {
         success: false,
         error: 'Error interno del servidor.',
@@ -226,7 +210,6 @@ const updateBooking = defineAction({
         .single();
 
       if (fetchError) {
-        console.error('Error fetching current booking:', fetchError);
         return {
           success: false,
           error: 'Error al obtener la reserva actual.',
@@ -267,7 +250,6 @@ const updateBooking = defineAction({
         .single();
 
       if (error) {
-        console.error('Error updating booking:', error);
         return {
           success: false,
           error: 'Error al actualizar la reserva.',
@@ -281,7 +263,6 @@ const updateBooking = defineAction({
           const { subject, html } = generateBookingUpdatedEmail(booking, significantChanges);
           await sendEmailWithResend(booking.email, subject, html, context.locals.runtime);
         } catch (emailError) {
-          console.warn('Failed to send update notification email:', emailError);
         }
       }
 
@@ -292,7 +273,6 @@ const updateBooking = defineAction({
       };
 
     } catch (error) {
-      console.error('Error in updateBooking action:', error);
       return {
         success: false,
         error: 'Error interno del servidor.',
@@ -321,7 +301,6 @@ const cancelBooking = defineAction({
         .single();
 
       if (error) {
-        console.error('Error cancelling booking:', error);
         return {
           success: false,
           error: 'Error al cancelar la reserva.',
@@ -334,7 +313,6 @@ const cancelBooking = defineAction({
         const { subject, html } = generateBookingCancelledEmail(booking, input.reason);
         await sendEmailWithResend(booking.email, subject, html, context.locals.runtime);
       } catch (emailError) {
-        console.warn('Failed to send cancellation email:', emailError);
       }
 
       return {
@@ -344,7 +322,6 @@ const cancelBooking = defineAction({
       };
 
     } catch (error) {
-      console.error('Error in cancelBooking action:', error);
       return {
         success: false,
         error: 'Error interno del servidor.',
@@ -359,8 +336,6 @@ const contactForm = defineAction({
   accept: 'form',
   input: contactFormSchema,
   handler: async (input, context) => {
-    console.log('=== CONTACT FORM ACTION CALLED ===');
-    console.log('Input received:', Object.keys(input));
     
     try {
       const adminEmail = context.locals.runtime?.env?.ADMIN_EMAIL || 'contacto@contentstudiokrp.es';
@@ -375,13 +350,6 @@ const contactForm = defineAction({
         const { subject: adminSubject, html: adminHtml } = generateContactNotificationEmail(input);
         const adminEmailResult = await sendEmailWithResend(adminEmail, adminSubject, adminHtml, context.locals.runtime);
         
-        if (!clientEmailResult.success) {
-          console.warn('Failed to send client confirmation email:', clientEmailResult.error);
-        }
-        
-        if (!adminEmailResult.success) {
-          console.warn('Failed to send admin notification email:', adminEmailResult.error);
-        }
         
         // Si al menos uno de los emails se envió, consideramos exitoso
         if (clientEmailResult.success || adminEmailResult.success) {
@@ -398,7 +366,6 @@ const contactForm = defineAction({
           };
         }
       } catch (emailError) {
-        console.error('Email sending failed:', emailError);
         return {
           success: false,
           error: 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.',
@@ -407,7 +374,6 @@ const contactForm = defineAction({
       }
 
     } catch (error) {
-      console.error('Error in contactForm action:', error);
       return {
         success: false,
         error: 'Error interno del servidor.',
