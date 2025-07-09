@@ -7,7 +7,7 @@ import { getDashboardData, handleDashboardActions, getStatusMessages } from '@/u
 
 export const prerender = false;
 
-const { cookies, request, redirect, locals } = Astro;
+const { cookies, request, locals } = Astro;
 
 // Manejar acciones POST
 const actionResponse = await handleDashboardActions(Astro);

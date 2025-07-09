@@ -146,7 +146,7 @@ export const GET: APIRoute = async ({ url }) => {
 };
 
 // Función para calcular slots disponibles en un día
-function calculateAvailableSlots(date: string, bookings: any[], studioSpace: string) {
+function calculateAvailableSlots(_date: string, bookings: any[], _studioSpace: string) {
   const allSlots = [
     '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', 
     '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'

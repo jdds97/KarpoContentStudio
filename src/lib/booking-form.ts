@@ -111,13 +111,11 @@ class BookingFormManager {
     const spaceSelect = document.getElementById('studio-space') as HTMLSelectElement;
     
     const validateFormCoherence = (): void => {
-      const date = dateInput?.value;
-      const time = timeInput?.value;
-      const space = spaceSelect?.value;
+      // Get form values for validation
+      dateInput?.value;
+      timeInput?.value;
+      spaceSelect?.value;
       
-      if (date && time && space) {
-        console.log('Formulario coherente:', { date, time, space });
-      }
     };
     
     [dateInput, timeInput, spaceSelect].forEach(element => {
@@ -166,7 +164,6 @@ class BookingFormManager {
       return data;
       
     } catch (error) {
-      console.error('Error validating discount code:', error);
       return { valid: false, message: 'Error al validar el código' };
     }
   }

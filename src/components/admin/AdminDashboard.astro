@@ -45,7 +45,7 @@ const { bookings, stats, successMessage, errorMessage } = Astro.props;
 
 <!-- Script mínimo -->
 <script>
-  import { initializeDashboard } from '@/scripts/dashboard-client';
+  import { initializeDashboard } from '@/scripts/admin-dashboard-handler';
   
   const bookingsData = JSON.parse(document.getElementById('bookings-data')?.textContent || '[]');
   initializeDashboard(bookingsData);
