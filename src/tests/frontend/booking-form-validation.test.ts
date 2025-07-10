@@ -156,54 +156,35 @@ class MockBookingFormValidator {
   }
 
   async validateAvailability(): Promise<void> {
-    console.log('=== VALIDATE AVAILABILITY CALLED ===');
     
     if (!this.dateInput?.value || !this.timeInput?.value || !this.packageInput?.value || !this.studioSpaceInput?.value) {
-      console.log('Missing form values:', {
-        date: this.dateInput?.value,
-        time: this.timeInput?.value,
-        package: this.packageInput?.value,
-        studioSpace: this.studioSpaceInput?.value
-      });
       return;
     }
 
     this.createAvailabilityMessage();
     this.showLoadingState();
 
+  
     try {
       const packageDuration = parseInt(this.packageInput.value.replace('h', ''));
       const url = `/api/calendar/validate-availability?date=${this.dateInput.value}&time=${this.timeInput.value}&duration=${packageDuration}&studio_space=${this.studioSpaceInput.value}`;
       
-      console.log('Validation request:', {
-        url,
-        date: this.dateInput.value,
-        time: this.timeInput.value,
-        duration: packageDuration,
-        studioSpace: this.studioSpaceInput.value
-      });
       
       const response = await fetch(url);
-      console.log('API Response status:', response.status);
       
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('API Error response:', errorText);
         throw new Error(`HTTP ${response.status}: ${errorText}`);
       }
 
       const data = await response.json();
-      console.log('API Response data:', data);
       
       if (data.available) {
-        console.log('Horario disponible');
         this.showAvailableState();
       } else {
-        console.log('Horario NO disponible:', data.reason, data.conflicts);
         this.showUnavailableState(data);
       }
     } catch (error) {
-      console.error('Error validating availability:', error);
       this.showErrorState();
     }
   }
@@ -586,9 +567,6 @@ describe('BookingFormValidator Frontend', () => {
 
       await validator.validateAvailability();
 
-      expect(consoleSpy).toHaveBeenCalledWith('=== VALIDATE AVAILABILITY CALLED ===');
-      expect(consoleSpy).toHaveBeenCalledWith('Validation request:', expect.any(Object));
-      expect(consoleSpy).toHaveBeenCalledWith('API Response data:', expect.any(Object));
     });
   });
 });

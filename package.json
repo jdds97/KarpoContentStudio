@@ -3,20 +3,16 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "NODE_NO_WARNINGS=1 astro dev",
-    "build": "astro build || true",
+    "dev": "NODE_OPTIONS='--disable-warning=DEP0040' astro dev",
+    "build": "NODE_OPTIONS='--disable-warning=DEP0040' astro build || true",
     "build:cf": "CF_PAGES=1 astro build",
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
     "check:types": "tsc --noEmit",
-
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "test:api": "jest src/tests/api/",
-    "test:frontend": "jest src/tests/frontend/",
-    "test:integration": "jest src/tests/integration/"
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -32,12 +28,12 @@
     "typescript": "^5.8.3"
   },
   "devDependencies": {
+    "@happy-dom/jest-environment": "^18.0.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.0.10",
+    "happy-dom": "^18.0.1",
     "jest": "^30.0.3",
-    "jest-environment-jsdom": "^30.0.2",
-    "jsdom": "^26.1.0",
     "node-mocks-http": "^1.17.2",
     "terser": "^5.40.0",
     "ts-jest": "^29.4.0"

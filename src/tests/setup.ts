@@ -1,8 +1,9 @@
 // Jest setup file
+/// <reference types="jest" />
 import '@testing-library/jest-dom';
 
 // Mock window.fetch for API tests
-global.fetch = jest.fn();
+(global as any).fetch = jest.fn();
 
 // Mock Request and Response for Node.js environment
 global.Request = class MockRequest {

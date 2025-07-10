@@ -13,14 +13,14 @@ import {
   Target,
   CheckCircle,
   Lightbulb,
-  RotateCcw,
-  Smartphone,
   Edit,
   Phone,
+  Package,
+  Coffee,
   Paintbrush,
   Palette,
-  Package,
-  Coffee
+  RotateCcw,
+  Smartphone
 } from '@/components/icons';
 
 // Metadatos SEO
@@ -799,30 +799,6 @@ export const BOOKING_TERMS = {
   linkText: 'Ver todas las normas'
 } as const;
 
-// Galería de inspiración
-export const INSPIRATION_GALLERY = {
-  title: "Inspírate con nuestro espacio",
-  images: [
-    {
-      src: "/images/spaces/principal-optimized.webp",
-      alt: "Espacio principal del estudio",
-      width: 800,
-      height: 600
-    },
-    {
-      src: "/images/spaces/black-zone-optimized.webp",
-      alt: "Zona negra del estudio",
-      width: 800,
-      height: 600
-    },
-    {
-      src: "/images/spaces/cyclorama-optimized.webp",
-      alt: "Cyclorama del estudio",
-      width: 800,
-      height: 600
-    }
-  ]
-} as const;
 
 // Datos completos de espacios del estudio para la página studio-spaces
 export const STUDIO_SPACES_FULL = [

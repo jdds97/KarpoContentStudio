@@ -1,11 +1,29 @@
 ---
-export interface Props {
+interface Props {
   class?: string;
+  width?: string;
+  height?: string;
+  [key: string]: any;
 }
 
-const { class: className = "w-6 h-6" } = Astro.props;
+const { class: className = '', width = '24', height = '24', ...props } = Astro.props;
 ---
 
-<svg class={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/>
+<svg 
+  class={className} 
+  width={width} 
+  height={height} 
+  viewBox="0 0 24 24" 
+  fill="none" 
+  stroke="currentColor" 
+  stroke-width="2" 
+  stroke-linecap="round" 
+  stroke-linejoin="round"
+  {...props}
+>
+  <path d="m3 14 3-3 3 3"/>
+  <path d="M8 21h12a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2H8"/>
+  <path d="M15 5v4"/>
+  <path d="M6 11V9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/>
+  <circle cx="8" cy="9" r="2"/>
 </svg>
