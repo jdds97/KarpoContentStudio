@@ -81,7 +81,7 @@ export const SOCIAL_MEDIA = {
 // Información de empresa
 export const COMPANY_INFO = {
   name: 'The Content Studio',
-  description: 'The Content Studio es un espacio creativo multifuncional ubicado en Sevilla, diseñado específicamente para fotógrafos, creadores de contenido, podcasters, marcas y profesionales del marketing. Nuestras instalaciones cuentan con un ciclorama de gran formato, zona de fondos de colores y un Creative Studio con cuatro paredes temáticas diferentes. Ofrecemos un entorno profesional y versátil equipado con iluminación de última generación, sistemas de sonido e insonorización para garantizar producciones de alta calidad. Desde sesiones fotográficas y rodajes audiovisuales hasta grabación de podcasts y eventos corporativos, proporcionamos el escenario perfecto donde las ideas toman forma, las marcas brillan y el contenido cobra vida.',
+  description: 'Tu espacio creativo donde las ideas toman forma, las marcas brillan y el contenido cobra vida.',
   tagline: 'El espacio donde tu creatividad cobra vida en Sevilla.',
   copyright: 'Todos los derechos reservados.',
   logo: {
