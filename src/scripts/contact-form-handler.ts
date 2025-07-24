@@ -2,8 +2,8 @@
 // Aplicando principios SOLID para manejo de formularios de contacto
 
 // Removed unused imports
-import { NotificationType } from '@/types';
 import { handleError } from '@/lib/core/error-handler';
+import { NotificationType } from '@/types';
 
 // Interface para el estado de envío
 interface SubmissionState {
@@ -16,7 +16,8 @@ interface SubmissionState {
 interface ContactFormResponse {
   success: boolean;
   message?: string;
-  error?: string;
+  error?: string | { message: string } | any;
+  data?: any;
 }
 
 // Enum para tipos de resultado - usando NotificationType centralizado
@@ -159,7 +160,60 @@ export class ContactFormHandler {
       return;
     }
 
+    // Validación del lado del cliente
+    const validationError = this.validateForm();
+    if (validationError) {
+      this.uiManager.showResult(NotificationType.ERROR, validationError);
+      return;
+    }
+
     await this.processFormSubmission();
+  }
+
+  // Validación del formulario en el cliente
+  private validateForm(): string | null {
+    if (!this.form) return 'Formulario no encontrado';
+
+    const formData = new FormData(this.form);
+    
+    // Validar campos requeridos
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const subject = formData.get('subject') as string;
+    const message = formData.get('message') as string;
+    const privacyPolicy = formData.get('privacy-policy');
+
+    if (!name?.trim()) {
+      return 'El nombre es requerido';
+    }
+
+    if (!email?.trim()) {
+      return 'El email es requerido';
+    }
+
+    // Validación básica de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return 'Por favor, introduce un email válido';
+    }
+
+    if (!subject?.trim()) {
+      return 'El asunto es requerido';
+    }
+
+    if (!message?.trim()) {
+      return 'El mensaje es requerido';
+    }
+
+    if (message.length < 10) {
+      return 'El mensaje debe tener al menos 10 caracteres';
+    }
+
+    if (!privacyPolicy) {
+      return 'Debes aceptar la política de privacidad para continuar';
+    }
+
+    return null;
   }
 
   // Procesamiento del envío del formulario
@@ -172,11 +226,29 @@ export class ContactFormHandler {
     try {
       const formData = new FormData(this.form);
       const response = await this.submitForm(formData);
-      const result = await response.json();
+      
+      // Para acciones de Astro, siempre intentamos parsear JSON primero
+      let result: ContactFormResponse;
+      const responseText = await response.text();
+      
+      try {
+        result = JSON.parse(responseText);
+      } catch (parseError) {
+        // Si no se puede parsear como JSON, es probablemente un error HTML
+        console.error('Error parsing response:', parseError);
+        throw new Error('Error en la respuesta del servidor');
+      }
+      
+      // Verificar si la respuesta tiene una estructura de error de Astro
+      if ('error' in result && result.error) {
+        this.handleError(typeof result.error === 'string' ? result.error : 'Error de validación');
+        return;
+      }
       
       this.handleSubmissionResult(result);
       
     } catch (error) {
+      console.error('Contact form submission error:', error);
       handleError(error as Error, {
         component: 'ContactFormHandler',
         action: 'processFormSubmission'
@@ -187,16 +259,37 @@ export class ContactFormHandler {
     }
   }
 
-  // Envío del formulario
+  // Envío del formulario con manejo de errores mejorado
   private async submitForm(formData: FormData): Promise<Response> {
     if (!this.form) {
       throw new Error('Form not found');
     }
 
-    return await fetch(this.form.action, {
-      method: 'POST',
-      body: formData
-    });
+    // Configuración de fetch con timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 segundos timeout
+
+    try {
+      const response = await fetch(this.form.action, {
+        method: 'POST',
+        body: formData,
+        signal: controller.signal,
+        headers: {
+          // No agregar Content-Type para FormData, el browser lo maneja
+        }
+      });
+
+      clearTimeout(timeoutId);
+      return response;
+    } catch (error) {
+      clearTimeout(timeoutId);
+      
+      if (error instanceof Error && error.name === 'AbortError') {
+        throw new Error('Tiempo de espera agotado. Por favor, inténtalo de nuevo.');
+      }
+      
+      throw error;
+    }
   }
 
   // Manejo del resultado del envío
@@ -204,7 +297,18 @@ export class ContactFormHandler {
     if (result.success) {
       this.handleSuccess(result.message || 'Mensaje enviado correctamente');
     } else {
-      this.handleError(result.error || 'Error al enviar el mensaje');
+      // Extraer mensaje de error de diferentes formatos posibles
+      let errorMessage = 'Error al enviar el mensaje';
+      
+      if (typeof result.error === 'string') {
+        errorMessage = result.error;
+      } else if (result.error && typeof result.error === 'object' && 'message' in result.error) {
+        errorMessage = result.error.message;
+      } else if (result.message) {
+        errorMessage = result.message;
+      }
+      
+      this.handleError(errorMessage);
     }
   }
 

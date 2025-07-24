@@ -1,24 +1,24 @@
 // Actions para manejo de reservas con integración de Resend
-import { defineAction } from 'astro:actions';
 import { createSupabaseAdmin } from '@/lib/supabase';
-import { 
-  createBookingSchema,
-  confirmBookingSchema,
-  updateBookingSchema,
+import {
   cancelBookingSchema,
-  contactFormSchema
+  confirmBookingSchema,
+  contactFormSchema,
+  createBookingSchema,
+  updateBookingSchema
 } from '@/utils/data/schemas';
-import { 
-  sendEmailWithResend,
+import {
   calculateTotalPrice,
-  generateBookingConfirmationEmail,
   generateAdminBookingNotificationEmail,
-  generateBookingConfirmedEmail,
   generateBookingCancelledEmail,
+  generateBookingConfirmationEmail,
+  generateBookingConfirmedEmail,
   generateBookingUpdatedEmail,
   generateContactConfirmationEmail,
-  generateContactNotificationEmail
+  generateContactNotificationEmail,
+  sendEmailWithResend
 } from '@/utils/email-helpers';
+import { defineAction } from 'astro:actions';
 
 // Action para crear una nueva reserva
 const createBooking = defineAction({
@@ -103,11 +103,14 @@ const createBooking = defineAction({
         };
       }
 
-      // Enviar emails de confirmación con Resend
+      // Enviar emails de confirmación con Resend (con delay para evitar rate limit)
       try {
         // Email al cliente
         const { subject: clientSubject, html: clientHtml } = generateBookingConfirmationEmail(booking);
         await sendEmailWithResend(input.email, clientSubject, clientHtml, context.locals.runtime);
+        
+        // Delay de 1 segundo para evitar el límite de tasa de Resend (2 req/sec)
+        await new Promise(resolve => setTimeout(resolve, 1000));
         
         // Email al estudio/administración
         const studioEmail = context.locals.runtime?.env?.ADMIN_EMAIL || 'contacto@contentstudiokrp.es';
@@ -116,6 +119,7 @@ const createBooking = defineAction({
         
       } catch (emailError) {
         // No fallar la reserva si el email falla
+        console.error('Error enviando emails:', emailError);
       }
 
       return {
@@ -340,11 +344,14 @@ const contactForm = defineAction({
     try {
       const adminEmail = context.locals.runtime?.env?.ADMIN_EMAIL || 'contacto@contentstudiokrp.es';
       
-      // Enviar emails usando las funciones centralizadas
+      // Enviar emails usando las funciones centralizadas (con delay para evitar rate limit)
       try {
         // Email al cliente
         const { subject: clientSubject, html: clientHtml } = generateContactConfirmationEmail(input);
         const clientEmailResult = await sendEmailWithResend(input.email, clientSubject, clientHtml, context.locals.runtime);
+        
+        // Delay de 1 segundo para evitar el límite de tasa de Resend (2 req/sec)
+        await new Promise(resolve => setTimeout(resolve, 1000));
         
         // Email al admin
         const { subject: adminSubject, html: adminHtml } = generateContactNotificationEmail(input);
@@ -366,6 +373,7 @@ const contactForm = defineAction({
           };
         }
       } catch (emailError) {
+        console.error('Error al enviar emails de contacto:', emailError);
         return {
           success: false,
           error: 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.',
@@ -374,6 +382,19 @@ const contactForm = defineAction({
       }
 
     } catch (error) {
+      console.error('Error en contactForm action:', error);
+      
+      // Si es un error de validación de Zod
+      if (error && typeof error === 'object' && 'issues' in error) {
+        const validationError = error as any;
+        const firstIssue = validationError.issues?.[0];
+        return {
+          success: false,
+          error: firstIssue?.message || 'Error de validación en el formulario.',
+          data: null
+        };
+      }
+      
       return {
         success: false,
         error: 'Error interno del servidor.',
