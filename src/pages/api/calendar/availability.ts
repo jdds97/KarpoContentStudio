@@ -2,9 +2,12 @@
 import type { APIRoute } from "astro";
 import { createSupabaseAdmin } from "../../../lib/supabase";
 
-export const GET: APIRoute = async ({ url }) => {
-  const supabaseAdmin = createSupabaseAdmin();
+export const GET: APIRoute = async ({ url, locals }) => {
   try {
+    const supabaseAdmin = createSupabaseAdmin(locals.runtime);
+    if (!supabaseAdmin) {
+      throw new Error('Failed to create Supabase admin client');
+    }
     const year = parseInt(url.searchParams.get("year") || new Date().getFullYear().toString());
     const month = parseInt(url.searchParams.get("month") || (new Date().getMonth() + 1).toString());
     const studioSpace = url.searchParams.get("studio_space") || "all";

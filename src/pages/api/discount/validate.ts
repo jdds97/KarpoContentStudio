@@ -4,8 +4,8 @@ import { createSupabaseAdmin } from "@/lib/supabase";
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request }) => {
-  const supabaseAdmin = createSupabaseAdmin();
+export const POST: APIRoute = async ({ request, locals }) => {
+  const supabaseAdmin = createSupabaseAdmin(locals.runtime);
   try {
     const { code } = await request.json();
     

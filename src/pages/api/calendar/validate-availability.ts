@@ -30,8 +30,8 @@ function generateTimeSlots(startTime: string, durationMinutes: number): string[]
   return slots;
 }
 
-export const GET: APIRoute = async ({ url }) => {
-  const supabaseAdmin = createSupabaseAdmin();
+export const GET: APIRoute = async ({ url, locals }) => {
+  const supabaseAdmin = createSupabaseAdmin(locals.runtime);
   try {
     const date = url.searchParams.get("date");
     const time = url.searchParams.get("time");

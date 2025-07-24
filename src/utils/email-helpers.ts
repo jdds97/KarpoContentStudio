@@ -52,27 +52,46 @@ const replacePlaceholders = (template: string, data: Record<string, string>): st
 const generateCompanySection = (company: string | null): string => {
   if (!company) return '';
   return `
-          <div class="detail-item">
-            <span class="detail-label">Empresa</span>
-            <span class="detail-value">${company}</span>
+          <!-- ═══ SEPARADOR: INFORMACIÓN ADICIONAL ═══ -->
+          <div style="height: 12px; border-bottom: 2px solid rgba(196, 191, 177, 0.2); margin: 20px 0; position: relative;">
+            <div style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); background: #F0ECE0; padding: 0 12px; color: #666; font-size: 11px; font-weight: 600; letter-spacing: 0.8px;">
+              INFORMACIÓN ADICIONAL
+            </div>
+          </div>
+          <div class="detail-item" style="background: rgba(218, 214, 201, 0.1); padding: 15px; border-radius: 6px;">
+            <span class="detail-label">🏢 Empresa</span>
+            <span class="detail-value" style="font-weight: 600;">${company}</span>
           </div>`;
 };
 
 const generateNotesSection = (notes: string | null): string => {
   if (!notes) return '';
   return `
-          <div class="detail-item">
-            <span class="detail-label">Notas adicionales</span>
-            <span class="detail-value">${notes}</span>
+          <!-- ═══ SEPARADOR: NOTAS ADICIONALES ═══ -->
+          <div style="height: 10px; margin: 18px 0;"></div>
+          <div class="detail-item" style="background: linear-gradient(135deg, #f8f8f8 0%, #f0f0f0 100%); border: 1px solid rgba(196, 191, 177, 0.3); border-radius: 8px; padding: 18px;">
+            <span class="detail-label" style="color: #555; font-weight: 600;">📝 Notas adicionales</span>
+            <div style="margin-top: 8px; padding: 10px; background: white; border-radius: 4px; border-left: 3px solid #DAD6C9;">
+              <span class="detail-value" style="font-style: italic; color: #333; line-height: 1.5; display: block;">${notes}</span>
+            </div>
           </div>`;
 };
 
 const generateDiscountSection = (discountCode: string | null, discountPercentage: number): string => {
   if (!discountCode) return '';
   return `
-          <div class="detail-item discount-applied">
-            <span class="detail-label">🎉 Descuento aplicado</span>
-            <span class="detail-value">${discountCode} (${discountPercentage}% de descuento)</span>
+          <!-- ═══ SEPARADOR: DESCUENTO ESPECIAL ═══ -->
+          <div style="height: 12px; border-bottom: 2px solid #4CAF50; margin: 25px 0; position: relative;">
+            <div style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); background: #F0ECE0; padding: 0 15px; color: #2E7D32; font-size: 11px; font-weight: 700; letter-spacing: 1px;">
+              ✨ DESCUENTO APLICADO ✨
+            </div>
+          </div>
+          <div class="detail-item discount-applied" style="background: linear-gradient(135deg, #e8f5e8 0%, #d4f1d4 100%); border-radius: 12px; padding: 20px; border: 3px solid #4CAF50; box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);">
+            <div style="text-align: center;">
+              <div style="font-size: 24px; margin-bottom: 8px;">🎉</div>
+              <span class="detail-label" style="color: #2E7D32; font-weight: 700; font-size: 16px; display: block; margin-bottom: 5px;">Descuento aplicado</span>
+              <span class="detail-value" style="color: #1B5E20; font-weight: 600; font-size: 18px; display: block;">${discountCode} (-${discountPercentage}%)</span>
+            </div>
           </div>`;
 };
 
@@ -266,28 +285,59 @@ export function generateContactConfirmationEmail(contactData: ContactFormData): 
   const subject = `Confirmación de contacto - ${contactData.subject}`;
   
   const html = `
-    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-      <h2 style="color: #2c3e50; border-bottom: 2px solid #f4f1eb; padding-bottom: 10px;">
-        Gracias por contactarnos
-      </h2>
-      <p>Hola <strong>${contactData.name}</strong>,</p>
-      <p>Hemos recibido tu mensaje y te responderemos lo antes posible.</p>
-      
-      <div style="background: #f4f1eb; padding: 15px; border-radius: 8px; margin: 20px 0;">
-        <h3 style="color: #2c3e50; margin-top: 0;">Resumen de tu consulta:</h3>
-        <p><strong>Asunto:</strong> ${contactData.subject}</p>
-        <p><strong>Mensaje:</strong></p>
-        <div style="background: white; padding: 10px; border-radius: 4px; border-left: 4px solid #d4af37;">
-          ${contactData.message.replace(/\n/g, '<br>')}
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 30px; background: #f8f9fa;">
+      <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+        
+        <h2 style="color: #2c3e50; border-bottom: 3px solid #f4f1eb; padding-bottom: 15px; margin-bottom: 30px; font-size: 28px;">
+          Gracias por contactarnos
+        </h2>
+        
+        <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">
+          Hola <strong>${contactData.name}</strong>,
+        </p>
+        
+        <p style="font-size: 16px; line-height: 1.6; margin-bottom: 30px;">
+          Hemos recibido tu mensaje y te responderemos lo antes posible.
+        </p>
+        
+        <div style="background: #f4f1eb; padding: 25px; border-radius: 10px; margin: 30px 0;">
+          <h3 style="color: #2c3e50; margin-top: 0; margin-bottom: 20px; font-size: 20px;">
+            Resumen de tu consulta:
+          </h3>
+          
+          <p style="margin-bottom: 15px; font-size: 16px;">
+            <strong>Asunto:</strong> ${contactData.subject}
+          </p>
+          
+          <p style="margin-bottom: 15px; font-size: 16px;">
+            <strong>Mensaje:</strong>
+          </p>
+          
+          <div style="background: white; padding: 20px; border-radius: 8px; border-left: 5px solid #d4af37; margin-top: 15px;">
+            <p style="margin: 0; font-size: 15px; line-height: 1.6;">
+              ${contactData.message.replace(/\n/g, '<br>')}
+            </p>
+          </div>
         </div>
-      </div>
-      
-      <p>Saludos cordiales,<br>
-      <strong>The Content Studio</strong></p>
-      
-      <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 12px; color: #666;">
-        📧 Email: contacto@thecontentstudio.com<br>
-        📍 Sevilla, España
+        
+        <div style="margin: 40px 0;">
+          <p style="font-size: 16px; line-height: 1.6; margin-bottom: 10px;">
+            Saludos cordiales,
+          </p>
+          <p style="font-size: 16px; font-weight: bold; margin: 0;">
+            <strong>The Content Studio</strong>
+          </p>
+        </div>
+        
+        <div style="margin-top: 40px; padding-top: 25px; border-top: 2px solid #eee; font-size: 14px; color: #666;">
+          <p style="margin-bottom: 8px;">
+            📧 Email: contacto@contentstudiokrp.es
+          </p>
+          <p style="margin: 0;">
+            📍 Sevilla, España
+          </p>
+        </div>
+        
       </div>
     </div>
   `;
@@ -302,27 +352,63 @@ export function generateContactNotificationEmail(contactData: ContactFormData): 
   const subject = `Nuevo contacto: ${contactData.subject}`;
   
   const html = `
-    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-      <h2 style="color: #2c3e50; border-bottom: 2px solid #f4f1eb; padding-bottom: 10px;">
-        Nuevo mensaje de contacto
-      </h2>
-      
-      <div style="background: #f4f1eb; padding: 15px; border-radius: 8px; margin: 20px 0;">
-        <h3 style="color: #2c3e50; margin-top: 0;">Datos del contacto:</h3>
-        <p><strong>Nombre:</strong> ${contactData.name}</p>
-        <p><strong>Email:</strong> ${contactData.email}</p>
-        ${contactData.phone ? `<p><strong>Teléfono:</strong> ${contactData.phone}</p>` : ''}
-        <p><strong>Asunto:</strong> ${contactData.subject}</p>
+    <div style="font-family: Arial, sans-serif; max-width: 650px; margin: 0 auto; padding: 30px; background: #f8f9fa;">
+      <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+        
+        <div style="background: linear-gradient(135deg, #000000 0%, #3C3C3C 100%); color: white; padding: 25px; border-radius: 8px; text-align: center; margin-bottom: 30px;">
+          <h2 style="margin: 0; font-size: 24px; font-weight: 600;">
+            Nuevo mensaje de contacto
+          </h2>
+        </div>
+        
+        <div style="background: #f4f1eb; padding: 25px; border-radius: 10px; margin: 30px 0;">
+          <h3 style="color: #2c3e50; margin-top: 0; margin-bottom: 25px; font-size: 20px;">
+            👤 Datos del contacto:
+          </h3>
+          
+          <div style="margin-bottom: 15px;">
+            <p style="margin: 0; font-size: 16px; line-height: 1.6;">
+              <strong>Nombre:</strong> ${contactData.name}
+            </p>
+          </div>
+          
+          <div style="margin-bottom: 15px;">
+            <p style="margin: 0; font-size: 16px; line-height: 1.6;">
+              <strong>Email:</strong> ${contactData.email}
+            </p>
+          </div>
+          
+          ${contactData.phone ? `
+          <div style="margin-bottom: 15px;">
+            <p style="margin: 0; font-size: 16px; line-height: 1.6;">
+              <strong>Teléfono:</strong> ${contactData.phone}
+            </p>
+          </div>
+          ` : ''}
+          
+          <div style="margin-bottom: 0;">
+            <p style="margin: 0; font-size: 16px; line-height: 1.6;">
+              <strong>Asunto:</strong> ${contactData.subject}
+            </p>
+          </div>
+        </div>
+        
+        <div style="background: white; padding: 25px; border-radius: 10px; border-left: 5px solid #d4af37; border: 1px solid #e0e0e0;">
+          <h3 style="color: #2c3e50; margin-top: 0; margin-bottom: 20px; font-size: 18px;">
+            💬 Mensaje:
+          </h3>
+          <div style="font-size: 15px; line-height: 1.7; color: #333;">
+            ${contactData.message.replace(/\n/g, '<br>')}
+          </div>
+        </div>
+        
+        <div style="margin-top: 40px; padding-top: 25px; border-top: 2px solid #eee; text-align: center;">
+          <p style="margin: 0; font-size: 13px; color: #888; font-style: italic;">
+            📧 Enviado desde el formulario de contacto del sitio web
+          </p>
+        </div>
+        
       </div>
-      
-      <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #d4af37;">
-        <h3 style="color: #2c3e50; margin-top: 0;">Mensaje:</h3>
-        <p>${contactData.message.replace(/\n/g, '<br>')}</p>
-      </div>
-      
-      <p style="margin-top: 20px; font-size: 12px; color: #666;">
-        Enviado desde el formulario de contacto del sitio web
-      </p>
     </div>
   `;
   

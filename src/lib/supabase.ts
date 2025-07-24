@@ -24,6 +24,7 @@ export function createSupabaseClient(runtime?: any) {
 
 // Cliente con privilegios de servicio (solo para server-side)
 export function createSupabaseAdmin(runtime?: any) {
+  // En desarrollo, Astro no tiene locals.runtime, usar variables de entorno directamente
   const supabaseUrl = runtime?.env?.SUPABASE_URL || 
                      import.meta.env.SUPABASE_URL || 
                      process.env.SUPABASE_URL;
@@ -34,8 +35,20 @@ export function createSupabaseAdmin(runtime?: any) {
                          import.meta.env.SUPABASE_ANON_KEY || 
                          process.env.SUPABASE_ANON_KEY;
   
-  if (!supabaseUrl || (!supabaseServiceKey && !supabaseAnonKey)) {
-    throw new Error(`Missing Supabase admin config: URL=${!!supabaseUrl}, ServiceKey=${!!supabaseServiceKey}, AnonKey=${!!supabaseAnonKey}`);
+  console.log('Supabase config check:', {
+    hasUrl: !!supabaseUrl,
+    hasServiceKey: !!supabaseServiceKey,
+    hasAnonKey: !!supabaseAnonKey,
+    isRuntime: !!runtime,
+    url: supabaseUrl?.substring(0, 30) + '...', // Solo primeros caracteres para debug
+  });
+  
+  if (!supabaseUrl) {
+    throw new Error(`Missing SUPABASE_URL`);
+  }
+  
+  if (!supabaseServiceKey && !supabaseAnonKey) {
+    throw new Error(`Missing SUPABASE_SERVICE_ROLE_KEY and SUPABASE_ANON_KEY`);
   }
   
   return createClient(supabaseUrl, supabaseServiceKey || supabaseAnonKey, {

@@ -15,6 +15,42 @@ export default defineConfig({
   }) : node({
     mode: 'standalone'
   }),
+  image: {
+    // Configuración optimizada para imágenes con máxima calidad
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+      config: {
+        // Configuraciones de Sharp para máxima calidad
+        limitInputPixels: 268402689, // ~16K x 16K máximo
+        sequentialRead: false, // Mejora performance en imágenes grandes
+        density: 300, // DPI alto para calidad retina
+        
+        // Configuraciones avanzadas de Sharp
+        mozjpeg: true, // Usar mozjpeg encoder para mejor compresión
+        progressive: true, // JPEG progresivo
+        chromaSubsampling: '4:4:4', // Sin subsampling de croma para max calidad
+        trellisQuantisation: true, // Mejor cuantización
+        overshootDeringing: true, // Reducir artefactos
+        optimiseScans: true, // Optimizar escaneos progresivos
+      }
+    },
+    // Formatos soportados priorizando AVIF
+    formats: ['avif', 'webp', 'jpg'],
+    // Calidades por formato - maximizadas para imágenes críticas
+    quality: {
+      avif: 85,  // Aumentado para mejor calidad
+      webp: 90,  // Aumentado para mejor calidad  
+      jpeg: 95   // Máxima calidad para fallback
+    },
+    // Breakpoints responsive automáticos optimizados
+    remotePatterns: [{
+      protocol: "https"
+    }],
+    // Configuración experimental de responsive images
+    experimental: {
+      globalCSS: true
+    }
+  },
   devToolbar: {
     enabled: false
   },

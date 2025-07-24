@@ -82,8 +82,9 @@ export const BOOKING_CONFIRMATION_TEMPLATE = `
       font-size: 16px;
       color: #3C3C3C;
       text-align: center;
-      margin-bottom: 30px;
-      line-height: 1.5;
+      margin-bottom: 35px;
+      line-height: 1.6;
+      padding: 0 10px;
     }
     
     .status-badge {
@@ -125,7 +126,7 @@ export const BOOKING_CONFIRMATION_TEMPLATE = `
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px 0;
+      padding: 12px 0;
       border-bottom: 1px solid rgba(196, 191, 177, 0.3);
     }
     
@@ -186,7 +187,8 @@ export const BOOKING_CONFIRMATION_TEMPLATE = `
     .next-steps p {
       font-size: 14px;
       color: #3C3C3C;
-      line-height: 1.5;
+      line-height: 1.6;
+      margin-bottom: 15px;
     }
     
     .contact-info {
@@ -288,33 +290,36 @@ export const BOOKING_CONFIRMATION_TEMPLATE = `
         <h3>📋 Detalles de tu Reserva</h3>
         <div class="detail-grid">
           <div class="detail-item">
-            <span class="detail-label">Fecha de la sesión</span>
+            <span class="detail-label">📅 Fecha de la sesión</span>
             <span class="detail-value">{{SESSION_DATE}}</span>
           </div>
           <div class="detail-item">
-            <span class="detail-label">Hora de inicio</span>
+            <span class="detail-label">🕐 Hora de inicio</span>
             <span class="detail-value">{{SESSION_TIME}}</span>
           </div>
           <div class="detail-item">
-            <span class="detail-label">Duración</span>
+            <span class="detail-label">⏱️ Duración</span>
             <span class="detail-value">{{PACKAGE_DURATION}}</span>
           </div>
           <div class="detail-item">
-            <span class="detail-label">Espacio del estudio</span>
+            <span class="detail-label">🏢 Espacio del estudio</span>
             <span class="detail-value">{{STUDIO_SPACE}}</span>
           </div>
           <div class="detail-item">
-            <span class="detail-label">Tipo de sesión</span>
+            <span class="detail-label">📸 Tipo de sesión</span>
             <span class="detail-value">{{SESSION_TYPE}}</span>
           </div>
           <div class="detail-item">
-            <span class="detail-label">Número de participantes</span>
+            <span class="detail-label">👥 Número de participantes</span>
             <span class="detail-value">{{PARTICIPANTS}}</span>
           </div>
           {{COMPANY_SECTION}}
           {{NOTES_SECTION}}
           {{DISCOUNT_SECTION}}
         </div>
+        
+        <!-- Separador visual entre información de sesión y precio -->
+        <div style="height: 20px; border-bottom: 2px solid rgba(196, 191, 177, 0.2); margin: 20px 0;"></div>
         
         <div class="price-highlight">
           <div class="detail-item">
@@ -342,7 +347,7 @@ export const BOOKING_CONFIRMATION_TEMPLATE = `
           </div>
           <div class="contact-item">
             <strong>Teléfono</strong>
-            +34 XXX XXX XXX
+            +34 633 811 994
           </div>
         </div>
       </div>
@@ -1076,7 +1081,7 @@ export const BOOKING_REMINDER_TEMPLATE = `
         <h3>🚨 ¿Necesitas hacer algún cambio?</h3>
         <p>Si necesitas reprogramar o tienes alguna emergencia, contáctanos lo antes posible:</p>
         <p><strong>Email:</strong> contacto@contentstudiokrp.es</p>
-        <p><strong>Teléfono:</strong> +34 </p>
+        <p><strong>Teléfono:</strong> +34 633 811 994</p>
       </div>
       
       <p style="margin-top: 30px; font-size: 18px; font-weight: 500;">
@@ -1173,8 +1178,9 @@ export const BOOKING_CONFIRMATION_TEMPLATE_ENHANCED = `
       font-size: 16px;
       color: #3C3C3C;
       text-align: center;
-      margin-bottom: 30px;
-      line-height: 1.5;
+      margin-bottom: 35px;
+      line-height: 1.6;
+      padding: 0 10px;
     }
     
     .status-badge {
@@ -1216,7 +1222,7 @@ export const BOOKING_CONFIRMATION_TEMPLATE_ENHANCED = `
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px 0;
+      padding: 12px 0;
       border-bottom: 1px solid rgba(196, 191, 177, 0.3);
     }
     
@@ -1277,7 +1283,8 @@ export const BOOKING_CONFIRMATION_TEMPLATE_ENHANCED = `
     .next-steps p {
       font-size: 14px;
       color: #3C3C3C;
-      line-height: 1.5;
+      line-height: 1.6;
+      margin-bottom: 15px;
     }
     
     .contact-info {
@@ -1379,33 +1386,36 @@ export const BOOKING_CONFIRMATION_TEMPLATE_ENHANCED = `
         <h3>📋 Detalles de tu Reserva</h3>
         <div class="detail-grid">
           <div class="detail-item">
-            <span class="detail-label">Fecha de la sesión</span>
+            <span class="detail-label">📅 Fecha de la sesión</span>
             <span class="detail-value">{{SESSION_DATE}}</span>
           </div>
           <div class="detail-item">
-            <span class="detail-label">Hora de inicio</span>
+            <span class="detail-label">🕐 Hora de inicio</span>
             <span class="detail-value">{{SESSION_TIME}}</span>
           </div>
           <div class="detail-item">
-            <span class="detail-label">Duración</span>
+            <span class="detail-label">⏱️ Duración</span>
             <span class="detail-value">{{PACKAGE_DURATION}}</span>
           </div>
           <div class="detail-item">
-            <span class="detail-label">Espacio del estudio</span>
+            <span class="detail-label">🏢 Espacio del estudio</span>
             <span class="detail-value">{{STUDIO_SPACE}}</span>
           </div>
           <div class="detail-item">
-            <span class="detail-label">Tipo de sesión</span>
+            <span class="detail-label">📸 Tipo de sesión</span>
             <span class="detail-value">{{SESSION_TYPE}}</span>
           </div>
           <div class="detail-item">
-            <span class="detail-label">Número de participantes</span>
+            <span class="detail-label">👥 Número de participantes</span>
             <span class="detail-value">{{PARTICIPANTS}}</span>
           </div>
           {{COMPANY_SECTION}}
           {{NOTES_SECTION}}
           {{DISCOUNT_SECTION}}
         </div>
+        
+        <!-- Separador visual entre información de sesión y precio -->
+        <div style="height: 20px; border-bottom: 2px solid rgba(196, 191, 177, 0.2); margin: 20px 0;"></div>
         
         <div class="price-highlight">
           <div class="detail-item">
@@ -1433,7 +1443,7 @@ export const BOOKING_CONFIRMATION_TEMPLATE_ENHANCED = `
           </div>
           <div class="contact-item">
             <strong>Teléfono</strong>
-            +34 XXX XXX XXX
+            +34 633 811 994
           </div>
         </div>
       </div>

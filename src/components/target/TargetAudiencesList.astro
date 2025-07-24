@@ -2,7 +2,6 @@
 import Button from '@/components/common/Button.astro';
 import { targetAudiences } from '@/utils';
 import { CheckCircle, XCircle, Target } from '@/components/icons';
-import { Image } from 'astro:assets';
 
 // Usar los datos desde utils en lugar de definirlos localmente
 const audiences = targetAudiences;
@@ -14,16 +13,36 @@ const audiences = targetAudiences;
         <div class={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-16 lg:gap-20`}>
           {/* Imagen */}
           <div class="w-full lg:w-2/5">
-            <Image
-              src={audience.image}
-              alt={audience.title}
-              width={1000}
-              height={800}
-              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 40vw, 500px"
-              class="w-full h-full object-cover rounded-lg shadow-md"
-              loading="lazy"
-              decoding="async"
-            />
+            <picture class="w-full h-full">
+              <source 
+                srcset={(() => {
+                  const pathParts = audience.image.split('/');
+                  const fileName = pathParts[pathParts.length - 1];
+                  const baseName = fileName.replace('-quality.webp', '').replace('-display.webp', '').replace('-large.webp', '').replace('-medium.webp', '').replace('-small.webp', '').replace('.webp', '');
+                  const zone = pathParts[pathParts.length - 3];
+                  return `
+                    /images/spaces/${zone}/webp/${baseName}-small.webp 400w,
+                    /images/spaces/${zone}/webp/${baseName}-medium.webp 800w,
+                    /images/spaces/${zone}/webp/${baseName}-large.webp 1200w
+                  `;
+                })()}
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 40vw, 500px"
+                type="image/webp"
+              />
+              <img 
+                src={(() => {
+                  const pathParts = audience.image.split('/');
+                  const fileName = pathParts[pathParts.length - 1];
+                  const baseName = fileName.replace('-quality.webp', '').replace('-display.webp', '').replace('-large.webp', '').replace('-medium.webp', '').replace('-small.webp', '').replace('.webp', '');
+                  const zone = pathParts[pathParts.length - 3];
+                  return `/images/spaces/${zone}/webp/${baseName}-medium.webp`;
+                })()}
+                alt={audience.title}
+                class="w-full h-full object-cover rounded-lg shadow-md"
+                loading="lazy"
+                style="object-position: center;"
+              />
+            </picture>
           </div>
           
           {/* Contenido */}
