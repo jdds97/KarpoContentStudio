@@ -62,7 +62,10 @@ export const contactFormSchema = z.object({
   email: z.string().email('Email inválido'),
   phone: z.string().optional(),
   subject: z.string().min(1, 'El asunto es requerido'),
-  message: z.string().min(10, 'El mensaje debe tener al menos 10 caracteres')
+  message: z.string().min(10, 'El mensaje debe tener al menos 10 caracteres'),
+  'privacy-policy': z.literal('on').or(z.literal('true')).or(z.boolean()).refine(val => val === 'on' || val === 'true' || val === true, {
+    message: 'Debes aceptar la política de privacidad'
+  })
 });
 
 // Tipos derivados de los schemas
