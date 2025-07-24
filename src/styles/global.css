@@ -491,3 +491,33 @@ label[for="menu-toggle"] .hamburger-line:nth-child(3) {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* HeroSection responsive background positioning */
+.hero-bg {
+  background-position: center calc(50% - 10px);
+  background-attachment: scroll;
+}
+
+@media (min-width: 480px) {
+  .hero-bg {
+    background-position: center calc(50% - 15px);
+  }
+}
+
+@media (min-width: 640px) {
+  .hero-bg {
+    background-position: center calc(80% - 20px);
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-bg {
+    background-position: center calc(70% - 25px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-bg {
+    background-position: center calc(60% - 30px);
+  }
+}

@@ -5,8 +5,8 @@ import { actions } from "astro:actions";
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request, cookies }) => {
-  const supabase = createSupabaseClient();
+export const POST: APIRoute = async ({ request, cookies, locals }) => {
+  const supabase = createSupabaseClient(locals.runtime);
   try {
     // Verificar autenticación
     const accessToken = cookies.get("sb-access-token");

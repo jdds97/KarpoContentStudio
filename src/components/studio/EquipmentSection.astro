@@ -1,6 +1,6 @@
 ---
-import { Lightbulb, Image, Mic, Package, ChevronRight } from '@/components/icons';
-import { STUDIO_EQUIPMENT, SECTION_CONTENT } from '@/utils';
+import { ChevronRight, Lightbulb, Mic, Package } from '@/components/icons';
+import { SECTION_CONTENT, STUDIO_EQUIPMENT } from '@/utils';
 ---
 <section class="section-padding bg-primary-beige">
   <div class="container mx-auto container-padding">
@@ -13,32 +13,15 @@ import { STUDIO_EQUIPMENT, SECTION_CONTENT } from '@/utils';
             <Lightbulb class="w-8 h-8 text-primary-black mr-3" />
             <h3 class="text-xl font-instrument text-primary-black">{STUDIO_EQUIPMENT.lighting.title}</h3>
           </div>
-          <ul class="space-y-2 text-primary-gray">
+          <ul class="space-y-2 text-primary-gray mb-6">
             {STUDIO_EQUIPMENT.lighting.items.map((item) => (
               <li class="flex items-start">
-                <ChevronRight class="w-5 h-5 text-primary-black mr-2 mt-0.5" />
-                <span>{item}</span>
+          <ChevronRight class="w-5 h-5 text-primary-black mr-2 mt-0.5" />
+          <span>{item}</span>
               </li>
             ))}
           </ul>
-        </div>
-        <!-- Fondos -->
-        <div class="bg-primary-white p-8 rounded-lg shadow-sm">
-          <div class="flex items-center mb-4">
-            <Image class="w-8 h-8 text-primary-black mr-3" />
-            <h3 class="text-xl font-instrument text-primary-black">{STUDIO_EQUIPMENT.backgrounds.title}</h3>
-          </div>
-          <ul class="space-y-2 text-primary-gray">
-            {STUDIO_EQUIPMENT.backgrounds.items.map((item) => (
-              <li class="flex items-start">
-                <ChevronRight class="w-5 h-5 text-primary-black mr-2 mt-0.5" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-          <!-- Audio -->
-        <div class="bg-primary-white p-8 rounded-lg shadow-sm">
+          
           <div class="flex items-center mb-4">
             <Mic class="w-8 h-8 text-primary-black mr-3" />
             <h3 class="text-xl font-instrument text-primary-black">{STUDIO_EQUIPMENT.audio.title}</h3>
@@ -46,8 +29,8 @@ import { STUDIO_EQUIPMENT, SECTION_CONTENT } from '@/utils';
           <ul class="space-y-2 text-primary-gray">
             {STUDIO_EQUIPMENT.audio.items.map((item) => (
               <li class="flex items-start">
-                <ChevronRight class="w-5 h-5 text-primary-black mr-2 mt-0.5" />
-                <span>{item}</span>
+          <ChevronRight class="w-5 h-5 text-primary-black mr-2 mt-0.5" />
+          <span>{item}</span>
               </li>
             ))}
           </ul>

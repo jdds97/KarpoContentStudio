@@ -1,14 +1,14 @@
 ---
-import { Image } from 'astro:assets';
 import Button from '@/components/common/Button.astro';
 import CheckCircle from '@/components/icons/CheckCircle.astro';
 import Sparkles from '@/components/icons/Sparkles.astro';
+import FinalCarousel from '@/components/studio/FinalCarousel.astro';
+import { STUDIO_ZONES_GALLERY } from '@/utils/data/ui-content';
 
 interface Props {
   id: string;
   title: string;
   description: string;
-  image: string;
   reverse?: boolean;
   features: string[];
   idealFor: string[];
@@ -20,11 +20,55 @@ const {
   id,
   title,
   description,
-  image,
   reverse = false,
   features,
   idealFor,
 } = Astro.props;
+
+// Obtener las imágenes de la zona correspondiente
+const getZoneImages = (spaceId: string) => {
+  const zoneMap: Record<string, keyof typeof STUDIO_ZONES_GALLERY.zones> = {
+    'cyclorama': 'cyclorama',
+    'color-backgrounds': 'colorBackgrounds',
+    'black-zone': 'blackZone',
+    'creative-studio': 'creativeStudio'
+  };
+  
+  const zoneKey = zoneMap[spaceId];
+  return zoneKey ? STUDIO_ZONES_GALLERY.zones[zoneKey] : null;
+};
+
+const zoneData = getZoneImages(id);
+
+// Crear layout dinámico basado en el número de imágenes
+const getDynamicLayout = (imageCount: number) => {
+  if (imageCount <= 2) {
+    return {
+      columns: { mobile: 1, tablet: 2, desktop: 2 },
+      maxImages: imageCount,
+      aspectRatio: 'landscape' as const,
+      gap: 'lg' as const
+    };
+  } else if (imageCount <= 4) {
+    return {
+      columns: { mobile: 2, tablet: 2, desktop: 2 },
+      maxImages: imageCount,
+      aspectRatio: 'landscape' as const,
+      gap: 'md' as const
+    };
+  } else if (imageCount <= 6) {
+    return {
+      columns: { mobile: 2, tablet: 2, desktop: 3 },
+      maxImages: 6,
+      aspectRatio: 'landscape' as const,
+      gap: 'md' as const
+    };
+  } else {
+    return STUDIO_ZONES_GALLERY.defaultLayout;
+  }
+};
+
+const dynamicLayout = zoneData ? getDynamicLayout(zoneData.images.length) : STUDIO_ZONES_GALLERY.defaultLayout;
 
 ---
 
@@ -32,17 +76,24 @@ const {
   id={id}
   class={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-10 mb-24`}
 >
-  <!-- Imagen -->
-  <div class="w-full lg:w-1/2">
-    <Image
-      src={image}
-      alt={title}
-      width={1200}
-      height={800}
-      class="w-full h-full object-cover rounded-lg shadow-md"
-      loading="lazy"
-      decoding="async"
-    />
+  <!-- Galería de imágenes -->
+  <div class="w-full lg:w-1/2 flex items-center justify-center">
+    {zoneData ? (
+      <div class="w-full max-w-2xl">
+        <FinalCarousel 
+          images={[...zoneData.images]}
+          layout={dynamicLayout}
+          zone={zoneData.name}
+          enableLightbox={true}
+          showOverlay={false}
+          class="w-full"
+        />
+      </div>
+    ) : (
+      <div class="w-full h-96 bg-gray-200 rounded-lg flex items-center justify-center">
+        <p class="text-gray-500">Galería no disponible</p>
+      </div>
+    )}
   </div>
 
   <!-- Contenido -->
@@ -90,3 +141,4 @@ const {
     >
   </div>
 </div>
+

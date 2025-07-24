@@ -1,22 +1,22 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import TargetSection from '@/components/home/TargetSection.astro';
-import StudioSpacesSection from '@/components/home/StudioSpacesSection.astro';
 import CtaSection from '@/components/common/CtaSection.astro';
-import HeroSection from '@/components/common/HeroSection.astro';
-import { HERO_CONTENT, CTA_CONTENT } from '@/utils';
+import OptimizedHeroSection from '@/components/common/OptimizedHeroSection.astro';
+import StudioSpacesSection from '@/components/home/StudioSpacesSection.astro';
+import TargetSection from '@/components/home/TargetSection.astro';
+import Layout from '@/layouts/Layout.astro';
+import { CTA_CONTENT, HERO_CONTENT } from '@/utils';
 
 ---
 
 <Layout title="Home">
-  <HeroSection
+  <OptimizedHeroSection
     title={HERO_CONTENT.home.title}
     description={HERO_CONTENT.home.description}
-    image="/images/spaces/principal-optimized.webp"
     buttonText={HERO_CONTENT.home.buttonText}
     buttonHref={HERO_CONTENT.home.buttonHref}
+    heightClass='h-[60vh] md:h-[75vh]'
     overlayClass="bg-primary-black/60"
-    titleClass="text-primary-black"
+    titleClass="text-primary-white"
     descriptionClass='text-primary-white'
     buttonVariant="custom"
     buttonClass="bg-primary-black text-primary-white hover:bg-primary-beige hover:text-primary-black transition-colors shadow-lg"

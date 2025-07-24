@@ -4,8 +4,8 @@ import { createSupabaseAdmin } from "@/lib/supabase";
 
 export const prerender = false;
 
-export const GET: APIRoute = async ({ url }) => {
-  const supabaseAdmin = createSupabaseAdmin();
+export const GET: APIRoute = async ({ url, locals }) => {
+  const supabaseAdmin = createSupabaseAdmin(locals.runtime);
   try {
     const date = url.searchParams.get("date");
     const studioSpace = url.searchParams.get("studio_space") || "all";

@@ -1,26 +1,26 @@
 // Contenido de UI para componentes
 
 import {
-  Camera,
-  Building2,
-  Briefcase,
-  Mic,
-  Video,
-  Users,
-  Play,
   Brain,
+  Briefcase,
   Building,
-  Target,
+  Building2,
+  Camera,
   CheckCircle,
-  Lightbulb,
-  Edit,
-  Phone,
-  Package,
   Coffee,
+  Edit,
+  Lightbulb,
+  Mic,
+  Package,
   Paintbrush,
   Palette,
+  Phone,
+  Play,
   RotateCcw,
-  Smartphone
+  Smartphone,
+  Target,
+  Users,
+  Video
 } from '@/components/icons';
 
 // Metadatos SEO
@@ -125,12 +125,12 @@ export const CAROUSEL_SLIDES = [
 // Testimonios
 export const TESTIMONIALS = [
   {
-    id: 'alejandro-rodriguez',
+    id: 'fran-vergara',
     quote: 'Como fotógrafo profesional, el ciclorama de The Content Studio ha sido un descubrimiento increíble. El espacio, la iluminación y el equipamiento son exactamente lo que necesitaba para mis sesiones editoriales.',
     author: {
-      name: 'Alejandro Rodríguez',
+      name: 'Fran Vergara',
       role: 'Fotógrafo de Moda',
-      initials: 'AR'
+      initials: 'FV'
     }
   },
   {
@@ -138,7 +138,7 @@ export const TESTIMONIALS = [
     quote: 'Nuestra startup acaba de lanzar su primera colección y gracias a las sesiones en The Content Studio, nuestras fotos de producto destacan por encima de la competencia. Una inversión que realmente ha valido la pena.',
     author: {
       name: 'Laura Martínez',
-      role: 'Fundadora, StyleCraft',
+      role: 'Modista y Fundadora de Marca',
       initials: 'LM'
     }
   },
@@ -147,7 +147,7 @@ export const TESTIMONIALS = [
     quote: 'Llevamos grabando nuestro podcast en The Content Studio durante 6 meses y la diferencia en calidad de audio y visual es asombrosa. Además, el equipo es siempre atento y profesional.',
     author: {
       name: 'Carlos García',
-      role: 'Podcaster, Futuristas Podcast',
+      role: 'Podcaster',
       initials: 'CG'
     }
   }
@@ -249,7 +249,7 @@ export const FORM_LABELS = {
       },
       middle: ' y la ',
       privacyLink: {
-        href: '/privacy-policy', 
+        href: '/privacy-policy',
         text: 'política de privacidad',
         class: 'text-primary-black underline hover:text-primary-gray transition-colors'
       },
@@ -339,7 +339,7 @@ export const CTA_CONTENT = {
 // Contenido para HeroSection
 export const HERO_CONTENT = {
   home: {
-    title: 'Estudio Fotográfico Profesional en Sevilla - The Content Studio',
+    title: 'The Content Studio',
     description: 'El espacio donde tu creatividad cobra vida en Sevilla.',
     buttonText: 'Reserva tu sesión',
     buttonHref: '/booking'
@@ -353,15 +353,15 @@ export const HERO_CONTENT = {
     description: 'Descubre todos los espacios disponibles en The Content Studio, cada uno diseñado específicamente para diferentes tipos de producciones y necesidades creativas.'
   },
   rates: {
-    title: 'Tarifas de Alquiler de Estudio Fotográfico en Sevilla',
+    title: 'Tarifas de Alquiler ',
     description: 'Ofrecemos opciones flexibles para adaptarnos a tus necesidades, desde alquileres por horas hasta membresías mensuales y anuales.'
   },
   contact: {
-    title: 'Contacta con The Content Studio - Estudio en Sevilla',
+    title: 'Contacto',
     description: 'Estamos aquí para responder a tus preguntas y ayudarte a encontrar el espacio perfecto para tu próximo proyecto.'
   },
   faq: {
-    title: 'Preguntas Frecuentes sobre Alquiler de Estudio Fotográfico',
+    title: 'Preguntas Frecuentes',
     description: 'Encuentra respuestas a las preguntas más comunes sobre nuestro estudio, reservas y servicios.'
   },
   booking: {
@@ -500,21 +500,9 @@ export const STUDIO_EQUIPMENT = {
   lighting: {
     title: 'Iluminación',
     items: [
-      '2 flashes Godox AD600Pro con modificadores',
-      '4 flashes Godox SK400II con beauty dish y softboxes',
-      '2 paneles LED bicolor Godox LC500R',
+      '2 flashes Godox SK400II con beauty dish y softboxes',
+      'Iluminación LED variable para vídeo y fotografía',
       'Reflectores, difusores y soportes variados'
-    ]
-  },
-  backgrounds: {
-    title: 'Fondos',
-    items: [
-      'Ciclorama blanco de 6m x 4m',
-      'Fondos de papel Colorama de 2,7m (blanco, verde chromakey, celeste, rojo, azul y otros colores)',
-      'Plancha de metacrilato transparente de 2m x 1m para proteger fondos Colorama',
-      'Pared de roble clásico y reverso en mármol gris móviles',
-      'Zona black studio con 40m² de fondo negro mate',
-      'Creative Studio: cuatro fondos temáticos únicos (ladrillo industrial, minimalista blanco, madera natural, elegante oscuro)'
     ]
   },
   creativeStudio: {
@@ -533,21 +521,18 @@ export const STUDIO_EQUIPMENT = {
   audio: {
     title: 'Audio Profesional',
     items: [
-      '2 micrófonos de condensador Rode NT1-A para grabación de alta calidad',
-      '2 micrófonos dinámicos Shure SM7B ideales para podcasting',
-      'Interface de audio Focusrite Scarlett 4i4 para grabación multicanal',
+      '2 micrófonos de condensador Rode PodMic para grabación de alta calidad',
       'Auriculares profesionales para monitorización en tiempo real',
-      'Creative Studio: acústica optimizada con paneles especializados para grabación de audio premium'
     ]
   },
   amenities: {
     title: 'Comodidades',
     items: [
       'Zona de camerino con espejo y burros para vestuario',
-      'Kitchenette con microondas, frigorífico y máquina de café',
+      'Pequeña cocina con microondas, frigorífico y máquina de café',
       'WiFi de alta velocidad en todas las zonas del estudio',
       'Zona de carga/descarga directa junto a la entrada',
-      'Creative Studio: climatización independiente y espacio de almacenamiento dedicado',
+      'Climatización independiente y espacio de almacenamiento dedicado',
       'Configuración rápida entre escenarios sin interrumpir flujo de trabajo'
     ]
   }
@@ -644,7 +629,7 @@ export const CONTENT_PACKAGES = {
         { icon: Lightbulb, text: "Ideal para 2 publicaciones + 1–2 reels semanales", isBold: true }
       ],
       buttonText: "Reservar Pack Inicia",
-      buttonLink: "/booking?package=pack-inicia&price=550",
+      buttonLink: "/contact",
       buttonVariant: "primary" as const,
       buttonClass: "h-14 text-base"
     },
@@ -667,7 +652,7 @@ export const CONTENT_PACKAGES = {
         { icon: Lightbulb, text: "Ideal para 4 publicaciones + 2–3 reels semanales", isBold: true }
       ],
       buttonText: "Reservar Pack Impulsa",
-      buttonLink: "/booking?package=pack-impulsa&price=800",
+      buttonLink: "/contact",
       buttonVariant: "custom" as const,
       buttonClass: "bg-primary-beige text-primary-black hover:bg-primary-gray hover:text-primary-white font-medium py-4 h-14 text-base transition-all duration-300 inline-flex items-center justify-center rounded"
     },
@@ -690,7 +675,7 @@ export const CONTENT_PACKAGES = {
         { icon: Lightbulb, text: "Ideal para 4+ publicaciones y reels semanales + historias diarias", isBold: true }
       ],
       buttonText: "Reservar Pack Potencia",
-      buttonLink: "/booking?package=pack-potencia&price=1200",
+      buttonLink: "/contact",
       buttonVariant: "primary" as const,
       buttonClass: "h-14 text-base"
     }
@@ -808,13 +793,13 @@ export const STUDIO_SPACES_FULL = [
     description: "Nuestro ciclorama de gran formato es el espacio ideal para producciones fotográficas y audiovisuales que requieren un entorno amplio, versátil y completamente personalizable.",
     image: "/images/spaces/cyclorama-optimized.webp",
     features: [
-      "Grandes Dimensiones: 6m x 4m con más de 3m de altura",
-      "Espacio Versátil para fotografía de moda, retratos y producciones audiovisuales",
-      "Iluminación Sin Restricciones y total libertad para setups profesionales",
-      "Fondos y Decorados Personalizables según las necesidades de cada sesión",
-      "Amplia Movilidad para el Equipo de fotografía y producción",
-      "Acceso a Equipamiento Profesional incluido en el alquiler",
-      "Fácil Acceso y Comodidad para transporte de equipos"
+      "Grandes dimensiones: 6m x 4m con más de 3m de altura",
+      "Espacio versátil para fotografía de moda, retratos y producciones audiovisuales",
+      "Iluminación sin restricciones y total libertad para setups profesionales",
+      "Fondos y decorados personalizables según las necesidades de cada sesión",
+      "Amplia movilidad para el equipo de fotografía y producción",
+      "Acceso a equipamiento profesional incluido en el alquiler",
+      "Fácil acceso y comodidad para transporte de equipos"
     ] as string[],
     idealFor: [
       "Fotografía y video de moda, editorial y publicidad",
@@ -830,11 +815,11 @@ export const STUDIO_SPACES_FULL = [
     image: "/images/spaces/sample.webp",
     reverse: true,
     features: [
-      "Fondos Intercambiables de 2.7m de ancho en variedad de colores",
-      "Mobiliario y Accesorios Personalizables para ambientar tus sesiones",
-      "Iluminación Adaptable para diferentes estilos visuales",
-      "Ambientes Dinámicos desde retratos hasta fotografía de moda",
-      "Fácil Montaje y Cambio Rápido de Fondos sin interrumpir el workflow"
+      "Fondos intercambiables de 2.7m de ancho en variedad de colores",
+      "Mobiliario y accesorios personalizables para ambientar tus sesiones",
+      "Iluminación adaptable para diferentes estilos visuales",
+      "Ambientes dinámicos desde retratos hasta fotografía de moda",
+      "Fácil montaje y cambio rápido de fondos sin interrumpir el workflow"
     ] as string[],
     idealFor: [
       "Sesiones de retrato con fondos coloridos y llamativos",
@@ -843,18 +828,44 @@ export const STUDIO_SPACES_FULL = [
       "Producciones audiovisuales con transiciones de colores y efectos visuales"
     ] as string[]
   },
+
   {
+    id: "creative-studio",
+    title: "Creative Studio",
+    description: "Nuestra zona Creative Studio es el corazón creativo de The Content Studio, un espacio único diseñado especialmente para podcasters, creadores de contenido y profesionales que buscan un entorno con personalidad propia. Con cuatro paredes temáticas completamente diferentes, cada escenario ofrece un estilo visual distintivo que permite grabar contenido variado sin necesidad de cambiar de ubicación.",
+    image: "/images/spaces/cyclorama-optimized.webp",
+    reverse: true,
+    features: [
+      "Cuatro escenarios únicos en un solo espacio",
+      "Acústica optimizada y ambiente controlado: climatización independiente y aislamiento acústico para sesiones largas de grabación",
+      "Iluminación profesional especializada: sistema de luces LED regulables y flashes profesionales adaptados para grabación de video y fotografía",
+      "Mobiliario modular y versátil: sillas, mesas, sofás y accesorios que se pueden reorganizar según las necesidades de cada producción",
+      "Configuración rápida: cambio de escenario en menos de 5 minutos sin interrumpir el flujo de trabajo"
+    ] as string[],
+    idealFor: [
+      "Podcasters profesionales que buscan grabar episodios con diferentes ambientes visuales y máxima calidad de audio",
+      "Creadores de contenido para YouTube, Instagram y TikTok que necesitan fondos atractivos y versátiles para sus videos",
+      "Empresas y startups que requieren grabar contenido corporativo, testimoniales y presentaciones con imagen profesional",
+      "Influencers y personal branding que buscan crear contenido premium para redes sociales y plataformas digitales",
+      "Educadores y formadores online que necesitan un entorno profesional para cursos, masterclasses y webinars",
+      "Agencias de marketing que desarrollan campañas audiovisuales para diferentes clientes con estéticas variadas",
+      "Entrevistas y charlas profesionales con invitados, ideal para contenido B2B y networking empresarial",
+      "Streaming en vivo y eventos virtuales con calidad broadcast y múltiples opciones de fondo",
+      "Fotografía de retrato corporativo y personal branding con acabados únicos y personalizados",
+      "Producciones de video marketing y storytelling para marcas que buscan diferenciarse visualmente"
+    ] as string[]
+  }, {
     id: "black-zone",
     title: "Black Zone",
     description: "Nuestra Black Zone es el escenario ideal para creadores que buscan un fondo oscuro con un ambiente sofisticado, dramático y versátil. Perfecta para jugar con luces, sombras y contrastes, esta zona se adapta a sesiones fotográficas, producciones audiovisuales y contenido artístico con un estilo único.",
     image: "/images/spaces/black-zone-optimized.webp",
     features: [
-      "Fondo Negro Profundo para contraste intenso y efecto cinematográfico",
-      "Espacio para Sesiones con Vehículos gracias a su acceso directo y amplitud",
-      "Iluminación Versátil para Juegos de Luces y Sombras",
-      "Mobiliario y Props Personalizables para crear ambientes únicos",
-      "Superficie Amplia con más de 40 metros cuadrados",
-      "Perfecto para Contenido Cinematográfico y Editorial"
+      "Fondo negro profundo para contraste intenso y efecto cinematográfico",
+      "Espacio para sesiones con vehículos gracias a su acceso directo y amplitud",
+      "Iluminación versátil para juegos de luces y sombras",
+      "Mobiliario y props personalizables para crear ambientes únicos",
+      "Superficie amplia con más de 40 metros cuadrados",
+      "Perfecto para contenido cinematográfico y editorial"
     ] as string[],
     idealFor: [
       "Retratos y sesiones editoriales con un look sofisticado y contrastes definidos",
@@ -863,37 +874,7 @@ export const STUDIO_SPACES_FULL = [
       "Contenido de branding y publicidad que requiera un ambiente elegante y versátil"
     ] as string[]
   },
-  {
-    id: "creative-studio",
-    title: "Creative Studio",
-    description: "Nuestra zona Creative Studio es el corazón creativo de The Content Studio, un espacio único diseñado especialmente para podcasters, creadores de contenido y profesionales que buscan un entorno con personalidad propia. Con cuatro paredes temáticas completamente diferentes, cada escenario ofrece un estilo visual distintivo que permite grabar contenido variado sin necesidad de cambiar de ubicación.",
-    image: "/images/spaces/cyclorama-optimized.webp",
-    reverse: true,
-    features: [
-      "Cuatro Escenarios Únicos en Un Solo Espacio: Pared industrial de ladrillo visto, acabado minimalista blanco, textura de madera natural y fondo oscuro elegante",
-      "Equipamiento Audiovisual Integrado: Televisión 55 pulgadas empotrada en pared para presentaciones, streaming y contenido interactivo",
-      "Acústica Optimizada: Paneles acústicos decorativos que mejoran la calidad de audio sin comprometer la estética visual",
-      "Iluminación Profesional Especializada: Sistema de luces LED regulables y flashes profesionales adaptados para grabación de video y fotografía",
-      "Mobiliario Modular y Versátil: Sillas, mesas, sofás y accesorios que se pueden reorganizar según las necesidades de cada producción",
-      "Zona de Podcasting Premium: Espacio específicamente diseñado para grabación de audio profesional con micrófonos de condensador y dinámicos",
-      "Ambiente Controlado: Climatización independiente y aislamiento acústico para sesiones largas de grabación",
-      "Configuración Rápida: Cambio de escenario en menos de 5 minutos sin interrumpir el flujo de trabajo",
-      "Conectividad Avanzada: WiFi de alta velocidad, múltiples tomas de corriente y puertos de conexión para equipos técnicos",
-      "Espacio de Almacenamiento: Área dedicada para guardar equipos personales y accesorios durante la sesión"
-    ] as string[],
-    idealFor: [
-      "Podcasters Profesionales que buscan grabar episodios con diferentes ambientes visuales y máxima calidad de audio",
-      "Creadores de Contenido para YouTube, Instagram y TikTok que necesitan fondos atractivos y versátiles para sus videos",
-      "Empresas y Startups que requieren grabar contenido corporativo, testimoniales y presentaciones con imagen profesional",
-      "Influencers y Personal Branding que buscan crear contenido premium para redes sociales y plataformas digitales",
-      "Educadores y Formadores Online que necesitan un entorno profesional para cursos, masterclasses y webinars",
-      "Agencias de Marketing que desarrollan campañas audiovisuales para diferentes clientes con estéticas variadas",
-      "Entrevistas y Charlas Profesionales con invitados, ideal para contenido B2B y networking empresarial",
-      "Streaming en Vivo y Eventos Virtuales con calidad broadcast y múltiples opciones de fondo",
-      "Fotografía de Retrato Corporativo y Personal Branding con acabados únicos y personalizados",
-      "Producciones de Video Marketing y Storytelling para marcas que buscan diferenciarse visualmente"
-    ] as string[]
-  }
+
 ] as const;
 
 // Tabla de precios
@@ -1076,6 +1057,238 @@ export const COOKIE_BANNER_CONTENT = {
     buttons: {
       savePreferences: 'Guardar Preferencias',
       acceptAll: 'Aceptar Todas'
+    }
+  }
+} as const;
+
+// Configuración de galerías por zona del estudio
+export const STUDIO_ZONES_GALLERY = {
+  // Configuración de layout por defecto
+  defaultLayout: {
+    columns: {
+      mobile: 1,
+      tablet: 2,
+      desktop: 3
+    },
+    maxImages: 12,
+    aspectRatio: 'landscape' as const,
+    gap: 'md' as const
+  },
+
+  // Layout compacto alternativo
+  compactLayout: {
+    columns: {
+      mobile: 2,
+      tablet: 2,
+      desktop: 4
+    },
+    maxImages: 4,
+    aspectRatio: 'square' as const,
+    gap: 'sm' as const
+  },
+
+  // Imágenes por zona con metadatos optimizados
+  zones: {
+    cyclorama: {
+      name: 'Ciclorama',
+      description: 'Espacio con fondo infinito blanco ideal para fotografía de producto, moda y retratos profesionales',
+      images: [
+        {
+          src: '/images/spaces/cyclorama/webp/DSC09112-quality.webp',
+          alt: 'Ciclorama blanco profesional 6x4m con iluminación LED para sesiones de moda en The Content Studio',
+          title: 'Ciclorama Principal - Vista General',
+          description: 'Amplio espacio de 6x4m con fondo infinito blanco y sistema de iluminación profesional'
+        },
+        {
+          src: '/images/spaces/cyclorama/webp/DSC09130-quality.webp',
+          alt: 'Setup de fotografía profesional en ciclorama con trípodes y equipos de iluminación LED',
+          title: 'Ciclorama - Setup Profesional',
+          description: 'Configuración típica para sesiones de fotografía con equipamiento profesional incluido'
+        },
+        {
+          src: '/images/spaces/cyclorama/webp/DSC09157-quality.webp',
+          alt: 'Detalle del sistema de iluminación LED y fondos infinitos del ciclorama profesional',
+          title: 'Ciclorama - Sistema de Iluminación',
+          description: 'Sistema de iluminación LED profesional con control total de temperatura de color'
+        },
+        {
+          src: '/images/spaces/cyclorama/webp/DSC09177-quality.webp',
+          alt: 'Vista lateral del ciclorama mostrando la altura de 3+ metros para producciones audiovisuales',
+          title: 'Ciclorama - Dimensiones Generosas',
+          description: 'Más de 3 metros de altura libre para producciones que requieren espacio vertical'
+        },
+        {
+          src: '/images/spaces/cyclorama/webp/DSC09179-quality.webp',
+          alt: 'Espacio versatil del ciclorama preparado para sesión de retrato profesional',
+          title: 'Ciclorama - Configuración para Retratos',
+          description: 'Setup optimizado para sesiones de retrato y fotografía personal'
+        },
+        {
+          src: '/images/spaces/cyclorama/webp/DSC09185-quality.webp',
+          alt: 'Ciclorama con equipos de filmación profesional para producciones audiovisuales',
+          title: 'Ciclorama - Producciones Audiovisuales',
+          description: 'Espacio adaptado para grabación de video y contenido audiovisual profesional'
+        },
+        {
+          src: '/images/spaces/cyclorama/webp/DSC09098-quality.webp',
+          alt: 'Vista completa del ciclorama blanco con fondos personalizables para sesiones comerciales',
+          title: 'Ciclorama - Fondos Personalizables',
+          description: 'Fondos y decorados completamente personalizables según necesidades del proyecto'
+        },
+        {
+          src: '/images/spaces/cyclorama/webp/DSC09101-quality.webp',
+          alt: 'Zona de preparación adyacente al ciclorama con espejo y área de cambio',
+          title: 'Ciclorama - Área de Preparación',
+          description: 'Espacio cómodo para preparación de modelos y organización de vestuario'
+        },
+        {
+          src: '/images/spaces/cyclorama/webp/DSC09106-quality.webp',
+          alt: 'Detalle del suelo y curvatura perfecta del ciclorama para efectos visuales profesionales',
+          title: 'Ciclorama - Curvatura Perfecta',
+          description: 'Transición suave entre suelo y pared para efectos de fondo infinito'
+        }
+      ]
+    },
+
+    creativeStudio: {
+      name: 'Creative Studio',
+      description: 'Área flexible para sesiones creativas, video, podcast y fotografía comercial con iluminación profesional',
+      images: [
+        {
+          src: '/images/spaces/creative-studio/webp/DSC08939-quality.webp',
+          alt: 'Estudio creativo multifuncional con setup para podcast y grabación de contenido audiovisual',
+          title: 'Creative Studio - Setup para Podcast',
+          description: 'Configuración profesional para grabación de podcast con aislamiento acústico'
+        },
+        {
+          src: '/images/spaces/creative-studio/webp/DSC08961-quality.webp',
+          alt: 'Zona creativa con iluminación LED ajustable para sesiones de fotografía comercial y branding',
+          title: 'Creative Studio - Iluminación Adaptable',
+          description: 'Sistema de iluminación LED con control completo de intensidad y temperatura'
+        },
+        {
+          src: '/images/spaces/creative-studio/webp/DSC08990-quality.webp',
+          alt: 'Espacio versátil del creative studio preparado para sesiones de video y streaming profesional',
+          title: 'Creative Studio - Configuración para Video',
+          description: 'Setup optimizado para grabación de video y contenido para redes sociales'
+        },
+        {
+          src: '/images/spaces/creative-studio/webp/DSC09002-quality.webp',
+          alt: 'Área de trabajo creativa con equipos profesionales para producción de contenido digital',
+          title: 'Creative Studio - Área de Producción',
+          description: 'Espacio equipado para producción integral de contenido digital y multimedia'
+        },
+        {
+          src: '/images/spaces/creative-studio/webp/DSC09005-quality.webp',
+          alt: 'Zona flexible del creative studio con fondos intercambiables para diferentes tipos de sesión',
+          title: 'Creative Studio - Fondos Versátiles',
+          description: 'Variedad de fondos y configuraciones para adaptarse a cualquier proyecto creativo'
+        },
+        {
+          src: '/images/spaces/creative-studio/webp/DSC09022-quality.webp',
+          alt: 'Setup profesional para streaming y webinars con cámaras múltiples y audio de calidad',
+          title: 'Creative Studio - Streaming Profesional',
+          description: 'Configuración multicámara para streaming, webinars y eventos virtuales'
+        },
+        {
+          src: '/images/spaces/creative-studio/webp/DSC09034-quality.webp',
+          alt: 'Espacio creativo con mesa de trabajo y equipos técnicos para post-producción',
+          title: 'Creative Studio - Área Técnica',
+          description: 'Zona dedicada a post-producción y trabajo técnico con estación completa'
+        },
+        {
+          src: '/images/spaces/creative-studio/webp/DSC09036-quality.webp',
+          alt: 'Vista general del creative studio mostrando versatilidad y equipamiento profesional',
+          title: 'Creative Studio - Vista Panorámica',
+          description: 'Visión completa del espacio mostrando todas las posibilidades creativas'
+        },
+        {
+          src: '/images/spaces/creative-studio/webp/DSC09047-quality.webp',
+          alt: 'Zona de grabación con tratamiento acústico profesional para audio de alta calidad',
+          title: 'Creative Studio - Tratamiento Acústico',
+          description: 'Aislamiento y tratamiento acústico profesional para grabaciones de audio'
+        },
+        {
+          src: '/images/spaces/creative-studio/webp/DSC09057-quality.webp',
+          alt: 'Setup para entrevistas y contenido corporativo con iluminación soft y profesional',
+          title: 'Creative Studio - Entrevistas Corporativas',
+          description: 'Configuración ideal para entrevistas, testimonios y contenido corporativo'
+        },
+        {
+          src: '/images/spaces/creative-studio/webp/DSC09070-quality.webp',
+          alt: 'Área creativa con instrumentos musicales y equipos para grabación de contenido musical',
+          title: 'Creative Studio - Contenido Musical',
+          description: 'Espacio adaptado para grabación de contenido musical y performances artísticas'
+        },
+        {
+          src: '/images/spaces/creative-studio/webp/DSC09191-quality.webp',
+          alt: 'Vista nocturna del creative studio con ambientación LED para contenido atmosphérico',
+          title: 'Creative Studio - Ambientación LED',
+          description: 'Efectos de iluminación LED para crear atmósferas únicas y contenido impactante'
+        }
+      ]
+    },
+
+    blackZone: {
+      name: 'Black Zone',
+      description: 'Espacio oscuro profesional para retratos elegantes, fotografía de moda y sesiones con alto contraste',
+      images: [
+        {
+          src: '/images/spaces/black-zone/webp/DSC09203-quality.webp',
+          alt: 'Black zone con iluminación dramática para retratos de alta gama y fotografía de moda elegante',
+          title: 'Black Zone - Retratos Dramáticos',
+          description: 'Espacio oscuro optimizado para crear retratos con alto impacto visual y contraste dramático'
+        },
+        {
+          src: '/images/spaces/black-zone/webp/DSC09206-quality.webp',
+          alt: 'Zona negra profesional con equipos de iluminación selectiva para fotografía artística y comercial',
+          title: 'Black Zone - Iluminación Selectiva',
+          description: 'Sistema de iluminación profesional para crear efectos de luz precisos y atmosferas únicas'
+        }
+      ]
+    },
+
+    colorBackgrounds: {
+      name: 'Fondos de Colores',
+      description: 'Variedad de fondos coloridos para destacar productos y crear contenido llamativo para redes sociales',
+      images: [
+        {
+          src: '/images/spaces/colores/webp/DSC09161-quality.webp',
+          alt: 'Fondo colorido vibrante para fotografía de producto y contenido comercial llamativo',
+          title: 'Fondos de Colores - Tonos Vibrantes',
+          description: 'Fondo de color intenso ideal para hacer destacar productos y crear contenido impactante'
+        },
+        {
+          src: '/images/spaces/colores/webp/DSC09164-quality.webp',
+          alt: 'Sesión de fotografía con fondo de color para branding y marketing visual profesional',
+          title: 'Fondos de Colores - Branding Profesional',
+          description: 'Configuración perfecta para sesiones de branding corporativo y marketing visual'
+        },
+        {
+          src: '/images/spaces/colores/webp/DSC09172-quality.webp',
+          alt: 'Fondo colorido dinámico para contenido de redes sociales y fotografía comercial moderna',
+          title: 'Fondos de Colores - Redes Sociales',
+          description: 'Colores optimizados para contenido de redes sociales y campañas digitales'
+        },
+        {
+          src: '/images/spaces/colores/webp/DSC09088-quality.webp',
+          alt: 'Variedad de fondos coloridos intercambiables para diferentes tipos de productos y servicios',
+          title: 'Fondos de Colores - Versatilidad Cromática',
+          description: 'Amplia gama de colores disponibles para adaptarse a cualquier identidad de marca'
+        },
+        {
+          src: '/images/spaces/colores/webp/DSC09082-quality.webp',
+          alt: 'Setup con fondo de color cálido para fotografía de lifestyle y contenido aspiracional',
+          title: 'Fondos de Colores - Tonos Cálidos',
+          description: 'Tonalidades cálidas perfectas para contenido lifestyle y fotografía aspiracional'
+        },
+        {
+          src: '/images/spaces/colores/webp/DSC09096-quality.webp',
+          alt: 'Fondo colorido con iluminación profesional para destacar texturas y detalles de producto',
+          title: 'Fondos de Colores - Detalle de Producto',
+          description: 'Iluminación especializada para resaltar texturas, colores y características únicas'
+        }
+      ]
     }
   }
 } as const;

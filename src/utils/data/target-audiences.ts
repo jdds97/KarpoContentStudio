@@ -34,7 +34,7 @@ export const targetAudiences: TargetAudience[] = [
       "Fotógrafos profesionales que buscan un entorno de calidad para sus proyectos comerciales, editoriales o sesiones con clientes.",
       "Fotógrafos aficionados que quieren mejorar su portafolio y practicar en un espacio profesional sin limitaciones."
     ],
-    image: "/images/spaces/principal-optimized.webp"
+    image: "/images/spaces/cyclorama/webp/DSC09185-quality.webp"
   },
   {
     id: "brands",
@@ -61,7 +61,7 @@ export const targetAudiences: TargetAudience[] = [
       "Empresas que requieren contenido visual para su branding y comunicación corporativa.",
       "Startups que necesitan imágenes atractivas y diferenciadoras para el lanzamiento de sus productos."
     ],
-    image: "/images/spaces/black-zone-optimized.webp"
+    image: "/images/spaces/colores/webp/DSC09172-quality.webp"
   },
   {
     id: "agencies",
@@ -88,7 +88,7 @@ export const targetAudiences: TargetAudience[] = [
       "Organizadores de eventos de networking que requieren un ambiente privado y profesional para sus encuentros.",
       "Equipos creativos que necesitan un espacio versátil para brainstorming, coworking y producción de contenido."
     ],
-    image: "/images/spaces/cyclorama-optimized.webp"
+    image: "/images/spaces/creative-studio/webp/DSC08939-quality.webp"
   },
   {
     id: "podcasters",
@@ -115,6 +115,6 @@ export const targetAudiences: TargetAudience[] = [
       "Youtubers y streamers que buscan un espacio bien iluminado y versátil para generar contenido.",
       "Equipos de producción que requieren un entorno controlado para entrevistas, grabaciones y transmisiones en vivo."
     ],
-    image: "/images/spaces/sample.webp"
+    image: "/images/spaces/creative-studio/webp/DSC09191-quality.webp"
   }
 ];
