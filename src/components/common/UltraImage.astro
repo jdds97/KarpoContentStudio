@@ -1,0 +1,104 @@
+---
+import { Picture } from 'astro:assets';
+
+export interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  width?: number;
+  height?: number;
+  loading?: 'eager' | 'lazy';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  quality?: number;
+  objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
+  sizes?: string;
+  inferSize?: boolean; // Option to automatically infer dimensions
+}
+
+const {
+  src,
+  alt,
+  class: className = '',
+  width,
+  height,
+  loading = 'lazy',
+  fetchpriority = 'auto',
+  quality = 95,
+  objectFit = 'cover',
+  sizes = '100vw',
+  inferSize = false
+} = Astro.props;
+
+// Validate dimensions or provide defaults
+const imageWidth = width || 1200; // Default width for studio images
+const imageHeight = height || 800; // Default height maintaining 3:2 aspect ratio
+
+// Generate comprehensive width array for maximum responsiveness
+const responsiveWidths = imageWidth 
+  ? [Math.round(imageWidth * 0.5), Math.round(imageWidth * 0.75), imageWidth, Math.round(imageWidth * 1.5), Math.round(imageWidth * 2)]
+  : [400, 600, 800, 1200, 1600, 2400, 3200];
+
+const densities = [1, 1.5, 2];
+---
+
+{inferSize ? (
+  <Picture
+    src={src}
+    alt={alt}
+    class={className}
+    widths={responsiveWidths}
+    sizes={sizes}
+    formats={['avif', 'webp', 'jpg']}
+    quality={quality}
+    densities={densities}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    inferSize={true}
+    pictureAttributes={{
+      style: "display: contents;"
+    }}
+    imgAttributes={{
+      style: `width: 100%; height: 100%; object-fit: ${objectFit}; object-position: center;`,
+      fetchpriority
+    }}
+  />
+) : (
+  <Picture
+    src={src}
+    alt={alt}
+    class={className}
+    width={imageWidth}
+    height={imageHeight}
+    widths={responsiveWidths}
+    sizes={sizes}
+    formats={['avif', 'webp', 'jpg']}
+    quality={quality}
+    densities={densities}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    pictureAttributes={{
+      style: "display: contents;"
+    }}
+    imgAttributes={{
+      style: `width: 100%; height: 100%; object-fit: ${objectFit}; object-position: center;`,
+      fetchpriority,
+      width: imageWidth.toString(),
+      height: imageHeight.toString()
+    }}
+  />
+)}
+
+<!-- Critical CSS for ultra images -->
+<style>
+  :global(.ultra-image) {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+  
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    :global(.ultra-image) {
+      image-rendering: auto;
+    }
+  }
+</style>

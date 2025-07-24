@@ -1,0 +1,1873 @@
+{
+  "generated": "2025-07-24T18:34:44.604Z",
+  "zones": {
+    "black-zone": [
+      {
+        "original": "DSC09203.jpg",
+        "zone": "black-zone",
+        "metadata": {
+          "alt": "Zona negra para retratos dramáticos y fotografía de alta gama - Vista 1",
+          "title": "Black Zone - Elegancia y dramatismo - DSC09203",
+          "description": "Espacio oscuro profesional para retratos elegantes, fotografía de moda y sesiones con alto contraste",
+          "zone": "black-zone"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/black-zone/webp/DSC09203-small.webp",
+              "size": 10058,
+              "sizeFormatted": "9.8KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/black-zone/avif/DSC09203-small.avif",
+              "size": 10878,
+              "sizeFormatted": "10.6KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/black-zone/webp/DSC09203-medium.webp",
+              "size": 35328,
+              "sizeFormatted": "34.5KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/black-zone/avif/DSC09203-medium.avif",
+              "size": 37489,
+              "sizeFormatted": "36.6KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/black-zone/webp/DSC09203-large.webp",
+              "size": 72666,
+              "sizeFormatted": "71.0KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/black-zone/avif/DSC09203-large.avif",
+              "size": 81136,
+              "sizeFormatted": "79.2KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/black-zone/webp/DSC09203-xlarge.webp",
+              "size": 128154,
+              "sizeFormatted": "125.2KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/black-zone/avif/DSC09203-xlarge.avif",
+              "size": 166508,
+              "sizeFormatted": "162.6KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09206.jpg",
+        "zone": "black-zone",
+        "metadata": {
+          "alt": "Zona negra para retratos dramáticos y fotografía de alta gama - Vista 2",
+          "title": "Black Zone - Elegancia y dramatismo - DSC09206",
+          "description": "Espacio oscuro profesional para retratos elegantes, fotografía de moda y sesiones con alto contraste",
+          "zone": "black-zone"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/black-zone/webp/DSC09206-small.webp",
+              "size": 10372,
+              "sizeFormatted": "10.1KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/black-zone/avif/DSC09206-small.avif",
+              "size": 10549,
+              "sizeFormatted": "10.3KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/black-zone/webp/DSC09206-medium.webp",
+              "size": 33862,
+              "sizeFormatted": "33.1KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/black-zone/avif/DSC09206-medium.avif",
+              "size": 34572,
+              "sizeFormatted": "33.8KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/black-zone/webp/DSC09206-large.webp",
+              "size": 68518,
+              "sizeFormatted": "66.9KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/black-zone/avif/DSC09206-large.avif",
+              "size": 73242,
+              "sizeFormatted": "71.5KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/black-zone/webp/DSC09206-xlarge.webp",
+              "size": 117446,
+              "sizeFormatted": "114.7KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/black-zone/avif/DSC09206-xlarge.avif",
+              "size": 154758,
+              "sizeFormatted": "151.1KB"
+            }
+          }
+        }
+      }
+    ],
+    "colores": [
+      {
+        "original": "DSC09074.jpg",
+        "zone": "colores",
+        "metadata": {
+          "alt": "Fondos de colores vibrantes para fotografía comercial y branding - Vista 1",
+          "title": "Zona de Colores - Fondos dinámicos para tu marca - DSC09074",
+          "description": "Variedad de fondos coloridos para destacar productos y crear contenido llamativo para redes sociales",
+          "zone": "colores"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09074-small.webp",
+              "size": 14234,
+              "sizeFormatted": "13.9KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09074-small.avif",
+              "size": 12290,
+              "sizeFormatted": "12.0KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09074-medium.webp",
+              "size": 38070,
+              "sizeFormatted": "37.2KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09074-medium.avif",
+              "size": 32433,
+              "sizeFormatted": "31.7KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09074-large.webp",
+              "size": 66650,
+              "sizeFormatted": "65.1KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09074-large.avif",
+              "size": 59626,
+              "sizeFormatted": "58.2KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09074-xlarge.webp",
+              "size": 104456,
+              "sizeFormatted": "102.0KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09074-xlarge.avif",
+              "size": 96321,
+              "sizeFormatted": "94.1KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09075.jpg",
+        "zone": "colores",
+        "metadata": {
+          "alt": "Fondos de colores vibrantes para fotografía comercial y branding - Vista 2",
+          "title": "Zona de Colores - Fondos dinámicos para tu marca - DSC09075",
+          "description": "Variedad de fondos coloridos para destacar productos y crear contenido llamativo para redes sociales",
+          "zone": "colores"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09075-small.webp",
+              "size": 19308,
+              "sizeFormatted": "18.9KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09075-small.avif",
+              "size": 18463,
+              "sizeFormatted": "18.0KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09075-medium.webp",
+              "size": 56290,
+              "sizeFormatted": "55.0KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09075-medium.avif",
+              "size": 53179,
+              "sizeFormatted": "51.9KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09075-large.webp",
+              "size": 100238,
+              "sizeFormatted": "97.9KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09075-large.avif",
+              "size": 96198,
+              "sizeFormatted": "93.9KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09075-xlarge.webp",
+              "size": 159510,
+              "sizeFormatted": "155.8KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09075-xlarge.avif",
+              "size": 155043,
+              "sizeFormatted": "151.4KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09082.jpg",
+        "zone": "colores",
+        "metadata": {
+          "alt": "Fondos de colores vibrantes para fotografía comercial y branding - Vista 3",
+          "title": "Zona de Colores - Fondos dinámicos para tu marca - DSC09082",
+          "description": "Variedad de fondos coloridos para destacar productos y crear contenido llamativo para redes sociales",
+          "zone": "colores"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09082-small.webp",
+              "size": 17044,
+              "sizeFormatted": "16.6KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09082-small.avif",
+              "size": 15798,
+              "sizeFormatted": "15.4KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09082-medium.webp",
+              "size": 48388,
+              "sizeFormatted": "47.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09082-medium.avif",
+              "size": 45500,
+              "sizeFormatted": "44.4KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09082-large.webp",
+              "size": 90202,
+              "sizeFormatted": "88.1KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09082-large.avif",
+              "size": 85700,
+              "sizeFormatted": "83.7KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09082-xlarge.webp",
+              "size": 148824,
+              "sizeFormatted": "145.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09082-xlarge.avif",
+              "size": 149281,
+              "sizeFormatted": "145.8KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09088.jpg",
+        "zone": "colores",
+        "metadata": {
+          "alt": "Fondos de colores vibrantes para fotografía comercial y branding - Vista 4",
+          "title": "Zona de Colores - Fondos dinámicos para tu marca - DSC09088",
+          "description": "Variedad de fondos coloridos para destacar productos y crear contenido llamativo para redes sociales",
+          "zone": "colores"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09088-small.webp",
+              "size": 15986,
+              "sizeFormatted": "15.6KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09088-small.avif",
+              "size": 14594,
+              "sizeFormatted": "14.3KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09088-medium.webp",
+              "size": 43988,
+              "sizeFormatted": "43.0KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09088-medium.avif",
+              "size": 39021,
+              "sizeFormatted": "38.1KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09088-large.webp",
+              "size": 79822,
+              "sizeFormatted": "78.0KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09088-large.avif",
+              "size": 76086,
+              "sizeFormatted": "74.3KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09088-xlarge.webp",
+              "size": 133760,
+              "sizeFormatted": "130.6KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09088-xlarge.avif",
+              "size": 133651,
+              "sizeFormatted": "130.5KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09096.jpg",
+        "zone": "colores",
+        "metadata": {
+          "alt": "Fondos de colores vibrantes para fotografía comercial y branding - Vista 5",
+          "title": "Zona de Colores - Fondos dinámicos para tu marca - DSC09096",
+          "description": "Variedad de fondos coloridos para destacar productos y crear contenido llamativo para redes sociales",
+          "zone": "colores"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09096-small.webp",
+              "size": 13714,
+              "sizeFormatted": "13.4KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09096-small.avif",
+              "size": 12549,
+              "sizeFormatted": "12.3KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09096-medium.webp",
+              "size": 36752,
+              "sizeFormatted": "35.9KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09096-medium.avif",
+              "size": 33912,
+              "sizeFormatted": "33.1KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09096-large.webp",
+              "size": 63782,
+              "sizeFormatted": "62.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09096-large.avif",
+              "size": 60056,
+              "sizeFormatted": "58.6KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09096-xlarge.webp",
+              "size": 100894,
+              "sizeFormatted": "98.5KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09096-xlarge.avif",
+              "size": 93569,
+              "sizeFormatted": "91.4KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09161.jpg",
+        "zone": "colores",
+        "metadata": {
+          "alt": "Fondos de colores vibrantes para fotografía comercial y branding - Vista 6",
+          "title": "Zona de Colores - Fondos dinámicos para tu marca - DSC09161",
+          "description": "Variedad de fondos coloridos para destacar productos y crear contenido llamativo para redes sociales",
+          "zone": "colores"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09161-small.webp",
+              "size": 6906,
+              "sizeFormatted": "6.7KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09161-small.avif",
+              "size": 7206,
+              "sizeFormatted": "7.0KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09161-medium.webp",
+              "size": 19708,
+              "sizeFormatted": "19.2KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09161-medium.avif",
+              "size": 20033,
+              "sizeFormatted": "19.6KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09161-large.webp",
+              "size": 36618,
+              "sizeFormatted": "35.8KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09161-large.avif",
+              "size": 40321,
+              "sizeFormatted": "39.4KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09161-xlarge.webp",
+              "size": 62730,
+              "sizeFormatted": "61.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09161-xlarge.avif",
+              "size": 76616,
+              "sizeFormatted": "74.8KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09164.jpg",
+        "zone": "colores",
+        "metadata": {
+          "alt": "Fondos de colores vibrantes para fotografía comercial y branding - Vista 7",
+          "title": "Zona de Colores - Fondos dinámicos para tu marca - DSC09164",
+          "description": "Variedad de fondos coloridos para destacar productos y crear contenido llamativo para redes sociales",
+          "zone": "colores"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09164-small.webp",
+              "size": 6544,
+              "sizeFormatted": "6.4KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09164-small.avif",
+              "size": 5011,
+              "sizeFormatted": "4.9KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09164-medium.webp",
+              "size": 16110,
+              "sizeFormatted": "15.7KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09164-medium.avif",
+              "size": 10609,
+              "sizeFormatted": "10.4KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09164-large.webp",
+              "size": 27464,
+              "sizeFormatted": "26.8KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09164-large.avif",
+              "size": 17855,
+              "sizeFormatted": "17.4KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09164-xlarge.webp",
+              "size": 43412,
+              "sizeFormatted": "42.4KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09164-xlarge.avif",
+              "size": 32770,
+              "sizeFormatted": "32.0KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09172.jpg",
+        "zone": "colores",
+        "metadata": {
+          "alt": "Fondos de colores vibrantes para fotografía comercial y branding - Vista 8",
+          "title": "Zona de Colores - Fondos dinámicos para tu marca - DSC09172",
+          "description": "Variedad de fondos coloridos para destacar productos y crear contenido llamativo para redes sociales",
+          "zone": "colores"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09172-small.webp",
+              "size": 12918,
+              "sizeFormatted": "12.6KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09172-small.avif",
+              "size": 12714,
+              "sizeFormatted": "12.4KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09172-medium.webp",
+              "size": 37300,
+              "sizeFormatted": "36.4KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09172-medium.avif",
+              "size": 37363,
+              "sizeFormatted": "36.5KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09172-large.webp",
+              "size": 68904,
+              "sizeFormatted": "67.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09172-large.avif",
+              "size": 72329,
+              "sizeFormatted": "70.6KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/colores/webp/DSC09172-xlarge.webp",
+              "size": 113992,
+              "sizeFormatted": "111.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/colores/avif/DSC09172-xlarge.avif",
+              "size": 126210,
+              "sizeFormatted": "123.3KB"
+            }
+          }
+        }
+      }
+    ],
+    "creative-studio": [
+      {
+        "original": "DSC08939.jpg",
+        "zone": "creative-studio",
+        "metadata": {
+          "alt": "Zona creativa multifuncional para contenido audiovisual y fotografía comercial - Vista 1",
+          "title": "Creative Studio - Espacio versátil para crear - DSC08939",
+          "description": "Área flexible para sesiones creativas, video, podcast y fotografía comercial con iluminación profesional",
+          "zone": "creative-studio"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC08939-small.webp",
+              "size": 14354,
+              "sizeFormatted": "14.0KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC08939-small.avif",
+              "size": 13711,
+              "sizeFormatted": "13.4KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC08939-medium.webp",
+              "size": 39558,
+              "sizeFormatted": "38.6KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC08939-medium.avif",
+              "size": 35157,
+              "sizeFormatted": "34.3KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC08939-large.webp",
+              "size": 70140,
+              "sizeFormatted": "68.5KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC08939-large.avif",
+              "size": 59985,
+              "sizeFormatted": "58.6KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC08939-xlarge.webp",
+              "size": 105956,
+              "sizeFormatted": "103.5KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC08939-xlarge.avif",
+              "size": 93143,
+              "sizeFormatted": "91.0KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC08961.jpg",
+        "zone": "creative-studio",
+        "metadata": {
+          "alt": "Zona creativa multifuncional para contenido audiovisual y fotografía comercial - Vista 2",
+          "title": "Creative Studio - Espacio versátil para crear - DSC08961",
+          "description": "Área flexible para sesiones creativas, video, podcast y fotografía comercial con iluminación profesional",
+          "zone": "creative-studio"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC08961-small.webp",
+              "size": 16948,
+              "sizeFormatted": "16.6KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC08961-small.avif",
+              "size": 14839,
+              "sizeFormatted": "14.5KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC08961-medium.webp",
+              "size": 45408,
+              "sizeFormatted": "44.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC08961-medium.avif",
+              "size": 38247,
+              "sizeFormatted": "37.4KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC08961-large.webp",
+              "size": 78612,
+              "sizeFormatted": "76.8KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC08961-large.avif",
+              "size": 64507,
+              "sizeFormatted": "63.0KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC08961-xlarge.webp",
+              "size": 119492,
+              "sizeFormatted": "116.7KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC08961-xlarge.avif",
+              "size": 95305,
+              "sizeFormatted": "93.1KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC08990.jpg",
+        "zone": "creative-studio",
+        "metadata": {
+          "alt": "Zona creativa multifuncional para contenido audiovisual y fotografía comercial - Vista 3",
+          "title": "Creative Studio - Espacio versátil para crear - DSC08990",
+          "description": "Área flexible para sesiones creativas, video, podcast y fotografía comercial con iluminación profesional",
+          "zone": "creative-studio"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC08990-small.webp",
+              "size": 14266,
+              "sizeFormatted": "13.9KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC08990-small.avif",
+              "size": 12152,
+              "sizeFormatted": "11.9KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC08990-medium.webp",
+              "size": 37920,
+              "sizeFormatted": "37.0KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC08990-medium.avif",
+              "size": 31190,
+              "sizeFormatted": "30.5KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC08990-large.webp",
+              "size": 66680,
+              "sizeFormatted": "65.1KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC08990-large.avif",
+              "size": 53732,
+              "sizeFormatted": "52.5KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC08990-xlarge.webp",
+              "size": 100492,
+              "sizeFormatted": "98.1KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC08990-xlarge.avif",
+              "size": 81332,
+              "sizeFormatted": "79.4KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09002.jpg",
+        "zone": "creative-studio",
+        "metadata": {
+          "alt": "Zona creativa multifuncional para contenido audiovisual y fotografía comercial - Vista 4",
+          "title": "Creative Studio - Espacio versátil para crear - DSC09002",
+          "description": "Área flexible para sesiones creativas, video, podcast y fotografía comercial con iluminación profesional",
+          "zone": "creative-studio"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09002-small.webp",
+              "size": 15270,
+              "sizeFormatted": "14.9KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09002-small.avif",
+              "size": 13992,
+              "sizeFormatted": "13.7KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09002-medium.webp",
+              "size": 41306,
+              "sizeFormatted": "40.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09002-medium.avif",
+              "size": 36963,
+              "sizeFormatted": "36.1KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09002-large.webp",
+              "size": 73000,
+              "sizeFormatted": "71.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09002-large.avif",
+              "size": 66054,
+              "sizeFormatted": "64.5KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09002-xlarge.webp",
+              "size": 115544,
+              "sizeFormatted": "112.8KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09002-xlarge.avif",
+              "size": 104112,
+              "sizeFormatted": "101.7KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09005.jpg",
+        "zone": "creative-studio",
+        "metadata": {
+          "alt": "Zona creativa multifuncional para contenido audiovisual y fotografía comercial - Vista 5",
+          "title": "Creative Studio - Espacio versátil para crear - DSC09005",
+          "description": "Área flexible para sesiones creativas, video, podcast y fotografía comercial con iluminación profesional",
+          "zone": "creative-studio"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09005-small.webp",
+              "size": 16540,
+              "sizeFormatted": "16.2KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09005-small.avif",
+              "size": 14307,
+              "sizeFormatted": "14.0KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09005-medium.webp",
+              "size": 46580,
+              "sizeFormatted": "45.5KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09005-medium.avif",
+              "size": 38587,
+              "sizeFormatted": "37.7KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09005-large.webp",
+              "size": 81250,
+              "sizeFormatted": "79.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09005-large.avif",
+              "size": 68760,
+              "sizeFormatted": "67.1KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09005-xlarge.webp",
+              "size": 130320,
+              "sizeFormatted": "127.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09005-xlarge.avif",
+              "size": 108333,
+              "sizeFormatted": "105.8KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09022.jpg",
+        "zone": "creative-studio",
+        "metadata": {
+          "alt": "Zona creativa multifuncional para contenido audiovisual y fotografía comercial - Vista 6",
+          "title": "Creative Studio - Espacio versátil para crear - DSC09022",
+          "description": "Área flexible para sesiones creativas, video, podcast y fotografía comercial con iluminación profesional",
+          "zone": "creative-studio"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09022-small.webp",
+              "size": 18090,
+              "sizeFormatted": "17.7KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09022-small.avif",
+              "size": 15952,
+              "sizeFormatted": "15.6KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09022-medium.webp",
+              "size": 50450,
+              "sizeFormatted": "49.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09022-medium.avif",
+              "size": 42442,
+              "sizeFormatted": "41.4KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09022-large.webp",
+              "size": 90476,
+              "sizeFormatted": "88.4KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09022-large.avif",
+              "size": 72899,
+              "sizeFormatted": "71.2KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09022-xlarge.webp",
+              "size": 134884,
+              "sizeFormatted": "131.7KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09022-xlarge.avif",
+              "size": 110743,
+              "sizeFormatted": "108.1KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09034.jpg",
+        "zone": "creative-studio",
+        "metadata": {
+          "alt": "Zona creativa multifuncional para contenido audiovisual y fotografía comercial - Vista 7",
+          "title": "Creative Studio - Espacio versátil para crear - DSC09034",
+          "description": "Área flexible para sesiones creativas, video, podcast y fotografía comercial con iluminación profesional",
+          "zone": "creative-studio"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09034-small.webp",
+              "size": 16316,
+              "sizeFormatted": "15.9KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09034-small.avif",
+              "size": 14666,
+              "sizeFormatted": "14.3KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09034-medium.webp",
+              "size": 44018,
+              "sizeFormatted": "43.0KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09034-medium.avif",
+              "size": 36848,
+              "sizeFormatted": "36.0KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09034-large.webp",
+              "size": 75458,
+              "sizeFormatted": "73.7KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09034-large.avif",
+              "size": 62823,
+              "sizeFormatted": "61.4KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09034-xlarge.webp",
+              "size": 115490,
+              "sizeFormatted": "112.8KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09034-xlarge.avif",
+              "size": 94592,
+              "sizeFormatted": "92.4KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09036.jpg",
+        "zone": "creative-studio",
+        "metadata": {
+          "alt": "Zona creativa multifuncional para contenido audiovisual y fotografía comercial - Vista 8",
+          "title": "Creative Studio - Espacio versátil para crear - DSC09036",
+          "description": "Área flexible para sesiones creativas, video, podcast y fotografía comercial con iluminación profesional",
+          "zone": "creative-studio"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09036-small.webp",
+              "size": 19868,
+              "sizeFormatted": "19.4KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09036-small.avif",
+              "size": 18201,
+              "sizeFormatted": "17.8KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09036-medium.webp",
+              "size": 54924,
+              "sizeFormatted": "53.6KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09036-medium.avif",
+              "size": 47011,
+              "sizeFormatted": "45.9KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09036-large.webp",
+              "size": 96478,
+              "sizeFormatted": "94.2KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09036-large.avif",
+              "size": 79951,
+              "sizeFormatted": "78.1KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09036-xlarge.webp",
+              "size": 144988,
+              "sizeFormatted": "141.6KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09036-xlarge.avif",
+              "size": 120865,
+              "sizeFormatted": "118.0KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09047.jpg",
+        "zone": "creative-studio",
+        "metadata": {
+          "alt": "Zona creativa multifuncional para contenido audiovisual y fotografía comercial - Vista 9",
+          "title": "Creative Studio - Espacio versátil para crear - DSC09047",
+          "description": "Área flexible para sesiones creativas, video, podcast y fotografía comercial con iluminación profesional",
+          "zone": "creative-studio"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09047-small.webp",
+              "size": 19208,
+              "sizeFormatted": "18.8KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09047-small.avif",
+              "size": 17426,
+              "sizeFormatted": "17.0KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09047-medium.webp",
+              "size": 53086,
+              "sizeFormatted": "51.8KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09047-medium.avif",
+              "size": 45512,
+              "sizeFormatted": "44.4KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09047-large.webp",
+              "size": 93472,
+              "sizeFormatted": "91.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09047-large.avif",
+              "size": 78436,
+              "sizeFormatted": "76.6KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09047-xlarge.webp",
+              "size": 143706,
+              "sizeFormatted": "140.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09047-xlarge.avif",
+              "size": 122204,
+              "sizeFormatted": "119.3KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09057.jpg",
+        "zone": "creative-studio",
+        "metadata": {
+          "alt": "Zona creativa multifuncional para contenido audiovisual y fotografía comercial - Vista 10",
+          "title": "Creative Studio - Espacio versátil para crear - DSC09057",
+          "description": "Área flexible para sesiones creativas, video, podcast y fotografía comercial con iluminación profesional",
+          "zone": "creative-studio"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09057-small.webp",
+              "size": 22262,
+              "sizeFormatted": "21.7KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09057-small.avif",
+              "size": 19214,
+              "sizeFormatted": "18.8KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09057-medium.webp",
+              "size": 62594,
+              "sizeFormatted": "61.1KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09057-medium.avif",
+              "size": 51630,
+              "sizeFormatted": "50.4KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09057-large.webp",
+              "size": 110630,
+              "sizeFormatted": "108.0KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09057-large.avif",
+              "size": 92126,
+              "sizeFormatted": "90.0KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09057-xlarge.webp",
+              "size": 171566,
+              "sizeFormatted": "167.5KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09057-xlarge.avif",
+              "size": 146731,
+              "sizeFormatted": "143.3KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09070.jpg",
+        "zone": "creative-studio",
+        "metadata": {
+          "alt": "Zona creativa multifuncional para contenido audiovisual y fotografía comercial - Vista 11",
+          "title": "Creative Studio - Espacio versátil para crear - DSC09070",
+          "description": "Área flexible para sesiones creativas, video, podcast y fotografía comercial con iluminación profesional",
+          "zone": "creative-studio"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09070-small.webp",
+              "size": 15424,
+              "sizeFormatted": "15.1KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09070-small.avif",
+              "size": 12685,
+              "sizeFormatted": "12.4KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09070-medium.webp",
+              "size": 39020,
+              "sizeFormatted": "38.1KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09070-medium.avif",
+              "size": 30493,
+              "sizeFormatted": "29.8KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09070-large.webp",
+              "size": 66548,
+              "sizeFormatted": "65.0KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09070-large.avif",
+              "size": 51158,
+              "sizeFormatted": "50.0KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09070-xlarge.webp",
+              "size": 103648,
+              "sizeFormatted": "101.2KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09070-xlarge.avif",
+              "size": 78046,
+              "sizeFormatted": "76.2KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09191.jpg",
+        "zone": "creative-studio",
+        "metadata": {
+          "alt": "Zona creativa multifuncional para contenido audiovisual y fotografía comercial - Vista 12",
+          "title": "Creative Studio - Espacio versátil para crear - DSC09191",
+          "description": "Área flexible para sesiones creativas, video, podcast y fotografía comercial con iluminación profesional",
+          "zone": "creative-studio"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09191-small.webp",
+              "size": 12864,
+              "sizeFormatted": "12.6KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09191-small.avif",
+              "size": 12674,
+              "sizeFormatted": "12.4KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09191-medium.webp",
+              "size": 40744,
+              "sizeFormatted": "39.8KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09191-medium.avif",
+              "size": 39013,
+              "sizeFormatted": "38.1KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09191-large.webp",
+              "size": 79242,
+              "sizeFormatted": "77.4KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09191-large.avif",
+              "size": 80792,
+              "sizeFormatted": "78.9KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/creative-studio/webp/DSC09191-xlarge.webp",
+              "size": 135000,
+              "sizeFormatted": "131.8KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/creative-studio/avif/DSC09191-xlarge.avif",
+              "size": 152249,
+              "sizeFormatted": "148.7KB"
+            }
+          }
+        }
+      }
+    ],
+    "cyclorama": [
+      {
+        "original": "DSC09098.jpg",
+        "zone": "cyclorama",
+        "metadata": {
+          "alt": "Ciclorama blanco profesional para sesiones de moda y producto en The Content Studio - Vista 1",
+          "title": "Zona Cyclorama - Estudio fotográfico profesional - DSC09098",
+          "description": "Espacio con fondo infinito blanco ideal para fotografía de producto, moda y retratos profesionales",
+          "zone": "cyclorama"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09098-small.webp",
+              "size": 15902,
+              "sizeFormatted": "15.5KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09098-small.avif",
+              "size": 13279,
+              "sizeFormatted": "13.0KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09098-medium.webp",
+              "size": 41268,
+              "sizeFormatted": "40.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09098-medium.avif",
+              "size": 35536,
+              "sizeFormatted": "34.7KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09098-large.webp",
+              "size": 74918,
+              "sizeFormatted": "73.2KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09098-large.avif",
+              "size": 68980,
+              "sizeFormatted": "67.4KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09098-xlarge.webp",
+              "size": 126020,
+              "sizeFormatted": "123.1KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09098-xlarge.avif",
+              "size": 123236,
+              "sizeFormatted": "120.3KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09101.jpg",
+        "zone": "cyclorama",
+        "metadata": {
+          "alt": "Ciclorama blanco profesional para sesiones de moda y producto en The Content Studio - Vista 2",
+          "title": "Zona Cyclorama - Estudio fotográfico profesional - DSC09101",
+          "description": "Espacio con fondo infinito blanco ideal para fotografía de producto, moda y retratos profesionales",
+          "zone": "cyclorama"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09101-small.webp",
+              "size": 16162,
+              "sizeFormatted": "15.8KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09101-small.avif",
+              "size": 14190,
+              "sizeFormatted": "13.9KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09101-medium.webp",
+              "size": 44068,
+              "sizeFormatted": "43.0KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09101-medium.avif",
+              "size": 38213,
+              "sizeFormatted": "37.3KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09101-large.webp",
+              "size": 78828,
+              "sizeFormatted": "77.0KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09101-large.avif",
+              "size": 70647,
+              "sizeFormatted": "69.0KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09101-xlarge.webp",
+              "size": 129062,
+              "sizeFormatted": "126.0KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09101-xlarge.avif",
+              "size": 124020,
+              "sizeFormatted": "121.1KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09106.jpg",
+        "zone": "cyclorama",
+        "metadata": {
+          "alt": "Ciclorama blanco profesional para sesiones de moda y producto en The Content Studio - Vista 3",
+          "title": "Zona Cyclorama - Estudio fotográfico profesional - DSC09106",
+          "description": "Espacio con fondo infinito blanco ideal para fotografía de producto, moda y retratos profesionales",
+          "zone": "cyclorama"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09106-small.webp",
+              "size": 14438,
+              "sizeFormatted": "14.1KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09106-small.avif",
+              "size": 13828,
+              "sizeFormatted": "13.5KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09106-medium.webp",
+              "size": 40572,
+              "sizeFormatted": "39.6KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09106-medium.avif",
+              "size": 40104,
+              "sizeFormatted": "39.2KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09106-large.webp",
+              "size": 79988,
+              "sizeFormatted": "78.1KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09106-large.avif",
+              "size": 80938,
+              "sizeFormatted": "79.0KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09106-xlarge.webp",
+              "size": 138800,
+              "sizeFormatted": "135.5KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09106-xlarge.avif",
+              "size": 145053,
+              "sizeFormatted": "141.7KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09112.jpg",
+        "zone": "cyclorama",
+        "metadata": {
+          "alt": "Ciclorama blanco profesional para sesiones de moda y producto en The Content Studio - Vista 4",
+          "title": "Zona Cyclorama - Estudio fotográfico profesional - DSC09112",
+          "description": "Espacio con fondo infinito blanco ideal para fotografía de producto, moda y retratos profesionales",
+          "zone": "cyclorama"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09112-small.webp",
+              "size": 8722,
+              "sizeFormatted": "8.5KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09112-small.avif",
+              "size": 8761,
+              "sizeFormatted": "8.6KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09112-medium.webp",
+              "size": 25830,
+              "sizeFormatted": "25.2KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09112-medium.avif",
+              "size": 25880,
+              "sizeFormatted": "25.3KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09112-large.webp",
+              "size": 49444,
+              "sizeFormatted": "48.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09112-large.avif",
+              "size": 49320,
+              "sizeFormatted": "48.2KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09112-xlarge.webp",
+              "size": 83684,
+              "sizeFormatted": "81.7KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09112-xlarge.avif",
+              "size": 88150,
+              "sizeFormatted": "86.1KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09130.jpg",
+        "zone": "cyclorama",
+        "metadata": {
+          "alt": "Ciclorama blanco profesional para sesiones de moda y producto en The Content Studio - Vista 5",
+          "title": "Zona Cyclorama - Estudio fotográfico profesional - DSC09130",
+          "description": "Espacio con fondo infinito blanco ideal para fotografía de producto, moda y retratos profesionales",
+          "zone": "cyclorama"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09130-small.webp",
+              "size": 12630,
+              "sizeFormatted": "12.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09130-small.avif",
+              "size": 12643,
+              "sizeFormatted": "12.3KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09130-medium.webp",
+              "size": 35318,
+              "sizeFormatted": "34.5KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09130-medium.avif",
+              "size": 35096,
+              "sizeFormatted": "34.3KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09130-large.webp",
+              "size": 65802,
+              "sizeFormatted": "64.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09130-large.avif",
+              "size": 66703,
+              "sizeFormatted": "65.1KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09130-xlarge.webp",
+              "size": 110942,
+              "sizeFormatted": "108.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09130-xlarge.avif",
+              "size": 118827,
+              "sizeFormatted": "116.0KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09157.jpg",
+        "zone": "cyclorama",
+        "metadata": {
+          "alt": "Ciclorama blanco profesional para sesiones de moda y producto en The Content Studio - Vista 6",
+          "title": "Zona Cyclorama - Estudio fotográfico profesional - DSC09157",
+          "description": "Espacio con fondo infinito blanco ideal para fotografía de producto, moda y retratos profesionales",
+          "zone": "cyclorama"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09157-small.webp",
+              "size": 9286,
+              "sizeFormatted": "9.1KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09157-small.avif",
+              "size": 8398,
+              "sizeFormatted": "8.2KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09157-medium.webp",
+              "size": 24068,
+              "sizeFormatted": "23.5KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09157-medium.avif",
+              "size": 20648,
+              "sizeFormatted": "20.2KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09157-large.webp",
+              "size": 42778,
+              "sizeFormatted": "41.8KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09157-large.avif",
+              "size": 37325,
+              "sizeFormatted": "36.5KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09157-xlarge.webp",
+              "size": 67920,
+              "sizeFormatted": "66.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09157-xlarge.avif",
+              "size": 60798,
+              "sizeFormatted": "59.4KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09177.jpg",
+        "zone": "cyclorama",
+        "metadata": {
+          "alt": "Ciclorama blanco profesional para sesiones de moda y producto en The Content Studio - Vista 7",
+          "title": "Zona Cyclorama - Estudio fotográfico profesional - DSC09177",
+          "description": "Espacio con fondo infinito blanco ideal para fotografía de producto, moda y retratos profesionales",
+          "zone": "cyclorama"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09177-small.webp",
+              "size": 7560,
+              "sizeFormatted": "7.4KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09177-small.avif",
+              "size": 6607,
+              "sizeFormatted": "6.5KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09177-medium.webp",
+              "size": 20738,
+              "sizeFormatted": "20.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09177-medium.avif",
+              "size": 17599,
+              "sizeFormatted": "17.2KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09177-large.webp",
+              "size": 38302,
+              "sizeFormatted": "37.4KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09177-large.avif",
+              "size": 33059,
+              "sizeFormatted": "32.3KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09177-xlarge.webp",
+              "size": 61338,
+              "sizeFormatted": "59.9KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09177-xlarge.avif",
+              "size": 56615,
+              "sizeFormatted": "55.3KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09179.jpg",
+        "zone": "cyclorama",
+        "metadata": {
+          "alt": "Ciclorama blanco profesional para sesiones de moda y producto en The Content Studio - Vista 8",
+          "title": "Zona Cyclorama - Estudio fotográfico profesional - DSC09179",
+          "description": "Espacio con fondo infinito blanco ideal para fotografía de producto, moda y retratos profesionales",
+          "zone": "cyclorama"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09179-small.webp",
+              "size": 8322,
+              "sizeFormatted": "8.1KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09179-small.avif",
+              "size": 8624,
+              "sizeFormatted": "8.4KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09179-medium.webp",
+              "size": 25656,
+              "sizeFormatted": "25.1KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09179-medium.avif",
+              "size": 25790,
+              "sizeFormatted": "25.2KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09179-large.webp",
+              "size": 50444,
+              "sizeFormatted": "49.3KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09179-large.avif",
+              "size": 51360,
+              "sizeFormatted": "50.2KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09179-xlarge.webp",
+              "size": 84592,
+              "sizeFormatted": "82.6KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09179-xlarge.avif",
+              "size": 91470,
+              "sizeFormatted": "89.3KB"
+            }
+          }
+        }
+      },
+      {
+        "original": "DSC09185.jpg",
+        "zone": "cyclorama",
+        "metadata": {
+          "alt": "Ciclorama blanco profesional para sesiones de moda y producto en The Content Studio - Vista 9",
+          "title": "Zona Cyclorama - Estudio fotográfico profesional - DSC09185",
+          "description": "Espacio con fondo infinito blanco ideal para fotografía de producto, moda y retratos profesionales",
+          "zone": "cyclorama"
+        },
+        "formats": {
+          "small": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09185-small.webp",
+              "size": 1500,
+              "sizeFormatted": "1.5KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09185-small.avif",
+              "size": 1243,
+              "sizeFormatted": "1.2KB"
+            }
+          },
+          "medium": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09185-medium.webp",
+              "size": 3822,
+              "sizeFormatted": "3.7KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09185-medium.avif",
+              "size": 2513,
+              "sizeFormatted": "2.5KB"
+            }
+          },
+          "large": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09185-large.webp",
+              "size": 6896,
+              "sizeFormatted": "6.7KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09185-large.avif",
+              "size": 4194,
+              "sizeFormatted": "4.1KB"
+            }
+          },
+          "xlarge": {
+            "webp": {
+              "path": "public/images/spaces/cyclorama/webp/DSC09185-xlarge.webp",
+              "size": 10752,
+              "sizeFormatted": "10.5KB"
+            },
+            "avif": {
+              "path": "public/images/spaces/cyclorama/avif/DSC09185-xlarge.avif",
+              "size": 6576,
+              "sizeFormatted": "6.4KB"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

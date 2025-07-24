@@ -1,0 +1,318 @@
+---
+export interface Props {
+  images: string[] | Array<{
+    src: string;
+    alt: string;
+    title?: string;
+    description?: string;
+  }>;
+  layout?: {
+    columns: {
+      mobile: number;
+      tablet: number;
+      desktop: number;
+    };
+    maxImages?: number;
+    aspectRatio?: 'square' | 'portrait' | 'landscape' | 'auto';
+    gap?: 'sm' | 'md' | 'lg';
+  };
+  showOverlay?: boolean;
+  enableLightbox?: boolean;
+  class?: string;
+  zone?: string;
+}
+
+const {
+  images,
+  layout = {
+    columns: { mobile: 1, tablet: 2, desktop: 3 },
+    maxImages: 6,
+    aspectRatio: 'landscape',
+    gap: 'md'
+  },
+  showOverlay = true,
+  enableLightbox = false,
+  class: customClass = '',
+  zone = ''
+} = Astro.props;
+
+// Process images
+const processedImages = Array.isArray(images) && typeof images[0] === 'string' 
+  ? (images as string[]).map((src, index) => ({
+      src,
+      alt: `${zone} imagen ${index + 1}`,
+      title: zone ? `${zone} - ${index + 1}` : undefined,
+      description: undefined
+    }))
+  : images as Array<{src: string; alt: string; title?: string; description?: string}>;
+
+const displayImages = layout.maxImages ? processedImages.slice(0, layout.maxImages) : processedImages;
+
+// Grid classes
+const getGridClasses = () => {
+  const { mobile, tablet, desktop } = layout.columns;
+  const imageCount = displayImages.length;
+  
+  const actualMobile = Math.min(mobile, imageCount);
+  const actualTablet = Math.min(tablet, imageCount);
+  const actualDesktop = Math.min(desktop, imageCount);
+  
+  return `grid grid-cols-${actualMobile} md:grid-cols-${actualTablet} lg:grid-cols-${actualDesktop}`;
+};
+
+const gapClasses = {
+  sm: 'gap-2',
+  md: 'gap-4',
+  lg: 'gap-6'
+};
+
+const aspectRatioClasses = {
+  square: 'aspect-square',
+  portrait: 'aspect-[3/4]',
+  landscape: 'aspect-[4/3]',
+  auto: ''
+};
+
+// Helper function to get optimized image paths
+const getResponsiveImage = (originalSrc: string) => {
+  // Convert /images/spaces/colores/webp/DSC09172-quality.webp to the base
+  const pathParts = originalSrc.split('/');
+  const fileName = pathParts[pathParts.length - 1];
+  const baseName = fileName.replace('-quality.webp', '').replace('-display.webp', '').replace('-large.webp', '').replace('-medium.webp', '').replace('-small.webp', '').replace('.webp', '');
+  const zone = pathParts[pathParts.length - 3]; // colores, cyclorama, etc
+  
+  return {
+    small: `/images/spaces/${zone}/webp/${baseName}-small.webp`,
+    medium: `/images/spaces/${zone}/webp/${baseName}-medium.webp`, 
+    large: `/images/spaces/${zone}/webp/${baseName}-large.webp`,
+    xlarge: `/images/spaces/${zone}/webp/${baseName}-xlarge.webp`,
+    quality: `/images/spaces/${zone}/webp/${baseName}-quality.webp`,
+    // For lightbox
+    avif_large: `/images/spaces/${zone}/avif/${baseName}-xlarge.avif`
+  };
+};
+
+const galleryId = `gallery-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class={`w-full ${customClass}`} data-gallery={galleryId}>
+  <div class={`${getGridClasses()} ${gapClasses[layout.gap || 'md']}`}>
+    {displayImages.map((image, index) => {
+      const responsiveImages = getResponsiveImage(image.src);
+      return (
+        <div 
+          class={`relative overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group ${aspectRatioClasses[layout.aspectRatio || 'landscape']}`}
+          data-image-index={index}
+        >
+          <!-- Optimized responsive image -->
+          <picture class="w-full h-full">
+            <!-- AVIF for best compression -->
+            <source 
+              srcset={`
+                ${responsiveImages.small} 400w,
+                ${responsiveImages.medium} 800w,
+                ${responsiveImages.large} 1200w
+              `}
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1200px) 33vw, 428px"
+              type="image/avif"
+            />
+            <!-- WebP fallback -->
+            <source 
+              srcset={`
+                ${responsiveImages.small} 400w,
+                ${responsiveImages.medium} 800w,
+                ${responsiveImages.large} 1200w
+              `}
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1200px) 33vw, 428px"
+              type="image/webp"
+            />
+            <!-- Final fallback -->
+            <img 
+              src={responsiveImages.medium}
+              alt={image.alt}
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              loading={index < 4 ? "eager" : "lazy"}
+              style="object-position: center;"
+            />
+          </picture>
+          
+          <!-- Overlay con información -->
+          {showOverlay && (image.title || image.description) && (
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="absolute bottom-0 left-0 right-0 p-4">
+                {image.title && (
+                  <h3 class="text-white text-lg font-bold mb-1 font-outfit">
+                    {image.title}
+                  </h3>
+                )}
+                {image.description && (
+                  <p class="text-white/90 text-sm line-clamp-2">
+                    {image.description}
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
+
+          <!-- Botón de lightbox -->
+          {enableLightbox && (
+            <button
+              type="button"
+              class="absolute top-2 right-2 w-8 h-8 bg-black/50 hover:bg-black/70 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
+              data-lightbox-trigger={index}
+              aria-label={`Ver imagen ${index + 1} en pantalla completa`}
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+              </svg>
+            </button>
+          )}
+        </div>
+      );
+    })}
+  </div>
+
+  <!-- Lightbox Modal -->
+  {enableLightbox && (
+    <div 
+      class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center opacity-0 invisible transition-all duration-300"
+      data-lightbox-modal
+    >
+      <div class="relative max-w-5xl max-h-[95vh] mx-4">
+        <button
+          type="button"
+          class="absolute top-4 right-4 z-60 w-10 h-10 bg-white/20 hover:bg-white/30 text-white rounded-full flex items-center justify-center transition-colors duration-200"
+          data-lightbox-close
+          aria-label="Cerrar imagen"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        
+        <!-- High quality image for lightbox -->
+        <img 
+          src={responsiveImages.large || displayImages[0]?.src || ""}
+          alt=""
+          class="max-w-full max-h-full object-contain rounded-lg"
+          data-lightbox-image
+          loading="lazy"
+        />
+        
+        <div class="absolute bottom-4 left-4 right-4 text-center">
+          <h3 class="text-white text-xl font-bold mb-2 font-outfit" data-lightbox-title></h3>
+          <p class="text-white/90 text-sm" data-lightbox-description></p>
+        </div>
+
+        <!-- Navigation -->
+        {displayImages.length > 1 && (
+          <>
+            <button
+              type="button" 
+              class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 text-white rounded-full flex items-center justify-center transition-colors duration-200"
+              data-lightbox-prev
+              aria-label="Imagen anterior"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 text-white rounded-full flex items-center justify-center transition-colors duration-200"
+              data-lightbox-next
+              aria-label="Imagen siguiente"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </>
+        )}
+      </div>
+    </div>
+  )}
+</div>
+
+{enableLightbox && (
+  <script define:vars={{ galleryId, displayImages }} is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      const gallery = document.querySelector(`[data-gallery="${galleryId}"]`);
+      if (!gallery) return;
+
+      const modal = gallery.querySelector('[data-lightbox-modal]');
+      const modalImage = gallery.querySelector('[data-lightbox-image]');
+      const modalAvif = gallery.querySelector('[data-lightbox-avif]');
+      const modalTitle = gallery.querySelector('[data-lightbox-title]');
+      const modalDescription = gallery.querySelector('[data-lightbox-description]');
+      const closeBtn = gallery.querySelector('[data-lightbox-close]');
+      const prevBtn = gallery.querySelector('[data-lightbox-prev]');
+      const nextBtn = gallery.querySelector('[data-lightbox-next]');
+      const triggers = gallery.querySelectorAll('[data-lightbox-trigger]');
+      
+      let currentIndex = 0;
+      
+      function getResponsiveImagePaths(originalSrc) {
+        const pathParts = originalSrc.split('/');
+        const fileName = pathParts[pathParts.length - 1];
+        const baseName = fileName.replace('-quality.webp', '').replace('-display.webp', '').replace('-large.webp', '').replace('-medium.webp', '').replace('-small.webp', '').replace('.webp', '');
+        const zone = pathParts[pathParts.length - 3];
+        
+        return {
+          xlarge: `/images/spaces/${zone}/webp/${baseName}-xlarge.webp`,
+          avif_xlarge: `/images/spaces/${zone}/avif/${baseName}-xlarge.avif`
+        };
+      }
+      
+      function openLightbox(index) {
+        currentIndex = index;
+        const image = displayImages[index];
+        const responsiveImages = getResponsiveImagePaths(image.src);
+        
+        // Use highest quality version for lightbox
+        modalImage.src = responsiveImages.xlarge;
+        modalImage.alt = image.alt;
+        modalAvif.srcset = responsiveImages.avif_xlarge;
+        modalTitle.textContent = image.title || '';
+        modalDescription.textContent = image.description || '';
+        
+        modal.classList.remove('opacity-0', 'invisible');
+        document.body.style.overflow = 'hidden';
+      }
+      
+      function closeLightbox() {
+        modal.classList.add('opacity-0', 'invisible');
+        document.body.style.overflow = '';
+      }
+      
+      function showPrevImage() {
+        currentIndex = (currentIndex - 1 + displayImages.length) % displayImages.length;
+        openLightbox(currentIndex);
+      }
+      
+      function showNextImage() {
+        currentIndex = (currentIndex + 1) % displayImages.length;
+        openLightbox(currentIndex);
+      }
+      
+      // Event listeners
+      triggers.forEach((trigger, index) => {
+        trigger.addEventListener('click', () => openLightbox(index));
+      });
+      
+      closeBtn?.addEventListener('click', closeLightbox);
+      prevBtn?.addEventListener('click', showPrevImage);
+      nextBtn?.addEventListener('click', showNextImage);
+      
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') showPrevImage();
+        if (e.key === 'ArrowRight') showNextImage();
+      });
+      
+      modal?.addEventListener('click', (e) => {
+        if (e.target === modal) closeLightbox();
+      });
+    });
+  </script>
+)}

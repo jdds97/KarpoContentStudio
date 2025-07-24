@@ -1,0 +1,135 @@
+---
+import { Picture } from 'astro:assets';
+import { HERO_CONTENT } from '@/utils';
+import Button from './Button.astro';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  buttonText?: string;
+  buttonHref?: string;
+  overlayClass?: string;
+  titleClass?: string;
+  textClass?: string;
+  descriptionClass?: string;
+  buttonVariant?: 'primary' | 'outline' | 'table' | 'custom';
+  buttonClass?: string;
+  heightClass?: string;
+  ultraQuality?: boolean; // New prop for ultra-quality images
+}
+
+const {
+  title = HERO_CONTENT.home.title,
+  description = HERO_CONTENT.home.description,
+  image = "/images/spaces/principal.jpg", // Use the original high-res image
+  buttonText = HERO_CONTENT.home.buttonText,
+  buttonHref = HERO_CONTENT.home.buttonHref,
+  overlayClass = 'bg-primary-black/60',
+  textClass = '',
+  titleClass = 'text-primary-black',
+  descriptionClass = 'text-primary-black font-outfit',
+  buttonVariant = 'custom',
+  buttonClass = 'bg-primary-beige text-primary-black hover:bg-primary-black hover:text-primary-white transition-colors shadow-lg',
+  heightClass = 'h-[50vh] md:h-[85vh] lg:h-[90vh]',
+  ultraQuality = true, // Default to ultra quality for hero
+} = Astro.props;
+---
+
+<section class={`relative ${heightClass} flex items-center justify-center overflow-hidden`}>
+  <!-- Ultra-high quality background image using Picture element -->
+  <div class="absolute inset-0 w-full h-full">
+    {ultraQuality ? (
+      <Picture
+        src={image}
+        alt="The Content Studio - Estudio fotográfico profesional en el corazón de la ciudad"
+        class="w-full h-full object-cover"
+        width={7008}
+        height={4672}
+        widths={[768, 1024, 1366, 1920, 2560, 3840]}
+        sizes="100vw"
+        formats={['avif', 'webp', 'jpg']}
+        quality={95}
+        densities={[1, 1.5, 2]}
+        loading="eager"
+        fetchpriority="high"
+        pictureAttributes={{
+          style: "position: absolute; inset: 0; width: 100%; height: 100%; display: block;"
+        }}
+        imgAttributes={{
+          style: "width: 100%; height: 100%; object-fit: cover; object-position: center;",
+          fetchpriority: "high"
+        }}
+      />
+    ) : (
+      <Picture
+        src={image}
+        alt="The Content Studio - Estudio fotográfico profesional"
+        class="w-full h-full object-cover"
+        width={7008}
+        height={4672}
+        widths={[768, 1024, 1366, 1920, 2560]}
+        sizes="100vw"
+        formats={['avif', 'webp', 'jpg']}
+        quality={88}
+        densities={[1, 1.5]}
+        loading="eager"
+        fetchpriority="high"
+        pictureAttributes={{
+          style: "position: absolute; inset: 0; width: 100%; height: 100%; display: block;"
+        }}
+        imgAttributes={{
+          style: "width: 100%; height: 100%; object-fit: cover; object-position: center;"
+        }}
+      />
+    )}
+  </div>
+
+  <!-- Overlay -->
+  <div class={`absolute inset-0 ${overlayClass} z-10`}></div>
+  
+  <!-- Content -->
+  <div class={`relative z-20 text-center max-w-2xl mx-auto px-4 ${textClass}`}>  
+    <h1 class={`text-4xl md:text-6xl font-instrument font-bold mb-6 drop-shadow-lg ${titleClass}`}>
+      {title}
+    </h1>
+    <p class={`md:text-2xl mb-8 drop-shadow ${descriptionClass}`}>
+      {description}
+    </p>
+    {buttonText && (
+      <Button href={buttonHref} variant={buttonVariant} class={buttonClass}>
+        {buttonText}
+      </Button>
+    )}
+  </div>
+</section>
+
+<!-- Preload hero image for critical performance -->
+<link 
+  rel="preload" 
+  as="image" 
+  href={ultraQuality ? "/images/spaces/webp/principal-hero-ultra.webp" : "/images/spaces/webp/principal-hero-retina.webp"}
+  fetchpriority="high"
+/>
+
+<!-- Critical CSS for hero image loading -->
+<style>
+  /* Ensure hero image loads smoothly */
+  .hero-container picture img {
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  /* Optimize for different screen densities */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .hero-container picture {
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+  }
+
+  /* Critical above-the-fold optimization */
+  .hero-container {
+    contain: layout style paint;
+    will-change: transform;
+  }
+</style>

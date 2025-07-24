@@ -1,0 +1,100 @@
+---
+import { HERO_CONTENT } from '@/utils';
+import Button from './Button.astro';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  buttonText?: string;
+  buttonHref?: string;
+  overlayClass?: string;
+  titleClass?: string;
+  textClass?: string;
+  descriptionClass?: string;
+  buttonVariant?: 'primary' | 'outline' | 'table' | 'custom';
+  buttonClass?: string;
+  heightClass?: string;
+}
+
+const {
+  title = HERO_CONTENT.home.title,
+  description = HERO_CONTENT.home.description,
+  buttonText = HERO_CONTENT.home.buttonText,
+  buttonHref = HERO_CONTENT.home.buttonHref,
+  overlayClass = 'bg-primary-black/60',
+  textClass = '',
+  titleClass = 'text-primary-black',
+  descriptionClass = 'text-primary-black font-outfit',
+  buttonVariant = 'custom',
+  buttonClass = 'bg-primary-beige text-primary-black hover:bg-primary-black hover:text-primary-white transition-colors shadow-lg',
+  heightClass = 'h-[50vh] md:h-[85vh] lg:h-[90vh]',
+} = Astro.props;
+---
+
+<section class={`relative ${heightClass} flex items-center justify-center overflow-hidden hero-bg`}>
+  <!-- Optimized background using existing processed images -->
+  <picture class="absolute inset-0 w-full h-full">
+    <!-- AVIF for modern browsers -->
+    <source 
+      srcset="
+        /images/spaces/webp/principal-hero-ultra.webp 768w,
+        /images/spaces/webp/principal-hero-retina.webp 1920w
+      "
+      sizes="100vw"
+      type="image/webp"
+    />
+    <!-- WebP fallback -->
+    <source 
+      srcset="
+        /images/spaces/principal/webp/principal-medium.webp 800w,
+        /images/spaces/principal/webp/principal-large.webp 1200w
+      "
+      sizes="100vw"
+      type="image/webp"
+    />
+    <!-- JPEG fallback for old browsers -->
+    <img 
+      src="/images/spaces/principal/webp/principal-large.webp"
+      alt="The Content Studio - Estudio fotográfico profesional en Sevilla"
+      class="w-full h-full object-cover object-center md:object-[center_70%]"
+      loading="eager"
+      fetchpriority="high"
+    />
+  </picture>
+
+  <!-- Overlay -->
+  <div class={`absolute inset-0 ${overlayClass} z-10`}></div>
+  
+  <!-- Content -->
+  <div class={`relative z-20 text-center max-w-2xl mx-auto px-4 ${textClass}`}>  
+    <h1 class={`text-4xl md:text-6xl font-instrument font-bold mb-6 drop-shadow-lg ${titleClass}`}>
+      {title}
+    </h1>
+    <p class={`md:text-2xl mb-8 drop-shadow ${descriptionClass}`}>
+      {description}
+    </p>
+    {buttonText && (
+      <Button href={buttonHref} variant={buttonVariant} class={buttonClass}>
+        {buttonText}
+      </Button>
+    )}
+  </div>
+</section>
+
+<!-- Preload critical hero image -->
+<link 
+  rel="preload" 
+  as="image" 
+  href="/images/spaces/webp/principal-hero-ultra.webp"
+  fetchpriority="high"
+/>
+
+<style>
+  .hero-bg {
+    background-color: #f5f5f5; /* Fallback mientras carga */
+  }
+  
+  .hero-bg picture img {
+    transition: opacity 0.3s ease-in-out;
+  }
+</style>
