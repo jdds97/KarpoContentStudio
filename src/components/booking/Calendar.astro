@@ -152,25 +152,54 @@ interface Props {
 
 <script>
   // Importar módulo de calendario para asegurar que esté cargado
-  import { initCalendarFinal } from '@/lib/calendar';
-  
+  import { initCalendarFinal, cleanupCalendar } from '@/lib/calendar';
+
+  // Contador de intentos
+  let initAttempts = 0;
+  const maxAttempts = 20;
 
   // Asegurar inicialización cuando el componente carga
-  function ensureInit() {
+  function ensureInit(forceReinit: boolean = false) {
+    initAttempts++;
+
+    if (initAttempts > maxAttempts) {
+      console.warn('Calendar: Max init attempts reached');
+      return;
+    }
+
     const container = document.getElementById('calendar-container');
-    
-    
+    const monthYear = document.getElementById('calendar-month-year');
+
     if (container) {
-      try {
-        initCalendarFinal();
-      } catch (error) {
-        // Error al llamar initCalendarFinal
+      // Check if calendar needs initialization
+      const needsInit = forceReinit ||
+        !container.hasAttribute('data-calendar-initialized') ||
+        (monthYear && monthYear.textContent === 'Cargando...');
+
+      if (needsInit) {
+        try {
+          // Clean up first if reinitializing
+          if (container.hasAttribute('data-calendar-initialized')) {
+            cleanupCalendar();
+          }
+          initCalendarFinal(true);
+        } catch (error) {
+          // Retry after a delay
+          setTimeout(() => ensureInit(true), 200);
+        }
       }
     } else {
-      setTimeout(ensureInit, 100);
+      // Container not found, retry
+      setTimeout(() => ensureInit(false), 100);
     }
   }
-  
-  // Inicializar inmediatamente y con retrasos
-  ensureInit();
+
+  // For Server Islands: This script runs when the island content is injected
+  // Initialize immediately since we're inside the component
+  ensureInit(true);
+
+  // Also handle case where script runs before DOM is fully ready
+  if (document.readyState !== 'complete') {
+    window.addEventListener('load', () => ensureInit(true));
+  }
 </script>

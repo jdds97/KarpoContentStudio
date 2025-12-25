@@ -19,7 +19,7 @@ export const CONTACT_INFO = {
 
 // URLs del sitio
 export const SITE_URLS = {
-  main: 'https://thecontentstudio.es',
+  main: 'https://contentstudiokrp.es',
   booking: '/booking',
   contact: '/contact',
   terms: '/terms',

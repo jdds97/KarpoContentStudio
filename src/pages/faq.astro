@@ -3,11 +3,14 @@ import Layout from '@/layouts/Layout.astro';
 import HeroSection from '@/components/common/HeroSection.astro';
 import FaqTabsSection from '@/components/faq/FaqTabsSection.astro';
 import FaqContactSection from '@/components/faq/FaqContactSection.astro';
-import { HERO_CONTENT } from '@/utils';
+import { HERO_CONTENT, faqStructuredData } from '@/utils';
 
 ---
 
-<Layout title="Preguntas Frecuentes">
+<Layout
+  title="FAQ - Preguntas sobre Alquiler de Estudio Fotográfico Sevilla"
+  description="Respuestas sobre tarifas, reservas, cancelaciones y equipamiento del estudio. Todo lo que necesitas saber para alquilar nuestro estudio profesional en Sevilla."
+>
   <HeroSection
     title={HERO_CONTENT.faq.title}
     description={HERO_CONTENT.faq.description}
@@ -19,4 +22,5 @@ import { HERO_CONTENT } from '@/utils';
   />
   <FaqTabsSection />
   <FaqContactSection />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqStructuredData)}></script>
 </Layout>

@@ -305,21 +305,52 @@ class CalendarFinal {
     try {
       const loadingIndicator = document.getElementById('loading-indicator');
       loadingIndicator?.classList.remove('hidden');
-      
+
       const year = this.currentDate.getFullYear();
       const month = this.currentDate.getMonth() + 1;
       const spaceParam = this.selectedSpace !== 'all' ? `&studio_space=${this.selectedSpace}` : '';
-      
+
       const response = await fetch(`/api/calendar/availability?year=${year}&month=${month}${spaceParam}`);
-      
+
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
       }
-      
+
       const data = await response.json();
-      this.availabilityData = data.availability || {};
+
+      // Parse the calendar data into availability format
+      // The API returns 'calendar' array, we need to convert to availability object
+      if (data.calendar && Array.isArray(data.calendar)) {
+        const availability: AvailabilityData = {};
+        data.calendar.forEach((day: any) => {
+          if (day.isCurrentMonth && day.date) {
+            const slots = day.availableSlots;
+            let status: 'available' | 'partial' | 'busy' | 'full' = 'available';
+
+            if (slots) {
+              const availableRatio = slots.available / slots.total;
+              if (availableRatio === 0) {
+                status = 'full';
+              } else if (availableRatio < 0.3) {
+                status = 'busy';
+              } else if (availableRatio < 0.7) {
+                status = 'partial';
+              }
+            }
+
+            availability[day.date] = { status };
+          }
+        });
+        this.availabilityData = availability;
+      } else if (data.availability) {
+        // Fallback to direct availability data if provided
+        this.availabilityData = data.availability;
+      } else {
+        this.availabilityData = {};
+      }
+
       this.render();
-      
+
     } catch (error) {
       this.availabilityData = {};
       this.render();
@@ -733,7 +764,7 @@ class CalendarFinal {
 }
 
 // Función de inicialización mejorada
-function initCalendarFinal(): void {
+function initCalendarFinal(forceReinit: boolean = false): void {
   // Verificar si estamos en un entorno de navegador
   if (typeof window === 'undefined' || typeof document === 'undefined') {
     return;
@@ -745,17 +776,24 @@ function initCalendarFinal(): void {
     return;
   }
 
-  // Check if already initialized
-  if ((window as any).calendarFinal || calendarContainer.hasAttribute('data-calendar-initialized')) {
-    return;
+  // Check if already initialized (unless force reinit)
+  if (!forceReinit && ((window as any).calendarFinal || calendarContainer.hasAttribute('data-calendar-initialized'))) {
+    // Verify the calendar is actually functional
+    const monthYear = document.getElementById('calendar-month-year');
+    if (monthYear && monthYear.textContent && monthYear.textContent !== 'Cargando...') {
+      return; // Already properly initialized
+    }
+    // Calendar exists but not functional, force reinit
+    cleanupCalendar();
   }
-  
+
   try {
     const instance = new CalendarFinal();
     (window as any).calendarFinal = instance;
     calendarContainer.setAttribute('data-calendar-initialized', 'true');
   } catch (error) {
-    // Error creating instance
+    // Error creating instance - retry after a delay
+    setTimeout(() => initCalendarFinal(true), 200);
   }
 }
 
@@ -770,40 +808,85 @@ function cleanupCalendar(): void {
   }
 }
 
-// Auto-initialize with better lifecycle management for Astro
+// Auto-initialize with better lifecycle management for Astro Server Islands
 if (typeof document !== 'undefined') {
   // Function to handle initialization
-  const handleCalendarInit = () => {
+  const handleCalendarInit = (force: boolean = false) => {
     // Check if calendar container exists
     const calendarContainer = document.getElementById('calendar-container');
     if (!calendarContainer) {
       return;
     }
 
-    // Check if already initialized
-    if (calendarContainer.hasAttribute('data-calendar-initialized')) {
-      return;
+    // Check if already initialized and functional
+    if (!force && calendarContainer.hasAttribute('data-calendar-initialized')) {
+      const monthYear = document.getElementById('calendar-month-year');
+      if (monthYear && monthYear.textContent && monthYear.textContent !== 'Cargando...') {
+        return; // Already properly initialized
+      }
     }
-    
-    initCalendarFinal();
+
+    initCalendarFinal(force);
+  };
+
+  // MutationObserver to detect Server Island content injection
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type === 'childList') {
+        // Check if calendar container was added
+        const addedNodes = Array.from(mutation.addedNodes);
+        for (const node of addedNodes) {
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            const element = node as Element;
+            // Check if the added node is or contains the calendar
+            if (element.id === 'calendar-container' || element.querySelector?.('#calendar-container')) {
+              // Small delay to ensure all elements are ready
+              setTimeout(() => handleCalendarInit(true), 50);
+              return;
+            }
+          }
+        }
+      }
+    }
+  });
+
+  // Start observing once DOM is ready
+  const startObserving = () => {
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
   };
 
   // Multiple initialization strategies
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', handleCalendarInit);
+    document.addEventListener('DOMContentLoaded', () => {
+      handleCalendarInit();
+      startObserving();
+    });
   } else {
     handleCalendarInit();
-    // Also try with a small delay in case of timing issues
-    setTimeout(handleCalendarInit, 100);
+    startObserving();
+    // Also try with delays for timing issues
+    setTimeout(() => handleCalendarInit(true), 100);
+    setTimeout(() => handleCalendarInit(true), 500);
   }
 
   // Handle Astro page transitions
   document.addEventListener('astro:page-load', () => {
-    setTimeout(handleCalendarInit, 50);
+    setTimeout(() => handleCalendarInit(true), 50);
   });
-  
+
+  // Handle Astro after-swap event (when Server Island content is swapped in)
+  document.addEventListener('astro:after-swap', () => {
+    setTimeout(() => handleCalendarInit(true), 50);
+  });
+
   // Cleanup on page unload for Astro transitions
-  document.addEventListener('astro:before-preparation', cleanupCalendar);
+  document.addEventListener('astro:before-preparation', () => {
+    cleanupCalendar();
+    observer.disconnect();
+  });
 }
 
 export { CalendarFinal, initCalendarFinal, cleanupCalendar };

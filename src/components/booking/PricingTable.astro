@@ -1,8 +1,62 @@
 ---
 import Button from '@/components/common/Button.astro';
 import { pricingSections, annualMembershipDetails, pricingNotes, PRICING_TABLE } from '@/utils';
+import { getActivePromotion, getCurrentPrice, formatPromotionEndDate, getPromotionDaysRemaining } from '@/utils/promotions';
 import Info from '@/components/icons/Info.astro';
+
+// Obtener promoción activa
+const activePromotion = getActivePromotion();
+const daysRemaining = activePromotion ? getPromotionDaysRemaining(activePromotion) : 0;
+
+// Función para obtener precio con descuento para paquetes estándar
+function getDisplayPrice(item: any) {
+  // Solo aplicar descuento a paquetes estándar (2h, 4h, 8h, 12h)
+  const durationMap: Record<string, string> = {
+    '2 horas': '2h',
+    '4 horas': '4h',
+    '8 horas': '8h',
+    '12 horas': '12h'
+  };
+
+  const durationKey = durationMap[item.duration];
+
+  if (durationKey && activePromotion && activePromotion.appliesTo === 'standard') {
+    const priceData = getCurrentPrice(durationKey);
+    return {
+      ...priceData,
+      originalFormatted: `${priceData.original}€ +IVA`,
+      currentFormatted: `${priceData.current}€ +IVA`
+    };
+  }
+
+  return null;
+}
 ---
+
+{/* Banner de promoción si está activa */}
+{activePromotion && (
+  <div class="mb-8 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-2xl p-6 shadow-lg animate-pulse-slow">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="text-center md:text-left">
+        <div class="flex items-center justify-center md:justify-start gap-2 mb-2">
+          <span class="text-3xl">🔥</span>
+          <span class="text-2xl md:text-3xl font-bold">{activePromotion.discountPercentage}% DESCUENTO</span>
+        </div>
+        <p class="text-white/90">{activePromotion.description}</p>
+        <p class="text-sm text-white/80 mt-1">
+          Usa el código <span class="font-bold bg-white/20 px-2 py-1 rounded">{activePromotion.code}</span> al reservar
+        </p>
+      </div>
+      <div class="text-center bg-white/10 rounded-xl px-6 py-4">
+        <p class="text-sm text-white/80">Oferta válida hasta</p>
+        <p class="text-xl font-bold">{formatPromotionEndDate(activePromotion.endDate)}</p>
+        {daysRemaining > 0 && daysRemaining <= 15 && (
+          <p class="text-sm text-yellow-300 mt-1">⏰ ¡Solo {daysRemaining} días!</p>
+        )}
+      </div>
+    </div>
+  </div>
+)}
 
 <!-- Desktop Table View (hidden on mobile) -->
 <div class="hidden lg:block overflow-x-auto">
@@ -24,45 +78,61 @@ import Info from '@/components/icons/Info.astro';
               <td colspan="4" class="px-6 py-4 font-instrument text-xl font-bold tracking-wide">{section.title}</td>
             </tr>
           )}
-          
+
           {/* Items de la sección */}
-          {section.items.map((item: any) => (
-            <tr>
-              <td class="px-6 py-4">
-                {item.id === 'annual-pro-plus' ? (
-                  <div>
-                    <p class="font-medium">{item.service}</p>
-                    <ul class="text-sm text-primary-gray mt-2 list-disc pl-4">
-                      {annualMembershipDetails.features.map((feature: any) => (
-                        <li>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ) : (
-                  item.service
-                )}
-              </td>
-              <td class="px-6 py-4">{item.duration}</td>
-              <td class="px-6 py-4 font-medium">
-                {item.id === 'annual-pro-plus' ? (
-                  <div>
-                    <p>{item.price}</p>
-                    <p class="text-sm text-primary-gray">{PRICING_TABLE.alternativePayment.prefix} {annualMembershipDetails.alternativePayment}</p>
-                  </div>
-                ) : (
-                  item.price
-                )}
-              </td>
-              <td class="px-6 py-4">
-                <Button 
-                  href={item.actionHref} 
-                  variant="table"
-                >
-                  {item.action === 'book' ? PRICING_TABLE.actions.book : PRICING_TABLE.actions.contact}
-                </Button>
-              </td>
-            </tr>
-          ))}
+          {section.items.map((item: any) => {
+            const priceDisplay = section.id === 'standard' ? getDisplayPrice(item) : null;
+
+            return (
+              <tr class={priceDisplay?.hasDiscount ? 'bg-green-50/50' : ''}>
+                <td class="px-6 py-4">
+                  {item.id === 'annual-pro-plus' ? (
+                    <div>
+                      <p class="font-medium">{item.service}</p>
+                      <ul class="text-sm text-primary-gray mt-2 list-disc pl-4">
+                        {annualMembershipDetails.features.map((feature: any) => (
+                          <li>{feature}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : (
+                    <div class="flex items-center gap-2">
+                      {item.service}
+                      {priceDisplay?.hasDiscount && (
+                        <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                          -{priceDisplay.discountPercentage}%
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </td>
+                <td class="px-6 py-4">{item.duration}</td>
+                <td class="px-6 py-4 font-medium">
+                  {item.id === 'annual-pro-plus' ? (
+                    <div>
+                      <p>{item.price}</p>
+                      <p class="text-sm text-primary-gray">{PRICING_TABLE.alternativePayment.prefix} {annualMembershipDetails.alternativePayment}</p>
+                    </div>
+                  ) : priceDisplay?.hasDiscount ? (
+                    <div>
+                      <span class="line-through text-gray-400 text-sm">{priceDisplay.originalFormatted}</span>
+                      <span class="text-green-600 font-bold text-lg ml-2">{priceDisplay.currentFormatted}</span>
+                    </div>
+                  ) : (
+                    item.price
+                  )}
+                </td>
+                <td class="px-6 py-4">
+                  <Button
+                    href={item.actionHref}
+                    variant="table"
+                  >
+                    {item.action === 'book' ? PRICING_TABLE.actions.book : PRICING_TABLE.actions.contact}
+                  </Button>
+                </td>
+              </tr>
+            );
+          })}
         </>
       ))}
     </tbody>
@@ -79,64 +149,81 @@ import Info from '@/components/icons/Info.astro';
           <h3 class="font-instrument text-lg md:text-xl font-bold tracking-wide">{section.title}</h3>
         </div>
       )}
-      
+
       {/* Cards de servicios */}
       <div class="space-y-3">
-        {section.items.map((item: any) => (
-          <div class="bg-white border border-primary-beige/50 rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-shadow">
-            <div class="space-y-3">
-              <!-- Servicio -->
-              <div>
-                <h4 class="font-instrument text-lg md:text-xl font-bold text-primary-black mb-2">
-                  {item.service}
-                </h4>
-                {item.id === 'annual-pro-plus' && (
-                  <ul class="text-sm text-primary-gray space-y-1 list-disc pl-4">
-                    {annualMembershipDetails.features.map((feature: any) => (
-                      <li>{feature}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-              
-              <!-- Información en grid -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm md:text-base">
+        {section.items.map((item: any) => {
+          const priceDisplay = section.id === 'standard' ? getDisplayPrice(item) : null;
+
+          return (
+            <div class={`bg-white border rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-shadow ${priceDisplay?.hasDiscount ? 'border-green-400 ring-2 ring-green-100' : 'border-primary-beige/50'}`}>
+              <div class="space-y-3">
+                <!-- Servicio -->
                 <div>
-                  <span class="text-primary-gray font-medium">Duración:</span>
-                  <p class="text-primary-black mt-1">{item.duration}</p>
-                </div>
-                <div>
-                  <span class="text-primary-gray font-medium">Precio:</span>
-                  {item.id === 'annual-pro-plus' ? (
-                    <div class="mt-1">
-                      <p class="text-primary-black font-semibold">{item.price}</p>
-                      <p class="text-xs text-primary-gray">{PRICING_TABLE.alternativePayment.prefix} {annualMembershipDetails.alternativePayment}</p>
-                    </div>
-                  ) : (
-                    <p class="text-primary-black font-semibold mt-1">{item.price}</p>
+                  <div class="flex items-center justify-between mb-2">
+                    <h4 class="font-instrument text-lg md:text-xl font-bold text-primary-black">
+                      {item.service}
+                    </h4>
+                    {priceDisplay?.hasDiscount && (
+                      <span class="bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full animate-bounce">
+                        -{priceDisplay.discountPercentage}%
+                      </span>
+                    )}
+                  </div>
+                  {item.id === 'annual-pro-plus' && (
+                    <ul class="text-sm text-primary-gray space-y-1 list-disc pl-4">
+                      {annualMembershipDetails.features.map((feature: any) => (
+                        <li>{feature}</li>
+                      ))}
+                    </ul>
                   )}
                 </div>
-              </div>
-              
-              <!-- Botón de acción -->
-              <div class="pt-2">
-                <Button 
-                  href={item.actionHref} 
-                  variant="custom"
-                  fullWidth
-                  class="bg-primary-black text-primary-white hover:bg-primary-beige hover:text-primary-black transition-all duration-300 py-3 text-center font-semibold"
-                >
-                  {item.action === 'book' ? PRICING_TABLE.actions.book : PRICING_TABLE.actions.contact}
-                </Button>
+
+                <!-- Información en grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm md:text-base">
+                  <div>
+                    <span class="text-primary-gray font-medium">Duración:</span>
+                    <p class="text-primary-black mt-1">{item.duration}</p>
+                  </div>
+                  <div>
+                    <span class="text-primary-gray font-medium">Precio:</span>
+                    {item.id === 'annual-pro-plus' ? (
+                      <div class="mt-1">
+                        <p class="text-primary-black font-semibold">{item.price}</p>
+                        <p class="text-xs text-primary-gray">{PRICING_TABLE.alternativePayment.prefix} {annualMembershipDetails.alternativePayment}</p>
+                      </div>
+                    ) : priceDisplay?.hasDiscount ? (
+                      <div class="mt-1">
+                        <p class="line-through text-gray-400 text-sm">{priceDisplay.originalFormatted}</p>
+                        <p class="text-green-600 font-bold text-xl">{priceDisplay.currentFormatted}</p>
+                        <p class="text-xs text-green-700">Ahorras {priceDisplay.original - priceDisplay.current}€</p>
+                      </div>
+                    ) : (
+                      <p class="text-primary-black font-semibold mt-1">{item.price}</p>
+                    )}
+                  </div>
+                </div>
+
+                <!-- Botón de acción -->
+                <div class="pt-2">
+                  <Button
+                    href={item.actionHref}
+                    variant="custom"
+                    fullWidth
+                    class={`${priceDisplay?.hasDiscount ? 'bg-green-600 hover:bg-green-700' : 'bg-primary-black hover:bg-primary-beige hover:text-primary-black'} text-primary-white transition-all duration-300 py-3 text-center font-semibold`}
+                  >
+                    {item.action === 'book' ? (priceDisplay?.hasDiscount ? '🔥 Reservar con Descuento' : PRICING_TABLE.actions.book) : PRICING_TABLE.actions.contact}
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   ))}
 </div>
-  
+
 <div class="mt-8 bg-primary-beige/80 p-4 md:p-6 rounded-xl border border-primary-beige-dark shadow-sm">
   <h3 class="font-instrument text-lg md:text-xl mb-4 flex items-center gap-2 text-primary-black">
     <Info class="w-6 h-6 md:w-7 md:h-7 text-primary-black drop-shadow-md flex-shrink-0" />
@@ -151,3 +238,13 @@ import Info from '@/components/icons/Info.astro';
     ))}
   </ul>
 </div>
+
+<style>
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.95; }
+  }
+  .animate-pulse-slow {
+    animation: pulse-slow 3s ease-in-out infinite;
+  }
+</style>

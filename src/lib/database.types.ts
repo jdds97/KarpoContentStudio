@@ -125,6 +125,47 @@ export interface Database {
           created_at?: string;
         };
       };
+      discount_codes: {
+        Row: {
+          id: string;
+          code: string;
+          description: string;
+          discount_percentage: number;
+          min_hours: number;
+          max_uses: number;
+          usage_count: number;
+          active: boolean;
+          expires_at: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          code: string;
+          description: string;
+          discount_percentage: number;
+          min_hours?: number;
+          max_uses?: number;
+          usage_count?: number;
+          active?: boolean;
+          expires_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          code?: string;
+          description?: string;
+          discount_percentage?: number;
+          min_hours?: number;
+          max_uses?: number;
+          usage_count?: number;
+          active?: boolean;
+          expires_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
     };
     Views: {
       [_ in never]: never;
@@ -149,3 +190,8 @@ export interface Database {
 export type BookingFormData = Database['public']['Tables']['bookings']['Insert'];
 export type BookingStatus = Database['public']['Tables']['bookings']['Row']['status'];
 export type Booking = Database['public']['Tables']['bookings']['Row'];
+
+// Tipos para códigos de descuento
+export type DiscountCode = Database['public']['Tables']['discount_codes']['Row'];
+export type DiscountCodeInsert = Database['public']['Tables']['discount_codes']['Insert'];
+export type DiscountCodeUpdate = Database['public']['Tables']['discount_codes']['Update'];

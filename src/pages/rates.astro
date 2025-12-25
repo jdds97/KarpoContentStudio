@@ -1,16 +1,25 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import HeroSection from '@/components/common/HeroSection.astro';
-import DiscountBanner from '@/components/rates/DiscountBanner.astro';
 import PricingSection from '@/components/rates/PricingSection.astro';
 import ContentPackagesSection from '@/components/rates/ContentPackagesSection.astro';
 import AdditionalServicesSection from '@/components/rates/AdditionalServicesSection.astro';
 import PaymentInfoSection from '@/components/rates/PaymentInfoSection.astro';
 import CtaSection from '@/components/common/CtaSection.astro';
 import { HERO_CONTENT, CTA_CONTENT } from '@/utils';
+import { getActivePromotion } from '@/utils/promotions';
+
+// Obtener promoción activa para el meta description
+const promo = getActivePromotion();
+const metaDescription = promo
+  ? `¡${promo.discountPercentage}% DESCUENTO hasta fin de febrero 2026! Tarifas de alquiler de estudio en Sevilla. Código ${promo.code}. Desde 90€ por 2 horas.`
+  : "Tarifas transparentes de alquiler de estudio en Sevilla. Desde alquiler por horas hasta paquetes mensuales de contenido.";
 ---
 
-<Layout title="Tarifas">
+<Layout
+  title="Precios Alquiler Estudio Fotográfico Sevilla - Tarifas por Horas"
+  description={metaDescription}
+>
   <HeroSection
     title={HERO_CONTENT.rates.title}
     description={HERO_CONTENT.rates.description}
@@ -19,13 +28,6 @@ import { HERO_CONTENT, CTA_CONTENT } from '@/utils';
     textClass="text-primary-black"
     buttonText=""
     heightClass="h-[40vh] md:h-[50vh]"  />
-  
-  <DiscountBanner 
-    discountCode="PRIMERA25"
-    discountPercentage={25}
-    validUntil="31 de Julio 2025"
-    description="Descuento especial para nuevos clientes en su primera reserva"
-  />
   
   <PricingSection />
   <ContentPackagesSection />

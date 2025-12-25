@@ -1,6 +1,6 @@
 // API wrapper para actualizar reservas - Usa Actions centralizadas
 import type { APIRoute } from "astro";
-import { createSupabaseClient } from "../../../lib/supabase";
+import { createSupabaseClient } from "@/lib/supabase";
 import { actions } from "astro:actions";
 
 export const prerender = false;

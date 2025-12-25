@@ -1,187 +1,365 @@
-# The Content Studio - KarpoContentStudio
+<p align="center">
+  <img src="public/images/logos/logo-black-optimized.webp" alt="The Content Studio" width="300">
+</p>
 
-## Propósito del Proyecto
+<h1 align="center">The Content Studio</h1>
 
-**The Content Studio** es una plataforma web profesional para un estudio creativo multifuncional ubicado en Sevilla. La aplicación permite a fotógrafos, creadores de contenido, podcasters, marcas y profesionales del marketing descubrir, explorar y reservar espacios creativos especializados para sus producciones.
+<p align="center">
+  <strong>Plataforma de reservas para estudio creativo multifuncional</strong>
+</p>
 
-### Características Principales
+<p align="center">
+  <a href="https://contentstudiokrp.es">
+    <img src="https://img.shields.io/badge/Website-contentstudiokrp.es-black?style=for-the-badge" alt="Website">
+  </a>
+  <img src="https://img.shields.io/badge/Astro-5.x-BC52EE?style=for-the-badge&logo=astro&logoColor=white" alt="Astro">
+  <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Tailwind-3.x-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind">
+</p>
 
-- **Gestión de Reservas**: Sistema completo de reservas con calendario integrado y validación de disponibilidad en tiempo real
-- **Espacios Multifuncionales**: Presentación de diferentes espacios (ciclorama, zona de fondos de colores, Creative Studio)
-- **Público Objetivo**: Secciones dedicadas a diferentes perfiles profesionales
-- **Sistema de Tarifas**: Información detallada de precios y paquetes disponibles
-- **Panel Administrativo**: Gestión completa de reservas, calendario y configuración
-- **Experiencia Responsiva**: Diseño optimizado para todos los dispositivos
+<p align="center">
+  <img src="https://img.shields.io/badge/Supabase-PostgreSQL-3FCF8E?style=flat-square&logo=supabase&logoColor=white" alt="Supabase">
+  <img src="https://img.shields.io/badge/Cloudflare-Pages-F38020?style=flat-square&logo=cloudflare&logoColor=white" alt="Cloudflare">
+  <img src="https://img.shields.io/badge/Resend-Email-000000?style=flat-square" alt="Resend">
+  <img src="https://img.shields.io/badge/License-Private-red?style=flat-square" alt="License">
+</p>
+
+---
+
+## Tabla de Contenidos
+
+- [Sobre el Proyecto](#sobre-el-proyecto)
+- [Características](#características)
+- [Stack Tecnológico](#stack-tecnológico)
+- [Arquitectura](#arquitectura)
+- [Instalación](#instalación)
+- [Configuración](#configuración)
+- [Scripts Disponibles](#scripts-disponibles)
+- [Estructura del Proyecto](#estructura-del-proyecto)
+- [API Reference](#api-reference)
+- [Testing](#testing)
+- [Despliegue](#despliegue)
+- [Contribución](#contribución)
+
+---
+
+## Sobre el Proyecto
+
+**The Content Studio** es una plataforma web completa para la gestión y reserva de espacios creativos en Sevilla. Diseñada para fotógrafos, creadores de contenido, podcasters, marcas y profesionales del marketing, ofrece una experiencia de usuario optimizada con un sistema de reservas en tiempo real.
+
+### Problema que Resuelve
+
+- Gestión manual de reservas y disponibilidad
+- Comunicación fragmentada con clientes
+- Falta de visibilidad online para estudios creativos
+- Procesos de reserva tediosos y propensos a errores
+
+### Solución
+
+Una plataforma integral que automatiza el proceso de reserva, muestra los espacios de forma atractiva y gestiona las comunicaciones con los clientes de manera eficiente.
+
+---
+
+## Características
+
+### Sistema de Reservas
+- Calendario interactivo con disponibilidad en tiempo real
+- Validación automática de conflictos de horarios
+- Soporte para múltiples espacios simultáneos
+- Sistema de códigos de descuento promocionales
+- Confirmación automática por email
+
+### Gestión de Espacios
+- **Ciclorama** - Fondo infinito profesional 6x4m
+- **Black Zone** - Zona oscura para fotografía de producto
+- **Zona Principal** - Espacio versátil multiusos
+- **Podcast Studio** - Configuración optimizada para audio
+
+### Panel Administrativo
+- Dashboard con métricas y estadísticas
+- Gestión completa de reservas (CRUD)
+- Vista de calendario administrativa
+- Configuración de disponibilidad y precios
+
+### Experiencia de Usuario
+- Diseño responsive para todos los dispositivos
+- Optimización SEO con datos estructurados
+- Rendimiento optimizado (Core Web Vitals)
+- Interfaz intuitiva y accesible
+
+---
 
 ## Stack Tecnológico
 
-### Frontend & Framework
-- **[Astro](https://astro.build/)** - Framework web moderno para sitios de alto rendimiento
-- **TypeScript** - Tipado estático para JavaScript
-- **Tailwind CSS** - Framework de utilidades CSS para diseño responsivo
+| Categoría | Tecnología | Propósito |
+|-----------|------------|-----------|
+| **Framework** | Astro 5.x | SSR/SSG híbrido, Server Islands |
+| **Lenguaje** | TypeScript 5.x | Tipado estático |
+| **Estilos** | Tailwind CSS 3.x | Utility-first CSS |
+| **Base de Datos** | Supabase (PostgreSQL) | Backend as a Service |
+| **Email** | Resend | Emails transaccionales |
+| **Hosting** | Cloudflare Pages | Edge deployment |
+| **Validación** | Zod | Schema validation |
+| **Testing** | Jest | Unit & Integration tests |
 
-### Backend & Base de Datos
-- **Supabase** - Backend como servicio con PostgreSQL
-- **Resend** - Servicio de email transaccional para notificaciones
+---
 
-### Herramientas de Desarrollo
-- **Jest** - Framework de testing para JavaScript/TypeScript
-- **ESLint** - Análisis estático de código
-- **Node.js** - Entorno de ejecución para desarrollo
+## Arquitectura
 
-### Hosting & Deployment
-- **Cloudflare Pages** - Hosting y CDN para el frontend
-- **Adaptadores**: Configuración dual (Node.js para desarrollo, Cloudflare para producción)
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     Cloudflare Pages                        │
+│                    (Edge Deployment)                        │
+└─────────────────────────┬───────────────────────────────────┘
+                          │
+┌─────────────────────────▼───────────────────────────────────┐
+│                      Astro Server                           │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
+│  │   Pages     │  │   Actions   │  │   API Endpoints     │  │
+│  │   (SSR)     │  │  (Server)   │  │   (/api/*)          │  │
+│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
+└─────────────────────────┬───────────────────────────────────┘
+                          │
+         ┌────────────────┼────────────────┐
+         │                │                │
+         ▼                ▼                ▼
+┌─────────────┐  ┌─────────────┐  ┌─────────────┐
+│  Supabase   │  │   Resend    │  │  Cloudflare │
+│  (Database) │  │   (Email)   │  │   (Assets)  │
+└─────────────┘  └─────────────┘  └─────────────┘
+```
+
+### Patrones Implementados
+
+- **Server Islands**: Componentes diferidos para mejor TTFB
+- **Astro Actions**: Mutaciones type-safe del servidor
+- **Row Level Security**: Políticas de seguridad en PostgreSQL
+- **Edge Functions**: Procesamiento en el edge para baja latencia
+
+---
+
+## Instalación
+
+### Prerrequisitos
+
+- Node.js 18.x o superior
+- npm o pnpm
+- Cuenta en Supabase
+- Cuenta en Resend (para emails)
+
+### Pasos
+
+```bash
+# Clonar el repositorio
+git clone https://github.com/tu-usuario/KarpoContentStudio.git
+cd KarpoContentStudio
+
+# Instalar dependencias
+npm install
+
+# Copiar variables de entorno
+cp .env.example .env
+
+# Configurar variables de entorno (ver sección Configuración)
+
+# Iniciar servidor de desarrollo
+npm run dev
+```
+
+---
+
+## Configuración
+
+### Variables de Entorno
+
+Crear un archivo `.env` en la raíz del proyecto:
+
+```env
+# Supabase - Base de datos
+SUPABASE_URL=https://tu-proyecto.supabase.co
+SUPABASE_ANON_KEY=tu_anon_key
+SUPABASE_SERVICE_ROLE_KEY=tu_service_role_key
+
+# Resend - Emails
+RESEND_API_KEY=re_tu_api_key
+
+# Configuración del sitio
+PUBLIC_SITE_URL=https://tu-dominio.com
+ADMIN_EMAIL=admin@tu-dominio.com
+```
+
+### Configuración de Supabase
+
+Ejecutar los scripts SQL en el orden indicado:
+
+1. `scripts/supabase-complete-setup.sql` - Tablas y configuración base
+2. `scripts/add-apertura40-discount.sql` - Códigos de descuento (opcional)
+
+---
+
+## Scripts Disponibles
+
+| Script | Descripción |
+|--------|-------------|
+| `npm run dev` | Inicia servidor de desarrollo en `localhost:4321` |
+| `npm run build` | Genera build de producción |
+| `npm run preview` | Vista previa del build de producción |
+| `npm run check` | Verificación de tipos TypeScript |
+| `npm test` | Ejecuta suite de tests |
+| `npm run lint` | Análisis estático con ESLint |
+
+---
 
 ## Estructura del Proyecto
 
 ```
 src/
-├── actions/           # Acciones del servidor (Astro Actions)
-├── components/        # Componentes reutilizables
-│   ├── booking/      # Componentes del sistema de reservas
-│   ├── common/       # Componentes compartidos (Header, Footer, SEO)
-│   ├── faq/          # Componentes de preguntas frecuentes
-│   ├── home/         # Componentes específicos de la homepage
-│   ├── icons/        # Iconos SVG como componentes
-│   ├── rates/        # Componentes de tarifas y precios
-│   └── studio/       # Componentes de espacios del estudio
-├── layouts/          # Layouts base para páginas
-├── lib/              # Bibliotecas y utilidades (Supabase, validaciones)
-├── pages/            # Páginas de la aplicación (rutas)
-│   ├── admin/        # Panel administrativo
-│   ├── api/          # Endpoints de API
-│   └── *.astro       # Páginas públicas
-├── scripts/          # Scripts de cliente para interactividad
-├── styles/           # Estilos globales y CSS
-├── tests/            # Suite de pruebas
-│   ├── api/          # Tests de endpoints
-│   ├── frontend/     # Tests de componentes frontend
-│   └── integration/  # Tests de integración
-├── types/            # Definiciones de tipos TypeScript
-└── utils/            # Utilidades, constantes y datos
-    ├── admin/        # Utilidades específicas del admin
-    ├── constants/    # Configuración del sitio
-    ├── data/         # Datos estáticos y esquemas
-    └── types/        # Tipos compartidos
+├── components/           # Componentes reutilizables
+│   ├── booking/         # Sistema de reservas
+│   ├── common/          # Header, Footer, SEO, Button
+│   ├── home/            # Secciones de la homepage
+│   ├── icons/           # Iconos SVG como componentes
+│   ├── rates/           # Tarifas y precios
+│   └── studio/          # Espacios del estudio
+├── layouts/             # Layouts base (Layout.astro, AdminLayout.astro)
+├── lib/                 # Utilidades core
+│   ├── actions/         # Astro Actions (server mutations)
+│   ├── supabase.ts      # Cliente de Supabase
+│   ├── calendar.ts      # Lógica del calendario
+│   └── database.types.ts # Tipos de la BD
+├── pages/               # Rutas de la aplicación
+│   ├── admin/           # Panel administrativo
+│   ├── api/             # API endpoints
+│   └── *.astro          # Páginas públicas
+├── styles/              # CSS global
+├── tests/               # Suite de pruebas
+└── utils/               # Utilidades y constantes
+    ├── constants/       # Configuración del sitio
+    ├── data/            # Datos estáticos, templates
+    └── promotions.ts    # Sistema de promociones
 ```
-
-## Páginas y Funcionalidades
-
-### Páginas Públicas
-- **Homepage** (`/`) - Presentación principal con hero section y overview de servicios
-- **Espacios del Estudio** (`/studio-spaces`) - Galería detallada de los espacios disponibles
-- **Público Objetivo** (`/target-audiences`) - Secciones para diferentes tipos de usuarios
-- **Tarifas** (`/rates`) - Información de precios y paquetes
-- **FAQ** (`/faq`) - Preguntas frecuentes organizadas por categorías
-- **Contacto** (`/contact`) - Formulario de contacto e información
-- **Reservas** (`/booking`) - Sistema completo de reservas con calendario
-
-### Panel Administrativo
-- **Dashboard** (`/admin`) - Panel principal de administración
-- **Gestión de Reservas** - CRUD completo de reservas
-- **Calendario** - Vista de calendario con disponibilidad
-- **Configuración** - Ajustes del sistema
-
-### API Endpoints
-- **Reservas** (`/api/bookings/*`) - CRUD de reservas
-- **Calendario** (`/api/calendar/*`) - Validación de disponibilidad
-- **Email** (`/api/email/*`) - Envío de notificaciones
-- **Descuentos** (`/api/discounts/*`) - Sistema de códigos promocionales
-
-## Arquitectura y Patrones
-
-### Gestión de Estado
-- **Utilidades Centralizadas**: Configuración y datos en `/src/utils/`
-- **Validación de Esquemas**: Zod para validación de formularios y API
-- **Tipado Fuerte**: TypeScript en toda la aplicación
-
-### Sistema de Componentes
-- **Componentes Astro**: Para rendering del servidor
-- **Scripts de Cliente**: JavaScript vanilla para interactividad
-- **Diseño Modular**: Componentes reutilizables y especializados
-
-### Base de Datos
-- **Supabase PostgreSQL**: Almacenamiento principal
-- **Row Level Security**: Seguridad a nivel de fila
-- **Triggers y Funciones**: Lógica de negocio en la base de datos
-
-### Comunicación
-- **Resend**: Email transaccional para confirmaciones y notificaciones
-- **Webhooks**: Integración con servicios externos
-- **Real-time**: Actualizaciones en tiempo real para el calendario
-
-## Características Técnicas
-
-### Rendimiento
-- **Server-Side Rendering**: Astro para carga rápida inicial
-- **Optimización de Imágenes**: Compresión automática y lazy loading
-- **CSS Optimizado**: Tailwind CSS con purging automático
-- **Minificación**: Compresión de assets en producción
-
-### SEO y Accesibilidad
-- **Meta Tags Dinámicos**: SEO optimizado por página
-- **Structured Data**: Datos estructurados para motores de búsqueda
-- **Responsive Design**: Adaptación a todos los dispositivos
-- **Web Vitals**: Optimización para Core Web Vitals
-
-### Seguridad
-- **Validación de Entrada**: Sanitización de todos los inputs
-- **HTTPS**: Comunicación segura
-- **CORS**: Configuración de políticas de origen cruzado
-- **Environment Variables**: Configuración segura de credenciales
-
-## Testing
-
-El proyecto incluye una suite completa de tests:
-
-### Tests de API
-- Validación de endpoints de reservas
-- Tests de disponibilidad de calendario
-- Validación de esquemas de datos
-
-### Tests Frontend
-- Validación de formularios
-- Interactividad de componentes
-- Manejo de estados de error
-
-### Tests de Integración
-- Flujos completos de usuario
-- Integración con servicios externos
-- Escenarios de error y recuperación
-
-## Configuración del Entorno
-
-### Variables de Entorno Requeridas
-```env
-# Supabase
-SUPABASE_URL=your_supabase_url
-SUPABASE_ANON_KEY=your_supabase_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-
-# Resend (Email)
-RESEND_API_KEY=your_resend_api_key
-
-# Configuración adicional
-PUBLIC_SITE_URL=your_site_url
-```
-
-### Scripts Disponibles
-- `npm run dev` - Servidor de desarrollo
-- `npm run build` - Build para producción
-- `npm run preview` - Vista previa del build
-- `npm test` - Ejecutar tests
-- `npm run check` - Verificación de tipos TypeScript
-
-## Contribución
-
-Este proyecto está desarrollado para The Content Studio y mantiene altos estándares de calidad:
-
-- **Código TypeScript**: Tipado estático obligatorio
-- **Tests**: Cobertura de código requerida
-- **Documentación**: Comentarios JSDoc para funciones complejas
-- **Estilo de Código**: Configuración de ESLint y Prettier
 
 ---
 
-**The Content Studio** - El espacio donde tu creatividad cobra vida en Sevilla.
+## API Reference
+
+### Endpoints Públicos
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| `GET` | `/api/calendar/availability` | Disponibilidad mensual |
+| `GET` | `/api/calendar/day-details` | Detalles de un día |
+| `POST` | `/api/discount/validate` | Validar código descuento |
+
+### Endpoints Autenticados
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| `POST` | `/api/bookings/update` | Actualizar reserva |
+| `POST` | `/api/auth/signin` | Iniciar sesión admin |
+| `POST` | `/api/auth/signout` | Cerrar sesión |
+
+### Astro Actions
+
+```typescript
+// Crear reserva
+actions.createBooking(formData)
+
+// Confirmar reserva
+actions.confirmBooking({ bookingId, adminPassword })
+
+// Cancelar reserva
+actions.cancelBooking({ bookingId, reason })
+```
+
+---
+
+## Testing
+
+```bash
+# Ejecutar todos los tests
+npm test
+
+# Ejecutar tests con coverage
+npm test -- --coverage
+
+# Ejecutar tests en modo watch
+npm test -- --watch
+```
+
+### Estructura de Tests
+
+```
+src/tests/
+├── api/              # Tests de endpoints
+├── frontend/         # Tests de componentes
+├── integration/      # Tests E2E
+└── utils/            # Tests de utilidades
+```
+
+---
+
+## Despliegue
+
+### Cloudflare Pages
+
+El proyecto está configurado para despliegue automático en Cloudflare Pages:
+
+1. Conectar repositorio en Cloudflare Dashboard
+2. Configurar variables de entorno en Settings
+3. Build command: `npm run build`
+4. Output directory: `dist`
+
+### Variables de Entorno en Producción
+
+Configurar en Cloudflare Pages > Settings > Environment Variables:
+
+- `SUPABASE_URL`
+- `SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `RESEND_API_KEY`
+- `PUBLIC_SITE_URL`
+
+---
+
+## Contribución
+
+### Convenciones de Código
+
+- **TypeScript**: Tipado estricto obligatorio
+- **Componentes**: PascalCase para archivos `.astro`
+- **Utilidades**: camelCase para funciones
+- **CSS**: Tailwind utilities, evitar CSS custom
+
+### Commits
+
+Seguimos [Conventional Commits](https://www.conventionalcommits.org/):
+
+```
+feat: nueva funcionalidad
+fix: corrección de bug
+docs: documentación
+style: formateo
+refactor: refactorización
+test: tests
+chore: mantenimiento
+```
+
+---
+
+## Licencia
+
+Este proyecto es software privado desarrollado para **The Content Studio**.
+
+---
+
+<p align="center">
+  <strong>The Content Studio</strong><br>
+  <em>Tu espacio creativo en Sevilla</em>
+</p>
+
+<p align="center">
+  <a href="https://contentstudiokrp.es">Website</a> •
+  <a href="https://contentstudiokrp.es/contact">Contacto</a> •
+  <a href="https://contentstudiokrp.es/booking">Reservar</a>
+</p>

@@ -1,9 +1,11 @@
 // Datos de precios y tarifas
+import { getActivePromotion } from '@/utils/promotions';
 
 export interface PricingOption {
   id: string;
   service: string;
   duration: string;
+  durationCode?: string; // Para incluir en la URL (2h, 4h, 8h, 12h)
   price: string;
   action: 'book' | 'contact';
   actionHref: string;
@@ -15,6 +17,15 @@ export interface PricingSection {
   items: PricingOption[];
 }
 
+// Función para generar href con código de promoción si está activa
+function getBookingHref(durationCode?: string): string {
+  const promo = getActivePromotion();
+  if (promo && durationCode) {
+    return `/booking?code=${promo.code}&duration=${durationCode}`;
+  }
+  return '/booking';
+}
+
 export const pricingSections: PricingSection[] = [
   {
     id: 'standard',
@@ -24,33 +35,37 @@ export const pricingSections: PricingSection[] = [
         id: 'base-rental',
         service: 'Alquiler Base',
         duration: '2 horas',
+        durationCode: '2h',
         price: '150€ +IVA',
         action: 'book',
-        actionHref: '/booking'
+        actionHref: getBookingHref('2h')
       },
       {
         id: 'half-day',
         service: 'Medio día',
         duration: '4 horas',
+        durationCode: '4h',
         price: '300€ +IVA',
         action: 'book',
-        actionHref: '/booking'
+        actionHref: getBookingHref('4h')
       },
       {
         id: 'full-day',
         service: 'Día completo',
         duration: '8 horas',
+        durationCode: '8h',
         price: '600€ +IVA',
         action: 'book',
-        actionHref: '/booking'
+        actionHref: getBookingHref('8h')
       },
       {
         id: 'extended-day',
         service: 'Jornada Extendida',
         duration: '12 horas',
+        durationCode: '12h',
         price: '850€ +IVA',
         action: 'book',
-        actionHref: '/booking'
+        actionHref: getBookingHref('12h')
       }
     ]
   },

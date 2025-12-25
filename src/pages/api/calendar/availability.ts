@@ -1,6 +1,6 @@
 // Endpoint para obtener disponibilidad de un mes específico
 import type { APIRoute } from "astro";
-import { createSupabaseAdmin } from "../../../lib/supabase";
+import { createSupabaseAdmin } from "@/lib/supabase";
 
 export const GET: APIRoute = async ({ url, locals }) => {
   try {
@@ -70,14 +70,17 @@ export const GET: APIRoute = async ({ url, locals }) => {
     const firstDayOfWeek = startDate.getDay(); // 0 = Sunday, 1 = Monday, etc.
 
     // Días anteriores del mes (para completar la semana)
-    const prevMonth = new Date(year, month - 2, 0);
+    const prevMonthDate = new Date(year, month - 1, 0); // Último día del mes anterior
+    const prevMonthYear = month === 1 ? year - 1 : year;
+    const prevMonthNum = month === 1 ? 12 : month - 1;
+    const daysInPrevMonth = prevMonthDate.getDate();
     const daysFromPrevMonth = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1; // Ajustar para que lunes sea 0
-    
+
     for (let i = daysFromPrevMonth; i > 0; i--) {
-      const day = prevMonth.getDate() - i + 1;
-      const date = new Date(prevMonth.getFullYear(), prevMonth.getMonth(), day);
+      const day = daysInPrevMonth - i + 1;
+      const dateStr = `${prevMonthYear}-${String(prevMonthNum).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
       calendar.push({
-        date: date.toISOString().split('T')[0],
+        date: dateStr,
         day: day,
         isCurrentMonth: false,
         isToday: false,
@@ -86,17 +89,18 @@ export const GET: APIRoute = async ({ url, locals }) => {
     }
 
     // Días del mes actual
-    const today = new Date().toISOString().split('T')[0];
+    const today = new Date();
+    const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
     for (let day = 1; day <= daysInMonth; day++) {
-      const date = new Date(year, month - 1, day);
-      const dateStr = date.toISOString().split('T')[0];
+      // Crear fecha en formato YYYY-MM-DD sin problemas de timezone
+      const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
       
       calendar.push({
         date: dateStr,
         day: day,
         isCurrentMonth: true,
-        isToday: dateStr === today,
-        isPast: dateStr < today,
+        isToday: dateStr === todayStr,
+        isPast: dateStr < todayStr,
         bookings: bookingsByDate[dateStr] || [],
         availableSlots: calculateAvailableSlots(dateStr, bookingsByDate[dateStr] || [], studioSpace)
       });
@@ -104,13 +108,14 @@ export const GET: APIRoute = async ({ url, locals }) => {
 
     // Días del siguiente mes (para completar la última semana)
     const totalCells = Math.ceil(calendar.length / 7) * 7;
-    const nextMonth = new Date(year, month, 1);
+    const nextMonthYear = month === 12 ? year + 1 : year;
+    const nextMonthNum = month === 12 ? 1 : month + 1;
     let dayCounter = 1;
-    
+
     while (calendar.length < totalCells) {
-      const date = new Date(nextMonth.getFullYear(), nextMonth.getMonth(), dayCounter);
+      const dateStr = `${nextMonthYear}-${String(nextMonthNum).padStart(2, '0')}-${String(dayCounter).padStart(2, '0')}`;
       calendar.push({
-        date: date.toISOString().split('T')[0],
+        date: dateStr,
         day: dayCounter,
         isCurrentMonth: false,
         isToday: false,

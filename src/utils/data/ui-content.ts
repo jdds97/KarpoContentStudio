@@ -1095,55 +1095,55 @@ export const STUDIO_ZONES_GALLERY = {
       images: [
         {
           src: '/images/spaces/cyclorama/webp/DSC09112-quality.webp',
-          alt: 'Ciclorama blanco profesional 6x4m con iluminación LED para sesiones de moda en The Content Studio',
+          alt: 'Ciclorama profesional 6x4m alquiler Sevilla - Estudio fotográfico con iluminación LED para moda, producto y video',
           title: 'Ciclorama Principal - Vista General',
           description: 'Amplio espacio de 6x4m con fondo infinito blanco y sistema de iluminación profesional'
         },
         {
           src: '/images/spaces/cyclorama/webp/DSC09130-quality.webp',
-          alt: 'Setup de fotografía profesional en ciclorama con trípodes y equipos de iluminación LED',
+          alt: 'Alquiler plató fotográfico Sevilla - Setup profesional con trípodes y equipos de iluminación LED incluidos',
           title: 'Ciclorama - Setup Profesional',
           description: 'Configuración típica para sesiones de fotografía con equipamiento profesional incluido'
         },
         {
           src: '/images/spaces/cyclorama/webp/DSC09157-quality.webp',
-          alt: 'Detalle del sistema de iluminación LED y fondos infinitos del ciclorama profesional',
+          alt: 'Sistema iluminación LED estudio fotográfico Sevilla - Ciclorama con fondos infinitos profesionales',
           title: 'Ciclorama - Sistema de Iluminación',
           description: 'Sistema de iluminación LED profesional con control total de temperatura de color'
         },
         {
           src: '/images/spaces/cyclorama/webp/DSC09177-quality.webp',
-          alt: 'Vista lateral del ciclorama mostrando la altura de 3+ metros para producciones audiovisuales',
+          alt: 'Ciclorama altura 3 metros Sevilla - Espacio para producciones audiovisuales y fotografía de moda',
           title: 'Ciclorama - Dimensiones Generosas',
           description: 'Más de 3 metros de altura libre para producciones que requieren espacio vertical'
         },
         {
           src: '/images/spaces/cyclorama/webp/DSC09179-quality.webp',
-          alt: 'Espacio versatil del ciclorama preparado para sesión de retrato profesional',
+          alt: 'Estudio retrato profesional Sevilla - Ciclorama versátil para book fotográfico y sesiones personales',
           title: 'Ciclorama - Configuración para Retratos',
           description: 'Setup optimizado para sesiones de retrato y fotografía personal'
         },
         {
           src: '/images/spaces/cyclorama/webp/DSC09185-quality.webp',
-          alt: 'Ciclorama con equipos de filmación profesional para producciones audiovisuales',
+          alt: 'Alquiler estudio video Sevilla - Ciclorama con equipos de filmación para producciones audiovisuales',
           title: 'Ciclorama - Producciones Audiovisuales',
           description: 'Espacio adaptado para grabación de video y contenido audiovisual profesional'
         },
         {
           src: '/images/spaces/cyclorama/webp/DSC09098-quality.webp',
-          alt: 'Vista completa del ciclorama blanco con fondos personalizables para sesiones comerciales',
+          alt: 'Estudio fotografía comercial Sevilla - Ciclorama blanco con fondos personalizables para ecommerce',
           title: 'Ciclorama - Fondos Personalizables',
           description: 'Fondos y decorados completamente personalizables según necesidades del proyecto'
         },
         {
           src: '/images/spaces/cyclorama/webp/DSC09101-quality.webp',
-          alt: 'Zona de preparación adyacente al ciclorama con espejo y área de cambio',
+          alt: 'Camerino y zona maquillaje estudio fotográfico Sevilla - Área preparación modelos',
           title: 'Ciclorama - Área de Preparación',
           description: 'Espacio cómodo para preparación de modelos y organización de vestuario'
         },
         {
           src: '/images/spaces/cyclorama/webp/DSC09106-quality.webp',
-          alt: 'Detalle del suelo y curvatura perfecta del ciclorama para efectos visuales profesionales',
+          alt: 'Ciclorama fondo infinito Sevilla - Curvatura perfecta para fotografía producto y efectos visuales',
           title: 'Ciclorama - Curvatura Perfecta',
           description: 'Transición suave entre suelo y pared para efectos de fondo infinito'
         }
@@ -1156,73 +1156,73 @@ export const STUDIO_ZONES_GALLERY = {
       images: [
         {
           src: '/images/spaces/creative-studio/webp/DSC08939-quality.webp',
-          alt: 'Estudio creativo multifuncional con setup para podcast y grabación de contenido audiovisual',
+          alt: 'Estudio grabación podcast Sevilla - Setup profesional con tratamiento acústico para videopodcast',
           title: 'Creative Studio - Setup para Podcast',
           description: 'Configuración profesional para grabación de podcast con aislamiento acústico'
         },
         {
           src: '/images/spaces/creative-studio/webp/DSC08961-quality.webp',
-          alt: 'Zona creativa con iluminación LED ajustable para sesiones de fotografía comercial y branding',
+          alt: 'Alquiler estudio contenido Sevilla - Iluminación LED ajustable para fotografía comercial y branding',
           title: 'Creative Studio - Iluminación Adaptable',
           description: 'Sistema de iluminación LED con control completo de intensidad y temperatura'
         },
         {
           src: '/images/spaces/creative-studio/webp/DSC08990-quality.webp',
-          alt: 'Espacio versátil del creative studio preparado para sesiones de video y streaming profesional',
+          alt: 'Estudio streaming profesional Sevilla - Espacio para video, TikTok, Instagram Reels y YouTube',
           title: 'Creative Studio - Configuración para Video',
           description: 'Setup optimizado para grabación de video y contenido para redes sociales'
         },
         {
           src: '/images/spaces/creative-studio/webp/DSC09002-quality.webp',
-          alt: 'Área de trabajo creativa con equipos profesionales para producción de contenido digital',
+          alt: 'Estudio creación contenido digital Sevilla - Área producción con equipos profesionales incluidos',
           title: 'Creative Studio - Área de Producción',
           description: 'Espacio equipado para producción integral de contenido digital y multimedia'
         },
         {
           src: '/images/spaces/creative-studio/webp/DSC09005-quality.webp',
-          alt: 'Zona flexible del creative studio con fondos intercambiables para diferentes tipos de sesión',
+          alt: 'Estudio con 4 fondos temáticos Sevilla - Pared ladrillo, minimalista, madera y fondo oscuro',
           title: 'Creative Studio - Fondos Versátiles',
           description: 'Variedad de fondos y configuraciones para adaptarse a cualquier proyecto creativo'
         },
         {
           src: '/images/spaces/creative-studio/webp/DSC09022-quality.webp',
-          alt: 'Setup profesional para streaming y webinars con cámaras múltiples y audio de calidad',
+          alt: 'Estudio streaming webinar Sevilla - Setup multicámara profesional para eventos virtuales',
           title: 'Creative Studio - Streaming Profesional',
           description: 'Configuración multicámara para streaming, webinars y eventos virtuales'
         },
         {
           src: '/images/spaces/creative-studio/webp/DSC09034-quality.webp',
-          alt: 'Espacio creativo con mesa de trabajo y equipos técnicos para post-producción',
+          alt: 'Zona técnica estudio Sevilla - Mesa trabajo y equipos para post-producción audiovisual',
           title: 'Creative Studio - Área Técnica',
           description: 'Zona dedicada a post-producción y trabajo técnico con estación completa'
         },
         {
           src: '/images/spaces/creative-studio/webp/DSC09036-quality.webp',
-          alt: 'Vista general del creative studio mostrando versatilidad y equipamiento profesional',
+          alt: 'Creative Studio completo Sevilla - Vista panorámica estudio versátil para creadores de contenido',
           title: 'Creative Studio - Vista Panorámica',
           description: 'Visión completa del espacio mostrando todas las posibilidades creativas'
         },
         {
           src: '/images/spaces/creative-studio/webp/DSC09047-quality.webp',
-          alt: 'Zona de grabación con tratamiento acústico profesional para audio de alta calidad',
+          alt: 'Estudio podcast tratamiento acústico Sevilla - Grabación audio profesional alta calidad',
           title: 'Creative Studio - Tratamiento Acústico',
           description: 'Aislamiento y tratamiento acústico profesional para grabaciones de audio'
         },
         {
           src: '/images/spaces/creative-studio/webp/DSC09057-quality.webp',
-          alt: 'Setup para entrevistas y contenido corporativo con iluminación soft y profesional',
+          alt: 'Estudio entrevistas corporativas Sevilla - Setup iluminación soft para testimonios y video',
           title: 'Creative Studio - Entrevistas Corporativas',
           description: 'Configuración ideal para entrevistas, testimonios y contenido corporativo'
         },
         {
           src: '/images/spaces/creative-studio/webp/DSC09070-quality.webp',
-          alt: 'Área creativa con instrumentos musicales y equipos para grabación de contenido musical',
+          alt: 'Estudio contenido musical Sevilla - Espacio grabación performances artísticas y videoclips',
           title: 'Creative Studio - Contenido Musical',
           description: 'Espacio adaptado para grabación de contenido musical y performances artísticas'
         },
         {
           src: '/images/spaces/creative-studio/webp/DSC09191-quality.webp',
-          alt: 'Vista nocturna del creative studio con ambientación LED para contenido atmosphérico',
+          alt: 'Estudio iluminación LED ambiente Sevilla - Efectos luz para contenido creativo e impactante',
           title: 'Creative Studio - Ambientación LED',
           description: 'Efectos de iluminación LED para crear atmósferas únicas y contenido impactante'
         }
@@ -1235,13 +1235,13 @@ export const STUDIO_ZONES_GALLERY = {
       images: [
         {
           src: '/images/spaces/black-zone/webp/DSC09203-quality.webp',
-          alt: 'Black zone con iluminación dramática para retratos de alta gama y fotografía de moda elegante',
+          alt: 'Black Zone estudio fotográfico Sevilla - Espacio oscuro para retratos dramáticos y fotografía moda editorial',
           title: 'Black Zone - Retratos Dramáticos',
           description: 'Espacio oscuro optimizado para crear retratos con alto impacto visual y contraste dramático'
         },
         {
           src: '/images/spaces/black-zone/webp/DSC09206-quality.webp',
-          alt: 'Zona negra profesional con equipos de iluminación selectiva para fotografía artística y comercial',
+          alt: 'Zona fondo negro estudio Sevilla - Iluminación selectiva para fotografía artística y lookbook',
           title: 'Black Zone - Iluminación Selectiva',
           description: 'Sistema de iluminación profesional para crear efectos de luz precisos y atmosferas únicas'
         }
@@ -1254,37 +1254,37 @@ export const STUDIO_ZONES_GALLERY = {
       images: [
         {
           src: '/images/spaces/colores/webp/DSC09161-quality.webp',
-          alt: 'Fondo colorido vibrante para fotografía de producto y contenido comercial llamativo',
+          alt: 'Fondos Colorama estudio Sevilla - Fotografía producto ecommerce con colores vibrantes',
           title: 'Fondos de Colores - Tonos Vibrantes',
           description: 'Fondo de color intenso ideal para hacer destacar productos y crear contenido impactante'
         },
         {
           src: '/images/spaces/colores/webp/DSC09164-quality.webp',
-          alt: 'Sesión de fotografía con fondo de color para branding y marketing visual profesional',
+          alt: 'Estudio fotografía branding Sevilla - Fondos color para marketing visual y campañas publicitarias',
           title: 'Fondos de Colores - Branding Profesional',
           description: 'Configuración perfecta para sesiones de branding corporativo y marketing visual'
         },
         {
           src: '/images/spaces/colores/webp/DSC09172-quality.webp',
-          alt: 'Fondo colorido dinámico para contenido de redes sociales y fotografía comercial moderna',
+          alt: 'Estudio contenido redes sociales Sevilla - Fondos coloridos para Instagram, TikTok y YouTube',
           title: 'Fondos de Colores - Redes Sociales',
           description: 'Colores optimizados para contenido de redes sociales y campañas digitales'
         },
         {
           src: '/images/spaces/colores/webp/DSC09088-quality.webp',
-          alt: 'Variedad de fondos coloridos intercambiables para diferentes tipos de productos y servicios',
+          alt: 'Fondos intercambiables estudio Sevilla - Variedad colores Colorama 2.7m para cualquier proyecto',
           title: 'Fondos de Colores - Versatilidad Cromática',
           description: 'Amplia gama de colores disponibles para adaptarse a cualquier identidad de marca'
         },
         {
           src: '/images/spaces/colores/webp/DSC09082-quality.webp',
-          alt: 'Setup con fondo de color cálido para fotografía de lifestyle y contenido aspiracional',
+          alt: 'Fotografía lifestyle estudio Sevilla - Fondos tonos cálidos para contenido aspiracional',
           title: 'Fondos de Colores - Tonos Cálidos',
           description: 'Tonalidades cálidas perfectas para contenido lifestyle y fotografía aspiracional'
         },
         {
           src: '/images/spaces/colores/webp/DSC09096-quality.webp',
-          alt: 'Fondo colorido con iluminación profesional para destacar texturas y detalles de producto',
+          alt: 'Estudio fotografía producto Sevilla - Fondos color con iluminación profesional para ecommerce',
           title: 'Fondos de Colores - Detalle de Producto',
           description: 'Iluminación especializada para resaltar texturas, colores y características únicas'
         }

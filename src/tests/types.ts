@@ -34,6 +34,11 @@ export interface TestSupabaseResponse {
 export interface TestApiContext {
   url: URL;
   request?: Request;
+  locals?: {
+    runtime?: {
+      env?: Record<string, string>;
+    };
+  };
 }
 
 export interface TestValidationResult {

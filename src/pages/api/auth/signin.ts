@@ -1,6 +1,6 @@
 // Endpoint para iniciar sesión en el panel de administración
 import type { APIRoute } from "astro";
-import { createSupabaseClient } from "../../../lib/supabase";
+import { createSupabaseClient } from "@/lib/supabase";
 
 export const prerender = false;
 

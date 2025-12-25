@@ -145,14 +145,33 @@ const confirmBooking = defineAction({
   handler: async (input, context) => {
     const supabaseAdmin = createSupabaseAdmin(context.locals.runtime);
     try {
-      // Verificar password de admin
-      const adminPassword = context.locals.runtime?.env?.ADMIN_PASSWORD || 'admin123';
-      if (input.adminPassword !== adminPassword) {
-        return {
-          success: false,
-          error: 'Password de administrador incorrecto.',
-          data: null
-        };
+      // Verificar autenticación: primero Supabase Auth, luego password legacy
+      const isSupabaseAuth = input.adminPassword === '__SUPABASE_AUTH__';
+
+      if (isSupabaseAuth) {
+        // Verificar sesión de Supabase usando cookies
+        const accessToken = context.cookies.get('sb-access-token');
+        const refreshToken = context.cookies.get('sb-refresh-token');
+
+        if (!accessToken || !refreshToken) {
+          return {
+            success: false,
+            error: 'Sesión no válida. Por favor, inicia sesión de nuevo.',
+            data: null
+          };
+        }
+
+        // La sesión existe, continuar (ya fue validada en la página)
+      } else {
+        // Verificación legacy con password
+        const adminPassword = context.locals.runtime?.env?.ADMIN_PASSWORD || 'admin123';
+        if (input.adminPassword !== adminPassword) {
+          return {
+            success: false,
+            error: 'Password de administrador incorrecto.',
+            data: null
+          };
+        }
       }
 
       // Actualizar estado de la reserva

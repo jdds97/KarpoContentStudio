@@ -1,7 +1,7 @@
 // Archivo principal de exportación de utils
 
 // Datos
-export { businessStructuredData } from './data/structured-data';
+export { businessStructuredData, faqStructuredData, websiteStructuredData } from './data/structured-data';
 export { targetAudiences, type TargetAudience } from './data/target-audiences';
 export { pricingSections, annualMembershipDetails, pricingNotes, type PricingOption, type PricingSection } from './data/pricing-data';
 export { faqCategories, type FaqQuestion, type FaqCategory } from './data/faq-data';

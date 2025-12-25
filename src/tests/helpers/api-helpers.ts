@@ -48,7 +48,19 @@ export const createTestUrl = (path: string, params: Record<string, string> = {})
 export const createApiContext = (path: string, params: Record<string, string> = {}): TestApiContext => {
   const url = createTestUrl(path, params);
   const request = new Request(url.toString());
-  return { url, request };
+  return {
+    url,
+    request,
+    locals: {
+      runtime: {
+        env: {
+          SUPABASE_URL: process.env.SUPABASE_URL || 'https://mock-project.supabase.co',
+          SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY || 'mock-anon-key',
+          SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY || 'mock-service-role-key'
+        }
+      }
+    }
+  };
 };
 
 /**

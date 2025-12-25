@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://contentstudiokrp.es/sitemap.xml
+Sitemap: https://contentstudiokrp.es/sitemap-index.xml
 
 # Disallow admin areas
 Disallow: /admin/

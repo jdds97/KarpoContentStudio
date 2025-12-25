@@ -1,42 +1,84 @@
 ---
 // Página de administración para gestionar reservas
+// Protegida con Supabase Auth
 export const prerender = false;
 
-import Layout from '@/layouts/Layout.astro';
-import { createSupabaseAdmin } from '@/lib/supabase';
+import AdminLayout from '@/layouts/AdminLayout.astro';
+import { createSupabaseAdmin, createSupabaseClient } from '@/lib/supabase';
 import { actions } from 'astro:actions';
 import { getGeneralError, isActionSuccess, getSuccessMessage } from '@/lib/form-helpers';
 
-// Obtener resultado de la action de confirmación si existe
-const confirmResult = Astro.getActionResult(actions.confirmBooking);
+const { cookies, locals } = Astro;
 
-// Obtener todas las reservas pendientes y confirmadas
-const supabaseAdmin = createSupabaseAdmin(Astro.locals?.runtime);
+// Verificar autenticación con Supabase Auth
+const accessToken = cookies.get("sb-access-token");
+const refreshToken = cookies.get("sb-refresh-token");
+
+if (!accessToken || !refreshToken) {
+  return Astro.redirect("/admin/login");
+}
+
+// Verificar sesión válida
+const supabase = createSupabaseClient(locals?.runtime);
+const { data: sessionData, error: sessionError } = await supabase.auth.setSession({
+  refresh_token: refreshToken.value,
+  access_token: accessToken.value,
+});
+
+if (sessionError) {
+  cookies.delete("sb-access-token", { path: "/" });
+  cookies.delete("sb-refresh-token", { path: "/" });
+  return Astro.redirect("/admin/login");
+}
+
+const userEmail = sessionData?.user?.email;
+
+// Obtener resultado de las actions si existen
+const confirmResult = Astro.getActionResult(actions.confirmBooking);
+const cancelResult = Astro.getActionResult(actions.cancelBooking);
+
+// Obtener todas las reservas
+const supabaseAdmin = createSupabaseAdmin(locals?.runtime);
 const { data: bookings, error } = await supabaseAdmin
   .from('bookings')
   .select('*')
   .order('created_at', { ascending: false })
-  .limit(50);
+  .limit(100);
 
 if (error) {
   console.error('Error fetching bookings:', error);
 }
+
+// Estadísticas
+const pendingCount = bookings?.filter(b => b.status === 'pending').length || 0;
+const confirmedCount = bookings?.filter(b => b.status === 'confirmed').length || 0;
+const cancelledCount = bookings?.filter(b => b.status === 'cancelled').length || 0;
 ---
 
-<Layout title="Administración de Reservas - The Content Studio">
+<AdminLayout title="Gestión de Reservas - The Content Studio" userEmail={userEmail}>
   <div class="min-h-screen bg-gray-50 py-8">
     <div class="container mx-auto px-4">
       <!-- Header -->
       <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-900 mb-2">
-          📋 Administración de Reservas
-        </h1>
-        <p class="text-gray-600">
-          Gestiona y confirma las reservas pendientes del estudio
-        </p>
+        <div class="flex justify-between items-center">
+          <div>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">
+              📋 Gestión de Reservas
+            </h1>
+            <p class="text-gray-600">
+              Confirma, edita o cancela las reservas del estudio
+            </p>
+          </div>
+          <a
+            href="/admin/dashboard"
+            class="inline-flex items-center px-4 py-2 bg-primary-black text-white rounded-lg hover:bg-primary-beige hover:text-primary-black transition-colors"
+          >
+            ← Volver al Dashboard
+          </a>
+        </div>
       </div>
 
-      <!-- Mensajes de confirmación -->
+      <!-- Mensajes de confirmación/error -->
       {isActionSuccess(confirmResult) && (
         <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
           <div class="flex items-start">
@@ -65,59 +107,98 @@ if (error) {
         </div>
       )}
 
+      {isActionSuccess(cancelResult) && (
+        <div class="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+          <div class="flex items-start">
+            <svg class="w-5 h-5 text-yellow-600 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            <div>
+              <h3 class="text-yellow-800 font-medium">Reserva Cancelada</h3>
+              <p class="text-yellow-700 mt-1">{getSuccessMessage(cancelResult)}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
       <!-- Estadísticas rápidas -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div class="bg-white p-6 rounded-lg shadow-sm">
-          <h3 class="text-lg font-medium text-gray-900 mb-2">📝 Pendientes</h3>
-          <p class="text-3xl font-bold text-yellow-600">
-            {bookings?.filter(b => b.status === 'pending').length || 0}
-          </p>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-yellow-500">
+          <h3 class="text-lg font-medium text-gray-900 mb-2">⏳ Pendientes</h3>
+          <p class="text-3xl font-bold text-yellow-600">{pendingCount}</p>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-sm">
+        <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-green-500">
           <h3 class="text-lg font-medium text-gray-900 mb-2">✅ Confirmadas</h3>
-          <p class="text-3xl font-bold text-green-600">
-            {bookings?.filter(b => b.status === 'confirmed').length || 0}
-          </p>
+          <p class="text-3xl font-bold text-green-600">{confirmedCount}</p>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-sm">
+        <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-red-500">
+          <h3 class="text-lg font-medium text-gray-900 mb-2">❌ Canceladas</h3>
+          <p class="text-3xl font-bold text-red-600">{cancelledCount}</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-blue-500">
           <h3 class="text-lg font-medium text-gray-900 mb-2">📊 Total</h3>
-          <p class="text-3xl font-bold text-blue-600">
-            {bookings?.length || 0}
-          </p>
+          <p class="text-3xl font-bold text-blue-600">{bookings?.length || 0}</p>
+        </div>
+      </div>
+
+      <!-- Filtros -->
+      <div class="bg-white p-4 rounded-lg shadow-sm mb-6">
+        <div class="flex flex-wrap gap-4 items-center">
+          <label class="font-medium text-gray-700">Filtrar por:</label>
+          <button id="filter-all" class="px-4 py-2 rounded-lg bg-primary-black text-white text-sm" data-filter="all">
+            Todas
+          </button>
+          <button id="filter-pending" class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm hover:bg-yellow-100" data-filter="pending">
+            Pendientes ({pendingCount})
+          </button>
+          <button id="filter-confirmed" class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm hover:bg-green-100" data-filter="confirmed">
+            Confirmadas ({confirmedCount})
+          </button>
+          <button id="filter-cancelled" class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm hover:bg-red-100" data-filter="cancelled">
+            Canceladas ({cancelledCount})
+          </button>
         </div>
       </div>
 
       <!-- Lista de reservas -->
       <div class="bg-white rounded-lg shadow-sm overflow-hidden">
         <div class="px-6 py-4 border-b border-gray-200">
-          <h2 class="text-xl font-semibold text-gray-900">Reservas Recientes</h2>
+          <h2 class="text-xl font-semibold text-gray-900">Reservas ({bookings?.length || 0})</h2>
         </div>
-        
+
         {bookings && bookings.length > 0 ? (
-          <div class="divide-y divide-gray-200">
+          <div class="divide-y divide-gray-200" id="bookings-list">
             {bookings.map((booking) => (
-              <div class="p-6">
+              <div class="p-6 booking-item" data-status={booking.status}>
                 <div class="flex items-start justify-between">
                   <div class="flex-1">
                     <!-- Información del cliente -->
-                    <div class="flex items-center mb-2">
-                      <h3 class="text-lg font-medium text-gray-900 mr-3">
+                    <div class="flex items-center mb-2 flex-wrap gap-2">
+                      <h3 class="text-lg font-medium text-gray-900">
                         {booking.name}
                       </h3>
                       <span class={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                        booking.status === 'pending' 
-                          ? 'bg-yellow-100 text-yellow-800' 
+                        booking.status === 'pending'
+                          ? 'bg-yellow-100 text-yellow-800'
                           : booking.status === 'confirmed'
                           ? 'bg-green-100 text-green-800'
+                          : booking.status === 'cancelled'
+                          ? 'bg-red-100 text-red-800'
                           : 'bg-gray-100 text-gray-800'
                       }`}>
-                        {booking.status === 'pending' ? '⏳ Pendiente' : 
-                         booking.status === 'confirmed' ? '✅ Confirmada' : booking.status}
+                        {booking.status === 'pending' ? '⏳ Pendiente' :
+                         booking.status === 'confirmed' ? '✅ Confirmada' :
+                         booking.status === 'cancelled' ? '❌ Cancelada' : booking.status}
                       </span>
+                      {booking.total_price && (
+                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                          💰 {Number(booking.total_price).toFixed(2)}€
+                        </span>
+                      )}
                     </div>
-                    
-                    <!-- Detalles de contacto -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+
+                    <!-- Detalles de contacto y sesión -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
                       <div>
                         <p class="text-sm text-gray-600">📧 {booking.email}</p>
                         <p class="text-sm text-gray-600">📱 {booking.phone}</p>
@@ -125,79 +206,108 @@ if (error) {
                           <p class="text-sm text-gray-600">🏢 {booking.company}</p>
                         )}
                       </div>
-                      
-                      <!-- Detalles de la sesión -->
+
                       <div>
                         <p class="text-sm text-gray-600">
-                          📅 {new Date(booking.preferred_date).toLocaleDateString('es-ES', { 
-                            weekday: 'long', 
-                            year: 'numeric', 
-                            month: 'long', 
-                            day: 'numeric' 
+                          📅 {new Date(booking.preferred_date).toLocaleDateString('es-ES', {
+                            weekday: 'short',
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric'
                           })}
                         </p>
                         <p class="text-sm text-gray-600">⏰ {booking.preferred_time}</p>
                         <p class="text-sm text-gray-600">⏳ {booking.package_duration}</p>
-                        <p class="text-sm text-gray-600">🏢 {booking.studio_space === 'all' ? 'Todos los espacios' : booking.studio_space}</p>
+                      </div>
+
+                      <div>
+                        <p class="text-sm text-gray-600">
+                          🏢 {booking.studio_space === 'all' ? 'Todos los espacios' : booking.studio_space}
+                        </p>
                         <p class="text-sm text-gray-600">🎬 {booking.session_type}</p>
                         <p class="text-sm text-gray-600">👥 {booking.participants} participantes</p>
                       </div>
                     </div>
-                    
+
                     <!-- Código de descuento si existe -->
                     {booking.discount_code && (
-                      <div class="mb-4 p-3 bg-green-50 rounded-lg">
+                      <div class="mb-4 p-3 bg-green-50 rounded-lg inline-block">
                         <p class="text-sm text-green-800">
-                          💰 <strong>Descuento aplicado:</strong> {booking.discount_code} 
-                          ({booking.discount_percentage}% de descuento)
+                          💰 <strong>Descuento:</strong> {booking.discount_code} ({booking.discount_percentage}%)
                         </p>
                       </div>
                     )}
-                    
-                    <!-- Descripción si existe -->
-                    {booking.description && (
-                      <div class="mb-4">
+
+                    <!-- Notas si existen -->
+                    {booking.notes && (
+                      <div class="mb-4 p-3 bg-gray-50 rounded-lg">
                         <p class="text-sm text-gray-600">
-                          <strong>Descripción:</strong> {booking.description}
+                          <strong>📝 Notas:</strong> {booking.notes}
                         </p>
                       </div>
                     )}
-                    
+
+                    <!-- Motivo de cancelación si existe -->
+                    {booking.cancellation_reason && (
+                      <div class="mb-4 p-3 bg-red-50 rounded-lg">
+                        <p class="text-sm text-red-700">
+                          <strong>Motivo de cancelación:</strong> {booking.cancellation_reason}
+                        </p>
+                      </div>
+                    )}
+
                     <!-- Fechas de creación y confirmación -->
-                    <div class="text-xs text-gray-500">
+                    <div class="text-xs text-gray-500 flex flex-wrap gap-4">
                       <p>Creada: {new Date(booking.created_at).toLocaleString('es-ES')}</p>
                       {booking.confirmed_at && (
                         <p>Confirmada: {new Date(booking.confirmed_at).toLocaleString('es-ES')}</p>
                       )}
-                      <p>ID: {booking.id}</p>
+                      {booking.cancelled_at && (
+                        <p>Cancelada: {new Date(booking.cancelled_at).toLocaleString('es-ES')}</p>
+                      )}
+                      <p class="font-mono">ID: {booking.id.slice(0, 8)}...</p>
                     </div>
                   </div>
-                  
+
                   <!-- Acciones -->
-                  <div class="ml-6">
+                  <div class="ml-6 flex flex-col gap-2">
                     {booking.status === 'pending' && (
-                      <form action={actions.confirmBooking} method="POST" class="space-y-2">
-                        <input type="hidden" name="bookingId" value={booking.id} />
-                        <input 
-                          type="password" 
-                          name="adminPassword" 
-                          placeholder="Password admin" 
-                          required 
-                          class="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                        />
-                        <button 
-                          type="submit"
-                          class="w-full bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
-                        >
-                          ✅ Confirmar Reserva
-                        </button>
-                      </form>
+                      <>
+                        <form action={actions.confirmBooking} method="POST">
+                          <input type="hidden" name="bookingId" value={booking.id} />
+                          <input type="hidden" name="adminPassword" value="__SUPABASE_AUTH__" />
+                          <button
+                            type="submit"
+                            class="w-full bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition-colors"
+                          >
+                            ✅ Confirmar
+                          </button>
+                        </form>
+                        <form action={actions.cancelBooking} method="POST" onsubmit="return confirm('¿Estás seguro de cancelar esta reserva?')">
+                          <input type="hidden" name="bookingId" value={booking.id} />
+                          <input type="text" name="reason" placeholder="Motivo..." class="w-full px-2 py-1 text-xs border rounded mb-1" />
+                          <button
+                            type="submit"
+                            class="w-full bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-red-700 transition-colors"
+                          >
+                            ❌ Cancelar
+                          </button>
+                        </form>
+                      </>
                     )}
-                    
+
                     {booking.status === 'confirmed' && (
                       <div class="text-center">
                         <span class="inline-flex items-center px-4 py-2 bg-green-100 text-green-800 rounded-md text-sm font-medium">
                           ✅ Confirmada
+                        </span>
+                      </div>
+                    )}
+
+                    {booking.status === 'cancelled' && (
+                      <div class="text-center">
+                        <span class="inline-flex items-center px-4 py-2 bg-red-100 text-red-800 rounded-md text-sm font-medium">
+                          ❌ Cancelada
                         </span>
                       </div>
                     )}
@@ -207,18 +317,46 @@ if (error) {
             ))}
           </div>
         ) : (
-          <div class="p-6 text-center text-gray-500">
-            <p>No hay reservas disponibles</p>
+          <div class="p-12 text-center text-gray-500">
+            <p class="text-lg">No hay reservas disponibles</p>
+            <p class="text-sm mt-2">Las nuevas reservas aparecerán aquí</p>
           </div>
         )}
       </div>
     </div>
   </div>
-</Layout>
+</AdminLayout>
 
 <script>
-  // Auto-refresh cada 30 segundos para ver nuevas reservas
+  // Filtros de reservas
+  const filterButtons = document.querySelectorAll('[data-filter]');
+  const bookingItems = document.querySelectorAll('.booking-item');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const filter = button.getAttribute('data-filter');
+
+      // Actualizar estilos de botones
+      filterButtons.forEach(btn => {
+        btn.classList.remove('bg-primary-black', 'text-white');
+        btn.classList.add('bg-gray-200', 'text-gray-700');
+      });
+      button.classList.remove('bg-gray-200', 'text-gray-700');
+      button.classList.add('bg-primary-black', 'text-white');
+
+      // Filtrar reservas
+      bookingItems.forEach(item => {
+        if (filter === 'all' || item.getAttribute('data-status') === filter) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  // Auto-refresh cada 60 segundos
   setTimeout(() => {
     window.location.reload();
-  }, 30000);
+  }, 60000);
 </script>

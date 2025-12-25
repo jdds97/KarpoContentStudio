@@ -2,13 +2,21 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import cloudflare from '@astrojs/cloudflare';
 import node from '@astrojs/node';
+import sitemap from '@astrojs/sitemap';
 import 'dotenv/config';
 
 // Only use Cloudflare adapter when CF_PAGES=1 is set by Cloudflare Pages
 const isCloudflarePages = process.env.CF_PAGES === '1';
 
 export default defineConfig({
+  site: 'https://contentstudiokrp.es',
   output: 'server',
+  integrations: [sitemap({
+    filter: (page) => !page.includes('/admin/'),
+    changefreq: 'weekly',
+    priority: 0.7,
+    lastmod: new Date(),
+  })],
   adapter: isCloudflarePages ? cloudflare({
     imageService: 'compile',
     platformProxy: true,

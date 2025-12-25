@@ -81,10 +81,12 @@ import { BOOKING_SIDEBAR, CONTACT_INFO } from '@/utils';
         <Phone class="w-5 h-5 text-primary-beige mr-2" />
         <a href={`tel:${CONTACT_INFO.phone}`} class="text-primary-white hover:text-primary-beige transition-colors font-medium">{CONTACT_INFO.phone}</a>
       </div>
+      <!--email_off-->
       <div class="flex items-center">
         <Mail class="w-5 h-5 text-primary-beige mr-2" />
         <a href={`mailto:${CONTACT_INFO.email}`} class="text-primary-white hover:text-primary-beige transition-colors font-medium">{CONTACT_INFO.email}</a>
       </div>
+      <!--/email_off-->
     </div>
     <Button href="/contact" variant="custom" class="bg-primary-white text-primary-black hover:bg-primary-beige hover:text-primary-gray font-medium transition-all" fullWidth>{BOOKING_SIDEBAR.help.contact}</Button>
   </div>

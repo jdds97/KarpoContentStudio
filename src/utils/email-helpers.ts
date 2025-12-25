@@ -106,12 +106,16 @@ const generateChangesListSection = (changes: string[]): string => {
 
 /**
  * Precios de los paquetes de horas
+ * Tarifa base: 75€/hora con ajustes por volumen
  */
 export const PACKAGE_PRICES: Record<string, number> = {
-  '2h': 150,
-  '4h': 300,
-  '8h': 600,
-  '12h': 850
+  '1h': 85,    // Sesión express (mínimo)
+  '2h': 150,   // Estándar
+  '3h': 225,   // 3 horas
+  '4h': 300,   // Medio día
+  '6h': 450,   // 6 horas
+  '8h': 600,   // Día completo
+  '12h': 850   // Jornada extendida
 };
 
 /**
