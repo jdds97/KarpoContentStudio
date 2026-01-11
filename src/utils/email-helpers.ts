@@ -106,29 +106,27 @@ const generateChangesListSection = (changes: string[]): string => {
 
 /**
  * Precios de los paquetes de horas
- * Tarifa base: 75€/hora con ajustes por volumen
+ * Tarifa base: 60€/hora
  */
 export const PACKAGE_PRICES: Record<string, number> = {
-  '1h': 85,    // Sesión express (mínimo)
-  '2h': 150,   // Estándar
-  '3h': 225,   // 3 horas
-  '4h': 300,   // Medio día
-  '6h': 450,   // 6 horas
-  '8h': 600,   // Día completo
-  '12h': 850   // Jornada extendida
+  '1h': 60,    // 1 hora
+  '2h': 120,   // Estándar
+  '3h': 180,   // 3 horas
+  '4h': 240,   // Medio día
+  '6h': 360,   // 6 horas
+  '8h': 480,   // Día completo
+  '12h': 720   // Jornada extendida
 };
 
 /**
- * Calcula el precio total basado en la duración del paquete y el descuento aplicado
+ * Calcula el precio total basado en la duración del paquete
  */
-export const calculateTotalPrice = (packageDuration: string, discountPercentage: number = 0): number => {
+export const calculateTotalPrice = (packageDuration: string): number => {
   const basePrice = PACKAGE_PRICES[packageDuration];
   if (!basePrice) {
     throw new Error(`Duración de paquete no válida: ${packageDuration}`);
   }
-  
-  const discount = (basePrice * discountPercentage) / 100;
-  return basePrice - discount;
+  return basePrice;
 };
 
 /**
@@ -354,34 +352,34 @@ export function generateContactConfirmationEmail(contactData: ContactFormData): 
  */
 export function generateContactNotificationEmail(contactData: ContactFormData): { subject: string; html: string } {
   const subject = `Nuevo contacto: ${contactData.subject}`;
-  
+
   const html = `
     <div style="font-family: Arial, sans-serif; max-width: 650px; margin: 0 auto; padding: 30px; background: #f8f9fa;">
       <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-        
+
         <div style="background: linear-gradient(135deg, #000000 0%, #3C3C3C 100%); color: white; padding: 25px; border-radius: 8px; text-align: center; margin-bottom: 30px;">
           <h2 style="margin: 0; font-size: 24px; font-weight: 600;">
             Nuevo mensaje de contacto
           </h2>
         </div>
-        
+
         <div style="background: #f4f1eb; padding: 25px; border-radius: 10px; margin: 30px 0;">
           <h3 style="color: #2c3e50; margin-top: 0; margin-bottom: 25px; font-size: 20px;">
             👤 Datos del contacto:
           </h3>
-          
+
           <div style="margin-bottom: 15px;">
             <p style="margin: 0; font-size: 16px; line-height: 1.6;">
               <strong>Nombre:</strong> ${contactData.name}
             </p>
           </div>
-          
+
           <div style="margin-bottom: 15px;">
             <p style="margin: 0; font-size: 16px; line-height: 1.6;">
               <strong>Email:</strong> ${contactData.email}
             </p>
           </div>
-          
+
           ${contactData.phone ? `
           <div style="margin-bottom: 15px;">
             <p style="margin: 0; font-size: 16px; line-height: 1.6;">
@@ -389,14 +387,14 @@ export function generateContactNotificationEmail(contactData: ContactFormData): 
             </p>
           </div>
           ` : ''}
-          
+
           <div style="margin-bottom: 0;">
             <p style="margin: 0; font-size: 16px; line-height: 1.6;">
               <strong>Asunto:</strong> ${contactData.subject}
             </p>
           </div>
         </div>
-        
+
         <div style="background: white; padding: 25px; border-radius: 10px; border-left: 5px solid #d4af37; border: 1px solid #e0e0e0;">
           <h3 style="color: #2c3e50; margin-top: 0; margin-bottom: 20px; font-size: 18px;">
             💬 Mensaje:
@@ -405,16 +403,117 @@ export function generateContactNotificationEmail(contactData: ContactFormData): 
             ${contactData.message.replace(/\n/g, '<br>')}
           </div>
         </div>
-        
+
         <div style="margin-top: 40px; padding-top: 25px; border-top: 2px solid #eee; text-align: center;">
           <p style="margin: 0; font-size: 13px; color: #888; font-style: italic;">
             📧 Enviado desde el formulario de contacto del sitio web
           </p>
         </div>
-        
+
       </div>
     </div>
   `;
-  
+
   return { subject, html };
+}
+
+// Enlace de reseña de Google
+const GOOGLE_REVIEW_LINK = 'https://g.page/r/CbI17jWVdjWwEBM/review';
+
+/**
+ * Genera el email de solicitud de reseña (se envía automáticamente al completar reserva)
+ */
+export function generateReviewRequestEmail(booking: Booking): { subject: string; html: string } {
+  const subject = `¿Qué tal tu experiencia en The Content Studio? ⭐`;
+
+  const customerName = booking.name?.split(' ')[0] || 'Cliente'; // Solo el primer nombre
+
+  const html = `
+    <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 30px; background: #f8f9fa;">
+      <div style="background: white; padding: 40px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+
+        <!-- Logo/Header -->
+        <div style="text-align: center; margin-bottom: 35px;">
+          <h1 style="color: #3C3C3C; font-size: 28px; font-weight: 700; margin: 0; letter-spacing: -0.5px;">
+            The Content Studio
+          </h1>
+          <div style="width: 60px; height: 3px; background: linear-gradient(90deg, #DAD6C9, #3C3C3C); margin: 15px auto;"></div>
+        </div>
+
+        <!-- Saludo -->
+        <p style="font-size: 18px; color: #333; line-height: 1.6; margin-bottom: 25px;">
+          ¡Hola <strong>${customerName}</strong>! 👋
+        </p>
+
+        <!-- Mensaje principal -->
+        <p style="font-size: 16px; color: #555; line-height: 1.7; margin-bottom: 25px;">
+          Esperamos que disfrutaras tu sesión en <strong>The Content Studio</strong>.
+          Tu opinión es muy importante para nosotros y nos ayuda a seguir mejorando.
+        </p>
+
+        <p style="font-size: 16px; color: #555; line-height: 1.7; margin-bottom: 35px;">
+          Si tienes un momento, nos encantaría que compartieras tu experiencia con una reseña en Google.
+          ¡Solo te tomará 1 minuto! ⏱️
+        </p>
+
+        <!-- Botón CTA -->
+        <div style="text-align: center; margin: 40px 0;">
+          <a href="${GOOGLE_REVIEW_LINK}"
+             style="display: inline-block; background: linear-gradient(135deg, #3C3C3C 0%, #555 100%); color: white; padding: 18px 45px; border-radius: 50px; text-decoration: none; font-size: 17px; font-weight: 600; box-shadow: 0 4px 15px rgba(60,60,60,0.3); transition: all 0.3s ease;">
+            ⭐ Dejar mi reseña ⭐
+          </a>
+        </div>
+
+        <!-- Estrellas decorativas -->
+        <div style="text-align: center; margin: 30px 0;">
+          <span style="font-size: 28px; letter-spacing: 8px;">⭐⭐⭐⭐⭐</span>
+        </div>
+
+        <!-- Mensaje de agradecimiento -->
+        <div style="background: linear-gradient(135deg, #f4f1eb 0%, #ebe7db 100%); padding: 25px; border-radius: 12px; margin-top: 35px; text-align: center;">
+          <p style="font-size: 15px; color: #666; margin: 0; line-height: 1.6;">
+            <strong>¡Muchas gracias por confiar en nosotros!</strong><br>
+            Esperamos verte pronto de nuevo 📸
+          </p>
+        </div>
+
+        <!-- Footer -->
+        <div style="margin-top: 40px; padding-top: 25px; border-top: 1px solid #eee; text-align: center;">
+          <p style="font-size: 14px; color: #888; margin-bottom: 8px;">
+            Con cariño,
+          </p>
+          <p style="font-size: 16px; color: #3C3C3C; font-weight: 600; margin: 0;">
+            El equipo de The Content Studio
+          </p>
+          <p style="font-size: 13px; color: #aaa; margin-top: 15px;">
+            📍 Sevilla, España
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Disclaimer -->
+      <p style="text-align: center; font-size: 11px; color: #999; margin-top: 20px;">
+        Este email se ha enviado automáticamente tras tu sesión en The Content Studio.
+      </p>
+    </div>
+  `;
+
+  return { subject, html };
+}
+
+/**
+ * Envía el email de solicitud de reseña
+ */
+export async function sendReviewRequestEmail(
+  booking: Booking,
+  runtime?: any
+): Promise<{ success: boolean; error?: string }> {
+  const { subject, html } = generateReviewRequestEmail(booking);
+
+  if (!booking.email) {
+    return { success: false, error: 'No hay email del cliente' };
+  }
+
+  return sendEmailWithResend(booking.email, subject, html, runtime);
 }

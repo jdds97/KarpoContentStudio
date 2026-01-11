@@ -16,7 +16,8 @@ import {
   generateBookingUpdatedEmail,
   generateContactConfirmationEmail,
   generateContactNotificationEmail,
-  sendEmailWithResend
+  sendEmailWithResend,
+  sendReviewRequestEmail
 } from '@/utils/email-helpers';
 import { defineAction } from 'astro:actions';
 
@@ -47,29 +48,8 @@ const createBooking = defineAction({
       } else {
       }
 
-      // Aplicar descuento si hay código válido
-      let discountPercentage = 0;
-      let finalDiscountCode = '';
-      
-      if (input['applied-discount-code']) {
-        // Validar código de descuento
-        const discountResponse = await fetch(`${siteUrl}/api/discount/validate`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ code: input['applied-discount-code'] })
-        });
-        
-        if (discountResponse.ok) {
-          const discountData = await discountResponse.json();
-          if (discountData.valid) {
-            discountPercentage = discountData.percentage || 0;
-            finalDiscountCode = input['applied-discount-code'];
-          }
-        }
-      }
-
-      // Calcular precio total usando la función centralizada
-      const totalPrice = calculateTotalPrice(input.package, discountPercentage);
+      // Calcular precio total usando la función centralizada (sin descuentos)
+      const totalPrice = calculateTotalPrice(input.package);
 
       // Crear la reserva en la base de datos
       const { data: booking, error } = await supabaseAdmin
@@ -86,8 +66,8 @@ const createBooking = defineAction({
           participants: parseInt(input.participants),
           session_type: input['session-type'],
           notes: input.notes || null,
-          discount_code: finalDiscountCode || null,
-          discount_percentage: discountPercentage,
+          discount_code: null,
+          discount_percentage: 0,
           total_price: totalPrice,
           status: 'pending',
           created_at: new Date().toISOString()
@@ -289,9 +269,22 @@ const updateBooking = defineAction({
         }
       }
 
+      // Enviar email de solicitud de reseña si el estado cambió a 'completed'
+      if (cleanData.status === 'completed' && currentBooking.status !== 'completed') {
+        try {
+          // Delay de 1 segundo para evitar rate limit
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          await sendReviewRequestEmail(booking, context.locals.runtime);
+        } catch (emailError) {
+          console.error('Error enviando email de reseña:', emailError);
+        }
+      }
+
       return {
         success: true,
-        message: 'Reserva actualizada exitosamente.',
+        message: cleanData.status === 'completed'
+          ? 'Reserva completada. Se ha enviado solicitud de reseña al cliente.'
+          : 'Reserva actualizada exitosamente.',
         data: { booking }
       };
 

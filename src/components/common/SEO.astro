@@ -7,6 +7,7 @@ interface Props {
   canonical?: string;
   image?: string;
   type?: "website" | "article";
+  preloadHero?: boolean;
 }
 
 const {
@@ -15,6 +16,7 @@ const {
   canonical = Astro.url.href,
   image = "/images/spaces/principal/webp/principal-medium.webp",
   type = "website",
+  preloadHero = false,
 } = Astro.props;
 
 const siteUrl = "https://contentstudiokrp.es";
@@ -58,3 +60,14 @@ const fullTitle = `${title} | The Content Studio`;
 <meta name="keywords" content={SEO_METADATA.keywords} />
 <meta name="author" content={SEO_METADATA.author} />
 <meta name="robots" content={SEO_METADATA.robots} />
+
+<!-- Preload hero image for better LCP -->
+{preloadHero && (
+  <link
+    rel="preload"
+    as="image"
+    href="/images/spaces/webp/principal-hero-ultra.webp"
+    type="image/webp"
+    fetchpriority="high"
+  />
+)}
