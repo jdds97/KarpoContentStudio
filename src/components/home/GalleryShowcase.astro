@@ -1,0 +1,213 @@
+---
+/**
+ * GalleryShowcase - Galería visual para el home
+ * Diseño minimalista con bento grid equilibrado
+ */
+import Button from '@/components/common/Button.astro';
+
+const showcaseImages = [
+  {
+    src: '/images/spaces/cyclorama/webp/DSC09112-large.webp',
+    zone: 'Ciclorama'
+  },
+  {
+    src: '/images/spaces/creative-studio/webp/DSC08939-large.webp',
+    zone: 'Creative Studio'
+  },
+  {
+    src: '/images/spaces/colores/webp/DSC09161-large.webp',
+    zone: 'Fondos de Colores'
+  },
+  {
+    src: '/images/spaces/black-zone/webp/DSC09203-large.webp',
+    zone: 'Black Zone'
+  },
+  {
+    src: '/images/spaces/cyclorama/webp/DSC09179-large.webp',
+    zone: 'Ciclorama'
+  },
+  {
+    src: '/images/spaces/creative-studio/webp/DSC09002-large.webp',
+    zone: 'Creative Studio'
+  }
+];
+---
+
+<section class="py-16 md:py-20 bg-white">
+  <div class="container mx-auto container-padding">
+    <!-- Bento Grid 3x2 equilibrado -->
+    <div class="grid grid-cols-6 grid-rows-2 gap-3 md:gap-4 h-[500px] md:h-[600px]">
+      <!-- Imagen grande izquierda (3x2) -->
+      <div
+        class="gallery-cell group relative overflow-hidden rounded-xl cursor-pointer col-span-3 row-span-2"
+        data-lightbox-trigger="0"
+      >
+        <img
+          src={showcaseImages[0].src}
+          alt={showcaseImages[0].zone}
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          loading="eager"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <span class="absolute bottom-4 left-4 text-white text-sm font-medium">{showcaseImages[0].zone}</span>
+        </div>
+      </div>
+
+      <!-- Columna central arriba (2x1) -->
+      <div
+        class="gallery-cell group relative overflow-hidden rounded-xl cursor-pointer col-span-2 row-span-1"
+        data-lightbox-trigger="1"
+      >
+        <img
+          src={showcaseImages[1].src}
+          alt={showcaseImages[1].zone}
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          loading="eager"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <span class="absolute bottom-3 left-3 text-white text-sm font-medium">{showcaseImages[1].zone}</span>
+        </div>
+      </div>
+
+      <!-- Columna derecha arriba (1x1) -->
+      <div
+        class="gallery-cell group relative overflow-hidden rounded-xl cursor-pointer col-span-1 row-span-1"
+        data-lightbox-trigger="2"
+      >
+        <img
+          src={showcaseImages[2].src}
+          alt={showcaseImages[2].zone}
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          loading="lazy"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <span class="absolute bottom-3 left-3 text-white text-xs font-medium">{showcaseImages[2].zone}</span>
+        </div>
+      </div>
+
+      <!-- Columna central abajo (1x1) -->
+      <div
+        class="gallery-cell group relative overflow-hidden rounded-xl cursor-pointer col-span-1 row-span-1"
+        data-lightbox-trigger="3"
+      >
+        <img
+          src={showcaseImages[3].src}
+          alt={showcaseImages[3].zone}
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          loading="lazy"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <span class="absolute bottom-3 left-3 text-white text-xs font-medium">{showcaseImages[3].zone}</span>
+        </div>
+      </div>
+
+      <!-- Columna derecha abajo (2x1) -->
+      <div
+        class="gallery-cell group relative overflow-hidden rounded-xl cursor-pointer col-span-2 row-span-1"
+        data-lightbox-trigger="4"
+      >
+        <img
+          src={showcaseImages[4].src}
+          alt={showcaseImages[4].zone}
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          loading="lazy"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <span class="absolute bottom-3 left-3 text-white text-sm font-medium">{showcaseImages[4].zone}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón ver más -->
+    <div class="text-center mt-8">
+      <Button href="/studio-spaces" variant="custom" class="text-sm bg-transparent border border-primary-black text-primary-black hover:bg-primary-black hover:text-white">
+        Ver todos los espacios
+      </Button>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="home-lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/95">
+    <button id="close-home-lb" class="absolute top-4 right-4 text-white hover:text-primary-beige transition-colors">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+    <button id="home-prev" class="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/10 hover:bg-white/20 rounded-full">
+      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+    <button id="home-next" class="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/10 hover:bg-white/20 rounded-full">
+      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+    <img id="home-lb-img" src="" alt="" class="max-w-[90vw] max-h-[90vh] object-contain" />
+  </div>
+</section>
+
+<style>
+  .gallery-cell {
+    animation: cellFade 0.5s ease-out forwards;
+    opacity: 0;
+  }
+  .gallery-cell:nth-child(1) { animation-delay: 0s; }
+  .gallery-cell:nth-child(2) { animation-delay: 0.1s; }
+  .gallery-cell:nth-child(3) { animation-delay: 0.15s; }
+  .gallery-cell:nth-child(4) { animation-delay: 0.2s; }
+  .gallery-cell:nth-child(5) { animation-delay: 0.25s; }
+
+  @keyframes cellFade {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+<script define:vars={{ showcaseImages }}>
+  window.homeGalleryImages = showcaseImages;
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const lb = document.getElementById('home-lightbox');
+    const img = document.getElementById('home-lb-img') as HTMLImageElement;
+    const images = (window as any).homeGalleryImages || [];
+    let idx = 0;
+
+    document.querySelectorAll('[data-lightbox-trigger]').forEach(el => {
+      el.addEventListener('click', () => {
+        idx = parseInt(el.getAttribute('data-lightbox-trigger') || '0');
+        if (lb && img) {
+          img.src = images[idx].src;
+          lb.classList.remove('hidden');
+          lb.classList.add('flex');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+
+    const close = () => {
+      lb?.classList.add('hidden');
+      lb?.classList.remove('flex');
+      document.body.style.overflow = '';
+    };
+
+    document.getElementById('close-home-lb')?.addEventListener('click', close);
+    lb?.addEventListener('click', (e) => { if (e.target === lb) close(); });
+    document.getElementById('home-prev')?.addEventListener('click', () => {
+      idx = (idx - 1 + images.length) % images.length;
+      if (img) img.src = images[idx].src;
+    });
+    document.getElementById('home-next')?.addEventListener('click', () => {
+      idx = (idx + 1) % images.length;
+      if (img) img.src = images[idx].src;
+    });
+    document.addEventListener('keydown', (e) => {
+      if (lb?.classList.contains('hidden')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') document.getElementById('home-prev')?.click();
+      if (e.key === 'ArrowRight') document.getElementById('home-next')?.click();
+    });
+  });
+</script>

@@ -44,11 +44,11 @@ export default defineConfig({
     },
     // Formatos soportados priorizando AVIF
     formats: ['avif', 'webp', 'jpg'],
-    // Calidades por formato - maximizadas para imágenes críticas
+    // Calidades por formato - balance calidad/rendimiento
     quality: {
-      avif: 85,  // Aumentado para mejor calidad
-      webp: 90,  // Aumentado para mejor calidad  
-      jpeg: 95   // Máxima calidad para fallback
+      avif: 75,  // Buena calidad con mejor compresión
+      webp: 80,  // Balance calidad/tamaño
+      jpeg: 85   // Buena calidad para fallback
     },
     // Breakpoints responsive automáticos optimizados
     remotePatterns: [{
@@ -120,7 +120,7 @@ export default defineConfig({
     },
     build: {
       cssCodeSplit: false,
-      minify: false,
+      minify: 'esbuild',
       assetsInlineLimit: 8192,
       rollupOptions: {
         external: [

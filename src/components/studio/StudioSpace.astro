@@ -1,7 +1,5 @@
 ---
 import Button from '@/components/common/Button.astro';
-import CheckCircle from '@/components/icons/CheckCircle.astro';
-import Sparkles from '@/components/icons/Sparkles.astro';
 import FinalCarousel from '@/components/studio/FinalCarousel.astro';
 import { STUDIO_ZONES_GALLERY } from '@/utils/data/ui-content';
 
@@ -10,8 +8,8 @@ interface Props {
   title: string;
   description: string;
   reverse?: boolean;
-  features: string[];
-  idealFor: string[];
+  features?: string[];
+  idealFor?: string[];
   titleClass?: string;
   descriptionClass?: string;
 }
@@ -21,8 +19,6 @@ const {
   title,
   description,
   reverse = false,
-  features,
-  idealFor,
 } = Astro.props;
 
 // Obtener las imágenes de la zona correspondiente
@@ -33,14 +29,13 @@ const getZoneImages = (spaceId: string) => {
     'black-zone': 'blackZone',
     'creative-studio': 'creativeStudio'
   };
-  
+
   const zoneKey = zoneMap[spaceId];
   return zoneKey ? STUDIO_ZONES_GALLERY.zones[zoneKey] : null;
 };
 
 const zoneData = getZoneImages(id);
 
-// Crear layout dinámico basado en el número de imágenes
 const getDynamicLayout = (imageCount: number) => {
   if (imageCount <= 2) {
     return {
@@ -56,89 +51,51 @@ const getDynamicLayout = (imageCount: number) => {
       aspectRatio: 'landscape' as const,
       gap: 'md' as const
     };
-  } else if (imageCount <= 6) {
+  } else {
     return {
       columns: { mobile: 2, tablet: 2, desktop: 3 },
       maxImages: 6,
       aspectRatio: 'landscape' as const,
       gap: 'md' as const
     };
-  } else {
-    return STUDIO_ZONES_GALLERY.defaultLayout;
   }
 };
 
 const dynamicLayout = zoneData ? getDynamicLayout(zoneData.images.length) : STUDIO_ZONES_GALLERY.defaultLayout;
-
 ---
 
 <div
   id={id}
-  class={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-10 mb-24`}
+  class={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-12 mb-20 items-center`}
 >
-  <!-- Galería de imágenes -->
-  <div class="w-full lg:w-1/2 flex items-center justify-center">
+  <!-- Galería de imágenes - más grande -->
+  <div class="w-full lg:w-3/5">
     {zoneData ? (
-      <div class="w-full max-w-2xl">
-        <FinalCarousel 
-          images={[...zoneData.images]}
-          layout={dynamicLayout}
-          zone={zoneData.name}
-          enableLightbox={true}
-          showOverlay={false}
-          class="w-full"
-        />
-      </div>
+      <FinalCarousel
+        images={[...zoneData.images]}
+        layout={dynamicLayout}
+        zone={zoneData.name}
+        enableLightbox={true}
+        showOverlay={false}
+        class="w-full"
+      />
     ) : (
-      <div class="w-full h-96 bg-gray-200 rounded-lg flex items-center justify-center">
-        <p class="text-gray-500">Galería no disponible</p>
+      <div class="w-full h-80 bg-gray-100 rounded-xl flex items-center justify-center">
+        <p class="text-gray-400">Galería no disponible</p>
       </div>
     )}
   </div>
 
-  <!-- Contenido -->
-  <div
-    class="w-full lg:w-1/2 flex flex-col justify-center prose prose-neutral dark:prose-invert text-primary-black"
-  >
-    <h3 class={`text-3xl font-instrument mb-4 text-primary-black`}>{title}</h3>
-    <p class={`text-primary-black`}>{description}</p>
-
-    <!-- Características -->
-    <div class="my-4">
-      <h4 class="text-xl font-instrument mb-3 text-primary-black">Características Principales</h4>
-      <ul class="space-y-2">
-        {
-          features.map((feature) => (
-            <li class="flex items-start">
-              <CheckCircle class="w-6 h-6 text-primary-black mr-2 flex-shrink-0" />
-              <span>{feature}</span>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-
-    <!-- Ideal Para -->
-    <div class="mb-8">
-      <h4 class="text-xl font-instrument mb-3 text-primary-black">Ideal para</h4>
-      <ul class="space-y-2">
-        {
-          idealFor.map((item) => (
-            <li class="flex items-start">
-              <Sparkles class="w-6 h-6 text-primary-black mr-2 flex-shrink-0" />
-              <span>{item}</span>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-
+  <!-- Contenido simplificado -->
+  <div class="w-full lg:w-2/5 flex flex-col justify-center">
+    <h3 class="text-2xl md:text-3xl font-instrument mb-4 text-primary-black">{title}</h3>
+    <p class="text-primary-gray leading-relaxed mb-6">{description}</p>
     <Button
       href="/booking"
       variant="custom"
       class="bg-primary-black text-primary-white hover:bg-primary-beige hover:text-primary-black self-start"
-      >Reservar Ahora</Button
     >
+      Reservar
+    </Button>
   </div>
 </div>
-

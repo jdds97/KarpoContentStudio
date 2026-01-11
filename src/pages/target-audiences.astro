@@ -1,35 +1,511 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import CtaSection from '@/components/common/CtaSection.astro';
-import TestimonialsSection from '@/components/target/TestimonialsSection.astro';
-import TargetAudiencesList from '@/components/target/TargetAudiencesList.astro';
-import HeroSection from '@/components/common/HeroSection.astro';
-import { HERO_CONTENT, CTA_CONTENT } from '@/utils';
+import Button from '@/components/common/Button.astro';
+import { CTA_CONTENT } from '@/utils';
 
+// Datos de públicos objetivo con múltiples fotos
+const audiences = [
+  {
+    id: 'photographers',
+    title: 'Fotógrafos',
+    description: 'Sesiones profesionales, clientes exigentes y portafolios que impactan.',
+    mainImage: '/images/spaces/target-audiences/image00008.jpeg',
+    gallery: [
+      '/images/spaces/target-audiences/image00008.jpeg',
+      '/images/spaces/target-audiences/image00007.jpeg'
+    ]
+  },
+  {
+    id: 'brands',
+    title: 'Marcas y startups',
+    description: 'Contenido para e-commerce, redes sociales, lanzamientos y campañas.',
+    mainImage: '/images/spaces/target-audiences/image00005.jpeg',
+    gallery: [
+      '/images/spaces/target-audiences/image00005.jpeg',
+      '/images/spaces/target-audiences/image00014.jpeg'
+    ]
+  },
+  {
+    id: 'creators',
+    title: 'Creadores y podcasters',
+    description: 'Grabaciones de video, entrevistas, YouTube, streaming y podcast.',
+    mainImage: '/images/spaces/target-audiences/image00001.jpeg',
+    gallery: [
+      '/images/spaces/target-audiences/image00001.jpeg',
+      '/images/spaces/target-audiences/image00002.jpeg'
+    ]
+  },
+  {
+    id: 'agencies',
+    title: 'Agencias y freelancers',
+    description: 'Producción, reuniones, presentaciones, workshops y networking.',
+    mainImage: '/images/spaces/target-audiences/image00003.jpeg',
+    gallery: [
+      '/images/spaces/target-audiences/image00003.jpeg',
+      '/images/spaces/target-audiences/image00004.jpeg'
+    ]
+  }
+];
 ---
 
 <Layout
   title="Estudio para Fotógrafos, Marcas, Podcasters y Creadores | Sevilla"
-  description="Espacios profesionales para fotógrafos, marcas, agencias y creadores de contenido. Soluciones adaptadas para fotografía de moda, producto, ecommerce y podcast en Sevilla."
+  description="Espacios profesionales para fotógrafos, marcas, agencias y creadores de contenido en Sevilla."
 >
-  <HeroSection
-    title={HERO_CONTENT.targetAudiences.title}
-    description={HERO_CONTENT.targetAudiences.description}
-    image=""
-    overlayClass="bg-primary-beige"
-    textClass="text-primary-black"
-    buttonText=""
-    heightClass="h-[40vh] md:h-[50vh]"
-  />
-  <TargetAudiencesList />
-  <TestimonialsSection />
+  <!-- Hero Section -->
+  <section class="bg-primary-beige py-16 md:py-24">
+    <div class="container mx-auto px-4 max-w-6xl text-center">
+      <h1 class="font-instrument text-4xl md:text-5xl lg:text-6xl font-bold text-primary-black mb-6">
+        ¿Para quién es The Content Studio?
+      </h1>
+      <p class="text-xl md:text-2xl text-primary-gray max-w-3xl mx-auto">
+        Un espacio pensado para profesionales que necesitan crear contenido de alto nivel.
+      </p>
+    </div>
+  </section>
+
+  <!-- Tarjetas de Público -->
+  <section class="py-16 bg-primary-white">
+    <div class="container mx-auto px-4 max-w-6xl">
+      <div class="grid md:grid-cols-2 gap-8">
+        {audiences.map((audience) => (
+          <button
+            type="button"
+            class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer text-left"
+            data-gallery-trigger={audience.id}
+            aria-label={`Ver galería de ${audience.title}`}
+          >
+            <!-- Imagen de fondo -->
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src={audience.mainImage}
+                alt={audience.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+            <!-- Overlay con texto -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6 md:p-8">
+              <h3 class="font-instrument text-2xl md:text-3xl font-bold text-white mb-2">
+                {audience.title}
+              </h3>
+              <p class="text-white/90 text-base md:text-lg">
+                {audience.description}
+              </p>
+              <span class="mt-3 text-white/70 text-sm flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                Ver galería ({audience.gallery.length} fotos)
+              </span>
+            </div>
+          </button>
+        ))}
+      </div>
+
+      <!-- CTA intermedio -->
+      <div class="text-center mt-12">
+        <p class="text-lg text-primary-gray mb-6">
+          Todo lo que necesitas para crear contenido profesional, sin comprar equipo ni alquilar varios espacios.
+        </p>
+        <Button href="/booking" variant="primary">
+          Reservar ahora
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal de Galería -->
+  <div
+    id="gallery-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-sm opacity-0 transition-opacity duration-300"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="gallery-title"
+  >
+    <div class="relative w-full max-w-5xl mx-4 transform scale-95 transition-transform duration-300" id="gallery-content">
+      <!-- Botón cerrar -->
+      <button
+        type="button"
+        id="close-gallery"
+        class="absolute -top-12 right-0 text-white hover:text-primary-beige transition-colors z-10"
+        aria-label="Cerrar galería"
+      >
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <!-- Título -->
+      <h2 id="gallery-title" class="text-2xl md:text-3xl font-instrument font-bold text-white mt-16 md:mt-20 mb-8 md:mb-10 text-center"></h2>
+
+      <!-- Contenedor de imágenes -->
+      <div id="gallery-images" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Las imágenes se insertan dinámicamente -->
+      </div>
+
+      <!-- Navegación -->
+      <div class="flex justify-center gap-4 mt-6">
+        <button
+          type="button"
+          id="prev-image"
+          class="p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+          aria-label="Imagen anterior"
+        >
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <span id="gallery-counter" class="text-white/80 self-center"></span>
+        <button
+          type="button"
+          id="next-image"
+          class="p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+          aria-label="Imagen siguiente"
+        >
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox para imagen ampliada -->
+  <div
+    id="lightbox"
+    class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/95 opacity-0 transition-opacity duration-200"
+    role="dialog"
+    aria-modal="true"
+  >
+    <button
+      type="button"
+      id="close-lightbox"
+      class="absolute top-4 right-4 text-white hover:text-primary-beige transition-colors z-10"
+      aria-label="Cerrar imagen"
+    >
+      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+    <button
+      type="button"
+      id="lightbox-prev"
+      class="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+      aria-label="Imagen anterior"
+    >
+      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+    <button
+      type="button"
+      id="lightbox-next"
+      class="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+      aria-label="Imagen siguiente"
+    >
+      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+    <img id="lightbox-image" src="" alt="Imagen ampliada" class="max-w-[90vw] max-h-[90vh] object-contain transform scale-95 transition-all duration-300" />
+    <span id="lightbox-counter" class="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/80"></span>
+  </div>
+
+  <!-- CTA Final -->
   <CtaSection
     title={CTA_CONTENT.elevateContent.title}
     description={CTA_CONTENT.elevateContent.description}
     primaryText={CTA_CONTENT.elevateContent.primaryText}
     primaryHref={CTA_CONTENT.elevateContent.primaryHref}
-    bgClass="bg-primary-white"
-    titleClass="text-primary-black"
-    descriptionClass="mt-2 text-primary-black"
+    bgClass="bg-primary-black"
+    titleClass="text-primary-white"
+    descriptionClass="mt-2 text-primary-white/80"
+    primaryBtnVariant="custom"
+    primaryBtnClass="bg-primary-white text-primary-black hover:bg-primary-beige"
   />
 </Layout>
+
+<style>
+  @keyframes fadeSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .gallery-item {
+    animation-fill-mode: forwards;
+  }
+</style>
+
+<script define:vars={{ audiences }}>
+  // Datos de audiencias para el script
+  const audienceData = audiences;
+</script>
+
+<script>
+  // Estado global
+  let currentGallery: string[] = [];
+  let currentIndex = 0;
+  let lightboxIndex = 0;
+  let initialized = false;
+
+  const audienceData = [
+    {
+      id: 'photographers',
+      title: 'Fotógrafos',
+      gallery: [
+        '/images/spaces/target-audiences/image00008.jpeg',
+        '/images/spaces/target-audiences/image00007.jpeg'
+      ]
+    },
+    {
+      id: 'brands',
+      title: 'Marcas y startups',
+      gallery: [
+        '/images/spaces/target-audiences/image00005.jpeg',
+        '/images/spaces/target-audiences/image00014.jpeg'
+      ]
+    },
+    {
+      id: 'creators',
+      title: 'Creadores y podcasters',
+      gallery: [
+        '/images/spaces/target-audiences/image00001.jpeg',
+        '/images/spaces/target-audiences/image00002.jpeg'
+      ]
+    },
+    {
+      id: 'agencies',
+      title: 'Agencias y freelancers',
+      gallery: [
+        '/images/spaces/target-audiences/image00003.jpeg',
+        '/images/spaces/target-audiences/image00004.jpeg'
+      ]
+    }
+  ];
+
+  function renderGallery() {
+    const galleryImages = document.getElementById('gallery-images');
+    const galleryCounter = document.getElementById('gallery-counter');
+    if (!galleryImages || !galleryCounter) return;
+
+    galleryImages.innerHTML = currentGallery.map((img, index) => `
+      <div
+        class="relative aspect-[4/3] overflow-hidden rounded-lg ${index === currentIndex ? 'ring-2 ring-primary-beige' : 'opacity-70 hover:opacity-100'} transition-all group gallery-item"
+        data-gallery-index="${index}"
+        style="animation: fadeSlideIn 0.4s ease-out ${index * 0.1}s forwards;"
+      >
+        <img src="${img}" alt="Imagen ${index + 1}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <button
+          type="button"
+          class="absolute top-2 right-2 p-2 bg-black/50 hover:bg-black/70 rounded-full transition-all opacity-0 group-hover:opacity-100 zoom-btn"
+          data-zoom-index="${index}"
+          aria-label="Ampliar imagen"
+        >
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+          </svg>
+        </button>
+      </div>
+    `).join('');
+
+    galleryCounter.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
+  }
+
+  function openLightbox(index: number) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
+    const lightboxCounter = document.getElementById('lightbox-counter');
+    if (!lightbox || !lightboxImage || !lightboxCounter) return;
+
+    lightboxIndex = index;
+    lightboxImage.src = currentGallery[lightboxIndex];
+    lightboxCounter.textContent = `${lightboxIndex + 1} / ${currentGallery.length}`;
+
+    lightbox.classList.remove('hidden');
+    lightbox.classList.add('flex');
+    requestAnimationFrame(() => {
+      lightbox.classList.remove('opacity-0');
+      lightbox.classList.add('opacity-100');
+      lightboxImage.classList.remove('scale-95');
+      lightboxImage.classList.add('scale-100');
+    });
+  }
+
+  function closeLightboxFn() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
+    if (lightbox && lightboxImage) {
+      lightbox.classList.remove('opacity-100');
+      lightbox.classList.add('opacity-0');
+      lightboxImage.classList.remove('scale-100');
+      lightboxImage.classList.add('scale-95');
+      setTimeout(() => {
+        lightbox.classList.add('hidden');
+        lightbox.classList.remove('flex');
+      }, 200);
+    }
+  }
+
+  function closeGallery() {
+    const modal = document.getElementById('gallery-modal');
+    const galleryContent = document.getElementById('gallery-content');
+    if (modal && galleryContent) {
+      modal.classList.remove('opacity-100');
+      modal.classList.add('opacity-0');
+      galleryContent.classList.remove('scale-100');
+      galleryContent.classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }, 300);
+    }
+  }
+
+  function initGallery() {
+    // Evitar doble inicialización
+    if (initialized) return;
+    initialized = true;
+
+    // Event delegation para clicks
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+
+      // Abrir galería desde tarjeta
+      const trigger = target.closest('[data-gallery-trigger]');
+      if (trigger) {
+        const audienceId = trigger.getAttribute('data-gallery-trigger');
+        const audience = audienceData.find(a => a.id === audienceId);
+        const modal = document.getElementById('gallery-modal');
+        const galleryTitle = document.getElementById('gallery-title');
+        const galleryContent = document.getElementById('gallery-content');
+
+        if (audience && modal && galleryTitle) {
+          currentGallery = audience.gallery;
+          currentIndex = 0;
+          galleryTitle.textContent = audience.title;
+          renderGallery();
+
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+          document.body.style.overflow = 'hidden';
+
+          requestAnimationFrame(() => {
+            modal.classList.remove('opacity-0');
+            modal.classList.add('opacity-100');
+            galleryContent?.classList.remove('scale-95');
+            galleryContent?.classList.add('scale-100');
+          });
+        }
+        return;
+      }
+
+      // Click en miniatura de galería
+      const galleryItem = target.closest('[data-gallery-index]');
+      if (galleryItem && !target.closest('.zoom-btn')) {
+        currentIndex = parseInt(galleryItem.getAttribute('data-gallery-index') || '0');
+        renderGallery();
+        return;
+      }
+
+      // Click en botón zoom
+      const zoomBtn = target.closest('.zoom-btn');
+      if (zoomBtn) {
+        e.stopPropagation();
+        const index = parseInt(zoomBtn.getAttribute('data-zoom-index') || '0');
+        openLightbox(index);
+        return;
+      }
+
+      // Cerrar galería
+      if (target.id === 'close-gallery' || target.closest('#close-gallery')) {
+        closeGallery();
+        return;
+      }
+
+      // Cerrar lightbox
+      if (target.id === 'close-lightbox' || target.closest('#close-lightbox')) {
+        closeLightboxFn();
+        return;
+      }
+
+      // Click en fondo del modal para cerrar
+      if (target.id === 'gallery-modal') {
+        closeGallery();
+        return;
+      }
+
+      // Click en fondo del lightbox para cerrar
+      if (target.id === 'lightbox') {
+        closeLightboxFn();
+        return;
+      }
+
+      // Navegación galería
+      if (target.id === 'prev-image' || target.closest('#prev-image')) {
+        currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+        renderGallery();
+        return;
+      }
+
+      if (target.id === 'next-image' || target.closest('#next-image')) {
+        currentIndex = (currentIndex + 1) % currentGallery.length;
+        renderGallery();
+        return;
+      }
+
+      // Navegación lightbox
+      if (target.id === 'lightbox-prev' || target.closest('#lightbox-prev')) {
+        lightboxIndex = (lightboxIndex - 1 + currentGallery.length) % currentGallery.length;
+        const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
+        const lightboxCounter = document.getElementById('lightbox-counter');
+        if (lightboxImage && lightboxCounter) {
+          lightboxImage.src = currentGallery[lightboxIndex];
+          lightboxCounter.textContent = `${lightboxIndex + 1} / ${currentGallery.length}`;
+        }
+        return;
+      }
+
+      if (target.id === 'lightbox-next' || target.closest('#lightbox-next')) {
+        lightboxIndex = (lightboxIndex + 1) % currentGallery.length;
+        const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
+        const lightboxCounter = document.getElementById('lightbox-counter');
+        if (lightboxImage && lightboxCounter) {
+          lightboxImage.src = currentGallery[lightboxIndex];
+          lightboxCounter.textContent = `${lightboxIndex + 1} / ${currentGallery.length}`;
+        }
+        return;
+      }
+    });
+
+    // Teclas
+    document.addEventListener('keydown', (e) => {
+      const lightbox = document.getElementById('lightbox');
+      const modal = document.getElementById('gallery-modal');
+
+      if (!lightbox?.classList.contains('hidden')) {
+        if (e.key === 'Escape') closeLightboxFn();
+        if (e.key === 'ArrowLeft') document.getElementById('lightbox-prev')?.click();
+        if (e.key === 'ArrowRight') document.getElementById('lightbox-next')?.click();
+        return;
+      }
+
+      if (!modal?.classList.contains('hidden')) {
+        if (e.key === 'Escape') closeGallery();
+        if (e.key === 'ArrowLeft') document.getElementById('prev-image')?.click();
+        if (e.key === 'ArrowRight') document.getElementById('next-image')?.click();
+      }
+    });
+  }
+
+  // Inicializar una sola vez (event delegation persiste entre navegaciones)
+  initGallery();
+</script>

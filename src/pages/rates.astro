@@ -2,18 +2,12 @@
 import Layout from '@/layouts/Layout.astro';
 import HeroSection from '@/components/common/HeroSection.astro';
 import PricingSection from '@/components/rates/PricingSection.astro';
-import ContentPackagesSection from '@/components/rates/ContentPackagesSection.astro';
 import AdditionalServicesSection from '@/components/rates/AdditionalServicesSection.astro';
 import PaymentInfoSection from '@/components/rates/PaymentInfoSection.astro';
 import CtaSection from '@/components/common/CtaSection.astro';
 import { HERO_CONTENT, CTA_CONTENT } from '@/utils';
-import { getActivePromotion } from '@/utils/promotions';
 
-// Obtener promoción activa para el meta description
-const promo = getActivePromotion();
-const metaDescription = promo
-  ? `¡${promo.discountPercentage}% DESCUENTO hasta fin de febrero 2026! Tarifas de alquiler de estudio en Sevilla. Código ${promo.code}. Desde 90€ por 2 horas.`
-  : "Tarifas transparentes de alquiler de estudio en Sevilla. Desde alquiler por horas hasta paquetes mensuales de contenido.";
+const metaDescription = "Tarifas transparentes de alquiler de estudio en Sevilla. Desde 120€ por 2 horas. Membresía mensual con 10h incluidas por 250€.";
 ---
 
 <Layout
@@ -28,11 +22,107 @@ const metaDescription = promo
     textClass="text-primary-black"
     buttonText=""
     heightClass="h-[40vh] md:h-[50vh]"  />
-  
+
   <PricingSection />
-  <ContentPackagesSection />
+
+  <!-- Sección: Un espacio. Infinitas posibilidades. -->
+  <section class="py-16 bg-primary-white">
+    <div class="container mx-auto px-4 max-w-6xl">
+      <div class="text-center mb-12">
+        <h2 class="font-instrument text-3xl md:text-4xl lg:text-5xl font-bold text-primary-black mb-6">
+          Un espacio. Infinitas posibilidades.
+        </h2>
+        <p class="text-lg md:text-xl text-primary-gray max-w-3xl mx-auto leading-relaxed">
+          The Content Studio es un estudio creativo diseñado para fotografía, video, campañas, podcasts y marcas que necesitan contenido visual de alto nivel.
+        </p>
+        <p class="text-lg md:text-xl text-primary-black font-medium mt-4 max-w-2xl mx-auto">
+          No alquilas solo un espacio.<br/>
+          <span class="text-primary-gray">Accedes a un entorno pensado para producir, crear y vender mejor.</span>
+        </p>
+      </div>
+
+      <!-- Por qué The Content Studio -->
+      <div class="grid md:grid-cols-2 gap-12 mt-16">
+        <div>
+          <h3 class="font-instrument text-2xl font-bold text-primary-black mb-6">
+            ¿Por qué The Content Studio?
+          </h3>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-primary-gray">Sets y fondos intercambiables</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-primary-gray">Iluminación profesional incluida</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-primary-gray">Espacio privado y cómodo</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-primary-gray">Audio, video y escenografía</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-primary-gray">Reserva por horas, medio día o jornada completa</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-primary-gray">Ubicación accesible para equipos y clientes</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-instrument text-2xl font-bold text-primary-black mb-6">
+            Diseñado para crear sin límites
+          </h3>
+          <p class="text-primary-gray mb-6">Una sola localización para:</p>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-primary-beige/30 p-4 rounded-lg">
+              <p class="text-primary-black font-medium">Fotografía de producto</p>
+            </div>
+            <div class="bg-primary-beige/30 p-4 rounded-lg">
+              <p class="text-primary-black font-medium">Campañas de moda</p>
+            </div>
+            <div class="bg-primary-beige/30 p-4 rounded-lg">
+              <p class="text-primary-black font-medium">Contenido para redes</p>
+            </div>
+            <div class="bg-primary-beige/30 p-4 rounded-lg">
+              <p class="text-primary-black font-medium">Podcasts y entrevistas</p>
+            </div>
+            <div class="bg-primary-beige/30 p-4 rounded-lg">
+              <p class="text-primary-black font-medium">Videos corporativos</p>
+            </div>
+            <div class="bg-primary-beige/30 p-4 rounded-lg">
+              <p class="text-primary-black font-medium">Workshops y eventos</p>
+            </div>
+          </div>
+          <p class="text-primary-black font-medium mt-6 italic">
+            "Cambias el fondo, la luz y la escena. El espacio se adapta a tu proyecto."
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <AdditionalServicesSection />
   <PaymentInfoSection />
+
   <CtaSection
     title={CTA_CONTENT.personalizedQuote.title}
     description={CTA_CONTENT.personalizedQuote.description}

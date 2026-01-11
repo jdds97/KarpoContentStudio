@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import HeroSection from '@/components/common/HeroSection.astro';
+import StudioGalleryHero from '@/components/studio/StudioGalleryHero.astro';
 import StudioSpacesSection from '@/components/studio/StudioSpacesSection.astro';
 import EquipmentSection from '@/components/studio/EquipmentSection.astro';
 import CtaSection from '@/components/common/CtaSection.astro';
@@ -20,6 +21,7 @@ import { HERO_CONTENT, CTA_CONTENT } from '@/utils';
     buttonText=""
     heightClass="h-[40vh] md:h-[50vh]"
   />
+  <StudioGalleryHero />
   <StudioSpacesSection />
   <EquipmentSection />
   <CtaSection 
