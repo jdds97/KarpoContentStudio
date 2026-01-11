@@ -10,23 +10,12 @@ import {
   isActionSuccess,
   getSuccessMessage
 } from '@/lib/form-helpers';
-import { getActivePromotion } from '@/utils/promotions';
 
 // Obtener resultado de la action si existe
 const result = Astro.getActionResult(actions.createBooking);
 
-// Leer código de descuento de la URL si existe
-const urlCode = Astro.url.searchParams.get('code') || '';
+// Leer duración de la URL si existe
 const urlDuration = Astro.url.searchParams.get('duration') || '';
-
-// Obtener promoción activa para mostrar en el hint
-const activePromotion = getActivePromotion();
-const promoHint = activePromotion
-  ? `💡 Código ${activePromotion.code}: ${activePromotion.discountPercentage}% de descuento hasta febrero 2026`
-  : '💡 ¿Tienes un código promocional? Introdúcelo aquí para obtener tu descuento';
-
-// Determinar si el código viene de la URL
-const codeFromUrl = urlCode.length > 0;
 ---
 <div class="bg-primary-white p-8 rounded-lg shadow-md">
   
@@ -244,48 +233,6 @@ const codeFromUrl = urlCode.length > 0;
         </div>
       </div>
 
-      <!-- Código de Descuento -->
-      <div>
-        <h4 class="text-lg font-outfit font-medium mb-4">Código de Descuento</h4>
-        <div class={`border rounded-lg p-4 ${codeFromUrl ? 'bg-green-100 border-green-400' : 'bg-green-50 border-green-200'}`}>
-          {codeFromUrl && (
-            <div class="flex items-center mb-3 bg-green-600 text-white px-3 py-2 rounded-md">
-              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-              </svg>
-              <span class="font-medium">¡Código {urlCode} aplicado automáticamente! 🎉</span>
-            </div>
-          )}
-          <div class="flex items-center mb-3">
-            <svg class="w-5 h-5 text-green-600 mr-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2L13.09 8.26L19 9L13.09 9.74L12 16L10.91 9.74L5 9L10.91 8.26L12 2Z"/>
-            </svg>
-            <span class="text-green-800 font-medium">{codeFromUrl ? 'Código promocional' : '¿Tienes un código promocional?'}</span>
-          </div>
-          <div class="flex gap-2">
-            <input
-              type="text"
-              id="discount-code"
-              name="discount-code"
-              value={urlCode || getFieldValue(result, 'discount-code')}
-              placeholder="Introduce tu código (ej: APERTURA40)"
-              class={`flex-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent ${codeFromUrl ? 'border-green-500 bg-white font-bold text-green-700' : 'border-green-300'}`}
-            />
-            <button
-              type="button"
-              id="apply-discount"
-              class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors duration-200 font-medium"
-            >
-              Aplicar
-            </button>
-          </div>
-          <div id="discount-message" class="mt-2 text-sm hidden">
-            <!-- Los mensajes de validación aparecerán aquí -->
-          </div>
-          <div class="mt-2 text-xs text-green-700" set:html={promoHint} />
-        </div>
-      </div>
-      
       <!-- Términos y Condiciones -->
       <div class="flex items-start">
         <div class="flex items-center h-5">
