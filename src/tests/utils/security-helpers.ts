@@ -390,7 +390,7 @@ export class TestDataGenerator {
         participants: 5,
         session_type: "Fotografía",
         notes: "Test booking",
-        total_price: 100
+        total_price: 120
       },
       // XSS in name field
       {
@@ -405,7 +405,7 @@ export class TestDataGenerator {
         participants: 5,
         session_type: "Fotografía",
         notes: "Test booking",
-        total_price: 100
+        total_price: 120
       },
       // Command injection in notes
       {

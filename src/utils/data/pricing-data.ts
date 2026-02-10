@@ -35,7 +35,7 @@ export const pricingSections: PricingSection[] = [
         service: 'Medio día',
         duration: '4 horas',
         durationCode: '4h',
-        price: '240€ +IVA',
+        price: '220€ +IVA',
         action: 'book',
         actionHref: '/booking?duration=4h'
       },
@@ -44,7 +44,7 @@ export const pricingSections: PricingSection[] = [
         service: 'Día completo',
         duration: '8 horas',
         durationCode: '8h',
-        price: '480€ +IVA',
+        price: '400€ +IVA',
         action: 'book',
         actionHref: '/booking?duration=8h'
       },
@@ -53,7 +53,7 @@ export const pricingSections: PricingSection[] = [
         service: 'Jornada Extendida',
         duration: '12 horas',
         durationCode: '12h',
-        price: '720€ +IVA',
+        price: '540€ +IVA',
         action: 'book',
         actionHref: '/booking?duration=12h'
       }
